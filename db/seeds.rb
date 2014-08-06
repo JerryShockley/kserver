@@ -8,7 +8,7 @@
 
 # Populating 1 User for each role
 
-puts "\n\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
+puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
 User.destroy_all
 usr = User.new
   usr.first_name = "Sysadmin"
