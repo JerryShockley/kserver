@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   after_initialize :set_default_role, :if => :new_record?
 
+  validates_presence_of :first_name, :last_name, :email
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
@@ -15,14 +16,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   def admin?
-    self.role == :administrator ||
-    self.role == :sysadmin
+    self.administrator? ||
+    self.sysadmin?
   end
 
   def faculty?
-    self.role == :administrator ||
-    self.role == :sysadmin ||
-    self.role == :teacher
+    self.administrator? ||
+    self.sysadmin? ||
+    self.teacher?
   end
 
 
