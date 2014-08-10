@@ -25,6 +25,12 @@ class User < ActiveRecord::Base
     self.sysadmin? ||
     self.teacher?
   end
+  
+  # Creates full name for user
+  def name
+    n = self.first_name + " " + self.last_name
+  end
+
 
 
 
