@@ -12,6 +12,7 @@ puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before re
 User.destroy_all
 usr = User.new
   usr.first_name = "Sysadmin"
+  usr.last_name = "User"
   usr.email = "sysadmin@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
@@ -20,6 +21,7 @@ usr = User.new
   
 usr = User.new
   usr.first_name = "Administrator"
+  usr.last_name = "User"
   usr.email = "administrator@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
@@ -28,6 +30,7 @@ usr = User.new
   
 usr = User.new
   usr.first_name = "Teacher"
+  usr.last_name = "User"
   usr.email = "teacher@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
@@ -36,6 +39,7 @@ usr = User.new
 
 usr = User.new
   usr.first_name = "Parent"
+  usr.last_name = "User"
   usr.email = "parent@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
@@ -45,6 +49,7 @@ usr = User.new
 
 usr = User.new
   usr.first_name = "Student"
+  usr.last_name = "User"
   usr.email = "student@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
