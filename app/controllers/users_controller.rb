@@ -1,3 +1,5 @@
+#TODO add authorization to Registrations controller to limit editing of users
+
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   after_action :verify_authorized
