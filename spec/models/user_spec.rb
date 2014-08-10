@@ -23,8 +23,21 @@ describe User do
       end
       
     end
+
+    describe "name" do
+      it "returns first_name followed by last_name separated by a space char" do
+        fname = "Joe"
+        lname = "Smith"
+        name = "Joe Smith"
+        usr = build_stubbed(:parent, {first_name: fname, last_name: lname})
+        expect(usr.name).to match(name)
+        
+      end
+    end
   
-    describe "#admin? method" do
+
+    
+    describe "admin?" do
       it "returns true for administrator" do
         usr = build_stubbed(:administrator)
         expect(usr.admin?).to be_truthy
@@ -51,7 +64,7 @@ describe User do
     end
 
   
-    describe "#faculty? method" do
+    describe "faculty?" do
       it "returns true for administrator" do
         usr = build_stubbed(:administrator)
         expect(usr.faculty?).to be_truthy
