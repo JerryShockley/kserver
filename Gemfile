@@ -17,7 +17,7 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'unicorn'
 gem 'unicorn-rails'
-gem 'jquery-datatables-rails', '~> 2.2.1'
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 gem 'will_paginate-foundation'
 group :development do
