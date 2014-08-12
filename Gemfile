@@ -17,6 +17,9 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'unicorn'
 gem 'unicorn-rails'
+gem 'jquery-datatables-rails', '~> 2.2.1'
+gem 'ajax-datatables-rails'
+gem 'will_paginate-foundation'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
@@ -29,6 +32,7 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
+  gem 'annotate', github: 'ctran/annotate_models', require: false
 end
 group :development, :test do
   gem 'factory_girl_rails'
