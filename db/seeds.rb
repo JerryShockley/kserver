@@ -8,6 +8,9 @@
 
 # Populating 1 User for each role
 
+require 'faker'
+require 'factory_girl'
+
 puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
 User.destroy_all
 usr = User.new
@@ -53,8 +56,14 @@ usr = User.new
   usr.email = "student@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
-  usr.student!
+
   puts("Created student user")
+  
+  200.times do
+    FactoryGirl::create(:user, { first_name: Faker::Name.first_name,
+                    last_name:  Faker::Name.last_name
+                  })
+  end
 
 puts "--  Created #{User.count} User record#{"s" if User.count > 1} During reseeding\n\n"
   
