@@ -13,6 +13,34 @@ require 'factory_girl'
 
 puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
 User.destroy_all
+
+usr = User.new
+usr.first_name = "Nina"
+  usr.last_name = "Bhatti"
+  usr.email = "nina@kokkoinc.com"
+  usr.password = "foobar"
+  usr.password_confirmation = "foobar"
+  usr.sysadmin!
+  puts("Created #{usr.name}'s account")
+
+usr.first_name = "Scott"
+  usr.last_name = "Trappe"
+  usr.email = "scott@kokkoinc.com"
+  usr.password = "foobar"
+  usr.password_confirmation = "foobar"
+  usr.sysadmin!
+  puts("Created #{usr.name}'s account")
+
+
+usr.first_name = "Jerry"
+  usr.last_name = "Shockley"
+  usr.email = "jerry@shockley.com"
+  usr.password = "foobar"
+  usr.password_confirmation = "foobar"
+  usr.sysadmin!
+  puts("Created #{usr.name}'s account")
+
+
 usr = User.new
   usr.first_name = "Sysadmin"
   usr.last_name = "User"
@@ -32,32 +60,32 @@ usr = User.new
   puts("Created administrator user")
   
 usr = User.new
-  usr.first_name = "Teacher"
+  usr.first_name = "editor"
   usr.last_name = "User"
-  usr.email = "teacher@shockleynet.com"
+  usr.email = "editor@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
-  usr.teacher!
-  puts("Created teacher user")
+  usr.editor!
+  puts("Created editor user")
 
 usr = User.new
-  usr.first_name = "Parent"
+  usr.first_name = "writer"
   usr.last_name = "User"
-  usr.email = "parent@shockleynet.com"
+  usr.email = "writer@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
-  usr.parent1!
-  puts("Created parent user")
+  usr.writer!
+  puts("Created writer user")
 
 
 usr = User.new
-  usr.first_name = "Student"
+  usr.first_name = "cust"
   usr.last_name = "User"
-  usr.email = "student@shockleynet.com"
+  usr.email = "cust@shockleynet.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
 
-  puts("Created student user")
+  puts("Created cust user")
   
   200.times do
     FactoryGirl::create(:user, { first_name: Faker::Name.first_name,
