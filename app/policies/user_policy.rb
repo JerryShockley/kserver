@@ -20,8 +20,13 @@ class UserPolicy
   end
 
   def update?
-    @current_user.admin?
+    @current_user.admin? or @current_user.email == @model.email
   end
+  
+  def edit?
+    @current_user.admin? or @current_user.email == @model.email    
+  end
+
 
   def destroy?
     return false if @current_user == @model
