@@ -21,8 +21,13 @@
 #
 
 class User < ActiveRecord::Base
-  enum role: [ :student, :parent1, :teacher, :administrator, :sysadmin ]
-
+  enum role: { 
+               cust: 0, 
+               writer: 1, 
+               editor: 2, 
+               administrator: 3, 
+               sysadmin: 4
+             }
   after_initialize :set_default_role, :if => :new_record?
 
   validates_presence_of :first_name, :last_name, :email
@@ -31,7 +36,7 @@ class User < ActiveRecord::Base
 
   
   def set_default_role
-    self.role ||= :student
+    self.role ||= :cust
   end
   
   devise :database_authenticatable, :registerable,
@@ -42,10 +47,11 @@ class User < ActiveRecord::Base
     self.sysadmin?
   end
 
-  def faculty?
+  def staff?
     self.administrator? ||
     self.sysadmin? ||
-    self.teacher?
+    self.editor? ||
+    self.writer?
   end
   
   # Creates full name for user
