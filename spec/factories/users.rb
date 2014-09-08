@@ -37,22 +37,22 @@ FactoryGirl.define do
       role :administrator
     end
     
-    trait :teacher do
-      role :teacher
+    trait :editor do
+      role :editor
     end
     
-    trait :parent do
-      role :parent1
+    trait :writer do
+      role :writer
     end
     
-    trait :student do
-      role :student
+    trait :cust do
+      role :cust
     end
 
     factory :sysadmin, traits: [:sysadmin]
     factory :administrator, traits: [:administrator]
-    factory :teacher, traits: [:teacher]
-    factory :parent, traits: [:parent]
-    factory :student, traits: [:student]
+    factory :editor, traits: [:editor]
+    factory :writer, traits: [:writer]
+    factory :cust, traits: [:cust]
   end
 end
