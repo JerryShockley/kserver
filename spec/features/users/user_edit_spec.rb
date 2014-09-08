@@ -37,5 +37,7 @@ feature 'User edit', :devise do
     expect(page).to have_content 'Edit User'
     expect(page).to have_field('Email', with: me.email)
   end
+  
+  # TODO add tests for deleting user 
 
 end
