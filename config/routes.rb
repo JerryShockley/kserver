@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  root to: 'visitors#index'
+  root  'welcome#index'
+  get 'welcome/index', as: 'welcome'
+
   devise_for :users
-  resources :users
+  resources :users # do
+#     collection do
+#       match('search' => 'user#search', via [:get, :post], as: :search)
+#     end
+#   end
+  
+  
 end
