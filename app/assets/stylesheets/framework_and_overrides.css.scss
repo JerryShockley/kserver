@@ -3,12 +3,21 @@
 
 // override for the 'Home' navigation link
 .top-bar .name {
-  font-size: rem-calc(13);
+  font-size: rem-calc(27);
   line-height: 45px; }
 .top-bar .name a {
   font-weight: normal;
   color: white;
   padding: 0 15px; }
+
+  // original CSS
+//  .top-bar .name {
+//    font-size: rem-calc(13);
+//    line-height: 45px; }
+//  .top-bar .name a {
+//    font-weight: normal;
+//    color: white;
+//    padding: 0 15px; }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create mixins using Foundation classes
@@ -90,3 +99,9 @@ section {
   @extend .radius;
   @extend .tiny;
 }
+
+ul div.top-bar-section {
+  
+}
+
+//$topbar-height: 165px 
