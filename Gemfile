@@ -17,9 +17,10 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'unicorn'
 gem 'unicorn-rails'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-gem 'ajax-datatables-rails'
-gem 'will_paginate-foundation'
+gem 'jquery-turbolinks'
+gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
+gem 'kaminari'
+gem 'videojs_rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
