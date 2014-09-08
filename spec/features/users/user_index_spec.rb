@@ -16,10 +16,11 @@ feature 'User index page', :devise do
   #   When I visit the user index page
   #   Then I see my own email address
   scenario 'user sees own email address' do
-    user = FactoryGirl.create(:user, :admin)
+    user = FactoryGirl.create(:user, :administrator)
     login_as(user, scope: :user)
     visit users_path
     expect(page).to have_content user.email
   end
+  # TODO Add test for linked cols show, edit & del
 
 end
