@@ -10,6 +10,10 @@ class UserPolicy
   def index?
     @current_user.admin?
   end
+  
+  # def search?
+  #   @current_user.admin?
+  # end
 
   def show?
     @current_user.admin? or @current_user.email == @model.email
