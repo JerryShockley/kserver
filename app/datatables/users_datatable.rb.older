@@ -1,0 +1,48 @@
+#TODO Not currently using this. Delete if not used.
+
+require 'forwardable'
+
+class UsersDatatable < AjaxDatatablesRails::Base
+  # uncomment the appropriate paginator module,
+  # depending on gems available in your project.
+  # include AjaxDatatablesRails::Extensions::Kaminari
+  include AjaxDatatablesRails::Extensions::WillPaginate
+  # include AjaxDatatablesRails::Extensions::SimplePaginator
+
+  extend Forwardable
+  def_delegators :@view, :params, :h, :link_to, :user_path, :edit_user_registration_path
+
+
+  def sortable_columns
+    # list columns inside the Array in string dot notation.
+    # Example: 'users.email'
+    @sortable_columns ||= ['users.last_name', 'users.first_name', 'users.email', 'users.role']
+  end
+
+  def searchable_columns
+    # list columns inside the Array in string dot notation.
+    # Example: 'users.email'
+    @searchable_columns ||= ['users.last_name', 'users.first_name', 'users.email', 'users.role']
+  end
+
+  private
+
+  def data
+    records.map do |record|
+      [
+        link_to(record.last_name, record),
+        h(record.first_name),
+        h(record.email),
+        h(record.role),
+        # link_to ("Edit <i class=\"general foundicon-edit\"></i>".html_safe, edit_user_registration_path(record)),
+        # link_to ("Delete", user_path(record), :data => { :confirm => "Are you sure?" }, method: :delete)
+      ]
+    end
+  end
+
+  def get_raw_records
+    User.all
+  end
+
+  # ==== Insert 'presenter'-like methods below if necessary
+end
