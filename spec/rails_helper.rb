@@ -19,6 +19,9 @@ ActiveRecord::Migration.maintain_test_schema!
 
 # Cucumber
 # World(FactoryGirl::Syntax::Methods)
+def logger
+    Rails::logger
+end
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
