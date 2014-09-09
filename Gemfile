@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-rails'
 end
 group :test do
+  gem 'fuubar'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'faker'
