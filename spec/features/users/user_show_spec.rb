@@ -33,7 +33,7 @@ feature 'User profile page', :devise do
     login_as(me, :scope => :user)
     Capybara.current_session.driver.header 'Referer', root_path
     visit user_path(other)
-    expect(page).to have_content 'Access denied.'
+    expect(page).to have_content "You are not authorized to perform this action.×"
   end
 
 end
