@@ -1,10 +1,10 @@
 class UserPolicy
-  attr_reader :current_user, :model
+  attr_reader :current_user, :resource
 
-  def initialize(current_user, model)
+  def initialize(current_user, resource)
     raise Pundit::NotAuthorizedError, "must be logged in" unless current_user 
     @current_user = current_user
-    @model = model
+    @resource = resource
   end
 
   def index?
@@ -16,21 +16,20 @@ class UserPolicy
   # end
 
   def show?
-    @current_user.admin? or @current_user.email == @model.email
+    @current_user.admin? or @current_user.email == @resource.email
   end
 
   def update?
-    @current_user.admin? or @current_user.email == @model.email
+    @current_user.admin? or @current_user.email == @resource.email
   end
   
   def edit?
-    @current_user.admin? or @current_user.email == @model.email    
+    update?    
   end
 
 
   def destroy?
-    return false if @current_user == @model
-    @current_user.admin?
+    @current_user.admin? or @current_user.email == @resource.email
   end
 
 end
