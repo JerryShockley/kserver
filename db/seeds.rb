@@ -8,8 +8,12 @@
 
 # Populating 1 User for each role
 
-require 'faker'
+
 require 'factory_girl'
+
+def logger
+    Rails::logger
+end
 
 puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
 User.destroy_all
@@ -44,7 +48,7 @@ usr.first_name = "Jerry"
 usr = User.new
   usr.first_name = "Sysadmin"
   usr.last_name = "User"
-  usr.email = "sysadmin@shockleynet.com"
+  usr.email = "sysadmin@foo.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.sysadmin!
@@ -53,7 +57,7 @@ usr = User.new
 usr = User.new
   usr.first_name = "Administrator"
   usr.last_name = "User"
-  usr.email = "administrator@shockleynet.com"
+  usr.email = "administrator@foo.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.administrator!
@@ -62,7 +66,7 @@ usr = User.new
 usr = User.new
   usr.first_name = "editor"
   usr.last_name = "User"
-  usr.email = "editor@shockleynet.com"
+  usr.email = "editor@foo.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.editor!
@@ -71,7 +75,7 @@ usr = User.new
 usr = User.new
   usr.first_name = "writer"
   usr.last_name = "User"
-  usr.email = "writer@shockleynet.com"
+  usr.email = "writer@foo.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.writer!
@@ -81,16 +85,13 @@ usr = User.new
 usr = User.new
   usr.first_name = "cust"
   usr.last_name = "User"
-  usr.email = "cust@shockleynet.com"
+  usr.email = "cust@foo.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
-
   puts("Created cust user")
   
   200.times do
-    FactoryGirl::create(:user, { first_name: Faker::Name.first_name,
-                    last_name:  Faker::Name.last_name
-                  })
+   FactoryGirl.create(:cust)
   end
 
 puts "--  Created #{User.count} User record#{"s" if User.count > 1} During reseeding\n\n"
