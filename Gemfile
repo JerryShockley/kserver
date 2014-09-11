@@ -36,6 +36,7 @@ group :development do
   gem 'annotate', github: 'ctran/annotate_models', require: false
 end
 group :development, :test do
+  gem 'pry-byebug'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
 end
