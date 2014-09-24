@@ -7,5 +7,5 @@
     = devise_error_messages!
     .form-group
       = f.label :email
-      = f.email_field :email, :autofocus => true, class: 'form-control'
-    = f.submit 'Reset Password', :class => 'button right'
+      = f.email_field :email, :autofocus => true, class: 'form-control', id: 'new_password_email'
+    = f.submit 'Reset Password', :class => 'button right', id: 'reset_password_submit'
