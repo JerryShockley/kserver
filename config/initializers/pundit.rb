@@ -20,3 +20,4 @@ module PunditHelper
 end
 
 ApplicationController.send :include, PunditHelper
+Devise::RegistrationsController.send :include, PunditHelper
