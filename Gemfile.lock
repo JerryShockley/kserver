@@ -162,9 +162,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (2.0.0)
-      byebug (~> 3.4)
-      pry (~> 0.10)
     pundit (0.2.3)
       activesupport (>= 3.0.0)
     quiet_assets (1.0.3)
@@ -293,6 +290,7 @@ DEPENDENCIES
   annotate!
   better_errors
   binding_of_caller
+  byebug
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner
@@ -310,7 +308,6 @@ DEPENDENCIES
   kaminari
   launchy
   pg
-  pry-byebug
   pundit
   quiet_assets
   rails (= 4.1.4)

@@ -23,6 +23,8 @@ gem 'kaminari'
 gem 'videojs_rails'
 group :development do
   gem 'better_errors'
+  # gem 'pry-rescue'
+  # gem 'pry-stack_explorer'
   gem 'binding_of_caller', :platforms=>[:mri_21]
   gem 'guard-bundler'
   gem 'guard-rails'
@@ -36,11 +38,12 @@ group :development do
   gem 'annotate', github: 'ctran/annotate_models', require: false
 end
 group :development, :test do
-  gem 'pry-byebug'
+  gem 'byebug'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
 end
 group :test do
+  # gem 'capybara-screenshot'
   gem 'fuubar'
   gem 'capybara'
   gem 'database_cleaner'
