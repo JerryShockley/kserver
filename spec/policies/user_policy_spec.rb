@@ -1,47 +1,109 @@
+require 'rails_helper'
+
+=begin
+  ***  Assumptions  ****
+Currently, when we test for an admin we're invoking User#admin?. This returns returns true for
+only :sysadmins and :administrators. We only test for a customer role for all non-admin roles as
+there is no distinction currently in our UserPolicy between these roles. As we add these types of
+distintions to UserPolicy we will need to add the necessary contexts and examples for each change.
+It will also be necessary to reflect Uchanges in UserPolicy affecting the admin roles.   
+
+=end
+
+
 describe UserPolicy do
   subject { UserPolicy }
 
-  let (:current_user) { FactoryGirl.build_stubbed :parent }
-  let (:other_user) { FactoryGirl.build_stubbed :parent }
-  let (:admin) { FactoryGirl.build_stubbed :sysadmin }
+  # let(:admin) { create :sysadmin }
+  
+  let(:user) { create :cust }
+  let(:other_user) {create :cust}
+  
 
-  permissions :index? do
-    it "denies access if not an admin" do
-      expect(UserPolicy).not_to permit(current_user)
-    end
-    it "allows access for an admin" do
-      expect(UserPolicy).to permit(admin)
-    end
-  end
+  context "when user is customer" do
+    
+    permissions :index? do
 
-  permissions :show? do
-    it "prevents other users from seeing your profile" do
-      expect(subject).not_to permit(current_user, other_user)
+      it "denies access" do
+        expect(subject).not_to permit(user)
+      end
     end
-    it "allows you to see your own profile" do
-      expect(subject).to permit(current_user, current_user)
-    end
-    it "allows an admin to see any profile" do
-      expect(subject).to permit(admin)
-    end
-  end
 
-  permissions :update? do
-    it "prevents updates if not an admin" do
-      expect(subject).not_to permit(current_user)
+    permissions :show? do
+
+      it "prevents other users from seeing your profile" do
+        expect(subject).not_to permit(user, other_user)
+      end
+
+      it "allows you to see your own profile" do
+        expect(subject).to permit(user, user)
+      end
     end
-    it "allows an admin to make updates" do
-      expect(subject).to permit(admin)
+
+    permissions :update? do
+      it "prevents updates of another's profile" do
+        expect(subject).not_to permit(user, other_user)
+      end
+
+      it "allows you to edit your own profile" do
+        expect(subject).to permit(user, user)
+      end
     end
-  end
 
   permissions :destroy? do
-    it "prevents deleting yourself" do
-      expect(subject).not_to permit(current_user, current_user)
+
+    it "allows deleting your own profile" do
+      expect(subject).to permit(user, user)
     end
-    it "allows an admin to delete any user" do
-      expect(subject).to permit(admin, other_user)
+    
+    it "prevents deleting another's profile" do
+      expect(subject).not_to permit(user, other_user)
     end
   end
+end
 
+
+  context "when user is an admin" do
+    let(:admin) {create :sysadmin}
+
+    permissions :index? do
+
+      it "allows access" do
+        expect(subject).to permit(admin)
+      end
+    end
+
+    permissions :show? do
+
+      it "they can see another's profile" do
+        expect(subject).to permit(admin, user)
+      end
+      
+      it "they can see their own profile" do
+        expect(subject).to permit(admin, admin)
+      end
+      
+    end
+
+    permissions :update? do
+
+      it "allows an admin to make updates to your own profile" do
+        expect(subject).to permit(admin, admin)
+      end
+
+      it "allows an admin to make updates to another's profile" do
+        expect(subject).to permit(admin, other_user)
+      end
+    end
+
+
+    permissions :destroy? do
+
+      it "allows an admin to delete any user" do
+        expect(subject).to permit(admin, user)
+      end
+
+    end
+  end
+    
 end
