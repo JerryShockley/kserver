@@ -1,5 +1,5 @@
-include Warden::Test::Helpers
-Warden.test_mode!
+require 'rails_helper'
+
 
 # Feature: User profile page
 #   As a user
@@ -28,12 +28,12 @@ feature 'User profile page', :devise do
   #   When I visit another user's profile
   #   Then I see an 'access denied' message
   scenario "user cannot see another user's profile" do
-    me = FactoryGirl.create(:user)
-    other = FactoryGirl.create(:user, email: 'other@example.com')
+    me = FactoryGirl.create(:cust)
+    other = FactoryGirl.create(:cust, email: 'other@example.com')
     login_as(me, :scope => :user)
-    Capybara.current_session.driver.header 'Referer', root_path
+    Capybara.current_session.driver.header 'Referer', '/welcome/index'
     visit user_path(other)
-    expect(page).to have_content "You are not authorized to perform this action.×"
+    expect(page).to have_content "Access denied.×"
   end
 
 end
