@@ -22,26 +22,36 @@
 
 class User < ActiveRecord::Base
   enum role: { 
-               cust: 0, 
+               customer: 0, 
                writer: 1, 
                editor: 2, 
                administrator: 3, 
                sysadmin: 4
              }
+
   after_initialize :set_default_role, :if => :new_record?
+  
+  def self.policy_class
+      UserPolicy
+    end
 
   validates_presence_of :first_name, :last_name, :email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   
-  def set_default_role
-    self.role ||= :cust
-  end
-  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+
+
   
+  def set_default_role
+   self.role ||= :customer
+  end
+
+
   def admin?
     self.administrator? ||
     self.sysadmin?
@@ -59,6 +69,11 @@ class User < ActiveRecord::Base
     n = self.first_name + " " + self.last_name
   end
 
+private
+
+  
+  
+  
 
 
 
