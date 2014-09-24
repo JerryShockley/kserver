@@ -1,0 +1,15 @@
+h3
+  | Viewing User
+p
+  | Name: 
+  = @user.name
+p
+  | Email: 
+  = @user.email if @user.email
+
+  #FIXME Fix this to disply all fields in to columns
+  - attribs = resource.attributes 
+  - attribs.keys.each do |key|
+
+    p = key.humanize
+  -end
