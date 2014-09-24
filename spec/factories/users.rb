@@ -19,15 +19,18 @@
 #  last_name              :string(255)
 #  role                   :integer
 #
+require 'faker'
 
 FactoryGirl.define do
   factory :user do
-    first_name { role.to_s}
-    last_name "User"
-    sequence(:email) {|n| "#{role.to_s}#{n}@shockleynet.com"}
-    # email {"#{role.to_s}@shockleynet.com"}
+    first_name { Faker::Name.first_name}
+    last_name {Faker::Name.last_name}
+    # sequence(:email) {|n| "#{first_name.last_name}#{n}@foo.com"}
+    email {"#{first_name}.#{last_name}@foo.com"}
+    # email_confirmation {"#{first_name}.#{last_name}@foo.com"}
     password "foobar"
     password_confirmation "foobar"
+    role :customer
 
     trait :sysadmin do
       role :sysadmin
@@ -46,7 +49,7 @@ FactoryGirl.define do
     end
     
     trait :cust do
-      role :cust
+      role :customer
     end
 
     factory :sysadmin, traits: [:sysadmin]
