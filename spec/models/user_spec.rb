@@ -20,6 +20,8 @@
 #  role                   :integer
 #
 
+require 'rails_helper'
+
 describe User do
 
   let(:sadmin) {build_stubbed :sysadmin}
