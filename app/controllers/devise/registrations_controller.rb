@@ -1,31 +1,49 @@
-=begin
-  20140907
-  Copied from Devise 3.2.4 source to override default behavior utilizing i18n interface. Initially 
-  we do this to personalize the message returned after successful registration. If Devise is upgraded
-  we will have to upgrade this file. All changes will be marked with # changed followed by the
-  original line or method.
-=end
-
 class Devise::RegistrationsController < DeviseController
   prepend_before_filter :require_no_authentication, only: [ :new, :create, :cancel ]
-  prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
+  # prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
+  after_action :verify_authorized, except: [:new, :create, :cancel]
+  
+
+
+  # TODO Improve table behavior
+  def index
+    authorize User
+    @q = User.search(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).per(75)
+    # respond_to do |format|
+    #   format.html
+      # format.json { render json: UsersDatatable.new(view_context) }
+    # end
+  end
+  
+
+  def show
+    @user = User.find(params[:id])
+    authorize @user
+  end
+  
 
 
   # GET /resource/sign_up
   def new
-    logger.info "\n\nPete we arrived at signup\n\n\n"
     build_resource({})
+    @validatable = devise_mapping.validatable?
+    if @validatable
+      @minimum_password_length = resource_class.password_length.min
+    end
     respond_with self.resource
   end
 
   # POST /resource
   def create
     build_resource(sign_up_params)
-
-    if resource.save
-      yield resource if block_given?
+    resource_saved = resource.save
+    yield resource if block_given?
+    if resource_saved
       if resource.active_for_authentication?
-        set_flash_message :notice, :signed_up, {name: "#{resource.first_name}"} if is_flashing_format?
+        # Modification: added customized flash response with user name
+        set_flash_message :notice, :signed_up, {name: "#{resource.first_name}"}  if is_flashing_format?
+        # set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
       else
@@ -35,24 +53,41 @@ class Devise::RegistrationsController < DeviseController
       end
     else
       clean_up_passwords resource
+      @validatable = devise_mapping.validatable?
+      if @validatable
+        @minimum_password_length = resource_class.password_length.min
+      end
       respond_with resource
     end
   end
 
   # GET /resource/edit
-  def edit
-    render :edit
+ 
+ def edit
+    # Modification: Lookup user for authentication. Use current_user if no user :id specified. 
+    # This occurs because we have two routes to this action (devise: assumes current user and 
+    # ours: passes an id)
+    id = params[:id] ? params[:id] : current_user.id
+    self.resource = User.find(id)
+    authorize self.resource
   end
 
   # PUT /resource
   # We need to use a copy of the resource because we don't want to change
   # the current user in place.
   def update
-    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    
+    id = params[:id] ? params[:id] : current_user.id
+    self.resource = resource_class.to_adapter.get!(id)
+    authorize self.resource                               
 
-    if update_resource(resource, account_update_params)
-      yield resource if block_given?
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    # byebug
+    # if params[:password].blank
+    remove_password_params_if_blank_password
+    resource_updated = resource.update_attributes(user_params)
+    # yield resource if block_given?
+    if resource_updated
       if is_flashing_format?
         flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
           :update_needs_confirmation : :updated
@@ -68,11 +103,19 @@ class Devise::RegistrationsController < DeviseController
 
   # DELETE /resource
   def destroy
-    resource.destroy
-    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    id = params[:id] ? params[:id] : current_user.id
+    self.resource = resource_class.to_adapter.get!(id)
+    authorize self.resource
+    self.resource.destroy
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name) if id == current_user.id
     set_flash_message :notice, :destroyed if is_flashing_format?
     yield resource if block_given?
-    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    #FIXME fix this render to handle both cases.
+    # if params[:id].blank?
+    #   respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    # else
+      render 'users/index'
+    # end
   end
 
   # GET /resource/cancel
@@ -85,7 +128,7 @@ class Devise::RegistrationsController < DeviseController
     redirect_to new_registration_path(resource_name)
   end
 
-                 
+  protected
 
   def update_needs_confirmation?(resource, previous)
     resource.respond_to?(:pending_reconfirmation?) &&
@@ -120,7 +163,10 @@ class Devise::RegistrationsController < DeviseController
   # The path used after sign up for inactive accounts. You need to overwrite
   # this method in your own RegistrationsController.
   def after_inactive_sign_up_path_for(resource)
-    respond_to?(:root_path) ? root_path : "/"
+    scope = Devise::Mapping.find_scope!(resource)
+    router_name = Devise.mappings[scope].router_name
+    context = router_name ? send(router_name) : self
+    context.respond_to?(:root_path) ? context.root_path : "/"
   end
 
   # The default url to be used after updating a resource. You need to overwrite
@@ -142,4 +188,42 @@ class Devise::RegistrationsController < DeviseController
   def account_update_params
     devise_parameter_sanitizer.sanitize(:account_update)
   end
+  
+  
+  private
+  
+  # Checks whether a password is needed or not. For validations only.
+  # Passwords are always required if it's a new record, or if the password
+  # or confirmation are being set somewhere.
+  def remove_password_params_if_blank_password
+    if params[:user][:password] == "" and params[:user][:password_confirmation] == ""
+      params[:user].delete :password
+      params[:user].delete :password_confirmation
+    end
+  end
+  
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, 
+                                  :password, :password_confirmation)
+  end
+
+  
+  # check if we need password to update user data
+    # ie if password or email was changed
+    # extend this as needed
+    def needs_password?(user)
+      user.email != params[:user][:email] ||
+        params[:user][:password].present? ||
+        params[:user][:password_confirmation].present?
+    end  
 end
+
+
+
+
+
+
+
+
+
