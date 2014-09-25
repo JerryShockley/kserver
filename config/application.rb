@@ -6,9 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# TODO Replace all schoolnet references with colorsisters
 # TODO Replace Foundation with Bootstrap 
-module Schoolnet
+module Colorsisters
   class Application < Rails::Application
 
     config.generators do |g|
