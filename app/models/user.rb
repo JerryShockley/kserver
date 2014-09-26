@@ -68,6 +68,13 @@ class User < ActiveRecord::Base
   def name
     n = self.first_name + " " + self.last_name
   end
+  
+  def self.show_attributes
+    show_attribs = [:first_name, :last_name, :email, :role, :sign_in_count, :last_sign_in_at,
+                    :created_at, :updated_at, :reset_password_sent_at, :remember_created_at ]
+    
+  end
+
 
 private
 
