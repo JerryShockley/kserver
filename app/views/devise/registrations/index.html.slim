@@ -3,7 +3,7 @@
     h3
       | Users
       
-      / = search_form_for @q do |f|
+      = search_form_for @q do |f|
         
 
       table#users
@@ -17,12 +17,12 @@
         tbody
            - for usr in @users do
             tr
-              td = link_to "#{usr.last_name}",  user_path(usr)
+              td = link_to "#{usr.last_name}",  userx_registration_path(usr)
               td = usr.first_name
               td = usr.email
               td = usr.role
               /TODO Add icons for operations
-              td = link_to('Edit', edit_userx_registration_url(usr), id: "edit_#{usr.id}") + " | " + link_to('Delete', user_registration_url(usr), id: "delete_#{usr.id}", :data => { :confirm => "Are you sure?" }, method: :delete)
+              td = link_to('Edit', edit_userx_registration_path(usr), id: "edit_#{usr.id}") + " | " + link_to('Delete', user_registration_path(usr), id: "delete_#{usr.id}", :data => { :confirm => "Are you sure?" }, method: :delete)
               /TODO Create test for delete
         = paginate(@users)
         
