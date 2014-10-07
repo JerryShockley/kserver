@@ -21,6 +21,9 @@
 #
 
 class User < ActiveRecord::Base
+
+  before_save :titleize_names, on: [:save, :update]
+  
   enum role: { 
                customer: 0, 
                writer: 1, 
@@ -78,10 +81,16 @@ class User < ActiveRecord::Base
 
 private
 
-  
-  
-  
+def titleize_names
+  self.first_name = first_name.titleize
+  self.last_name = last_name.titleize
+  self.email = email.downcase
+end
 
+
+def self.ransackable_attributes(auth_object = nil)
+  %w(last_name first_name email role sign_in_count last_sign_in_at created_at ) + _ransackers.keys
+end  
 
 
 end

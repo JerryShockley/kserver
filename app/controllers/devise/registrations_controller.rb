@@ -1,20 +1,45 @@
+require 'pundit'
+
 class Devise::RegistrationsController < DeviseController
+  include PunditHelper
   prepend_before_filter :require_no_authentication, only: [ :new, :create, :cancel ]
   # prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
   after_action :verify_authorized, except: [:new, :create, :cancel]
+  before_filter :store_and_set_search_params, only: [:index]
   
 
 
   # TODO Improve table behavior
   def index
     authorize User
-    @q = User.search(params[:q])
-    @users = @q.result(distinct: true).page(params[:page]).per(75)
+    # byebug
+    @search = User.search(@search_params)
+    # byebug
+    if @search.sorts.empty?
+      @search.build_sort
+      @search.sorts = 'last_name asc'
+    end
+    @record_count ||= @search.result(distinct: true).count
+    @users = @search.result(distinct: true).page(params[:page]).per(75)
+    @search.build_condition if @search.conditions.empty?
     # respond_to do |format|
     #   format.html
       # format.json { render json: UsersDatatable.new(view_context) }
     # end
   end
+  
+  # From Ransack Demo
+
+  # def advanced_search
+  #   @search = User.search(params[:q])
+  #   @search.build_grouping unless @search.groupings.any?
+  #   @users  = params[:distinct].to_i.zero? ?
+  #     @search.result :
+  #     @search.result(distinct: true)
+  #
+  #   respond_with @users
+  # end
+  
   
 
   def show
@@ -42,7 +67,7 @@ class Devise::RegistrationsController < DeviseController
     if resource_saved
       if resource.active_for_authentication?
         # Modification: added customized flash response with user name
-        set_flash_message :notice, :signed_up, {name: "#{resource.first_name}"}  if is_flashing_format?
+        set_flash_message :notice, :signed_up, {name: resource.first_name }  if is_flashing_format?
         # set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -80,7 +105,7 @@ class Devise::RegistrationsController < DeviseController
     id = params[:id] ? params[:id] : current_user.id
     self.resource = resource_class.to_adapter.get!(id)
     authorize self.resource                               
-
+    # byebug
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
     # byebug
     # if params[:password].blank
@@ -93,11 +118,20 @@ class Devise::RegistrationsController < DeviseController
           :update_needs_confirmation : :updated
         set_flash_message :notice, flash_key
       end
-      sign_in resource_name, resource, bypass: true
-      respond_with resource, location: after_update_path_for(resource)
+      if resource.id == current_user.id
+        sign_in resource_name, resource, bypass: true
+        respond_with resource, location: after_update_path_for(resource)        
+      else  
+        sign_in :user, current_user, bypass: true
+        redirect_to users_path
+      end
     else
       clean_up_passwords resource
-      respond_with resource
+      if resource.id == current_user.id
+        respond_with resource
+      else
+        render back_path
+      end
     end
   end
 
@@ -108,14 +142,10 @@ class Devise::RegistrationsController < DeviseController
     authorize self.resource
     self.resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name) if id == current_user.id
-    set_flash_message :notice, :destroyed if is_flashing_format?
+    set_flash_message :notice, :destroyed, { name: resource.name, email: resource.email} if is_flashing_format?
     yield resource if block_given?
     #FIXME fix this render to handle both cases.
-    # if params[:id].blank?
-    #   respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
-    # else
-      render 'users/index'
-    # end
+    redirect_to users_path
   end
 
   # GET /resource/cancel
@@ -191,6 +221,27 @@ class Devise::RegistrationsController < DeviseController
   
   
   private
+  
+  # store params of ransack into session and set @search_params variable
+    # controller_name and action_name have different definition for rails < 4.1
+    def store_and_set_search_params
+      # byebug
+      store_search_params
+      @search_params = retrieve_search_params
+    end
+    
+    def store_search_params
+      session[:q] = {controller_name => { action_name => params[:q] }} unless params[:q].blank?
+      # session[:q] = session[:q].deep_merge({controller_name => { action_name => params[:q] }}) if params[:q]
+    end
+    
+    def retrieve_search_params
+      p = session.try(:[],:q).try(:[], controller_name).try(:[], action_name)
+      p.nil? ? {} : p
+    end
+
+
+
   
   # Checks whether a password is needed or not. For validations only.
   # Passwords are always required if it's a new record, or if the password

@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# TODO Set timezone prefs
 # TODO Replace Foundation with Bootstrap 
 module Colorsisters
   class Application < Rails::Application

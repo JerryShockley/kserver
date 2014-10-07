@@ -26,6 +26,7 @@ describe User do
 
   let(:sadmin) {build_stubbed :sysadmin}
 
+    
 
     describe "validations" do
       it "is valid with a valid object" do
@@ -56,6 +57,39 @@ describe User do
         usr = build_stubbed(:writer, {first_name: fname, last_name: lname})
         expect(usr.name).to match(name)
         
+      end
+    end
+    
+    describe "titleize_names" do
+      
+      it "capitalizes first_name" do
+        name_lcase = "janet"
+        name_ucase = "Janet"
+        user = build_stubbed :cust, first_name: name_lcase
+        user.send :titleize_names
+        expect(user.first_name).to match name_ucase
+      end
+      
+      it "capitalizes last_name" do
+        name_lcase = "smith"
+        name_ucase = "Smith"
+        user = build_stubbed :cust, last_name: name_lcase
+        user.send :titleize_names
+        expect(user.last_name).to match name_ucase
+      end
+      
+      it "downcases email" do
+        email_lcase = "janet_smith@abc.com"
+        email_ucase = "Janet_Smith@AbC.Com"
+        user = build_stubbed :cust, email: email_ucase
+        user.send :titleize_names
+        expect(user.email).to match email_lcase
+      end
+      
+      it "is called before save" do 
+        user = User.new
+        expect(user).to receive(:titleize_names)
+        user.run_callbacks :save        
       end
     end
     

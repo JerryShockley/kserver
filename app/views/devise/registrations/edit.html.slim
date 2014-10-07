@@ -27,10 +27,8 @@
         = f.label :password_confirmation
         = f.password_field :password_confirmation, class: 'form-control'
       
-    = f.submit 'Update', :class => 'button right'
-.authform
-  h3
-    | Cancel Account
-  p
-    | Unhappy? We'll be sad to see you go.
-  = button_to "Cancel my account", userx_registration_path(resource), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right'
+    = f.submit 'Update', :class => 'button'
+
+p
+/ TODO add back button
+  = button_to "Back", :back_path, class: 'button right'

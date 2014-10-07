@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   devise_scope :user  do
     get "/account/users" => "devise/registrations#index", as: :users
+    put "account/users" => "devise/registrations#index", as: :search_users
     get "/account/users/:id" => "devise/registrations#show", as: :userx_registration
     get "/account/users/edit/:id" => "devise/registrations#edit", as: :edit_userx_registration
     put "/account/users/:id" => "devise/registrations#update"

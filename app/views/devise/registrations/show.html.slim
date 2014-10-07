@@ -8,6 +8,10 @@ h3
         tr
           td#user_label = key.to_s.humanize
           td#user_data = resource.send(key)
+          
+  p
+    = button_to "Back", :back, method: :put, class: 'button'
+    
 
 
 

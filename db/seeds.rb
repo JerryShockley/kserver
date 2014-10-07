@@ -19,29 +19,33 @@ puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before re
 User.destroy_all
 
 usr = User.new
-usr.first_name = "Nina"
+  usr.first_name = "Nina"
   usr.last_name = "Bhatti"
   usr.email = "nina@kokkoinc.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.sysadmin!
+  usr.save!
   puts("Created #{usr.name}'s account")
 
-usr.first_name = "Scott"
+usr = User.new
+  usr.first_name = "Scott"
   usr.last_name = "Trappe"
   usr.email = "scott@kokkoinc.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.sysadmin!
+  usr.save!
   puts("Created #{usr.name}'s account")
 
-
+usr = User.new
 usr.first_name = "Jerry"
   usr.last_name = "Shockley"
   usr.email = "jerry@shockley.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.sysadmin!
+  usr.save!
   puts("Created #{usr.name}'s account")
 
 
@@ -61,6 +65,7 @@ usr = User.new
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.administrator!
+  usr.save!
   puts("Created administrator user")
   
 usr = User.new
@@ -70,6 +75,7 @@ usr = User.new
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.editor!
+  usr.save!
   puts("Created editor user")
 
 usr = User.new
@@ -79,6 +85,7 @@ usr = User.new
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.writer!
+  usr.save!
   puts("Created writer user")
 
 
@@ -88,6 +95,7 @@ usr = User.new
   usr.email = "cust@foo.com"
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
+  usr.save!
   puts("Created cust user")
   
   200.times do
