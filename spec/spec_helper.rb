@@ -1,4 +1,5 @@
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 require 'pundit/rspec'
 require 'devise'
 require 'factory_girl'
