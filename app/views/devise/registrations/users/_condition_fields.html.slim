@@ -1,15 +1,15 @@
-div.field
-  div.row
-    div class='large-3 columns'
+.field
+  .row.condition_row
+    .large-3.columns
       = f.attribute_fields do |a|
         = a.attribute_select
-    div class="large-3 columns"
+    .large-3.columns
       = f.predicate_select
-    div class="large-3 columns"  
+    .large-3.columns
       = f.value_fields do |v|
         = v.text_field :value
-    div class="large-3 columns"  
-      = link_to "Remove", "#", class: "remove_fields"
+    .large-3.columns
+      = link_to "Remove", "#", class: "remove_condition_fields"
 
 / <div class="field">
 /   <%= f.attribute_fields do |a| %>

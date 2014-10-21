@@ -1,11 +1,11 @@
-div.field data-object-name="#{f.object_name}"
-  div.row
-    div class='large-3 columns'
+.field data-object-name="#{f.object_name}"
+  .row.sort_row
+    .large-3.columns
       = f.attribute_select({}, {}, 'sort')
-    div class='large-3 columns'
+    .large-2.columns
       = f.sort_direction_select({}, {})
-    div class='large-3 columns'
-      = link_to "Remove", "#", class: "remove_fields"
+    .large-7.columns
+      = link_to "Remove", "#", class: "remove_sort_fields"
   
 
 / <%= content_tag(:span,
