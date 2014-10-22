@@ -6,6 +6,6 @@ module ApplicationHelper
     fields = f.send("#{type}_fields", new_object, child_index: id) do |builder|
       render("devise/registrations/users/" + type.to_s + "_fields", f: builder)
     end
-    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+    link_to(name, '#', class: "add_#{type}_fields", id: "add_#{type}_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 end
