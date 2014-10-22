@@ -5,23 +5,24 @@ class Devise::RegistrationsController < DeviseController
   prepend_before_filter :require_no_authentication, only: [ :new, :create, :cancel ]
   # prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
   after_action :verify_authorized, except: [:new, :create, :cancel]
-  before_filter :store_and_set_search_params, only: [:index]
   
 
 
   # TODO Improve table behavior
   def index
     authorize User
-    # byebug
+    # save last search params in session. We only save blank search params if 
+    # referrer is index. Note no other referrers would give us non-blank search params.
+    save_search_params(session, params) if referrer_is_index?(params)
+      
+    @search_params = retrieve_search_params(session, params)
     @search = User.search(@search_params)
     # byebug
-    if @search.sorts.empty?
-      @search.build_sort
-      @search.sorts = 'last_name asc'
-    end
     @record_count ||= @search.result(distinct: true).count
     @users = @search.result(distinct: true).page(params[:page]).per(75)
     @search.build_condition if @search.conditions.empty?
+    @search.build_sort if @search.sorts.empty?
+    
     # respond_to do |format|
     #   format.html
       # format.json { render json: UsersDatatable.new(view_context) }
@@ -222,21 +223,24 @@ class Devise::RegistrationsController < DeviseController
   
   private
   
-  # store params of ransack into session and set @search_params variable
-    # controller_name and action_name have different definition for rails < 4.1
-    def store_and_set_search_params
-      # byebug
-      store_search_params
-      @search_params = retrieve_search_params
+    def referrer_is_index?(params)
+      !params[:q].nil?
     end
-    
-    def store_search_params
-      session[:q] = {controller_name => { action_name => params[:q] }} unless params[:q].blank?
-      # session[:q] = session[:q].deep_merge({controller_name => { action_name => params[:q] }}) if params[:q]
+
+  
+    def save_search_params(session, params)
+      search_val = params[:q]
+      
+      if search_val.blank?
+        session[:q] = {params[:controller] => { params[:action] => nil }}
+      else 
+        session[:q] = {params[:controller] => { params[:action] => search_val }}
+      end
     end
+
     
-    def retrieve_search_params
-      p = session.try(:[],:q).try(:[], controller_name).try(:[], action_name)
+    def retrieve_search_params(session, params)
+      p = session.try(:[],:q).try(:[], params[:controller]).try(:[], params[:action])
       p.nil? ? {} : p
     end
 
