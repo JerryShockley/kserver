@@ -14,9 +14,13 @@ html
     header
       == render 'layouts/navigation'
     main[role="main"]
-      = "Logged in as #{current_user.name}"  unless current_user.blank?
-      
-      == render 'layouts/messages'
-      == yield
+      div.row
+        div class="large-12 columns"
+          p class="text-right"
+            = "Logged in as #{current_user.name}"  unless current_user.blank?
+      div.row
+        div class="large-12 columns"
+          == render 'layouts/messages'
+          == yield
       
       
