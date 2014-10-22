@@ -12,7 +12,7 @@ feature 'Sign Up', :devise do
   #   Then I see a successful sign up message
   scenario 'visitor can sign up with valid first name, last name, email address and password' do
     
-    sign_up_with('Joe', 'Allenator', 'test@example.com', 'please123', 'please123')
+    sign_up_with('Joe', 'Allenator', 'test@example.com', 'please123')
     expect(page).to have_content 'Welcome to ColorSisters Joe!'
   end
 
@@ -21,7 +21,7 @@ feature 'Sign Up', :devise do
   #   When I sign up with an invalid email address
   #   Then I see an invalid email message
   scenario 'visitor cannot sign up with invalid email address format' do
-    sign_up_with('Joe', 'Allenator', 'bogus', 'please123', 'please123')
+    sign_up_with('Joe', 'Allenator', 'bogus', 'please123')
     expect(page).to have_content 'Email is invalid'
   end
 
@@ -30,7 +30,7 @@ feature 'Sign Up', :devise do
   #   When I sign up without an email address confirmation
   #   Then I see an invalid email confirmation message
   scenario 'visitor cannot sign up with a blank email address' do
-    sign_up_with('Joe', 'Allenator',  '', 'please123', 'please123')
+    sign_up_with('Joe', 'Allenator',  '', 'please123')
     expect(page).to have_content "Email can't be blank"
   end
 
@@ -39,7 +39,7 @@ feature 'Sign Up', :devise do
   #   When I sign up without a password
   #   Then I see a missing password message
   scenario 'visitor cannot sign up without password' do
-    sign_up_with('Joe', 'Allenator', 'test@example.com', '', '')
+    sign_up_with('Joe', 'Allenator', 'test@example.com', '')
     expect(page).to have_content "Password can't be blank"
   end
 
@@ -48,7 +48,7 @@ feature 'Sign Up', :devise do
   #   When I sign up with a short password
   #   Then I see a 'too short password' message
   scenario 'visitor cannot sign up with a short password' do
-    sign_up_with('Joe', 'Allenator', 'test@example.com', 'plea', 'plea')
+    sign_up_with('Joe', 'Allenator', 'test@example.com', 'plea')
     expect(page).to have_content "Password is too short"
   end
 
