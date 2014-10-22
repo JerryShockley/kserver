@@ -40,13 +40,14 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'jasmine-rails'
-  gem 'poltergeist'
+  gem 'jasmine-jquery-rails'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
 end
 group :test do
   # gem 'capybara-screenshot'
   gem 'fuubar'
+  gem 'poltergeist'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'faker'
