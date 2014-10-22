@@ -1,16 +1,18 @@
 h3
   | Viewing User
-
-  table.show#users
-    thead
-    tbody
-      - User.show_attributes.each do |key|
-        tr
-          td#user_label = key.to_s.humanize
-          td#user_data = resource.send(key)
-          
-  p
-    = button_to "Back", :back, method: :put, class: 'button'
+  .row
+    p
+    .large-10.columns.large-centered
+      .row.panel
+        table.show#users
+          - User.show_attributes.each do |key|
+            tr
+              td#user_label = key.to_s.humanize
+              td#user_data = resource.send(key)
+          .row
+        .large-12.text-center
+          p
+              = button_to "Back", build_cancel_path, method: :get, class: 'button'
     
 
 
