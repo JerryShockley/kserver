@@ -80,6 +80,23 @@ describe 'Registrations index page', :devise do
           expect(user_last_names[0]).to eq(user2.last_name)
           expect(user_last_names[1]).to eq(user1.last_name)
           
+      # ****  Test session saving of search & sort form parameters
+          visit userx_registration_path(User.find(user1.id))
+          click_button('Back')
+          
+          user_last_names = page.all('table#users.admin tbody tr td:nth-child(1)').map{|td| td.text}
+          expect(user_last_names[0]).to eq(user2.last_name)
+          expect(user_last_names[1]).to eq(user1.last_name)
+          expect(user_last_names.size).to eq(2)
+          expect(find(:xpath, "//select[@id='q_c_0_a_0_name']").value).to eq('last_name')
+          expect(find(:xpath, "//select[@id='q_c_0_p']").value).to eq('cont')
+          expect(find(:xpath, "//input[@id='q_c_0_v_0_value']").value).to eq('e')
+          expect(find(:xpath, "//select[@id='q_s_0_name']").value).to eq('first_name')
+          expect(find(:xpath, "//*[@id='q_s_0_dir']").value).to eq('desc')
+          
+          
+          
+          
       # ****  Test the sort js links
           
           # test js add sort links on search form
