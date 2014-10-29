@@ -38,19 +38,15 @@
             tr
               = model_fields.each_with_object('') do |field, string|
                 th
-                  = sort_link(@search, field, method: :put )
+                  - if field == :sign_in_count
+                    = sort_link(@search, "Sign in #", method: :put )
+                  - else
+                    = sort_link(@search, field, method: :put )
               th
                  = "Operations"
-          tbody
-            = @users.each_with_object('') do |object, string|
-              tr
-                = model_fields.each_with_object('') do |field, string|
-                  td
-                    - if field == :last_name
-                      = link_to "#{object.send(field)}", userx_registration_path(object)
-                    - else
-                      = object.send(field)
-                td
-                  = link_to('Edit', edit_userx_registration_path(object), id: "edit_#{object.id}" ) + " | " + link_to('Delete', userx_registration_path(object), id: "delete_#{object.id}", :data => { :confirm => "Are you sure?" }, method: :delete)
+          tbody.tdata
+            = render "devise/registrations/users/user"
+      .row
+        = paginate @users
         
         

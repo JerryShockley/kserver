@@ -1,0 +1,6 @@
+$('tbody.tdata').append('<%= j render("devise/registrations/users/user") %>');
+<% if @users.next_page %>
+  $('.pagination').replaceWith('<%= j paginate(@users) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

@@ -1,0 +1,7 @@
+= @users.each_with_object('') do |object, string|
+  tr.user
+    = model_fields.each_with_object('') do |field, string|
+      td
+        = formatted_field_value(object, field)
+    td
+      = link_to('Edit', edit_userx_registration_path(object), id: "edit_#{object.id}" ) + " | " + link_to('Delete', userx_registration_path(object), id: "delete_#{object.id}", :data => { :confirm => "Are you sure?" }, method: :delete)

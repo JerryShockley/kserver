@@ -19,28 +19,15 @@ class Devise::RegistrationsController < DeviseController
     @search = User.search(@search_params)
     # byebug
     @record_count ||= @search.result(distinct: true).count
-    @users = @search.result(distinct: true).page(params[:page]).per(75)
+    # @users = @search.result(distinct: true).page(params[:page])
+    @users = @search.result(distinct: true).page(params[:page])
     @search.build_condition if @search.conditions.empty?
     @search.build_sort if @search.sorts.empty?
-    
-    # respond_to do |format|
-    #   format.html
-      # format.json { render json: UsersDatatable.new(view_context) }
-    # end
+    respond_to do |format|
+      format.html  
+      format.js 
+    end
   end
-  
-  # From Ransack Demo
-
-  # def advanced_search
-  #   @search = User.search(params[:q])
-  #   @search.build_grouping unless @search.groupings.any?
-  #   @users  = params[:distinct].to_i.zero? ?
-  #     @search.result :
-  #     @search.result(distinct: true)
-  #
-  #   respond_with @users
-  # end
-  
   
 
   def show

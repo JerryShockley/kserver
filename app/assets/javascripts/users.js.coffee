@@ -36,3 +36,11 @@ jQuery ->
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, search_count++))
     event.preventDefault()
+
+  if $('.pagination').length
+    $(window).scroll ->
+      url = $('.pagination .next_page').attr('href')
+      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
+        $('.pagination').text("Fetching more products...")
+        $.getScript(url)
+    $(window).scroll()

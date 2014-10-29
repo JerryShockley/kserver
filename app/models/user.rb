@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
 
   after_initialize :set_default_role, :if => :new_record?
   
+  paginates_per 50
+  
   def self.policy_class
       UserPolicy
     end
