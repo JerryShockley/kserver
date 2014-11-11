@@ -8,4 +8,18 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_#{type}_fields", id: "add_#{type}_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+  
+  
+  def error_messages!(obj)
+    return "" if obj.errors.empty?    
+    messages = obj.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+
+    html = <<-HTML
+    <div id="errorExplanation">
+      <ul>#{messages}</ul>
+    </div>
+    HTML
+
+    html.html_safe
+  end
 end

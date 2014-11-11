@@ -22,6 +22,8 @@
 
 class User < ActiveRecord::Base
 
+  has_one :profile
+  
   before_save :titleize_names, on: [:save, :update]
   
   enum role: { 

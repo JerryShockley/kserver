@@ -1,40 +1,54 @@
 .authform
   h3
-    | Edit 
-    = resource_name.to_s.humanize
-  = form_for(resource, :as => resource_name, :url => userx_registration_path(resource), :html => { :method => :put, :role => 'form'}) do |f|
-    = devise_error_messages!
+    | Edit User
+  = simple_form_for(@profile_form, :url => userx_registration_path(@profile_form.user), :html => { :method => :patch, :role => 'form'}) do |f|
+    = error_messages! @profile_form
     .panel
       .row
-        .large-6.columns.form-group
-          = f.label :first_name
-          = f.text_field :first_name, :autofocus => true, class: 'form-control'
-        .form-group.large-6.columns
-          = f.label :last_name
-          = f.text_field :last_name, :autofocus => true, class: 'form-control'
+        .large-6.columns.medium-6
+          = f.input :first_name, :autofocus => true, class: 'form-control'
+        .large-6.columns.medium-6
+          = f.input :last_name, :autofocus => true, class: 'form-control'
       .row
-        .large-6.columns.form-group
-          = f.label :email
-          = f.email_field :email, class: 'form-control'
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          div
-            | Currently waiting confirmation for: 
-            = resource.unconfirmed_email
+        .large-6.columns.medium-6.small-12
+          = f.input :email
+        .columns.large-6.medium-6.small-12
+          = f.input :receive_emails, as: :boolean, boolean_style: :inline, label: "Receive Kokko informational emails"
+      -if current_user && current_user.admin?
+        .row
+          .columns.large-3.medium-3.small-12.left
+            = f.input :role, collection: User.roles.keys.map {|k,v| [k,k]}
+          .columns.large-6.medium-8.small-8
+            = f.input :source, label: "Source of information"
+      fieldset
+        legend Mailing address
+        .row
+          .columns.large-12
+            p Please share you're mailing address if you'd like to be on the waiting list to receive a Color Match card to use our service when they become available.
+        .row
+          .columns.large-6.medium-6
+            = f.input :street1
+          .columns.large-6.medium-6
+            = f.input :street2
+        .row
+          .columns.large-6.medium-6
+            = f.input :city
+          .columns.large-2.medium-2.small-4
+            = f.input :state, collection: ProfileForm::STATES
+          .columns.large-3.medium-3.small-8
+            = f.input :postal_code, label: 'Zip code'
+            
       fieldset
         legend Change Password
-        .row.form-group
-          p
-            | Leave these fields blank if you don't want to change your password.
-            .large-6.columns
-              = f.label :password
-              = f.password_field :password, :autocomplete => 'off', class: 'form-control'
-            .large-6.columns
-              = f.label :password_confirmation
-              = f.password_field :password_confirmation, class: 'form-control'
+        .row
+          .columns.large-12
+            p Leave this field blank if you don't want to change your password.
+        .row
+          .large-6.columns.medium-6.small-12
+            = f.input :password, :autocomplete => 'off'
       .row
         .large-12.columns
             = f.submit 'Update', :class => 'button expand'
   .row
     .large-12.columns
-        = button_to "Cancel", build_cancel_path,  method: :get, class: 'button'
-    
+        = button_to "Cancel", :back, method: :get, class: 'button'    

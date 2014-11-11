@@ -26,11 +26,19 @@ FactoryGirl.define do
     first_name { Faker::Name.first_name}
     last_name {Faker::Name.last_name}
     # sequence(:email) {|n| "#{first_name.last_name}#{n}@foo.com"}
-    email {"#{first_name}.#{last_name}@foo.com"}
-    # email_confirmation {"#{first_name}.#{last_name}@foo.com"}
+    email {"#{first_name.downcase}.#{last_name.downcase}@foo.com"}
     password "foobar"
-    password_confirmation "foobar"
     role :customer
+
+    # trait :stubbed_profile do
+    #   association :profile, factory: :profile, first_name: {first_name},
+    #                         last_name: {last_name}, email: {email}, strategy: :build_stubbed
+    # end
+
+    trait :create_profile do
+      profile { create :profile, first_name: first_name, last_name: last_name, email: email}
+    end
+
 
     trait :sysadmin do
       role :sysadmin
@@ -52,6 +60,10 @@ FactoryGirl.define do
       role :customer
     end
 
+    # factory :stubbed_administator_profile, traits: [:administrator, :stubbed_profile]
+    # factory :stubbed_customer_profile, traits: [:customer, :stubbed_profile]
+    factory :create_administator_profile, traits: [:administrator, :create_profile]
+    factory :create_customer_profile, traits: [:create_profile, :cust]
     factory :sysadmin, traits: [:sysadmin]
     factory :administrator, traits: [:administrator]
     factory :editor, traits: [:editor]

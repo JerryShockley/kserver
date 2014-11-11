@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
+
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root  to: 'welcome#index'
   get 'welcome/index', as: 'welcome'
 
-  # devise_scope :user do
-  #   get "index", to: "registrations#index", on: :collection
-  # end
-  # These paths support a modification to Devise's Registrations#edit and Registrations#update
-  # actions enble a user to edit another user's profile
 
   devise_scope :user  do
     get "/account/users" => "devise/registrations#index", as: :users
@@ -21,12 +17,8 @@ Rails.application.routes.draw do
 
 
   devise_for :users, path: 'account'
-       
-  # resources :users # do
-#     collection do
-#       match('search' => 'user#search', via [:get, :post], as: :search)
-#     end
-#   end
+  
+  resources :profiles, only: [:create, :new, :edit, :update]
   
   
 end

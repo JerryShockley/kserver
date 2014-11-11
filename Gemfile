@@ -20,6 +20,8 @@ gem 'unicorn-rails'
 gem 'jquery-turbolinks'
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 gem 'kaminari'
+gem 'virtus'
+gem 'reform'
 gem 'videojs_rails'
 group :development do
   gem 'better_errors'

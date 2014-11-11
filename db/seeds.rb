@@ -15,8 +15,9 @@ def logger
     Rails::logger
 end
 
-puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
+puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} and #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
 User.destroy_all
+Profile.destroy_all
 
 usr = User.new
   usr.first_name = "Nina"
@@ -26,6 +27,7 @@ usr = User.new
   usr.password_confirmation = "foobar"
   usr.sysadmin!
   usr.save!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created #{usr.name}'s account")
 
 usr = User.new
@@ -36,6 +38,7 @@ usr = User.new
   usr.password_confirmation = "foobar"
   usr.sysadmin!
   usr.save!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created #{usr.name}'s account")
 
 usr = User.new
@@ -46,6 +49,7 @@ usr.first_name = "Jerry"
   usr.password_confirmation = "foobar"
   usr.sysadmin!
   usr.save!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created #{usr.name}'s account")
 
 
@@ -56,6 +60,7 @@ usr = User.new
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.sysadmin!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created sysadmin user")
   
 usr = User.new
@@ -66,6 +71,7 @@ usr = User.new
   usr.password_confirmation = "foobar"
   usr.administrator!
   usr.save!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created administrator user")
   
 usr = User.new
@@ -76,6 +82,7 @@ usr = User.new
   usr.password_confirmation = "foobar"
   usr.editor!
   usr.save!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created editor user")
 
 usr = User.new
@@ -86,6 +93,7 @@ usr = User.new
   usr.password_confirmation = "foobar"
   usr.writer!
   usr.save!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created writer user")
 
 
@@ -96,11 +104,20 @@ usr = User.new
   usr.password = "foobar"
   usr.password_confirmation = "foobar"
   usr.save!
+  usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
   puts("Created cust user")
   
-  200.times do
-   FactoryGirl.create(:cust)
+  
+  # Create unrelated users and profiles
+  100.times do
+   FactoryGirl.create :cust
+   FactoryGirl.create :profile
+  end
+  
+  # Create linked users and profiles
+  100.times do
+   FactoryGirl.create(:create_customer_profile)
   end
 
-puts "--  Created #{User.count} User record#{"s" if User.count > 1} During reseeding\n\n"
+puts "--  Created #{User.count} User record#{"s" if Profile.count > 1} and #{Profile.count} Profile record#{"s" if Profile.count > 1} during reseeding\n\n"
   

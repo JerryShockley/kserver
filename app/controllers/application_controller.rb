@@ -1,3 +1,6 @@
+
+require 'pundit'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -25,8 +28,21 @@ class ApplicationController < ActionController::Base
   def add_query_params(referrer_url, params_hash)
     Rack::Utils.parse_nested_query(referrer_url.query).merge(params_hash).to_query
   end
+  
+  def failed_save_msg(obj)
+    "#{pluralize(obj.errors.count, "error")} prohibited this record from being saved:"
+  end
 
 
+  def pluralize(count, singular, plural = nil)
+    word = if (count == 1 || count =~ /^1(\.0+)?$/)
+      singular
+    else
+      plural || singular.pluralize
+    end
+
+    "#{count || 0} #{word}"
+  end
 
                                              
 end

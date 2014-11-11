@@ -17,12 +17,11 @@ class Devise::RegistrationsController < DeviseController
       
     @search_params = retrieve_search_params(session, params)
     @search = User.search(@search_params)
-    # byebug
     @record_count ||= @search.result(distinct: true).count
-    # @users = @search.result(distinct: true).page(params[:page])
     @users = @search.result(distinct: true).page(params[:page])
     @search.build_condition if @search.conditions.empty?
     @search.build_sort if @search.sorts.empty?
+    
     respond_to do |format|
       format.html  
       format.js 
@@ -39,18 +38,23 @@ class Devise::RegistrationsController < DeviseController
 
   # GET /resource/sign_up
   def new
-    build_resource({})
+    # build_resource({})
+    @profile_form = ProfileForm.new
     @validatable = devise_mapping.validatable?
     if @validatable
       @minimum_password_length = resource_class.password_length.min
     end
-    respond_with self.resource
+    # respond_with self.resource
+   respond_with @profile_form
+    
   end
 
   # POST /resource
   def create
     build_resource(sign_up_params)
-    resource_saved = resource.save
+    @profile_form ||= ProfileForm.new(resource)
+    # resource_saved = resource.save
+    resource_saved = @profile_form.save params[:profile_form]
     yield resource if block_given?
     if resource_saved
       if resource.active_for_authentication?
@@ -70,7 +74,9 @@ class Devise::RegistrationsController < DeviseController
       if @validatable
         @minimum_password_length = resource_class.password_length.min
       end
-      respond_with resource
+      # render resource
+      flash[:alert] = failed_save_msg(@profile_form)
+      render :new
     end
   end
 
@@ -81,8 +87,10 @@ class Devise::RegistrationsController < DeviseController
     # This occurs because we have two routes to this action (devise: assumes current user and 
     # ours: passes an id)
     id = params[:id] ? params[:id] : current_user.id
-    self.resource = User.find(id)
-    authorize self.resource
+    @profile_form = ProfileForm.new(User.find(id))
+    self.resource = @profile_form.user
+    authorize @profile_form.user
+    
   end
 
   # PUT /resource
@@ -92,13 +100,15 @@ class Devise::RegistrationsController < DeviseController
     
     id = params[:id] ? params[:id] : current_user.id
     self.resource = resource_class.to_adapter.get!(id)
+    # byebug
+    @profile_form = ProfileForm.new(resource)
+    # @current_user = current_user
     authorize self.resource                               
-    # byebug
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-    # byebug
     # if params[:password].blank
-    remove_password_params_if_blank_password
-    resource_updated = resource.update_attributes(user_params)
+    # remove_password_params_if_blank_password
+    # resource_updated = resource.update_attributes(user_params)
+    resource_updated = @profile_form.save(params[:profile_form])
     # yield resource if block_given?
     if resource_updated
       if is_flashing_format?
@@ -108,20 +118,20 @@ class Devise::RegistrationsController < DeviseController
       end
       if resource.id == current_user.id
         sign_in resource_name, resource, bypass: true
-        respond_with resource, location: after_update_path_for(resource)        
+        # respond_with resource, location: after_update_path_for(resource) 
+        redirect_to root_path
       else  
         sign_in :user, current_user, bypass: true
-        redirect_to users_path
+        # redirect_to users_path
+        redirect_to root_path
       end
     else
       clean_up_passwords resource
-      if resource.id == current_user.id
-        respond_with resource
-      else
-        render back_path
-      end
+      flash[:alert] = failed_save_msg(@profile_form)
+      render :edit
     end
   end
+    
 
   # DELETE /resource
   def destroy

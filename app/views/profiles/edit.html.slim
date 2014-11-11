@@ -1,0 +1,53 @@
+h3
+  | Edit Profile
+= simple_form_for(@profile_form, :url => profile_path(@profile_form.profile), :html => { :method => :patch}) do |f|
+  = error_messages! @profile_form
+  .panel
+    .row
+      .large-6.columns.medium-6
+        = f.input :first_name, :autofocus => true, class: 'form-control'
+      .large-6.columns.medium-6
+        = f.input :last_name, :autofocus => true, class: 'form-control'
+    .row
+      .large-6.columns.medium-6.small-12
+        = f.input :email
+      .columns.large-6.medium-6.small-12.left
+        = f.input :receive_emails, as: :boolean, boolean_style: :inline, label: "Receive Kokko informational emails"
+    -if current_user && current_user.admin?
+      .row
+        .columns.large-3.medium-3.small-4.left
+          = f.input :role, collection: User.roles.keys
+        .columns.large-6.medium-8.small-8.right
+          = f.input :source, label: "Source of information"
+    fieldset
+      legend Mailing address
+      .row
+        .columns.large-12
+          p Please share you're mailing address if you'd like to be on the waiting list to receive a Color Match card to use our service when they become available.
+      .row
+        .columns.large-6.medium-6
+          = f.input :street1
+        .columns.large-6.medium-6
+          = f.input :street2
+      .row
+        .columns.large-6.medium-6
+          = f.input :city
+        .columns.large-2.medium-2.small-4
+          = f.input :state, collection: ProfileForm::STATES
+        .columns.large-3.medium-3.small-8
+          = f.input :postal_code, label: 'Zip code'
+          
+    fieldset
+      legend Change Password
+      .row
+        .columns.large-12
+          p Leave this field blank if you don't want to change your password.
+      .row
+        .large-6.columns.medium-6.small-12
+          = f.input :password, :autocomplete => 'off'
+    .row
+      .large-12.columns
+          = f.submit 'Update', :class => 'button expand'
+.row
+  .large-12.columns
+      = button_to "Cancel", :back, class: 'button'

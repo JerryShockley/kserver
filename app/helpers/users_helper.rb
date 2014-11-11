@@ -37,7 +37,6 @@ module UsersHelper
   end
 
 
-
   def display_results_count(count)
     msg = "Your search found "
     case count
@@ -50,5 +49,20 @@ module UsersHelper
     end
     msg.html_safe
   end  
+  
+  
+  def error_messages!(obj)
+    return "" if obj.errors.empty?    
+    messages = obj.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+
+    html = <<-HTML
+    <div id="errorExplanation">
+      <ul>#{messages}</ul>
+    </div>
+    HTML
+
+    html.html_safe
+  end
+  
   
 end
