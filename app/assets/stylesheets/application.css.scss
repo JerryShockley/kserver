@@ -15,6 +15,29 @@
  *= require video-js
  *= require_tree .
  */
+ul.imagelist li{
+  padding:0;
+  margin:0;
+  border-width:0;
+
+}
+
+img.row-image{
+  padding:0;
+  margin:0;
+  border-width:0;
+}
+
+li.row-item{
+  padding:0;
+  margin:0;
+  border-width:0;
+}
+
+img.wide {
+  max-width: 100%;
+  min-width: 100%;
+}
 
 
 #errorExplanation {

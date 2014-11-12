@@ -13,14 +13,10 @@ html
   body
     header
       == render 'layouts/navigation'
-    main[role="main"]
-      div.row
-        div class="large-12 columns"
-          p class="text-right"
-            = "Logged in as #{current_user.name}"  unless current_user.blank?
-      div.row
-        div class="large-12 columns"
-          == render 'layouts/messages'
-          == yield
+      / = "Logged in as #{current_user.name}"  unless current_user.blank?
+
+    main[role="main"]           
+      == render 'layouts/messages'
+      == yield
       
       

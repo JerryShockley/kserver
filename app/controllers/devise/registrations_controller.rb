@@ -100,7 +100,6 @@ class Devise::RegistrationsController < DeviseController
     
     id = params[:id] ? params[:id] : current_user.id
     self.resource = resource_class.to_adapter.get!(id)
-    # byebug
     @profile_form = ProfileForm.new(resource)
     # @current_user = current_user
     authorize self.resource                               

@@ -28,7 +28,7 @@ class ProfileForm
   validates_presence_of :email
   validate :verify_complete_mailing_address
   validates_length_of :password, minimum: MIN_PASSWORD_LENGTH,  unless: Proc.new {|e| e.password.blank?}
-  validates_format_of :postal_code, with: /\d\d\d\d\d-\d\d\d\d|\d\d\d\d\d/,  unless: Proc.new {|e| e.postal_code.blank?}
+  validates_format_of :postal_code, with: /\A\d\d\d\d\d-?\d\d\d\d\Z|\A\d\d\d\d\d\Z/,  unless: Proc.new {|e| e.postal_code.blank?}
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/
 
   
@@ -76,6 +76,8 @@ class ProfileForm
     if valid?
       unless user.new_record? && !params.has_key?(:password)
         user.save! # saves profile too!
+        profile.save!
+        user.profile = profile
       else
         profile.user_id = nil 
         profile.save!
@@ -90,7 +92,10 @@ class ProfileForm
 
   private
   
-  
+  def postal_code=(code)
+    super( code && code.size == 9 ? code.insert(5,'-') : code)
+  end
+
   
   # Returns a new hash with all keys converted to symbols. This is useful because ActiveRecord.attributes
   # returns keys as strings, while Self.attribtures (via Virtus) returns keys as symbols which is the most 
@@ -103,7 +108,7 @@ class ProfileForm
   
   # User attributes that are directly modified by ProfileForm
   def user_param_keys(include_virtual_attributes = true)
-    params = include_virtual_attributes ? [:first_name, :last_name, :email, :password, :role] : [:first_name, :last_name, :email, :role]
+    include_virtual_attributes ? [:first_name, :last_name, :email, :password, :role] : [:first_name, :last_name, :email, :role]
   end
   
   # Profile attributes that are directly modified by ProfileForm
@@ -125,7 +130,7 @@ class ProfileForm
   end
   
   def virtual_form_params_keys
-    [:request_card, :password] 
+    [:password] 
   end
 
 
@@ -168,7 +173,6 @@ class ProfileForm
     end
     
     def filter_role(key, val)
-      # byebug
       val = ["customer", "writer", "editor", "administrator", "sysadmin"][val.to_i] if key == :role && (val.class == Fixnum)
       val
     end
@@ -187,7 +191,6 @@ class ProfileForm
     def find_profile_or_empty_object
       if user.profile.blank?
         obj = Profile.find_by(email: user.email) || Profile.new
-        user.profile = obj
       else
         user.profile
       end
@@ -202,16 +205,20 @@ class ProfileForm
       [:first_name, :last_name, :city].each { |key| params[key] = params[key].titleize unless params[key].blank?  }
     end
 
+    def validate_full_name_for_mailing_address
+      self.errors.add(:first_name, "is blank preventing use of mailing address.") if self.first_name.blank?
+      self.errors.add(:last_name, "is blank preventing use of mailing address.")  if self.last_name.blank?
+    end
+
     
     def verify_complete_mailing_address
       blank_ary = []
       nonblank_ary = []
       mailing_address_keys.each { |key| self.send(key).blank? ?  blank_ary << key : nonblank_ary << key }
       if(nonblank_ary.size > 0 && blank_ary.size > 0)
-        blank_ary << :first_name if self.first_name.blank?
-        blank_ary << :last_name if self.last_name.blank?
+        validate_full_name_for_mailing_address
         blank_ary.each { |key| self.errors.add(key, " field is blank in a partially completed mailing address.")}
-      end 
+      end
     end
 
 
