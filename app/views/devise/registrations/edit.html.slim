@@ -1,9 +1,10 @@
-.authform
+.row.authform
   h3
     | Edit User
+  br
   = simple_form_for(@profile_form, :url => userx_registration_path(@profile_form.user), :html => { :method => :patch, :role => 'form'}) do |f|
     = error_messages! @profile_form
-    .panel
+    .row.panel
       .row
         .large-6.columns.medium-6
           = f.input :first_name, :autofocus => true, class: 'form-control'
@@ -50,5 +51,6 @@
         .large-12.columns
             = f.submit 'Update', :class => 'button expand'
   .row
+  br
     .large-12.columns
-        = button_to "Cancel", :back, method: :get, class: 'button'    
+        = button_to "Cancel", :back, method: :get, class: 'button right'    

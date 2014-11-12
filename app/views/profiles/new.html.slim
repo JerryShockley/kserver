@@ -1,46 +1,47 @@
-h3
+h3.row
   | Create Profile
-= simple_form_for(@profile_form, :url => profiles_path(@profile_form.profile), :html => { :method => :post}) do |f|
-  = error_messages! @profile_form
-  .panel
-    .row
-      .large-6.columns.medium-6
-        = f.input :first_name, :autofocus => true, class: 'form-control'
-      .large-6.columns.medium-6
-        = f.input :last_name, :autofocus => true, class: 'form-control'
-    .row
-      .large-6.columns.medium-6.small-12
-        = f.input :email
-      .columns.large-6.medium-6.small-12.left
-        = f.input :source
-    fieldset
-      legend Mailing address
+br
+  .row.panel
+    = simple_form_for(@profile_form, :url => profiles_path(@profile_form.profile), :html => { :method => :post}) do |f|
+      = error_messages! @profile_form
       .row
-        .columns.large-12
-          h6 Please share you're mailing address if you'd like to be on the waiting list to receive a Color Match card to use our service when they become available.
+        .large-6.columns.medium-6
+          = f.input :first_name, :autofocus => true, class: 'form-control'
+        .large-6.columns.medium-6
+          = f.input :last_name, :autofocus => true, class: 'form-control'
       .row
-        .columns.large-6.medium-6
-          = f.input :street1
-        .columns.large-6.medium-6
-          = f.input :street2
-      .row
-        .columns.large-6.medium-6
-          = f.input :city
-        .columns.large-2.medium-2.small-4
-          = f.input :state, collection: ProfileForm::STATES
-        .columns.large-3.medium-3.small-8
-          = f.input :postal_code, label: 'Zip code'
+        .large-6.columns.medium-6.small-12
+          = f.input :email
+        .columns.large-6.medium-6.small-12.left
+          = f.input :source
+      fieldset
+        legend Mailing address
+        .row
+          .columns.large-12
+            h6 Please share you're mailing address if you'd like to be on the waiting list to receive a Color Match card to use our service when they become available.
+        .row
+          .columns.large-6.medium-6
+            = f.input :street1
+          .columns.large-6.medium-6
+            = f.input :street2
+        .row
+          .columns.large-6.medium-6
+            = f.input :city
+          .columns.large-2.medium-2.small-4
+            = f.input :state, collection: ProfileForm::STATES
+          .columns.large-3.medium-3.small-8
+            = f.input :postal_code, label: 'Zip code'
           
-    fieldset
-      legend Change Password
+      fieldset
+        legend Change Password
+        .row
+          p
+            | Leave this field blank if you don't want to change your password.
+            .large-6.columns.medium-6
+              = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
       .row
-        p
-          | Leave this field blank if you don't want to change your password.
-          .large-6.columns.medium-6
-            = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
+        .large-12.columns
+            = f.submit 'Submit', :class => 'button expand'
   .row
-    .large-12.columns
-        = f.submit 'Submit', :class => 'button expand'
-.row
   .large-12.columns
       = button_to "Cancel", :back, class: 'button'

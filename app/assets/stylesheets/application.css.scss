@@ -15,6 +15,12 @@
  *= require video-js
  *= require_tree .
  */
+
+.cbutton{
+  display: inline-block;
+}
+
+
 ul.imagelist li{
   padding:0;
   margin:0;

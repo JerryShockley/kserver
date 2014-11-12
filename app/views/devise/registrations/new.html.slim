@@ -1,49 +1,53 @@
-h3
-  | Sign up
-  
-= simple_form_for(@profile_form, :url => user_registration_path) do |f|
-  = error_messages! @profile_form
-  .panel
-    .row
-      .large-6.columns.medium-6
-        = f.input :first_name, :autofocus => true
-      .large-6.columns.medium-6
-        = f.input :last_name
-    .row
-      .large-6.columns.medium-6.small-12
-        = f.input :email
-      .large-6.columns.medium-6.small-8.text-left
-        = f.input :receive_emails, as: :boolean, boolean_style: :inline
-    fieldset
-      legend Mailing address
-      .row
-        .columns.large-12
-          h6 Please share you're mailing address if you'd like to be on the waiting list to receive a Color Match card to use our service when they become available.
-          br
-      .row
-        .columns.large-6.medium-6
-          = f.input :street1
-        .columns.large-6.medium-6
-          = f.input :street2
-      .row
-        .columns.large-6.medium-6
-          = f.input :city
-        .columns.large-2.medium-2.small-4
-          = f.input :state, collection: ProfileForm::STATES
-        .columns.large-4.medium-4.small-8
-          = f.input :postal_code, label: 'Zip code'
-
-    fieldset
-      legend Create Account
-      .row
-      .coilumns.large-12
-        h6 Enter a password to create an account so you can view your results.
-        br
-          .large-6.columns.medium-6
-            = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
-    .row
-      .large-12.columns
-          = f.submit 'Submit', :class => 'button expand'
 .row
-  .large-12.columns
-      = button_to "Cancel", root_path, method: :get, class: 'button'
+  = simple_form_for(@profile_form, :url => user_registration_path) do |f|
+    h3
+      | Sign up
+
+    = error_messages! @profile_form
+    .panel.columns
+      .row
+        .large-6.columns.medium-6
+          = f.input :first_name, :autofocus => true
+        .large-6.columns.medium-6
+          = f.input :last_name
+      .row
+        .large-6.columns.medium-6.small-12
+          = f.input :email
+        .large-6.columns.medium-6.small-8.text-left
+          = f.input :receive_emails, as: :boolean, boolean_style: :inline
+      fieldset.row
+        legend Mailing address
+        .row
+          .columns.large-12
+            h6 Please share you're mailing address if you'd like to be on the waiting list to receive a Color Match card to use our service when they become available.
+            br
+        .row
+          .columns.large-6.medium-6
+            = f.input :street1
+          .columns.large-6.medium-6
+            = f.input :street2
+        .row
+          .columns.large-6.medium-6
+            = f.input :city
+          .columns.large-2.medium-2.small-4
+            = f.input :state, collection: ProfileForm::STATES
+          .columns.large-4.medium-4.small-8
+            = f.input :postal_code, label: 'Zip code'
+
+      fieldset
+        legend Create Account
+        .row
+        .coilumns.large-12
+          h6 Enter a password to create an account so you can view your results.
+          br
+            .large-6.columns.medium-6
+              = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
+      .row
+        .large-12.columns
+   
+        = f.submit 'Submit', :class => 'button expand'
+
+  .row
+  br
+    .large-12.columns
+        = button_to "Cancel", root_path, method: :get, class: 'button right'

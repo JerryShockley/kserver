@@ -1,7 +1,8 @@
-new.authform
+.row.authform
   = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
     h3
       | Sign in
+    br
     .row
       .panel.large-6.large-centered.columns.medium-8.medium-centered.small-10.small-centered
         = devise_error_messages!

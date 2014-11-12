@@ -1,18 +1,16 @@
-h3
-  | Viewing User
+br
+h3.row.columns.large-12
+  | Show User
+br
+.row.columns.large-12
+  table.show#users
+    - User.show_attributes.each do |key|
+      tr
+        td#user_label = key.to_s.humanize
+        td#user_data = resource.send(key)
   .row
-    p
-    .large-10.columns.large-centered
-      .row.panel
-        table.show#users
-          - User.show_attributes.each do |key|
-            tr
-              td#user_label = key.to_s.humanize
-              td#user_data = resource.send(key)
-          .row
-        .large-12.text-center
-          p
-              = button_to "Back", build_cancel_path, method: :get, class: 'button'
+    .columns.large-2.medium-3.small-6
+      = button_to "Back", build_cancel_path, method: :get, class: 'button cbutton'
     
 
 
