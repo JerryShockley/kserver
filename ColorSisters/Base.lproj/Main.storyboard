@@ -155,10 +155,43 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="puE-xB-6fs"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="8Ed-NA-WgO" kind="show" identifier="detail" id="uRt-jO-kpf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t59-Vo-e7h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="353" y="660"/>
+        </scene>
+        <!--Detailed Match View Controller-->
+        <scene sceneID="ukS-c4-Lm5">
+            <objects>
+                <viewController title="Match Details" id="8Ed-NA-WgO" userLabel="Detailed Match View Controller" customClass="KokkoDetailedMatchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9fi-g7-3hN"/>
+                        <viewControllerLayoutGuide type="bottom" id="nKS-pb-6Re"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kqe-46-sUZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2S-M3-cPj">
+                                <rect key="frame" x="180" y="237" width="240" height="128"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ulm-Ak-lRo">
+                                <rect key="frame" x="-36" y="7" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Match Details" id="MWL-Hd-1nC"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9uH-lm-egJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SFK-Zy-hPW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082" y="660"/>
         </scene>
         <!--Share View Controller-->
         <scene sceneID="BhO-oD-ptb">
@@ -259,6 +292,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SL5-35-FJD"/>
+        <segue reference="3yt-fl-KkC"/>
     </inferredMetricsTieBreakers>
 </document>

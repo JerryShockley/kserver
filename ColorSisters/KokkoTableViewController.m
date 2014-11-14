@@ -7,6 +7,7 @@
 //
 
 #import "KokkoTableViewController.h"
+#import "KokkoDetailedMatchViewController.h"
 
 @interface KokkoTableViewController ()
 
@@ -25,6 +26,17 @@
                                @"M.A.C",
                                @"Maybelline",
                                @"Revlon",
+                               ];
+    
+    
+    self.imageMatchesArray = @[@"1.jpg",
+                               @"1.jpg",
+                               @"1.jpg",
+                               @"1.jpg",
+                               @"1.jpg",
+                               @"1.jpg",
+                               @"1.jpg",
+                               @"1.jpg",
                                ];
 }
 
@@ -57,6 +69,11 @@
     cell.detailTextLabel.text = @"";
     
     return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.tableViewImage = [UIImage imageNamed:[self.imageMatchesArray objectAtIndex:indexPath.row]];
+    [self performSegueWithIdentifier:@"detail" sender:self];
 }
 
 
@@ -94,14 +111,19 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if([segue.identifier isEqual:@"detail"]) {
+        KokkoDetailedMatchViewController *detailVC = (KokkoDetailedMatchViewController *)segue.destinationViewController;
+        detailVC.detailedMatch = self.tableViewImage;
+    }
 }
-*/
+
 
 @end
