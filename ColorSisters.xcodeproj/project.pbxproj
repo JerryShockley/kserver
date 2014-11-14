@@ -10,11 +10,12 @@
 		D55E42B71A158EA500DD91E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B61A158EA500DD91E7 /* main.m */; };
 		D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B91A158EA500DD91E7 /* AppDelegate.m */; };
 		D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D55E42BB1A158EA500DD91E7 /* ColorSisters.xcdatamodeld */; };
-		D55E42C01A158EA500DD91E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42BF1A158EA500DD91E7 /* ViewController.m */; };
 		D55E42C31A158EA500DD91E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C11A158EA500DD91E7 /* Main.storyboard */; };
 		D55E42C51A158EA500DD91E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C41A158EA500DD91E7 /* Images.xcassets */; };
 		D55E42C81A158EA500DD91E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C61A158EA500DD91E7 /* LaunchScreen.xib */; };
 		D55E42D41A158EA600DD91E7 /* ColorSistersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42D31A158EA600DD91E7 /* ColorSistersTests.m */; };
+		D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */; };
+		D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,14 +35,16 @@
 		D55E42B81A158EA500DD91E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D55E42B91A158EA500DD91E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D55E42BC1A158EA500DD91E7 /* ColorSisters.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ColorSisters.xcdatamodel; sourceTree = "<group>"; };
-		D55E42BE1A158EA500DD91E7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D55E42BF1A158EA500DD91E7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D55E42C21A158EA500DD91E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D55E42C41A158EA500DD91E7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D55E42C71A158EA500DD91E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D55E42CD1A158EA600DD91E7 /* ColorSistersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorSistersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55E42D21A158EA600DD91E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D55E42D31A158EA600DD91E7 /* ColorSistersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorSistersTests.m; sourceTree = "<group>"; };
+		D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoPageControlViewController.h; path = ViewControllers/KokkoPageControlViewController.h; sourceTree = "<group>"; };
+		D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoPageControlViewController.m; path = ViewControllers/KokkoPageControlViewController.m; sourceTree = "<group>"; };
+		D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoUIImagePickerController.h; path = ViewControllers/KokkoUIImagePickerController.h; sourceTree = "<group>"; };
+		D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoUIImagePickerController.m; path = ViewControllers/KokkoUIImagePickerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,13 +88,12 @@
 			children = (
 				D55E42B81A158EA500DD91E7 /* AppDelegate.h */,
 				D55E42B91A158EA500DD91E7 /* AppDelegate.m */,
-				D55E42BE1A158EA500DD91E7 /* ViewController.h */,
-				D55E42BF1A158EA500DD91E7 /* ViewController.m */,
 				D55E42C11A158EA500DD91E7 /* Main.storyboard */,
 				D55E42C41A158EA500DD91E7 /* Images.xcassets */,
 				D55E42C61A158EA500DD91E7 /* LaunchScreen.xib */,
 				D55E42BB1A158EA500DD91E7 /* ColorSisters.xcdatamodeld */,
 				D55E42B41A158EA500DD91E7 /* Supporting Files */,
+				D57FA3E91A159F03007FD997 /* ViewControllers */,
 			);
 			path = ColorSisters;
 			sourceTree = "<group>";
@@ -120,6 +122,17 @@
 				D55E42D21A158EA600DD91E7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D57FA3E91A159F03007FD997 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */,
+				D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */,
+				D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */,
+				D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,8 +237,9 @@
 			files = (
 				D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */,
 				D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */,
-				D55E42C01A158EA500DD91E7 /* ViewController.m in Sources */,
+				D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */,
 				D55E42B71A158EA500DD91E7 /* main.m in Sources */,
+				D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +432,7 @@
 				D55E42D91A158EA600DD91E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D55E42DA1A158EA600DD91E7 /* Build configuration list for PBXNativeTarget "ColorSistersTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +441,7 @@
 				D55E42DC1A158EA600DD91E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
