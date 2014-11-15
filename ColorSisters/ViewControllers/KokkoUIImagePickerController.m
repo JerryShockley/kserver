@@ -9,6 +9,8 @@
 
 @interface KokkoUIImagePickerController ()
 
+@property (nonatomic) UIImagePickerController *imagePickerController;
+
 @end
 
 @implementation KokkoUIImagePickerController
@@ -25,19 +27,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    // work around to not continually show the image picker
-    if (self.imageView.image == nil) {
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-        imagePickerController.delegate = self;
-        [self presentViewController:imagePickerController animated:NO completion:nil];
-    }
-    else {
-        
-    }
+}
 
+- (IBAction)showCamera:(UIBarButtonItem *)sender {
     
+    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (IBAction)showPhotoPicker:(UIBarButtonItem *)sender {
+    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
@@ -50,6 +48,22 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
+{
+    
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = sourceType;
+    imagePickerController.delegate = self;
+    
+    if (sourceType == UIImagePickerControllerSourceTypeCamera)
+    {
+        //imagePickerController.showsCameraControls = NO;
+    }
+    
+    self.imagePickerController = imagePickerController;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation

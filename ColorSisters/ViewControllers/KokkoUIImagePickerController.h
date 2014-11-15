@@ -10,4 +10,7 @@
 @interface KokkoUIImagePickerController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+- (IBAction)showCamera:(UIBarButtonItem *)sender;
+- (IBAction)showPhotoPicker:(UIBarButtonItem *)sender;
+
 @end
