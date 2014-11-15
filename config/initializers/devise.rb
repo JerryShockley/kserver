@@ -1,7 +1,6 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-@@log = Logger.new(STDOUT)
 
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
@@ -13,7 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'no-reply@' + Rails.application.secrets.domain_name
+  config.mailer_sender = 'no-reply@' + "need_domain.com"#Rails.application.secrets.domain_name
   config.remember_for = 4.weeks
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
