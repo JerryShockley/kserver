@@ -13,7 +13,7 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 
 set :domain, '74.207.224.95'
 set :deploy_to, '/home/deployer/kserver'
-set :repository, 'ssh://git_kokko@kokko.git.cloudforge.com/kserver.git'
+set :repository, 'ssh://git_kokko@kokko.git.cloudforge.com/kserver1.git'
 set :branch, 'master'
 set :user, 'deployer'
 set :port, '6287'
