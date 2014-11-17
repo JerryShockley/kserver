@@ -63,7 +63,7 @@ class ProfileForm
       set_object_attributes( self, unique_objects_attributes )
     end
     self.receive_emails = true if profile.new_record?
-    self.role = 0 if profile.new_record?
+    self.role = 'customer' if user.new_record?
   end
 
   
