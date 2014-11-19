@@ -16,6 +16,8 @@
 		D55E42D41A158EA600DD91E7 /* ColorSistersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42D31A158EA600DD91E7 /* ColorSistersTests.m */; };
 		D59752D61A15B48A009415BA /* KokkoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D59752D51A15B48A009415BA /* KokkoTableViewController.m */; };
 		D59752D91A15C1FA009415BA /* KokkoDetailedMatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */; };
+		D5C7CB391A1C435200AAEEA7 /* UIImage+Match.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C7CB381A1C435200AAEEA7 /* UIImage+Match.m */; };
+		D5C7CB3B1A1C441300AAEEA7 /* InterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C7CB3A1A1C441300AAEEA7 /* InterfaceTests.m */; };
 		D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */; };
 		D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */; };
 /* End PBXBuildFile section */
@@ -47,6 +49,9 @@
 		D59752D51A15B48A009415BA /* KokkoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KokkoTableViewController.m; sourceTree = "<group>"; };
 		D59752D71A15C1FA009415BA /* KokkoDetailedMatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoDetailedMatchViewController.h; path = ViewControllers/KokkoDetailedMatchViewController.h; sourceTree = "<group>"; };
 		D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoDetailedMatchViewController.m; path = ViewControllers/KokkoDetailedMatchViewController.m; sourceTree = "<group>"; };
+		D5C7CB371A1C435200AAEEA7 /* UIImage+Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Match.h"; path = "Interface/UIImage+Match.h"; sourceTree = "<group>"; };
+		D5C7CB381A1C435200AAEEA7 /* UIImage+Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Match.m"; path = "Interface/UIImage+Match.m"; sourceTree = "<group>"; };
+		D5C7CB3A1A1C441300AAEEA7 /* InterfaceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceTests.m; sourceTree = "<group>"; };
 		D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoPageControlViewController.h; path = ViewControllers/KokkoPageControlViewController.h; sourceTree = "<group>"; };
 		D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoPageControlViewController.m; path = ViewControllers/KokkoPageControlViewController.m; sourceTree = "<group>"; };
 		D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoUIImagePickerController.h; path = ViewControllers/KokkoUIImagePickerController.h; sourceTree = "<group>"; };
@@ -92,6 +97,7 @@
 		D55E42B31A158EA500DD91E7 /* ColorSisters */ = {
 			isa = PBXGroup;
 			children = (
+				D5C7CB321A1C41AE00AAEEA7 /* Interface */,
 				D55E42B81A158EA500DD91E7 /* AppDelegate.h */,
 				D55E42B91A158EA500DD91E7 /* AppDelegate.m */,
 				D55E42C11A158EA500DD91E7 /* Main.storyboard */,
@@ -117,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				D55E42D31A158EA600DD91E7 /* ColorSistersTests.m */,
+				D5C7CB3A1A1C441300AAEEA7 /* InterfaceTests.m */,
 				D55E42D11A158EA600DD91E7 /* Supporting Files */,
 			);
 			path = ColorSistersTests;
@@ -143,6 +150,15 @@
 				D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D5C7CB321A1C41AE00AAEEA7 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				D5C7CB371A1C435200AAEEA7 /* UIImage+Match.h */,
+				D5C7CB381A1C435200AAEEA7 /* UIImage+Match.m */,
+			);
+			name = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +264,7 @@
 				D59752D91A15C1FA009415BA /* KokkoDetailedMatchViewController.m in Sources */,
 				D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */,
 				D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */,
+				D5C7CB391A1C435200AAEEA7 /* UIImage+Match.m in Sources */,
 				D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */,
 				D55E42B71A158EA500DD91E7 /* main.m in Sources */,
 				D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */,
@@ -260,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D55E42D41A158EA600DD91E7 /* ColorSistersTests.m in Sources */,
+				D5C7CB3B1A1C441300AAEEA7 /* InterfaceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
