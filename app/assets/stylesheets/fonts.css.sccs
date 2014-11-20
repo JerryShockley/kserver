@@ -1,4 +1,4 @@
-#####  HapnaMono  #####
+# ####  HapnaMono  #####
 
 @font-face {
   font-family: HapnaMono;
@@ -68,7 +68,7 @@
 @font-face {
   font-family: Raleway;
   src: url(font-path('Raleway-Medium.otf'));  
-  font-weight: 600;
+  font-weight: 00;
 } 
 
 
