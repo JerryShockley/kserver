@@ -2,3 +2,379 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
+//#####  Banner Callout
+
+.banner-container {
+  position: relative;
+//  display: block;
+
+
+
+
+  .text-wrapper {
+//    display: block;
+    position: absolute;
+    top:57%;
+    right:0;
+    width: 38%;
+    overflow: hide;
+  
+    p.text {
+      background: rgba(255,255,255,0.9);
+      padding:.5rem;
+      margin: 0px;
+      width: 100%;  
+      font-family: Raleway;
+      font-size: 1rem;
+    }
+  
+
+    .title-row {
+      background: rgba(0,0,0,0.75);
+      width: 100%;
+      right: 0;
+      padding: .35rem;
+      
+      p.title {
+        display: inline;
+        color: white;
+        width: 100%;
+        font-family: Myra;
+        font-size: 1.2rem;
+        padding-right: .6rem;
+        padding-left: .4rem;
+      }
+
+      img {
+        height: 10%;
+        width: 10%;  
+//        display: inline;
+      }
+      
+    }
+
+  }
+
+}
+
+
+//#####  3 Image Row below banner
+
+$lt-blue: #A6CFDA;
+
+ul.imagelist {
+  
+  p {
+    margin: 0;
+  }
+  
+  .box1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hide;
+
+    p.title {
+      color: $lt-blue;
+      position: absolute;
+      top: 4%;
+      left: 22%;
+      font-family: Myra;
+      font-size: 1.4rem;
+      text-decoration: underline;
+    }
+    
+    p.text {
+      position: absolute;
+      font-family: Raleway;
+      font-weight: 300;
+      font-size: 1rem;
+      color: white;
+      top: 20%;
+      left: 22%;
+      right: 1.5%;
+      padding: .6rem;
+    }
+  }
+  
+  
+  .box2 {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hide;
+
+    p.title {
+      color: $lt-blue;
+      position: absolute;
+      top: 4%;
+      left: 3%;
+      font-family: Myra;
+      font-size: 1.4rem;
+      text-decoration: underline;
+    }
+    
+    p.text {
+      position: absolute;
+      font-family: Raleway;
+      font-weight: 300;
+      font-size: 1rem;
+      color: white;
+      top: 20%;
+      left: 3%;
+      right: 50%;
+      padding: .6rem;
+    }
+  }
+  
+  
+  .box3 {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hide;
+
+    p.title {
+      color: $lt-blue;
+      position: absolute;
+      top: 4%;
+      left: 3%;
+      font-family: Myra;
+      font-size: 1.4rem;
+      text-decoration: underline;
+    }
+    
+    p.text {
+      position: absolute;
+      font-family: Raleway;
+      font-weight: 300;
+      font-size: 1rem;
+      color: white;
+      top: 20%;
+      left: 3%;
+      right: 38%;
+      padding: .6rem;
+    }
+  }
+  
+}
+
+
+//##### media-queries
+
+@media screen and (min-width: 1170px ) {
+  .text-wrapper .title-row span.title {
+    font-size: 1.2rem;
+  }
+
+  .text-wrapper .text {
+    font-size: 1.0rem;
+  }
+  
+}
+
+@media screen and (min-width: 937px )
+              and (max-width: 1169px)  {
+  .text-wrapper .title-row span.title {
+    font-size: 1rem;
+  }
+
+  .text-wrapper .text {
+    font-size: 0.9rem;
+    height:  4%;
+  }
+
+
+  .text-wrapper {
+    top: 52%;
+    width: 38%;
+    line-height: 1.4;
+  
+  }
+  
+  
+}
+
+
+@media screen and (min-width: 776px )
+              and (max-width: 936px)  {
+  .text-wrapper .title-row span.title {
+    font-size: .8rem;
+    padding: 0;
+    margin: 0;
+    height: 25%;
+  }
+
+  .text-wrapper .text {
+    font-size: 0.8rem;
+    line-height: 1.3;
+
+  }
+
+  .text-wrapper {
+    top: 48%;
+    width: 38%;
+    line-height: 1.4;
+  
+  }
+  
+  
+}
+
+
+
+@media screen and (min-width: 685px )
+              and (max-width: 775px)  {
+
+  .text-wrapper .text {
+    font-size: 0.7rem;
+    line-height: 1.3;
+
+  }
+  
+  .text-wrapper .title-row span.title {
+    font-size: .8rem;
+    height: 25%;
+  }
+
+
+  .text-wrapper {
+    top: 48%;
+    width: 38%;
+    line-height: 1.4;
+  
+  }
+  
+  
+}
+
+
+
+@media screen and (min-width: 560px )
+              and (max-width: 684px)  {
+
+  .text-wrapper .text {
+    display: none;
+  }
+  
+  .text-wrapper .title-row span.title {
+    font-size: .8rem;
+    padding: .2rem;
+  }
+
+
+  .text-wrapper {
+    top: 62%;
+    width: 38%;
+  }
+  
+  
+}
+
+
+
+
+@media screen and (min-width: 383px )
+              and (max-width: 559px)  {
+
+  .text-wrapper .text {
+    display: none;
+  }
+  
+  .text-wrapper .title-row span.title {
+    font-size: .5rem;
+    padding: .2rem;
+  }
+
+
+  .text-wrapper {
+    top: 62%;
+    width: 38%;
+    line-height: 1.4;
+  
+  }
+}
+  
+
+  @media screen and (min-width: 320px )
+                and (max-width: 382px)  {
+
+//    .text-wrapper .text {
+//      display: none;
+//    }
+//
+//    .text-wrapper .title-row {
+//      display: none;
+//    }
+
+
+    .text-wrapper {
+      display: none;
+    }
+  
+}
+
+//
+//@media screen and (min-width: 380px )
+//              and (max-width: 475px)  {
+//
+//  .text-wrapper .text {
+//    display: none;
+//  }
+//
+//  .text-wrapper .title-row span.title {
+//    font-size: .5rem;
+//    padding: .2rem;
+//  }
+//
+//
+//  .text-wrapper {
+//    top: 62%;
+//    width: 38%;
+//    line-height: 1.4;
+//
+//  }
+//
+//
+//}
+
+
+
+//#####
+
+.cbutton{
+  display: inline-block;
+}
+
+
+ul.imagelist li{
+  padding:0;
+  margin:0;
+  border-width:0;
+
+}
+
+img.row-image{
+  padding:0;
+  margin:0;
+  border-width:0;
+}
+
+li.row-item{
+  padding:0;
+  margin:0;
+  border-width:0;
+}
+
+img.wide {
+  max-width: 100%;
+  min-width: 100%;
+}

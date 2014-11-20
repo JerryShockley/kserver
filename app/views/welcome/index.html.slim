@@ -1,11 +1,47 @@
-= image_tag('home_page/header.jpg', class: "wide", alt: "ColorSisters Home Page")
+
+.banner-container
+  = image_tag('home_page/header.jpg', class: "wide" , alt: "ColorSisters Home Page")
+  .text-wrapper
+    p.text
+      | Welcome to ColorSisters-the only color accurate e-commerce 
+      | delivery platform that simplifies finding the ideal color cosmetic 
+      | products to achieve your desired look designed specifically for your skin tone. 
+      | ColorSisters is in closed beta and wants to invite you to be one of fist to 
+      | experience the science behind the beautiful you.
+    .title-row
+      p.title 
+        | FIND YOUR COLOR MATCH
+        
+      / .title-img
+      = image_tag('home_page/dots.png' , alt: "")
+  
+.row
 ul.imagelist.small-block-grid-3
-  li.row-item
-    = image_tag('home_page/step1.jpg', class: "row-image", alt: "ColorSisters Step 1")
-  li
-    = image_tag('home_page/step2.jpg', class: "row-image", alt: "ColorSisters Step 2")
-  li
-    = image_tag('home_page/step3.jpg', class: "row-image", alt: "ColorSisters Step 3")
+  li.col1
+    .box1
+      = image_tag('home_page/step1-empty.jpg', class: "row-image bk_image", alt: "ColorSisters Step 1")
+      p.title 
+        | STEP 1
+      p.text
+        | Color accurate mobile technology–as easy to use as taking a 
+        | selfie with your cell phone.
+  li.col2
+    .box2
+      = image_tag('home_page/step2-empty.jpg', class: "row-image bk_image", alt: "ColorSisters Step 2")
+      p.title 
+        | STEP 2
+      p.text
+        | Save time and money with scientific color matching at home. Buy an entire suite of 
+        | products for your desired look with just one click.
+  li.col3
+    .box3
+      = image_tag('home_page/step3-empty.jpg', class: "row-image bk_image", alt: "ColorSisters Step 3")
+      p.title 
+        | STEP 3
+      p.text
+        | Products are tested by women who are just like you.  Be confident 
+        | in your selection while eliminating the challenges of buying color 
+        | cosmetics online.
 
 
 

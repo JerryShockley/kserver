@@ -1,0 +1,94 @@
+#####  HapnaMono  #####
+
+@font-face {
+  font-family: HapnaMono;
+  src: url(font-path('HapnaMono-Light.otf'));
+} 
+
+
+
+#####  Myra Family  #####
+
+@font-face {
+  font-family: Myra;
+  src: url(font-path('Myra 4F Caps Bold.otf'));
+  font-weight: bold;
+} 
+
+@font-face {
+  font-family: Myra;
+  src: url(font-path('Myra 4F Caps Light.otf'));
+  font-weight: 100;
+} 
+
+@font-face {
+  font-family: Myra;
+  src: url(font-path('Myra 4F Caps Regular.otf'));
+  font-weight: normal;
+} 
+
+
+#####  Raleway Family  #####
+ 
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-Bold.otf'));  
+  font-weight: bold;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-ExtraBold.otf'));  
+  font-weight: 900;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-ExtraLight.otf'));  
+  font-weight: 200;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-Heavy.otf'));  
+  font-weight: 700;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-Light.otf'));  
+  font-weight: 300;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-Medium.otf'));  
+  font-weight: 600;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-Regular.otf'));  
+  font-weight: normal;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-SemiBold.otf'));  
+  font-weight: 800;
+} 
+
+
+@font-face {
+  font-family: Raleway;
+  src: url(font-path('Raleway-Thin.otf'));
+  font-weight: 100;
+    
+} 

@@ -36,6 +36,7 @@ module Colorsisters
 
     # For Foundation 5
     config.assets.precompile += %w( vendor/modernizr )
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
   end
 end
