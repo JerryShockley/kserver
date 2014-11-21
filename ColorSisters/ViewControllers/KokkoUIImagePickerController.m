@@ -6,6 +6,7 @@
 //
 
 #import "KokkoUIImagePickerController.h"
+#import "UIImage+Match.h"
 
 @interface KokkoUIImagePickerController ()
 
@@ -45,6 +46,12 @@
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     self.imageView.image = image;
+    
+    // TODO:  test for interface
+    UIImage *scaledImage = [image scaleToCGSize:CGSizeMake(150, 100)];
+    CGRect chart = [image findChart];
+    CGRect face = [image findFace];
+    // TODO:
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -58,7 +65,7 @@
     
     if (sourceType == UIImagePickerControllerSourceTypeCamera)
     {
-        //imagePickerController.showsCameraControls = NO;
+        imagePickerController.showsCameraControls = NO;
     }
     
     self.imagePickerController = imagePickerController;

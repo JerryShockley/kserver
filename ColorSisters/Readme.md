@@ -1,5 +1,11 @@
 
 20 Nov
+Version 1.0, Build 3
+* Turn off flash with .showsCameraControls = NO
+* Added KokkoGetProductImages() with methods from email (Scott, 20 Nov 2014)
+
+
+20 Nov
 Version 1.0, Build 2
 * Same known issues as Build 1
 * Changed extension to UIImage+Match.mm
@@ -7,7 +13,7 @@ Version 1.0, Build 2
 
 
 18 Nov 2014
-Bundle Identifier - com.kokko.ColorSiseters
+Bundle Identifier - com.kokko.ColorSisters
 Version 1.0, Build 1
 Known Issues
 * Storyboards are universal, and is messing up layouts on iPod Touch & iPhone 5c devices and simulators
