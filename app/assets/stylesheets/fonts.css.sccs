@@ -1,4 +1,4 @@
-# ####  HapnaMono  #####
+//#####  HapnaMono  #####
 
 @font-face {
   font-family: HapnaMono;
@@ -7,7 +7,7 @@
 
 
 
-#####  Myra Family  #####
+//#####  Myra Family  #####
 
 @font-face {
   font-family: Myra;
@@ -28,7 +28,7 @@
 } 
 
 
-#####  Raleway Family  #####
+//#####  Raleway Family  #####
  
 @font-face {
   font-family: Raleway;
