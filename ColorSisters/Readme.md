@@ -1,4 +1,10 @@
 
+20 Nov
+Version 1.0, Build 2
+* Same known issues as Build 1
+* Changed extension to UIImage+Match.mm
+* Deployment target 7.1
+
 
 18 Nov 2014
 Bundle Identifier - com.kokko.ColorSiseters
