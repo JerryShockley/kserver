@@ -233,7 +233,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t59-Vo-e7h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="418.5" y="284"/>
+            <point key="canvasLocation" x="400.5" y="660"/>
         </scene>
         <!--Detailed Match View Controller-->
         <scene sceneID="ukS-c4-Lm5">
@@ -303,7 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SFK-Zy-hPW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1210.5" y="284"/>
+            <point key="canvasLocation" x="1324.5" y="660"/>
         </scene>
         <!--Share View Controller-->
         <scene sceneID="BhO-oD-ptb">
@@ -406,11 +406,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHT-Rf-fnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724.5" y="1024"/>
+            <point key="canvasLocation" x="-34.5" y="-89"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Mj5-i5-9yV"/>
-        <segue reference="476-Lu-huZ"/>
+        <segue reference="3KZ-np-tOq"/>
+        <segue reference="SL5-35-FJD"/>
     </inferredMetricsTieBreakers>
 </document>
