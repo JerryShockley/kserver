@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KGb-kh-VSH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VoS-wI-0j9">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -18,51 +20,77 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SdA-5X-0IO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1072" y="-61"/>
+            <point key="canvasLocation" x="-1834.5" y="660"/>
         </scene>
         <!--Getting Started View Controller-->
         <scene sceneID="pjU-0K-VWc">
             <objects>
-                <viewController id="VoS-wI-0j9" userLabel="Getting Started View Controller" sceneMemberID="viewController">
+                <viewController id="VoS-wI-0j9" userLabel="Getting Started View Controller" customClass="KokkoPageControlViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zJq-PO-RgO"/>
-                        <viewControllerLayoutGuide type="bottom" id="4AK-wi-KbS"/>
+                        <viewControllerLayoutGuide type="top" id="OwL-uK-H9z"/>
+                        <viewControllerLayoutGuide type="bottom" id="rXN-dA-y5q"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XbV-5m-n06">
+                    <view key="view" contentMode="scaleToFill" id="uf1-sH-feF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZzL-BW-LHK">
-                                <rect key="frame" x="180" y="104" width="240" height="308"/>
-                                <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="b0z-U7-PBj">
+                                <rect key="frame" x="-19" y="-18" width="39" height="37"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="87" y="519" width="209" height="37"/>
+                                </variation>
+                                <connections>
+                                    <action selector="pageControlChanged:" destination="VoS-wI-0j9" eventType="valueChanged" id="vE7-Ak-bWZ"/>
+                                </connections>
+                            </pageControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nR4-jX-Tmb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Get Started" style="plain" id="bCC-M9-EEJ">
+                                        <connections>
+                                            <action selector="showCamera:" destination="KGb-kh-VSH" id="Du0-zC-pAx"/>
+                                            <segue destination="KGb-kh-VSH" kind="show" id="476-Lu-huZ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="556" width="338" height="44"/>
+                                </variation>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5SJ-6b-QFd">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="1" green="0.035351606611024211" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="419" height="462"/>
                                 </variation>
                             </imageView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-M6-Wg2">
-                                <rect key="frame" x="217" y="420" width="167" height="37"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="217" y="420" width="168" height="37"/>
-                                </variation>
-                            </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25x-wa-5sw">
-                                <rect key="frame" x="277" y="537" width="80" height="30"/>
-                                <state key="normal" title="Get Started">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="KGb-kh-VSH" kind="show" id="EoA-Ha-Mru"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="b0z-U7-PBj"/>
+                                <exclude reference="nR4-jX-Tmb"/>
+                                <exclude reference="5SJ-6b-QFd"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="b0z-U7-PBj"/>
+                                <include reference="nR4-jX-Tmb"/>
+                                <include reference="5SJ-6b-QFd"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="5SJ-6b-QFd" id="bik-hV-uKI"/>
+                        <outlet property="pageControl" destination="b0z-U7-PBj" id="3lA-Wt-SX5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yEa-ut-tcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1072" y="660"/>
+            <point key="canvasLocation" x="-1072.5" y="660"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="PxW-Qk-dLp">
@@ -76,18 +104,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Smo-ce-kkg">
-                                <rect key="frame" x="97" y="150" width="406" height="406"/>
-                                <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="124" width="400" height="529"/>
-                                </variation>
-                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trC-re-mzQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
@@ -104,9 +120,21 @@
                                     </barButtonItem>
                                 </items>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                    <rect key="frame" x="16" y="556" width="338" height="44"/>
                                 </variation>
                             </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Smo-ce-kkg">
+                                <rect key="frame" x="97" y="150" width="406" height="406"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="124" width="400" height="529"/>
+                                </variation>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqF-Is-ymk">
                                 <rect key="frame" x="202" y="81" width="196" height="30"/>
                                 <state key="normal" title="Simulated Image Processing">
@@ -141,25 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBY-Yx-2pF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-324" y="722"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="USt-La-MgW">
-            <objects>
-                <viewController id="vod-NZ-0Zc" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="67k-cT-Y5n"/>
-                        <viewControllerLayoutGuide type="bottom" id="eYR-b2-EfO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="q8p-2t-LBO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2n4-fC-CzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-351" y="1374.75"/>
+            <point key="canvasLocation" x="-337.5" y="660"/>
         </scene>
         <!--Matches Table View Controller-->
         <scene sceneID="7SJ-0n-C1S">
@@ -223,7 +233,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t59-Vo-e7h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="660"/>
+            <point key="canvasLocation" x="418.5" y="284"/>
         </scene>
         <!--Detailed Match View Controller-->
         <scene sceneID="ukS-c4-Lm5">
@@ -237,16 +247,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2S-M3-cPj">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2S-M3-cPj">
                                 <rect key="frame" x="180" y="237" width="240" height="128"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
                             </imageView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ulm-Ak-lRo">
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ulm-Ak-lRo">
                                 <rect key="frame" x="-36" y="7" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Match Details" id="MWL-Hd-1nC">
@@ -257,18 +264,46 @@
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="403" height="44"/>
-                                </variation>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R2S-M3-cPj" firstAttribute="leading" secondItem="Ulm-Ak-lRo" secondAttribute="leading" id="1Da-sl-Bzn"/>
+                            <constraint firstItem="Ulm-Ak-lRo" firstAttribute="top" secondItem="R2S-M3-cPj" secondAttribute="bottom" id="Aiq-wl-gdx"/>
+                            <constraint firstItem="R2S-M3-cPj" firstAttribute="top" secondItem="kqe-46-sUZ" secondAttribute="top" id="OgS-J6-23k"/>
+                            <constraint firstItem="Ulm-Ak-lRo" firstAttribute="top" secondItem="R2S-M3-cPj" secondAttribute="top" id="czw-2M-j7L"/>
+                            <constraint firstItem="Ulm-Ak-lRo" firstAttribute="leading" secondItem="kqe-46-sUZ" secondAttribute="leading" id="eOZ-Qc-KUM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ulm-Ak-lRo" secondAttribute="trailing" constant="-19" id="ftA-cS-CBS"/>
+                            <constraint firstItem="Ulm-Ak-lRo" firstAttribute="leading" secondItem="R2S-M3-cPj" secondAttribute="trailing" id="z9K-e1-SI2"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Aiq-wl-gdx"/>
+                                <exclude reference="czw-2M-j7L"/>
+                                <exclude reference="eOZ-Qc-KUM"/>
+                                <exclude reference="ftA-cS-CBS"/>
+                                <exclude reference="z9K-e1-SI2"/>
+                                <exclude reference="1Da-sl-Bzn"/>
+                                <exclude reference="OgS-J6-23k"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="Aiq-wl-gdx"/>
+                                <include reference="czw-2M-j7L"/>
+                                <include reference="eOZ-Qc-KUM"/>
+                                <include reference="ftA-cS-CBS"/>
+                                <include reference="z9K-e1-SI2"/>
+                                <include reference="1Da-sl-Bzn"/>
+                                <include reference="OgS-J6-23k"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="9uH-lm-egJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SFK-Zy-hPW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1267.5" y="576"/>
+            <point key="canvasLocation" x="1210.5" y="284"/>
         </scene>
         <!--Share View Controller-->
         <scene sceneID="BhO-oD-ptb">
@@ -286,7 +321,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="PKd-ZR-i2N">
-                                        <barButtonItem key="rightBarButtonItem" title="New Photo" id="QuT-Md-zKN">
+                                        <barButtonItem key="leftBarButtonItem" title="New Photo" id="QuT-Md-zKN">
                                             <connections>
                                                 <segue destination="KGb-kh-VSH" kind="show" id="SL5-35-FJD"/>
                                             </connections>
@@ -327,7 +362,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="45" y="94" width="270" height="98"/>
+                                    <rect key="frame" x="64" y="97" width="273" height="98"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="62" y="108" width="276" height="98"/>
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXg-h0-Tip">
@@ -336,7 +374,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="177" y="398" width="49" height="30"/>
+                                    <rect key="frame" x="159" y="398" width="49" height="30"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="160" y="399" width="49" height="30"/>
                                 </variation>
                             </button>
                         </subviews>
@@ -365,11 +406,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHT-Rf-fnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-30" y="-135"/>
+            <point key="canvasLocation" x="724.5" y="1024"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EoA-Ha-Mru"/>
         <segue reference="Mj5-i5-9yV"/>
+        <segue reference="476-Lu-huZ"/>
     </inferredMetricsTieBreakers>
 </document>
