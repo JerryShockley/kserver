@@ -3,6 +3,7 @@ Rails.application.configure do
 
   # videojs config
   config.assets.precompile += %w( video-js.swf vjs.eot vjs.svg vjs.ttf vjs.woff )
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
 
   # Code is not reloaded between requests.
   config.cache_classes = true
