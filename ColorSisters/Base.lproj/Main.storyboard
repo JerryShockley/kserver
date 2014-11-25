@@ -34,19 +34,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="b0z-U7-PBj">
-                                <rect key="frame" x="-19" y="-18" width="39" height="37"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5SJ-6b-QFd">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="1" green="0.035351606611024211" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="87" y="519" width="209" height="37"/>
+                                    <rect key="frame" x="0.0" y="64" width="400" height="447"/>
                                 </variation>
-                                <connections>
-                                    <action selector="pageControlChanged:" destination="VoS-wI-0j9" eventType="valueChanged" id="vE7-Ak-bWZ"/>
-                                </connections>
-                            </pageControl>
+                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nR4-jX-Tmb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <barButtonItem title="Get Started" style="plain" id="bCC-M9-EEJ">
+                                    <barButtonItem title="Get Started" width="200" style="plain" id="bCC-M9-EEJ">
                                         <connections>
                                             <action selector="showCamera:" destination="KGb-kh-VSH" id="Du0-zC-pAx"/>
                                             <segue destination="KGb-kh-VSH" kind="show" id="476-Lu-huZ"/>
@@ -54,30 +52,32 @@
                                     </barButtonItem>
                                 </items>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="556" width="338" height="44"/>
+                                    <rect key="frame" x="0.0" y="556" width="400" height="44"/>
                                 </variation>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5SJ-6b-QFd">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="1" green="0.035351606611024211" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="b0z-U7-PBj">
+                                <rect key="frame" x="-19" y="-18" width="39" height="37"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="419" height="462"/>
+                                    <rect key="frame" x="117" y="519" width="167" height="37"/>
                                 </variation>
-                            </imageView>
+                                <connections>
+                                    <action selector="pageControlChanged:" destination="VoS-wI-0j9" eventType="valueChanged" id="vE7-Ak-bWZ"/>
+                                </connections>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="b0z-U7-PBj"/>
-                                <exclude reference="nR4-jX-Tmb"/>
                                 <exclude reference="5SJ-6b-QFd"/>
+                                <exclude reference="nR4-jX-Tmb"/>
+                                <exclude reference="b0z-U7-PBj"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="b0z-U7-PBj"/>
-                                <include reference="nR4-jX-Tmb"/>
                                 <include reference="5SJ-6b-QFd"/>
+                                <include reference="nR4-jX-Tmb"/>
+                                <include reference="b0z-U7-PBj"/>
                             </mask>
                         </variation>
                     </view>
@@ -104,6 +104,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Smo-ce-kkg">
+                                <rect key="frame" x="97" y="150" width="406" height="406"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqF-Is-ymk">
+                                <rect key="frame" x="202" y="81" width="196" height="30"/>
+                                <state key="normal" title="Simulated Image Processing">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="102" y="72" width="196" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="toG-5d-dru" kind="show" id="Mj5-i5-9yV"/>
+                                </connections>
+                            </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trC-re-mzQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
@@ -119,47 +140,50 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="556" width="338" height="44"/>
-                                </variation>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Smo-ce-kkg">
-                                <rect key="frame" x="97" y="150" width="406" height="406"/>
-                                <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="124" width="400" height="529"/>
-                                </variation>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqF-Is-ymk">
-                                <rect key="frame" x="202" y="81" width="196" height="30"/>
-                                <state key="normal" title="Simulated Image Processing">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="102" y="64" width="196" height="30"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="102" y="72" width="196" height="30"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="toG-5d-dru" kind="show" id="Mj5-i5-9yV"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="trC-re-mzQ" firstAttribute="bottom" secondItem="Njc-eY-Sxb" secondAttribute="top" id="5hR-38-UvH"/>
+                            <constraint firstItem="trC-re-mzQ" firstAttribute="trailing" secondItem="Smo-ce-kkg" secondAttribute="trailing" id="P02-YQ-eYh"/>
+                            <constraint firstItem="trC-re-mzQ" firstAttribute="leading" secondItem="Smo-ce-kkg" secondAttribute="leading" id="WKP-Qq-jFp"/>
+                            <constraint firstItem="Smo-ce-kkg" firstAttribute="top" secondItem="JqF-Is-ymk" secondAttribute="bottom" constant="12" id="ahn-Fr-pNU"/>
+                            <constraint firstItem="trC-re-mzQ" firstAttribute="top" secondItem="Smo-ce-kkg" secondAttribute="bottom" id="bNQ-1Q-CQ1"/>
+                            <constraint firstItem="Smo-ce-kkg" firstAttribute="leading" secondItem="xuO-Na-yT9" secondAttribute="leading" id="lYQ-cS-8Kx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Smo-ce-kkg" secondAttribute="trailing" constant="-23" id="pqG-rE-oKN"/>
+                            <constraint firstItem="JqF-Is-ymk" firstAttribute="centerX" secondItem="xuO-Na-yT9" secondAttribute="centerX" id="vhh-gR-IvY"/>
+                            <constraint firstItem="JqF-Is-ymk" firstAttribute="top" secondItem="tKB-og-0vg" secondAttribute="bottom" id="xxf-dr-33w"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="trC-re-mzQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="ahn-Fr-pNU"/>
+                                <exclude reference="lYQ-cS-8Kx"/>
+                                <exclude reference="pqG-rE-oKN"/>
+                                <exclude reference="vhh-gR-IvY"/>
+                                <exclude reference="xxf-dr-33w"/>
+                                <exclude reference="5hR-38-UvH"/>
+                                <exclude reference="P02-YQ-eYh"/>
+                                <exclude reference="WKP-Qq-jFp"/>
+                                <exclude reference="bNQ-1Q-CQ1"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="trC-re-mzQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="ahn-Fr-pNU"/>
+                                <include reference="lYQ-cS-8Kx"/>
+                                <include reference="pqG-rE-oKN"/>
+                                <include reference="vhh-gR-IvY"/>
+                                <include reference="xxf-dr-33w"/>
+                                <include reference="5hR-38-UvH"/>
+                                <include reference="P02-YQ-eYh"/>
+                                <include reference="WKP-Qq-jFp"/>
+                                <include reference="bNQ-1Q-CQ1"/>
                             </mask>
                         </variation>
                     </view>
@@ -169,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBY-Yx-2pF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-337.5" y="660"/>
+            <point key="canvasLocation" x="-360" y="660"/>
         </scene>
         <!--Matches Table View Controller-->
         <scene sceneID="7SJ-0n-C1S">
@@ -183,7 +207,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
-                                <navigationItem title="Title" id="dMy-vJ-nbQ">
+                                <navigationItem title="Matches" id="dMy-vJ-nbQ">
                                     <barButtonItem key="leftBarButtonItem" title="New Photo" id="Pqc-Mb-fQd">
                                         <connections>
                                             <segue destination="KGb-kh-VSH" kind="show" id="3yt-fl-KkC"/>
@@ -225,7 +249,6 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="puE-xB-6fs"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="8Ed-NA-WgO" kind="show" identifier="detail" id="uRt-jO-kpf"/>
@@ -356,18 +379,6 @@
                                     <rect key="frame" x="152" y="338" width="97" height="30"/>
                                 </variation>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for using Color Sisters" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEL-Qk-gFA">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="64" y="97" width="273" height="98"/>
-                                </variation>
-                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="62" y="108" width="276" height="98"/>
-                                </variation>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXg-h0-Tip">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Signup">
@@ -380,6 +391,18 @@
                                     <rect key="frame" x="160" y="399" width="49" height="30"/>
                                 </variation>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for using Color Sisters" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEL-Qk-gFA">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="64" y="100" width="273" height="98"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="62" y="108" width="276" height="98"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -388,8 +411,8 @@
                                 <exclude reference="mvg-Zc-XwK"/>
                                 <exclude reference="L4w-f3-BFF"/>
                                 <exclude reference="Qne-L3-Myv"/>
-                                <exclude reference="dEL-Qk-gFA"/>
                                 <exclude reference="oXg-h0-Tip"/>
+                                <exclude reference="dEL-Qk-gFA"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -398,8 +421,8 @@
                                 <include reference="mvg-Zc-XwK"/>
                                 <include reference="L4w-f3-BFF"/>
                                 <include reference="Qne-L3-Myv"/>
-                                <include reference="dEL-Qk-gFA"/>
                                 <include reference="oXg-h0-Tip"/>
+                                <include reference="dEL-Qk-gFA"/>
                             </mask>
                         </variation>
                     </view>
@@ -410,7 +433,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3KZ-np-tOq"/>
-        <segue reference="SL5-35-FJD"/>
+        <segue reference="Mj5-i5-9yV"/>
+        <segue reference="476-Lu-huZ"/>
     </inferredMetricsTieBreakers>
 </document>
