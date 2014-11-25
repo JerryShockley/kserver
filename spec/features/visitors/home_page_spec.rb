@@ -12,7 +12,7 @@ feature 'Home page' do
   #   Then I see "Welcome"
   scenario 'visit the home page' do
     visit root_url
-    expect(page).to have_content "ColorSistersSign inSign up"
+    expect(page).to have_content "ColorSisters"
   end
 
 end

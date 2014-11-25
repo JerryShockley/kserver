@@ -23,46 +23,46 @@ describe ProfileForm do
         end
       end
     end
-    context 'called with a Profile instance' do
-      profile = build_stubbed :profile
-      pform = ProfileForm.new(profile)
-      it 'initializes all corresponding ProfileForm attributes' do
-        profile = build_stubbed :profile
-        pform = ProfileForm.new(profile)
-        pform.profile_param_keys.each do |key|
-          expect(pform.send key).to eq(profile.send key) 
-        end
-      end
-    end
+    # context 'called with a Profile instance' do
+    #   profile = build_stubbed :profile
+    #   pform = ProfileForm.new(profile)
+    #   it 'initializes all corresponding ProfileForm attributes' do
+    #     profile = build_stubbed :profile
+    #     pform = ProfileForm.new(profile)
+    #     pform.profile_param_keys.each do |key|
+    #       expect(pform.send key).to eq(profile.send key)
+    #     end
+    #   end
+    # end
   end
   
   
-  describe '#save' do
-    context 'updating a valid object' do
-      it 'saves the user instance' do
-        profile = build_stubbed(:profile)
-        
-        
-        # new_pf_params = attributes_for(:profile)
-        # allow(Profile).to receive(:find_by).with(email: profile.email).and_return(profile)
-        user = create(:user, email: profile.email, password: "foobar", first_name: profile.first_name, 
-                                    last_name: profile.last_name)
-        pf = ProfileForm.new(user)
-        pf_params = pf.unique_objects_attributes.merge(password: "foobar")
-        pf.save(pf_params)
-
-      end
-      it 'saves the profile instance' do
-
-      end
-      it 'returns true' do
-
-      end
-    end
-    context 'with an invalid object' do
-
-    end
-  end
+  # describe '#save' do
+  #   context 'updating a valid object' do
+  #     it 'saves the user instance' do
+  #       profile = build_stubbed(:profile)
+  #
+  #
+  #       # new_pf_params = attributes_for(:profile)
+  #       # allow(Profile).to receive(:find_by).with(email: profile.email).and_return(profile)
+  #       user = create(:user, email: profile.email, password: "foobar", first_name: profile.first_name,
+  #                                   last_name: profile.last_name)
+  #       pf = ProfileForm.new(user)
+  #       pf_params = pf.unique_objects_attributes.merge(password: "foobar")
+  #       pf.save(pf_params)
+  #
+  #     end
+  #     it 'saves the profile instance' do
+  #
+  #     end
+  #     it 'returns true' do
+  #
+  #     end
+  #   end
+  #   context 'with an invalid object' do
+  #
+  #   end
+  # end
   
 
 end

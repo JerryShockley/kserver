@@ -11,6 +11,8 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
+
+
 set :domain, '74.207.224.95'
 set :deploy_to, '/home/deployer/kserver'
 set :repository, 'ssh://git_kokko@kokko.git.cloudforge.com/kserver1.git'
@@ -21,13 +23,32 @@ set :forward_agent, true
 set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 set :rails_env, 'production'
 set :ssh_options, '-A'
+set :identity_file, 'Users/jerry/.ssh'
+
+
+def set_production_variables
+  set :domain, '74.207.224.95'
+  set :port, '6287'
+  set :user, 'deployer'
+  set :rails_env, 'production'
+end
+
+
+def set_staging_variables
+  set :domain, 'localhost'
+  set :port, '6287'
+  set :user, 'deployer'
+  set :rails_env, 'production'
+end
+
+
 
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'log', 'config/secrets.yml']
+set :shared_paths, ['config/database.yml', 'log', 'config/secrets.yml', 'config/unicorn.rb']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -37,26 +58,24 @@ set :shared_paths, ['config/database.yml', 'log', 'config/secrets.yml']
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
-  # If you're using rbenv, use this to load the rbenv environment.
-  # Be sure to commit your .rbenv-version to your repository.
-  # invoke :'rbenv:load'
-
   # For those using RVM, use this to load an RVM version@gemset.
   # invoke :'rvm:use[ruby-1.9.3-p125@default]'
   queue %{
   echo "-----> Loading environment"
-  #{echo_cmd %[source ~/.bashrc]}
+  #{echo_cmd %[source ~/.zshrc]}
   }
     invoke :'rbenv:load'
     # If you're using rbenv, use this to load the rbenv environment.
     # Be sure to commit your .rbenv-version to your repository.
   end
+  
 
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task :setup => :environment do
+  set_dependent_env_variables
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
@@ -89,6 +108,7 @@ end
 
 desc "Deploys the current version to the server."
 task :deploy => :environment do
+  
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
@@ -112,4 +132,7 @@ end
 #  - http://nadarei.co/mina/tasks
 #  - http://nadarei.co/mina/settings
 #  - http://nadarei.co/mina/helpers
+
+
+
 
