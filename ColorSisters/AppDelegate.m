@@ -19,10 +19,11 @@
     // Override point for customization after application launch.
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSLog(@"async via Grand Central Dispatch");
+        NSLog(@"KokkoInterface async via Grand Central Dispatch");
         // Start the Imaging Library class
         // load the Imaging Library has a big data set loaded from files
         KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
+        NSLog(@"KokkoInterface init in didFinish() = %p", kokkoClass);
     });
     return YES;
 }

@@ -6,6 +6,7 @@
 //
 
 #import "KokkoUIImagePickerController.h"
+#import "KokkoInterface.h"
 #import "UIImage+Match.h"
 
 @interface KokkoUIImagePickerController ()
@@ -47,11 +48,10 @@
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     self.imageView.image = image;
     
-    // TODO:  test for interface
-    UIImage *scaledImage = [image scaleToCGSize:CGSizeMake(150, 100)];
-    CGRect chart = [image findChart];
-    CGRect face = [image findFace];
-    // TODO:
+    KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
+    NSLog(@"KokkoInterface init in didFinishPickingMedia() = %p", kokkoClass);
+
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
