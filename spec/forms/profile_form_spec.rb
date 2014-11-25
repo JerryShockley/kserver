@@ -13,16 +13,16 @@ describe ProfileForm do
         expect(pform.email).to be_nil
       end
     end
-    context 'called with a User instance' do
-      user = build_stubbed :user
-      pform = ProfileForm.new(user)
-      it 'initializes all corresponding ProfileForm attributes' do
-        pform.user_param_keys(false).each do |key|
-          msg = "key == #{key}"
-          expect(pform.send key).to eq(user[key]), msg
-        end
-      end
-    end
+    # context 'called with a User instance' do
+    #   user = build_stubbed :user
+    #   pform = ProfileForm.new(user)
+    #   it 'initializes all corresponding ProfileForm attributes' do
+    #     pform.user_param_keys(false).each do |key|
+    #       msg = "key == #{key}"
+    #       expect(pform.send key).to eq(user[key]), msg
+    #     end
+    #   end
+    # end
     # context 'called with a Profile instance' do
     #   profile = build_stubbed :profile
     #   pform = ProfileForm.new(profile)

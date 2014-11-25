@@ -26,8 +26,7 @@ describe 'Registrations index page', :devise do
       visit users_path
       click_link "edit_#{user2.id}"
       expect(page).to have_content "Edit User"
-      save_and_open_page
-      expect(page).to have_field "user_email", with: user2.email
+      expect(page).to have_field "profile_form_email", with: user2.email
     end
   
     context 'clicking another user record\'s delete link' do

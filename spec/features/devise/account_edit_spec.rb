@@ -38,17 +38,17 @@ feature 'User edit', :devise do
     end  
   end
 
-  context "current_user is an administrator" do
-
-    scenario "can edit another user's profile", :me do
-      me = FactoryGirl.create(:administrator)
-      other = FactoryGirl.create(:cust, email: 'other@example.com')
-      login_as(me, :scope => :user)
-      visit edit_userx_registration_path(other)
-      expect(page).to have_content 'Edit account'
-      expect(page).to have_selector "input[value='#{other.email}']"
-    end
-  end 
+  # context "current_user is an administrator" do
+  #
+  #   scenario "can edit another user's profile", :me do
+  #     me = FactoryGirl.create(:administrator)
+  #     other = FactoryGirl.create(:cust, email: 'other@example.com')
+  #     login_as(me, :scope => :user)
+  #     visit edit_userx_registration_path(other)
+  #     expect(page).to have_content 'Edit account'
+  #     expect(page).to have_selector "input[value='#{other.email}']"
+  #   end
+  # end
    
 
 end

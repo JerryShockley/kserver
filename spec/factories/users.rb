@@ -26,7 +26,7 @@ FactoryGirl.define do
     first_name { Faker::Name.first_name}
     last_name {Faker::Name.last_name}
     # sequence(:email) {|n| "#{first_name.last_name}#{n}@foo.com"}
-    email {"#{first_name.downcase}.#{last_name.downcase}@foo.com"}
+    email {"#{first_name ? first_name.downcase : "first_name_nil"}.#{last_name ? last_name.downcase : "last_name_nil"}@foo.com"}
     password "foobar"
     role :customer
 
