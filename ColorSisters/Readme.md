@@ -1,7 +1,10 @@
-
+Toolchain
+Xcode Version 6.1 (6A1052d)
+iPod 5th & iPhone 5c (iOS 8.1.1 (12B435))
 
 25 Nov 2014
 Version 1.5, Build 5
+* Camera tested on iPod 5th & iPhone 5c (iOS 8.1.1 (12B435))
 * KokkoInterface called in separate threads, called at didFinishLaunch() and after didFinishPickingMedia()
   * Test results to show singleton, memory pointer values are identical
 '
