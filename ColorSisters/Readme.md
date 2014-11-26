@@ -2,6 +2,9 @@ Toolchain
 Xcode Version 6.1 (6A1052d)
 iPod 5th & iPhone 5c (iOS 8.1.1 (12B435))
 
+26 Nov 2014
+* Moved KokkoInterface out of AppDelegate to [KokkoInterface init]
+
 25 Nov 2014
 Version 1.5, Build 5
 * Camera tested on iPod 5th & iPhone 5c (iOS 8.1.1 (12B435))
