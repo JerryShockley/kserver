@@ -65,7 +65,8 @@
     
     if (sourceType == UIImagePickerControllerSourceTypeCamera)
     {
-        imagePickerController.showsCameraControls = NO;
+        imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+        imagePickerController.showsCameraControls = YES;
     }
     
     self.imagePickerController = imagePickerController;
