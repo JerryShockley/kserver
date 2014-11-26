@@ -10,4 +10,5 @@
 
 @interface KokkoInterface : NSObject
 +(KokkoInterface*)sharedKokkoInterface;
++(void) init;
 @end
