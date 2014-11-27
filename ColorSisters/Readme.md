@@ -34,8 +34,8 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 * Added KokkoGetProductImages() with methods from email (Scott, 20 Nov 2014)
 
 
-20 Nov 2014
-Version 1.2, Build 2
+# 20 Nov 2014
+* Version 1.2, Build 2
 * Same known issues as Build 1
 * Changed extension to UIImage+Match.mm
 * Deployment target 7.1
@@ -62,3 +62,7 @@ Version 1.2, Build 2
   * Interface is built as UIImage "category", which is basically an extension of UIImage
   * See UIImage+Match.h
   * findChart() and findFace() are methods, but in another iteration they should be propertys?!?
+
+
+### Icon
+![alt text](/Images.xcassets/AppIcon.appiconset/Icon-60@3x.png "Icon-60@3x")
