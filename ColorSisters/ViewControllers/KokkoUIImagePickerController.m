@@ -7,7 +7,6 @@
 
 #import "KokkoUIImagePickerController.h"
 #import "KokkoInterface.h"
-#import "UIImage+Match.h"
 
 @interface KokkoUIImagePickerController ()
 
