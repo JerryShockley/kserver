@@ -65,4 +65,4 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 
 
 ### Icon
-![alt text](../ColorSisters/Images.xcassets/AppIcon.appiconset/Icon%4060@3x.png "Icon-60@3x")
+![alt text](../ColorSisters/Images.xcassets/AppIcon.appiconset/Icon-60%403x.png "Icon-60@3x")
