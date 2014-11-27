@@ -2,7 +2,6 @@
 //  KokkoInterface.m
 //  ColorSisters
 //
-//  Created by Rob Chohan on 11/24/14.
 //  Copyright (c) 2014 Kokko, Inc. All rights reserved.
 //
 
@@ -31,5 +30,71 @@ KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
         
         NSLog(@"KokkoInterface init in didFinish() = %p", kokkoClass);
     });
+}
+
+- (void) initWithImage:(UIImage *)imageToAnalyze {
+    
+    @try {
+        // TODO:   return call to C++ imageToAnalyze
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception %@", exception);
+    }
+    @finally {
+        
+    }
+}
+
+- (CGRect *) findChart {
+
+    CGRect *chart;
+    
+    @try {
+        // TODO:   return call to C++ chart
+        // chart =
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception %@", exception);
+    }
+    @finally {
+        return chart;
+    }
+}
+
+- (CGRect *) findFace {
+    
+    CGRect *face;
+    
+    @try {
+        // TODO:   return call to C++ findFace
+        // face =
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception %@", exception);
+    }
+    @finally {
+        return face;
+    }
+}
+
+/**
+ * the data returned is a list of lists: the top level list is the brands, and each element in that list has a list of matching shades.
+ * an NSArray, with each element being a <brand-name, Array> pair.
+ */
+- (NSArray*) getRecommendations {
+    
+    NSArray *recommendations;
+    
+    @try {
+        // TODO:   return call to C++ Recommendations
+        // recommendations =
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception %@", exception);
+    }
+    @finally {
+        return recommendations;
+    }
+
 }
 @end

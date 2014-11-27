@@ -49,8 +49,7 @@
     self.imageView.image = image;
     
     KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
-    NSLog(@"KokkoInterface init in didFinishPickingMedia() = %p", kokkoClass);
-
+    [kokkoClass initWithImage:image];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
