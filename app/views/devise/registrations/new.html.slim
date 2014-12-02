@@ -5,6 +5,9 @@
 
     = error_messages! @profile_form
     .panel.columns
+      .row.req_explanation
+        .columns.large-12.text-right
+          | * = Required field
       .row
         .large-6.columns.medium-6
           = f.input :first_name, :autofocus => true
@@ -12,9 +15,13 @@
           = f.input :last_name
       .row
         .large-6.columns.medium-6.small-12
-          = f.input :email
-        .large-6.columns.medium-6.small-8.text-left
+          = f.input :email          
+        .columns.large-6.medium-6.small-12
+          = f.input :source, label: "Invitation code if you received one"
+      .row
+        .large-6.columns.medium-6.small-12        
           = f.input :receive_emails, as: :boolean, boolean_style: :inline
+      br
       fieldset.row
         legend Mailing address
         .row
@@ -33,7 +40,7 @@
             = f.input :state, collection: ProfileForm::STATES
           .columns.large-4.medium-4.small-8
             = f.input :postal_code, label: 'Zip code'
-        br
+      br
       / fieldset
       /   legend Create Account
       /   .row
@@ -44,8 +51,8 @@
       /         = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
       .row
         .large-12.columns
-   
-        = f.submit 'Submit', :class => 'button expand'
+ 
+      = f.submit 'Submit', :class => 'button expand'
 
   .row
   br
