@@ -33,15 +33,15 @@
             = f.input :state, collection: ProfileForm::STATES
           .columns.large-4.medium-4.small-8
             = f.input :postal_code, label: 'Zip code'
-
-      fieldset
-        legend Create Account
-        .row
-        .coilumns.large-12
-          h6 Enter a password to create an account so you can view your results.
-          br
-            .large-6.columns.medium-6
-              = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
+        br
+      / fieldset
+      /   legend Create Account
+      /   .row
+      /   .coilumns.large-12
+      /     h6 Enter a password to create an account so you can view your results.
+      /     br
+      /       .large-6.columns.medium-6
+      /         = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
       .row
         .large-12.columns
    

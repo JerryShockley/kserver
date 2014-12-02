@@ -25,8 +25,9 @@ class ProfileForm
   attribute :role, String
   attribute :source, String
   
-  validates_presence_of :email
-  validate :verify_complete_mailing_address
+  validates_presence_of :email, :first_name, :last_name, :postal_code
+  # validate :verify_complete_mailing_address
+  validate :unique_email
   validates_length_of :password, minimum: MIN_PASSWORD_LENGTH,  unless: Proc.new {|e| e.password.blank?}
   validates_format_of :postal_code, with: /\A\d\d\d\d\d-?\d\d\d\d\Z|\A\d\d\d\d\d\Z/,  unless: Proc.new {|e| e.postal_code.blank?}
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/
@@ -72,7 +73,8 @@ class ProfileForm
     titleize_names(params)
     set_object_attributes(self, params)
     set_object_attributes(user, params.slice(*user_param_keys))
-    set_object_attributes(profile, params.slice(*profile_param_keys))                                
+    set_object_attributes(profile, params.slice(*profile_param_keys)) 
+                                   
     if valid?
       unless user.new_record? && !params.has_key?(:password)
         user.save! # saves profile too!
@@ -91,6 +93,22 @@ class ProfileForm
   
 
   private
+  
+  def unique_email     
+    verify_unique_email(user) && verify_unique_email(profile)
+  end
+  
+  def verify_unique_email(obj)
+    if obj.new_record? || obj.changed.contains('email')
+      if !obj.email.blank? && obj.class.exists?( ['email = ?', obj.email] )
+        self.errors.add(:email, "\"#{obj.email}\" must be unique. Another user has registered this email address. ")
+        return false
+      end
+    end
+    true
+  end
+
+
   
   def postal_code=(code)
     super( code && code.size == 9 ? code.insert(5,'-') : code)
