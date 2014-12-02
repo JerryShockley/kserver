@@ -20,40 +20,42 @@ ul.imagelist.small-block-grid-3
     .box1
       = image_tag('home_page/step1-empty.jpg', class: "row-image bk_image", alt: "ColorSisters Step 1")
       p.title 
-        | EASY
+        a href="#body_text" EASY
       p.text
         | Snap a selfie. 
   li.col2
     .box2
       = image_tag('home_page/step2-empty.jpg', class: "row-image bk_image", alt: "ColorSisters Step 2")
       p.title 
-        | INSPIRED
+        a href="#body_text" INSPIRED
       p.text
         | Find the perfect look.
   li.col3
     .box3
       = image_tag('home_page/step3-empty.jpg', class: "row-image bk_image", alt: "ColorSisters Step 3")
       p.title 
-        | ACCURATE
+        a href="#body_text" ACCURATE
       p.text
-        | COMING SOON! 
+        | Looks matched to your skin tone. 
 
-
-.row.panel
-  p
-    | Welcome to ColorSisters! ColorSisters is the only color accurate e-commerce discovery platform that simplifies finding the ideal color cosmetic products to achieve your desired look designed specifically for your skin tone.
-  p
-    | Using color accurate mobile technology–finding the right looks and product recommendations matched to your skin tone is as easy as taking a selfie.
-  p
-    | Save time and money with scientific color matching at home. Buy an entire suite of products for your desired look with just one click.
-  p
-    | Products are tested by women who are just like you. Be confident in your selection while eliminating the challenges of buying color cosmetics online.
-  p
-    | Come back often as we are just beginning and launching exciting new features often! We are happy that you are here and can not wait to inspire the beautiful you.
-  p
-    | For more information and to request an invitation to our exclusive Beta program, simply 
-    = link_to "REGISTER FOR AN INVITATION ", new_user_registration_path 
-    | and be one of the first to experience the science behind the beautiful you."
+.middle
+  .row.panel
+  
+    h2#body_text COMING SOON!
+    p
+      | Welcome to ColorSisters! ColorSisters is the only color accurate e-commerce discovery platform that simplifies finding the ideal color cosmetic products to achieve your desired look designed specifically for your skin tone.
+    p
+      | Using color accurate mobile technology–finding the right looks and product recommendations matched to your skin tone is as easy as taking a selfie.
+    p
+      | Save time and money with scientific color matching at home. Buy an entire suite of products for your desired look with just one click.
+    p
+      | Products are tested by women who are just like you. Be confident in your selection while eliminating the challenges of buying color cosmetics online.
+    p
+      | Come back often as we are just beginning and launching exciting new features often! We are happy that you are here and can not wait to inspire the beautiful you.
+    p
+      | For more information and to request an invitation to our exclusive Beta program, simply 
+      = link_to "REGISTER FOR AN INVITATION ", new_user_registration_path 
+      | and be one of the first to experience the science behind the beautiful you."
     
     
     

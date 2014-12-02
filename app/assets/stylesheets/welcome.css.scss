@@ -2,11 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$lt-blue: #A6CFDA;
+$lt-blue: #a6cfda;
+$lt-blue-h: #5a838e;
 $gold: #B6885A;
+$lt-black: #303030;
 
 body p {
   font: 1rem/1.4 Raleway;
+}
+.middle {
+  background: #000000;
 }
 //#####  Banner Callout
 
@@ -31,12 +36,12 @@ body p {
       .lbutton {
         display: block;
         color: white;
-        background: $gold;
+        background: black;
         width: 100%;
         height: 100%;
         text-align: center;
         font: 1.2rem/2.9 Raleway;
-        border: .1rem solid $gold;
+//        border: .15rem solid black;
         border-radius: .4rem;
       }
     
@@ -45,33 +50,8 @@ body p {
       }
       
       a.lbutton:hover {
-        border: .1rem solid black;
-        color: $lt-blue;
+        background: $lt-black;
       }
-//    .title-row {
-//      background: rgba(6,6,6,0.9);
-//      width: 100%;
-//      right: 0;
-//      padding: .90rem;
-////      button_to "REGISTER FOR AN INVITATION", new_user_registration_path
-//      p.title {
-//        display: inline;
-//        color: white;
-//        width: 100%;
-//        font-family: Raleway;
-//        font-weight: normal;
-//        font-size: 1.2rem;
-//        padding-top: 0.9%;
-//        padding-bottom: 2%;
-//        padding-right: 1%;
-//        padding-left: 1%;
-//      }
-
-//      img {
-//        height: 10%;
-//        width: 10%;
-////        display: inline;
-//      }
       
   }
 
@@ -103,12 +83,18 @@ ul.imagelist {
       top: 4%;
       left: 22%;
       font: 2rem/1.6 Raleway;
-      text-decoration: underline;
+      a {
+        color: $lt-blue;
+      }
+      
+      a:hover {
+        color: $lt-blue-h;
+      }
     }
     
     p.text {
       position: absolute;
-      font: 300 1.6rem/1.4 Raleway;
+      font: 300 1.4rem/1.4 Raleway;
       color: white;
       top: 28%;
       left: 25%;
@@ -131,12 +117,18 @@ ul.imagelist {
       top: 4%;
       left: 9%;
       font: 2rem/1.6 Raleway;
-      text-decoration: underline;
+      a {
+        color: $lt-blue;
+      }
+      
+      a:hover {
+        color: $lt-blue-h;
+      }
     }
     
     p.text {
       position: absolute;
-      font: 300 1.6rem/1.4 Raleway;
+      font: 300 1.4rem/1.4 Raleway;
       color: white;
       top: 28%;
       left: 12%;
@@ -160,12 +152,18 @@ ul.imagelist {
       top: 4%;
       left: 9%;
       font: 2rem/1.6 Raleway;
-      text-decoration: underline;
+      a {
+        color: $lt-blue;
+      }
+      
+      a:hover {
+        color: $lt-blue-h;
+      }
     }
     
     p.text {
       position: absolute;
-      font: 300 1.6rem/1.4 Raleway;
+      font: 300 1.4rem/1.4 Raleway;
       color: white;
       top: 28%;
       left: 12%;
@@ -194,7 +192,7 @@ ul.imagelist {
     
     .box1 {
       p.title {
-        font: 1.4rem/1.4 Raleway;
+        font: 1.2rem/1.4 Raleway;
       }
     
       p.text {
@@ -209,7 +207,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 1.6rem/1.4 Raleway;
+        font: 300 1.2rem/1.4 Raleway;
       }
     }
   
@@ -221,7 +219,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 1.6rem/1.4 Raleway;
+        font: 300 1.2rem/1.4 Raleway;
       }
     }
   
@@ -253,7 +251,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 1.2rem/1.4 Raleway;
+        font: 300 1.2rem/1.3 Raleway;
       }
     }
   
@@ -264,7 +262,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 1.2rem/1.4 Raleway;
+        font: 300 1.2rem/1.3 Raleway;
       }
     }
   
@@ -276,7 +274,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 1.2rem/1.4 Raleway;
+        font: 300 1.1rem/1.3 Raleway;
       }
     }
   
@@ -318,7 +316,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .95rem/1.4 Raleway;
+        font: 300 .95rem/1.3 Raleway;
       }
     }
   
@@ -329,7 +327,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .95rem/1.4 Raleway;
+        font: 300 .95rem/1.3 Raleway;
       }
     }
   
@@ -341,7 +339,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .95rem/1.4 Raleway;
+        font: 300 .85rem/1.3 Raleway;
       }
     }
   
@@ -380,7 +378,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .75rem/1.4 Raleway;
+        font: 300 .75rem/1.3 Raleway;
       }
     }
   
@@ -391,7 +389,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .75rem/1.4 Raleway;
+        font: 300 .75rem/1.3 Raleway;
       }
     }
   
@@ -403,7 +401,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .75rem/1.4 Raleway;
+        font: 300 .65rem/1.3 Raleway;
       }
     }
   
@@ -444,7 +442,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .6rem/1.4 Raleway;
+        font: 300 .6rem/1.3 Raleway;
       }
     }
   
@@ -455,7 +453,7 @@ ul.imagelist {
       }
     
       p.text {
-        font: 300 .6rem/1.4 Raleway;
+        font: 300 .6rem/1.3 Raleway;
       }
     }
   
@@ -463,11 +461,11 @@ ul.imagelist {
     .box3 {
 
       p.title {
-        font: .8/app/styrem/1.4 Raleway;
+        font: .8rem/1.4 Raleway;
       }
     
       p.text {
-        font: 300 .6rem/1.4 Raleway;
+        font: 300 .53rem/1.3 Raleway;
       }
     }
   
