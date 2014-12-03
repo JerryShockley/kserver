@@ -7,7 +7,7 @@ Copyright (c) 2014 Kokko, Inc. All rights reserved.
 * Xcode Version 6.1.1 (6A2008a)
 * iOS SDK 8.1
 * Deployment Target 7.1
-* Mavericks, OS X 10.9.5 (13F34)
+* Yosemite, OS X 10.10.1 (14B25)
 * [Markdown](http://daringfireball.net/projects/markdown/) for HTML documentation from Readme.md
 * Git, https://<user>@kokko.git.cloudforge.com/ioscolorsisters.git
 * [Cloud Forge](https://kokko.git.cloudforge.com/ioscolorsisters)
@@ -21,6 +21,9 @@ Builds are tested against
 * iPhone 5c iOS 8.1.1 (12B435)
 
 ## Build Notes
+
+### 3 Dec 2014
+* Matches - table and storyboard fixed
 
 ### 2 Dec 2014
 * Getting Started - set black background for the entire view

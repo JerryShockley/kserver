@@ -7,8 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class DetailViewController;
+
 @interface KokkoTableViewController : UITableViewController
 
+@property (strong, nonatomic) DetailViewController *detailViewController;
 @property (nonatomic, retain) NSArray *titleMatchesArray;
 @property (nonatomic, retain) NSArray *subtitleMatchesArray;
 @property (nonatomic, retain) NSArray *imageMatchesArray;
