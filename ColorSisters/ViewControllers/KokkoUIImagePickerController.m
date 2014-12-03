@@ -91,6 +91,7 @@
     [kokkoClass getRecommendations];
     
     // TODO - add popup with results from kokkoClass
+    [self showMatchesAlert];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
@@ -103,6 +104,16 @@
     
     
     //    self.imageReady = NO;
+}
+
+- (void)showMatchesAlert {
+    NSString *title = NSLocalizedString(@"Match Found", nil);
+    NSString *message = NSLocalizedString(@"Found x shades, across y brands", nil);
+    NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 /*
