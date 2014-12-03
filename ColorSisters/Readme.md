@@ -22,6 +22,13 @@ Builds are tested against
 
 ## Build Notes
 
+### 2 Dec 2014
+* Getting Started - set black background for the entire view
+* Getting Started - support gestures for horizontal scroll
+* Camera View - Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.
+* Camera View - Cancel should take you back to the launch pages
+* Camera View - Flash control is disabled (rear camera)
+
 ### 27 Nov 2014
 * Updated KokkoInterface with: unit tests, exception handling, NSArray returns, and proper signatures based on feedback
 
@@ -45,10 +52,6 @@ ColorSisters[4970:3070480] KokkoInterface init in didFinish() = 0x7fb2c0452420
 
 ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7fb2c0452420
 ```
-
-### 2 Dec 2014
-* Getting Started - set black background for the entire view
-* Getting Started - support gestures for horizontal scroll 
 
 ### 24 Nov 2014
 * Version 1.4, Build 4

@@ -12,5 +12,6 @@
 
 - (IBAction)showCamera:(UIBarButtonItem *)sender;
 - (IBAction)showPhotoPicker:(UIBarButtonItem *)sender;
+- (IBAction)findFoundation:(UIButton *)sender;
 
 @end
