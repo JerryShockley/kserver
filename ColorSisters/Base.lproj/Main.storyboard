@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8Ed-NA-WgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jSO-EX-Mcd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -84,6 +84,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="R6q-ai-I82">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQX-Jd-JK3">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <items>
+                                        <navigationItem title="Matches" id="lRo-3H-TXn" userLabel="Matches">
+                                            <barButtonItem key="leftBarButtonItem" title="Share" width="200" id="IiD-f3-XE5">
+                                                <connections>
+                                                    <segue destination="G5m-H0-GUg" kind="show" id="Fnm-kx-TUE"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Pqc-Mb-fQd">
+                                                <connections>
+                                                    <segue destination="KGb-kh-VSH" kind="show" id="3yt-fl-KkC"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </navigationItem>
+                                    </items>
+                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                        <rect key="frame" x="0.0" y="26" width="400" height="44"/>
+                                    </variation>
+                                </navigationBar>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="SQX-Jd-JK3"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="subviews">
+                                    <include reference="SQX-Jd-JK3"/>
+                                </mask>
+                            </variation>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="Cell" textLabel="Z37-YG-4J2" detailTextLabel="1Bh-ik-fiV" style="IBUITableViewCellStyleSubtitle" id="Rx2-jx-V5i">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -111,18 +148,7 @@
                             <outlet property="delegate" destination="toG-5d-dru" id="XEK-Bj-N8w"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Share" width="200" id="IiD-f3-XE5">
-                            <connections>
-                                <segue destination="G5m-H0-GUg" kind="show" id="Fnm-kx-TUE"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem systemItem="camera" id="Pqc-Mb-fQd">
-                            <connections>
-                                <segue destination="KGb-kh-VSH" kind="show" id="3yt-fl-KkC"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="8Ed-NA-WgO" kind="show" identifier="detail" id="uRt-jO-kpf"/>
@@ -130,7 +156,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t59-Vo-e7h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="556.5" y="594"/>
+            <point key="canvasLocation" x="424.5" y="604.5"/>
         </scene>
         <!--Detailed Match View Controller-->
         <scene sceneID="ukS-c4-Lm5">
@@ -197,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SFK-Zy-hPW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="556.5" y="1378.5"/>
+            <point key="canvasLocation" x="-43.5" y="1359.75"/>
         </scene>
         <!--Share View Controller-->
         <scene sceneID="BhO-oD-ptb">
@@ -211,6 +237,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8N-n4-kPc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Signup" id="PKd-ZR-i2N">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="QuT-Md-zKN">
+                                            <connections>
+                                                <segue destination="KGb-kh-VSH" kind="show" id="SL5-35-FJD"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="28" width="400" height="44"/>
+                                </variation>
+                            </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="first name" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L4w-f3-BFF">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -262,31 +303,16 @@
                                     <rect key="frame" x="116" y="314" width="97" height="30"/>
                                 </variation>
                             </button>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8N-n4-kPc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Signup" id="PKd-ZR-i2N">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="QuT-Md-zKN">
-                                            <connections>
-                                                <segue destination="KGb-kh-VSH" kind="show" id="SL5-35-FJD"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="28" width="400" height="44"/>
-                                </variation>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="L8N-n4-kPc"/>
                                 <exclude reference="L4w-f3-BFF"/>
                                 <exclude reference="Qne-L3-Myv"/>
                                 <exclude reference="dEL-Qk-gFA"/>
                                 <exclude reference="mvg-Zc-XwK"/>
                                 <exclude reference="oXg-h0-Tip"/>
-                                <exclude reference="L8N-n4-kPc"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -307,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHT-Rf-fnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48" y="-234"/>
+            <point key="canvasLocation" x="598.5" y="-182.25"/>
         </scene>
         <!--Kokko Page Control View Controller-->
         <scene sceneID="sfF-oW-WW5">
@@ -524,6 +550,6 @@
         <image name="Page3" width="640" height="640"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3yt-fl-KkC"/>
+        <segue reference="SL5-35-FJD"/>
     </inferredMetricsTieBreakers>
 </document>
