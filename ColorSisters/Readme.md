@@ -28,6 +28,11 @@ Builds are tested against
 * Camera View - Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.
 * Camera View - Cancel should take you back to the launch pages
 * Camera View - Flash control is disabled (rear camera)
+* Known Issues with this build
+  * Share Results - Layout and storyboard previews are fine, but device shows an error (under investigation, see Images below)
+  * Getting Started - Needs 8 second timer (under investigation)
+  * Matches - Layout issues, too high (needs more space below the status bar)
+  * TODO:  Since you have the data, could fake up showing a recommendation.
 
 ### 27 Nov 2014
 * Updated KokkoInterface with: unit tests, exception handling, NSArray returns, and proper signatures based on feedback
@@ -79,16 +84,6 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 * Version 1.0, Build 1
 
 
-### Known Issues
-* Unit test of Interface is not working, see ColorSisterTests/InterfaceTests.m
-* InterfaceTests.m compiles, but debugger does not trip in Unit test
-* LaunchScreen.xib - needs spec
-* Getting started needs text - "Launch and Tutorial (page 4-5 of Nov 12 spec)"
-  * Needs 8 second timer
-* Matches page - Layout is crowded at top
-* Share Page - needs wiring to web service
-
-
 ### Fixed Issues
 * Storyboards are universal, and is messing up layouts on iPod Touch & iPhone 5c devices and simulators
 * First revision of Interface, See Interface/UIImage+Match.m
@@ -100,7 +95,13 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 # Images
 
 # Screen Shots and Previews
+## GettingStarted-preview.png
 ![alt text](./Documentation/GettingStarted-preview.png "")
+***
+
+## ShareResults-preview.png
+![alt text](./Documentation/ShareResults-preview.png "")
+***
 
 ## Icon
 ### Icon-60

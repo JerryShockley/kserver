@@ -36,6 +36,13 @@ Builds are tested against</p>
 <li>Camera View - Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.</li>
 <li>Camera View - Cancel should take you back to the launch pages</li>
 <li>Camera View - Flash control is disabled (rear camera)</li>
+<li>Known Issues with this build
+<ul>
+<li>Share Results - Layout and storyboard previews are fine, but device shows an error (under investigation, see Images below)</li>
+<li>Getting Started - Needs 8 second timer (under investigation)</li>
+<li>Matches - Layout issues, too high (needs more space below the status bar)</li>
+<li>TODO:  Since you have the data, could fake up showing a recommendation.</li>
+</ul></li>
 </ul>
 
 <h3>27 Nov 2014</h3>
@@ -108,20 +115,6 @@ ColorSisters[4970:3070480] KokkoInterface async via Grand Central Dispatch</p>
 <li>Version 1.0, Build 1</li>
 </ul>
 
-<h3>Known Issues</h3>
-
-<ul>
-<li>Unit test of Interface is not working, see ColorSisterTests/InterfaceTests.m</li>
-<li>InterfaceTests.m compiles, but debugger does not trip in Unit test</li>
-<li>LaunchScreen.xib - needs spec</li>
-<li>Getting started needs text - "Launch and Tutorial (page 4-5 of Nov 12 spec)"
-<ul>
-<li>Needs 8 second timer</li>
-</ul></li>
-<li>Matches page - Layout is crowded at top</li>
-<li>Share Page - needs wiring to web service</li>
-</ul>
-
 <h3>Fixed Issues</h3>
 
 <ul>
@@ -138,7 +131,17 @@ ColorSisters[4970:3070480] KokkoInterface async via Grand Central Dispatch</p>
 
 <h1>Screen Shots and Previews</h1>
 
+<h2>GettingStarted-preview.png</h2>
+
 <p><img src="./Documentation/GettingStarted-preview.png" alt="alt text" title="" /></p>
+
+<hr />
+
+<h2>ShareResults-preview.png</h2>
+
+<p><img src="./Documentation/ShareResults-preview.png" alt="alt text" title="" /></p>
+
+<hr />
 
 <h2>Icon</h2>
 
