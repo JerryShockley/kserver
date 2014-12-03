@@ -24,6 +24,7 @@ Builds are tested against
 
 ### 3 Dec 2014
 * Matches - table and storyboard fixed
+* Getting Started - removed 'jarring' UI issue with navi bar'
 
 ### 2 Dec 2014
 * Getting Started - set black background for the entire view

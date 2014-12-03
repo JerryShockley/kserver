@@ -43,6 +43,16 @@
 
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    // For this view only, remove the Navigation bar
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    // Bring back the Navigation bar
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (IBAction)startWalkthrough:(id)sender {
     PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
     NSArray *viewControllers = @[startingViewController];
