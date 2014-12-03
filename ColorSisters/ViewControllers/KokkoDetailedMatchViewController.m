@@ -25,6 +25,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     self.imageView.image = _detailedMatch;
 }
 /*
