@@ -29,9 +29,11 @@ Builds are tested against
 * Camera View - Cancel should take you back to the launch pages
 * Camera View - Flash control is disabled (rear camera)
 * Known Issues with this build
+  * Image Processing - Find Foundation background view shows
+  * Dead end to results page
   * Share Results - Layout and storyboard previews are fine, but device shows an error (under investigation, see Images below)
   * Getting Started - Needs 8 second timer (under investigation)
-  * Matches - Layout issues, too high (needs more space below the status bar)
+  * Matches - TODO: needs images pulled in
   * TODO:  Since you have the data, could fake up showing a recommendation.
 
 ### 27 Nov 2014
