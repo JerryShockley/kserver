@@ -8,49 +8,95 @@
 #import "KokkoPageControlViewController.h"
 
 @interface KokkoPageControlViewController ()
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-
-@property (strong, nonatomic) UIImageView *currentView;
 
 @end
 
 @implementation KokkoPageControlViewController
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-
-    self.pageControl.pageIndicatorTintColor = [UIColor blueColor];
-    self.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-
-
+    // Create the data model
+    self.pageTitles = @[@"TODO description Page1.png", @"TODO description Page2.png", @"TODO description Page3.png"]; // TODO:  need strings
+    self.pageImages = @[@"Page1.png", @"Page2.png", @"Page3.png"];
     
-    self.imageView.animationImages = @[
-                                  [UIImage imageNamed:@"Page1"],
-                                  [UIImage imageNamed:@"Page2"],
-                                  [UIImage imageNamed:@"Page3"],
-                                  ];
+    // Override point for customization after application launch.
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor blueColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    pageControl.backgroundColor = [UIColor blackColor];
+    
+    // Create page view controller
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+    self.pageViewController.dataSource = self;
+    
+    PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+    NSArray *viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:viewControllers
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:NO
+                                     completion:nil];
     
 
-    self.imageView.image = self.imageView.animationImages[0];
+    [self addChildViewController:_pageViewController];
+    [self.view addSubview:_pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
 
-    
-    // We want the image to be scaled to the correct aspect ratio within imageView's bounds.
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    // If the image does not have the same aspect ratio as imageView's bounds, then imageView's backgroundColor will be applied to the "empty" space.
-    self.imageView.backgroundColor = [UIColor whiteColor];
 }
 
-
-- (IBAction)pageControlChanged:(id)sender {
-    [self.currentView setHidden:YES];
-    NSInteger selectedPage = self.pageControl.currentPage;
-    
-    self.imageView.image = self.imageView.animationImages[selectedPage];
-//    [self.currentView setHidden:NO];
+- (IBAction)startWalkthrough:(id)sender {
+    PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+    NSArray *viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
 }
 
+- (PageContentViewController *)viewControllerAtIndex:(NSUInteger)index {
+    if (([self.pageTitles count] == 0) || (index >= [self.pageTitles count])) {
+        return nil;
+    }
+    
+    // Create a new view controller and pass suitable data.
+    PageContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageContentViewController"];
+    pageContentViewController.imageFile = self.pageImages[index];
+    pageContentViewController.titleText = self.pageTitles[index];
+    pageContentViewController.pageIndex = index;
+    
+    return pageContentViewController;
+}
+
+#pragma mark - Page View Controller Data Source
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+    NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    
+    if ((index == 0) || (index == NSNotFound)) {
+        return nil;
+    }
+    
+    index--;
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+    NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    
+    if (index == NSNotFound) {
+        return nil;
+    }
+    
+    index++;
+    if (index == [self.pageTitles count]) {
+        return nil;
+    }
+    return [self viewControllerAtIndex:index];
+}
+
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
+    return [self.pageTitles count];
+}
+
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
+    return 0;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

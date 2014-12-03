@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D51DBB5E1A2E97B5003DC6D9 /* KokkoPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D51DBB5D1A2E97B5003DC6D9 /* KokkoPageContentViewController.m */; };
 		D55E42B71A158EA500DD91E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B61A158EA500DD91E7 /* main.m */; };
 		D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B91A158EA500DD91E7 /* AppDelegate.m */; };
 		D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D55E42BB1A158EA500DD91E7 /* ColorSisters.xcdatamodeld */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D51DBB5C1A2E97B5003DC6D9 /* KokkoPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoPageContentViewController.h; path = ViewControllers/KokkoPageContentViewController.h; sourceTree = "<group>"; };
+		D51DBB5D1A2E97B5003DC6D9 /* KokkoPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoPageContentViewController.m; path = ViewControllers/KokkoPageContentViewController.m; sourceTree = "<group>"; };
 		D55E42B11A158EA500DD91E7 /* ColorSisters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSisters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55E42B51A158EA500DD91E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D55E42B61A158EA500DD91E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 		D57FA3E91A159F03007FD997 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D51DBB5C1A2E97B5003DC6D9 /* KokkoPageContentViewController.h */,
+				D51DBB5D1A2E97B5003DC6D9 /* KokkoPageContentViewController.m */,
 				D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */,
 				D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */,
 				D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */,
@@ -281,6 +286,7 @@
 				D59752D91A15C1FA009415BA /* KokkoDetailedMatchViewController.m in Sources */,
 				D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */,
 				D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */,
+				D51DBB5E1A2E97B5003DC6D9 /* KokkoPageContentViewController.m in Sources */,
 				D59DF8B41A238FB000387161 /* KokkoInterface.mm in Sources */,
 				D5C7CB391A1C435200AAEEA7 /* UIImage+Match.mm in Sources */,
 				D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */,

@@ -4,7 +4,7 @@ Copyright (c) 2014 Kokko, Inc. All rights reserved.
 
 
 ## Toolchain
-* Xcode Version 6.1 (6A1052d)
+* Xcode Version 6.1.1 (6A2008a)
 * iOS SDK 8.1
 * Deployment Target 7.1
 * Mavericks, OS X 10.9.5 (13F34)
@@ -46,6 +46,9 @@ ColorSisters[4970:3070480] KokkoInterface init in didFinish() = 0x7fb2c0452420
 ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7fb2c0452420
 ```
 
+### 2 Dec 2014
+* Getting Started - set black background for the entire view
+* Getting Started - support gestures for horizontal scroll 
 
 ### 24 Nov 2014
 * Version 1.4, Build 4
@@ -92,6 +95,10 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 
 
 # Images
+
+# Screen Shots and Previews
+![alt text](./Documentation/GettingStarted-preview.png "")
+
 ## Icon
 ### Icon-60
 ![alt text](Images.xcassets/AppIcon.appiconset/Icon-60@2x.png "")
