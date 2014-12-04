@@ -12,8 +12,10 @@
 @end
 
 @implementation KokkoPageControlViewController
-- (void)viewDidLoad
-{
+NSInteger intervalGettingStartedSeconds = 10;
+NSUInteger currentIndex = 0;
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Create the data model
     self.pageTitles = @[@"TODO description Page1.png", @"TODO description Page2.png", @"TODO description Page3.png"]; // TODO:  need strings
@@ -29,9 +31,9 @@
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;
     
-    PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
-    NSArray *viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:viewControllers
+    PageContentViewController *startingViewController = [self viewControllerAtIndex:currentIndex];
+    self.viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:self.viewControllers
                                       direction:UIPageViewControllerNavigationDirectionForward
                                        animated:NO
                                      completion:nil];
@@ -41,7 +43,42 @@
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
 
+    [NSTimer scheduledTimerWithTimeInterval:intervalGettingStartedSeconds
+                                     target:self
+                                   selector:@selector(scrollingTimer) userInfo:nil repeats:YES];
 }
+
+- (void) scrollingTimer {
+    // TODO:  If the user initiates a scroll, then the action should be obeyed and the timer reset
+    currentIndex = [self presentationIndexForPageViewController:self.pageViewController];
+    
+    switch (currentIndex) {
+        case 0: {
+            // Move from first to second page
+            currentIndex = 1;
+        break;
+        }
+        case 1: {
+            // Move from second to third page
+            currentIndex = 2;
+            break;
+        }
+        case 2: {
+            // Move from third to first page
+            currentIndex = 0;
+            break;
+        }
+
+        default:
+        break;
+    }
+
+    self.viewControllers = @[[self viewControllerAtIndex:currentIndex]];
+    [self.pageViewController setViewControllers:self.viewControllers
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:NO
+                                     completion:nil];
+    }
 
 - (void) viewDidAppear:(BOOL)animated {
     // For this view only, remove the Navigation bar
@@ -51,12 +88,6 @@
 - (void) viewDidDisappear:(BOOL)animated {
     // Bring back the Navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-
-- (IBAction)startWalkthrough:(id)sender {
-    PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
-    NSArray *viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
 }
 
 - (PageContentViewController *)viewControllerAtIndex:(NSUInteger)index {
@@ -77,6 +108,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    currentIndex = index;
     
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -88,6 +120,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    currentIndex = index;
     
     if (index == NSNotFound) {
         return nil;
@@ -105,7 +138,7 @@
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
-    return 0;
+    return currentIndex;
 }
 
 - (void)didReceiveMemoryWarning {

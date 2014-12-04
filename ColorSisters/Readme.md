@@ -25,6 +25,7 @@ Builds are tested against
 ### 3 Dec 2014
 * Matches - table and storyboard fixed
 * Getting Started - removed 'jarring' UI issue with navi bar'
+* Getting Started - added 10 second timer
 
 ### 2 Dec 2014
 * Getting Started - set black background for the entire view
@@ -36,7 +37,6 @@ Builds are tested against
   * Image Processing - Find Foundation background view shows
   * Dead end to results page
   * Share Results - Layout and storyboard previews are fine, but device shows an error (under investigation, see Images below)
-  * Getting Started - Needs 8 second timer (under investigation)
   * Matches - TODO: needs images pulled in
   * TODO:  Since you have the data, could fake up showing a recommendation.
 
