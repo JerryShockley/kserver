@@ -13,5 +13,5 @@
 - (void) initWithImage:(UIImage *)imageToAnalyze;
 - (CGRect *) findChart;
 - (CGRect *) findFace;
-- (NSArray *) getRecommendations;
+- (NSDictionary *) getRecommendations;
 @end
