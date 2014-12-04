@@ -1,0 +1,649 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D24F184E1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */; };
+		D24F184F1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */; };
+		D24F18511A2E3ED6003491FC /* FaceShades.csv in Resources */ = {isa = PBXBuildFile; fileRef = D24F18501A2E3ED6003491FC /* FaceShades.csv */; };
+		D24F18521A2E3ED6003491FC /* FaceShades.csv in Resources */ = {isa = PBXBuildFile; fileRef = D24F18501A2E3ED6003491FC /* FaceShades.csv */; };
+		D24F18551A2E3EEE003491FC /* 2007_3x8_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F18531A2E3EEE003491FC /* 2007_3x8_ini.cht */; };
+		D24F18561A2E3EEE003491FC /* 2007_3x8_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F18531A2E3EEE003491FC /* 2007_3x8_ini.cht */; };
+		D24F18571A2E3EEE003491FC /* haarcascade_frontalface_default.xml in Resources */ = {isa = PBXBuildFile; fileRef = D24F18541A2E3EEE003491FC /* haarcascade_frontalface_default.xml */; };
+		D24F18581A2E3EEE003491FC /* haarcascade_frontalface_default.xml in Resources */ = {isa = PBXBuildFile; fileRef = D24F18541A2E3EEE003491FC /* haarcascade_frontalface_default.xml */; };
+		D24F185A1A2E3FF1003491FC /* product_images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D24F18591A2E3FF1003491FC /* product_images.bundle */; };
+		D24F185B1A2E3FF1003491FC /* product_images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D24F18591A2E3FF1003491FC /* product_images.bundle */; };
+		D24F185D1A2E404D003491FC /* chart_v16_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F185C1A2E404D003491FC /* chart_v16_ini.cht */; };
+		D24F185E1A2E404D003491FC /* chart_v16_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F185C1A2E404D003491FC /* chart_v16_ini.cht */; };
+		D2DEE97B1A2E60B50063C236 /* chart_detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */; };
+		D2DEE97C1A2E60B50063C236 /* chart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96C1A2E60B00063C236 /* chart.cpp */; };
+		D2DEE97D1A2E60B50063C236 /* color_measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96E1A2E60B00063C236 /* color_measure.cpp */; };
+		D2DEE97E1A2E60B50063C236 /* colorspace.c in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9701A2E60B10063C236 /* colorspace.c */; };
+		D2DEE97F1A2E60B50063C236 /* exemplar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9731A2E60B20063C236 /* exemplar.cpp */; };
+		D2DEE9801A2E60B50063C236 /* face_extractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9751A2E60B30063C236 /* face_extractor.cpp */; };
+		D2DEE9811A2E60B50063C236 /* pipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9771A2E60B30063C236 /* pipeline.cpp */; };
+		D2DEE9821A2E60B50063C236 /* skinpixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9791A2E60B40063C236 /* skinpixels.cpp */; };
+		D2DEE9C71A2E77EB0063C236 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DEE9C61A2E77EA0063C236 /* opencv2.framework */; };
+		D2DEE9CA1A2E781D0063C236 /* Eigen in Resources */ = {isa = PBXBuildFile; fileRef = D2DEE9C91A2E781D0063C236 /* Eigen */; };
+		D55E42B71A158EA500DD91E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B61A158EA500DD91E7 /* main.m */; };
+		D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B91A158EA500DD91E7 /* AppDelegate.m */; };
+		D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D55E42BB1A158EA500DD91E7 /* ColorSisters.xcdatamodeld */; };
+		D55E42C31A158EA500DD91E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C11A158EA500DD91E7 /* Main.storyboard */; };
+		D55E42C51A158EA500DD91E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C41A158EA500DD91E7 /* Images.xcassets */; };
+		D55E42C81A158EA500DD91E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C61A158EA500DD91E7 /* LaunchScreen.xib */; };
+		D55E42D41A158EA600DD91E7 /* ColorSistersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42D31A158EA600DD91E7 /* ColorSistersTests.m */; };
+		D59752D61A15B48A009415BA /* KokkoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D59752D51A15B48A009415BA /* KokkoTableViewController.m */; };
+		D59752D91A15C1FA009415BA /* KokkoDetailedMatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */; };
+		D59819F81A1C6E3200855190 /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = D59819F71A1C6E3200855190 /* Readme.md */; };
+		D59DF8B41A238FB000387161 /* KokkoInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = D59DF8B31A238FB000387161 /* KokkoInterface.mm */; };
+		D5C350D61A278B4000CB0F8C /* KokkoInterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C350D51A278B4000CB0F8C /* KokkoInterfaceTests.m */; };
+		D5C7CB391A1C435200AAEEA7 /* UIImage+Match.mm in Sources */ = {isa = PBXBuildFile; fileRef = D5C7CB381A1C435200AAEEA7 /* UIImage+Match.mm */; };
+		D5C7CB3B1A1C441300AAEEA7 /* InterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C7CB3A1A1C441300AAEEA7 /* InterfaceTests.m */; };
+		D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */; };
+		D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */; };
+		D5D950D31A1F01A3007B3AF2 /* KokkoProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D950D21A1F01A3007B3AF2 /* KokkoProductInfo.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D55E42CE1A158EA600DD91E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D55E42A91A158EA500DD91E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D55E42B01A158EA500DD91E7;
+			remoteInfo = ColorSisters;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FacePixels.fpdb.txt; sourceTree = "<group>"; };
+		D24F18501A2E3ED6003491FC /* FaceShades.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FaceShades.csv; sourceTree = "<group>"; };
+		D24F18531A2E3EEE003491FC /* 2007_3x8_ini.cht */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2007_3x8_ini.cht; sourceTree = "<group>"; };
+		D24F18541A2E3EEE003491FC /* haarcascade_frontalface_default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_default.xml; sourceTree = "<group>"; };
+		D24F18591A2E3FF1003491FC /* product_images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = product_images.bundle; sourceTree = "<group>"; };
+		D24F185C1A2E404D003491FC /* chart_v16_ini.cht */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chart_v16_ini.cht; sourceTree = "<group>"; };
+		D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chart_detector.cpp; path = ColorSisters/ImageAnalysis/chart_detector.cpp; sourceTree = "<group>"; };
+		D2DEE96B1A2E60AF0063C236 /* chart_detector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chart_detector.h; path = ColorSisters/ImageAnalysis/chart_detector.h; sourceTree = "<group>"; };
+		D2DEE96C1A2E60B00063C236 /* chart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chart.cpp; path = ColorSisters/ImageAnalysis/chart.cpp; sourceTree = "<group>"; };
+		D2DEE96D1A2E60B00063C236 /* chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chart.h; path = ColorSisters/ImageAnalysis/chart.h; sourceTree = "<group>"; };
+		D2DEE96E1A2E60B00063C236 /* color_measure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = color_measure.cpp; path = ColorSisters/ImageAnalysis/color_measure.cpp; sourceTree = "<group>"; };
+		D2DEE96F1A2E60B10063C236 /* color_measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = color_measure.h; path = ColorSisters/ImageAnalysis/color_measure.h; sourceTree = "<group>"; };
+		D2DEE9701A2E60B10063C236 /* colorspace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = colorspace.c; path = ColorSisters/ImageAnalysis/colorspace.c; sourceTree = "<group>"; };
+		D2DEE9711A2E60B10063C236 /* colorspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = colorspace.h; path = ColorSisters/ImageAnalysis/colorspace.h; sourceTree = "<group>"; };
+		D2DEE9721A2E60B20063C236 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ColorSisters/ImageAnalysis/common.h; sourceTree = "<group>"; };
+		D2DEE9731A2E60B20063C236 /* exemplar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = exemplar.cpp; path = ColorSisters/ImageAnalysis/exemplar.cpp; sourceTree = "<group>"; };
+		D2DEE9741A2E60B20063C236 /* exemplar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = exemplar.h; path = ColorSisters/ImageAnalysis/exemplar.h; sourceTree = "<group>"; };
+		D2DEE9751A2E60B30063C236 /* face_extractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = face_extractor.cpp; path = ColorSisters/ImageAnalysis/face_extractor.cpp; sourceTree = "<group>"; };
+		D2DEE9761A2E60B30063C236 /* face_extractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = face_extractor.h; path = ColorSisters/ImageAnalysis/face_extractor.h; sourceTree = "<group>"; };
+		D2DEE9771A2E60B30063C236 /* pipeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pipeline.cpp; path = ColorSisters/ImageAnalysis/pipeline.cpp; sourceTree = "<group>"; };
+		D2DEE9781A2E60B40063C236 /* pipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pipeline.h; path = ColorSisters/ImageAnalysis/pipeline.h; sourceTree = "<group>"; };
+		D2DEE9791A2E60B40063C236 /* skinpixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skinpixels.cpp; path = ColorSisters/ImageAnalysis/skinpixels.cpp; sourceTree = "<group>"; };
+		D2DEE97A1A2E60B50063C236 /* skinpixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skinpixels.h; path = ColorSisters/ImageAnalysis/skinpixels.h; sourceTree = "<group>"; };
+		D2DEE9C61A2E77EA0063C236 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ColorSisters/Frameworks/opencv2.framework; sourceTree = "<group>"; };
+		D2DEE9C91A2E781D0063C236 /* Eigen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Eigen; path = ColorSisters/Frameworks/Eigen; sourceTree = "<group>"; };
+		D55E42B11A158EA500DD91E7 /* ColorSisters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSisters.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D55E42B51A158EA500DD91E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D55E42B61A158EA500DD91E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D55E42B81A158EA500DD91E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D55E42B91A158EA500DD91E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D55E42BC1A158EA500DD91E7 /* ColorSisters.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ColorSisters.xcdatamodel; sourceTree = "<group>"; };
+		D55E42C21A158EA500DD91E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D55E42C41A158EA500DD91E7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D55E42C71A158EA500DD91E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D55E42CD1A158EA600DD91E7 /* ColorSistersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorSistersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D55E42D21A158EA600DD91E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D55E42D31A158EA600DD91E7 /* ColorSistersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorSistersTests.m; sourceTree = "<group>"; };
+		D59752D41A15B48A009415BA /* KokkoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KokkoTableViewController.h; sourceTree = "<group>"; };
+		D59752D51A15B48A009415BA /* KokkoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KokkoTableViewController.m; sourceTree = "<group>"; };
+		D59752D71A15C1FA009415BA /* KokkoDetailedMatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoDetailedMatchViewController.h; path = ViewControllers/KokkoDetailedMatchViewController.h; sourceTree = "<group>"; };
+		D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoDetailedMatchViewController.m; path = ViewControllers/KokkoDetailedMatchViewController.m; sourceTree = "<group>"; };
+		D59819F71A1C6E3200855190 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		D59DF8B21A238FB000387161 /* KokkoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoInterface.h; path = Interface/KokkoInterface.h; sourceTree = "<group>"; };
+		D59DF8B31A238FB000387161 /* KokkoInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = KokkoInterface.mm; path = Interface/KokkoInterface.mm; sourceTree = "<group>"; };
+		D5C350D51A278B4000CB0F8C /* KokkoInterfaceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KokkoInterfaceTests.m; sourceTree = "<group>"; };
+		D5C7CB371A1C435200AAEEA7 /* UIImage+Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Match.h"; path = "Interface/UIImage+Match.h"; sourceTree = "<group>"; };
+		D5C7CB381A1C435200AAEEA7 /* UIImage+Match.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "UIImage+Match.mm"; path = "Interface/UIImage+Match.mm"; sourceTree = "<group>"; };
+		D5C7CB3A1A1C441300AAEEA7 /* InterfaceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceTests.m; sourceTree = "<group>"; };
+		D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoPageControlViewController.h; path = ViewControllers/KokkoPageControlViewController.h; sourceTree = "<group>"; };
+		D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoPageControlViewController.m; path = ViewControllers/KokkoPageControlViewController.m; sourceTree = "<group>"; };
+		D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoUIImagePickerController.h; path = ViewControllers/KokkoUIImagePickerController.h; sourceTree = "<group>"; };
+		D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoUIImagePickerController.m; path = ViewControllers/KokkoUIImagePickerController.m; sourceTree = "<group>"; };
+		D5D950D21A1F01A3007B3AF2 /* KokkoProductInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoProductInfo.m; path = Interface/KokkoProductInfo.m; sourceTree = "<group>"; };
+		D5D950D41A1F01E6007B3AF2 /* KokkoProductInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoProductInfo.h; path = Interface/KokkoProductInfo.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D55E42AE1A158EA500DD91E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2DEE9C71A2E77EB0063C236 /* opencv2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55E42CA1A158EA600DD91E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D2DEE9C51A2E61680063C236 /* ImageAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */,
+				D2DEE96B1A2E60AF0063C236 /* chart_detector.h */,
+				D2DEE96C1A2E60B00063C236 /* chart.cpp */,
+				D2DEE96D1A2E60B00063C236 /* chart.h */,
+				D2DEE96E1A2E60B00063C236 /* color_measure.cpp */,
+				D2DEE96F1A2E60B10063C236 /* color_measure.h */,
+				D2DEE9701A2E60B10063C236 /* colorspace.c */,
+				D2DEE9711A2E60B10063C236 /* colorspace.h */,
+				D2DEE9721A2E60B20063C236 /* common.h */,
+				D2DEE9731A2E60B20063C236 /* exemplar.cpp */,
+				D2DEE9741A2E60B20063C236 /* exemplar.h */,
+				D2DEE9751A2E60B30063C236 /* face_extractor.cpp */,
+				D2DEE9761A2E60B30063C236 /* face_extractor.h */,
+				D2DEE9771A2E60B30063C236 /* pipeline.cpp */,
+				D2DEE9781A2E60B40063C236 /* pipeline.h */,
+				D2DEE9791A2E60B40063C236 /* skinpixels.cpp */,
+				D2DEE97A1A2E60B50063C236 /* skinpixels.h */,
+			);
+			name = ImageAnalysis;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D2DEE9C81A2E780E0063C236 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2DEE9C91A2E781D0063C236 /* Eigen */,
+				D2DEE9C61A2E77EA0063C236 /* opencv2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D55E42A81A158EA500DD91E7 = {
+			isa = PBXGroup;
+			children = (
+				D2DEE9C81A2E780E0063C236 /* Frameworks */,
+				D55E42B31A158EA500DD91E7 /* ColorSisters */,
+				D55E42D01A158EA600DD91E7 /* ColorSistersTests */,
+				D55E42B21A158EA500DD91E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D55E42B21A158EA500DD91E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D55E42B11A158EA500DD91E7 /* ColorSisters.app */,
+				D55E42CD1A158EA600DD91E7 /* ColorSistersTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D55E42B31A158EA500DD91E7 /* ColorSisters */ = {
+			isa = PBXGroup;
+			children = (
+				D59819F71A1C6E3200855190 /* Readme.md */,
+				D2DEE9C51A2E61680063C236 /* ImageAnalysis */,
+				D5C7CB321A1C41AE00AAEEA7 /* Interface */,
+				D55E42B81A158EA500DD91E7 /* AppDelegate.h */,
+				D55E42B91A158EA500DD91E7 /* AppDelegate.m */,
+				D55E42C11A158EA500DD91E7 /* Main.storyboard */,
+				D55E42C41A158EA500DD91E7 /* Images.xcassets */,
+				D55E42C61A158EA500DD91E7 /* LaunchScreen.xib */,
+				D55E42BB1A158EA500DD91E7 /* ColorSisters.xcdatamodeld */,
+				D55E42B41A158EA500DD91E7 /* Supporting Files */,
+				D57FA3E91A159F03007FD997 /* ViewControllers */,
+			);
+			path = ColorSisters;
+			sourceTree = "<group>";
+		};
+		D55E42B41A158EA500DD91E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D24F18591A2E3FF1003491FC /* product_images.bundle */,
+				D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */,
+				D24F18501A2E3ED6003491FC /* FaceShades.csv */,
+				D24F185C1A2E404D003491FC /* chart_v16_ini.cht */,
+				D24F18531A2E3EEE003491FC /* 2007_3x8_ini.cht */,
+				D24F18541A2E3EEE003491FC /* haarcascade_frontalface_default.xml */,
+				D55E42B51A158EA500DD91E7 /* Info.plist */,
+				D55E42B61A158EA500DD91E7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D55E42D01A158EA600DD91E7 /* ColorSistersTests */ = {
+			isa = PBXGroup;
+			children = (
+				D55E42D31A158EA600DD91E7 /* ColorSistersTests.m */,
+				D5C7CB3A1A1C441300AAEEA7 /* InterfaceTests.m */,
+				D5C350D51A278B4000CB0F8C /* KokkoInterfaceTests.m */,
+				D55E42D11A158EA600DD91E7 /* Supporting Files */,
+			);
+			path = ColorSistersTests;
+			sourceTree = "<group>";
+		};
+		D55E42D11A158EA600DD91E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D55E42D21A158EA600DD91E7 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D57FA3E91A159F03007FD997 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */,
+				D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */,
+				D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */,
+				D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */,
+				D59752D41A15B48A009415BA /* KokkoTableViewController.h */,
+				D59752D51A15B48A009415BA /* KokkoTableViewController.m */,
+				D59752D71A15C1FA009415BA /* KokkoDetailedMatchViewController.h */,
+				D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D5C7CB321A1C41AE00AAEEA7 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				D5C7CB371A1C435200AAEEA7 /* UIImage+Match.h */,
+				D5C7CB381A1C435200AAEEA7 /* UIImage+Match.mm */,
+				D5D950D41A1F01E6007B3AF2 /* KokkoProductInfo.h */,
+				D5D950D21A1F01A3007B3AF2 /* KokkoProductInfo.m */,
+				D59DF8B21A238FB000387161 /* KokkoInterface.h */,
+				D59DF8B31A238FB000387161 /* KokkoInterface.mm */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D55E42B01A158EA500DD91E7 /* ColorSisters */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D55E42D71A158EA600DD91E7 /* Build configuration list for PBXNativeTarget "ColorSisters" */;
+			buildPhases = (
+				D55E42AD1A158EA500DD91E7 /* Sources */,
+				D55E42AE1A158EA500DD91E7 /* Frameworks */,
+				D55E42AF1A158EA500DD91E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ColorSisters;
+			productName = ColorSisters;
+			productReference = D55E42B11A158EA500DD91E7 /* ColorSisters.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D55E42CC1A158EA600DD91E7 /* ColorSistersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D55E42DA1A158EA600DD91E7 /* Build configuration list for PBXNativeTarget "ColorSistersTests" */;
+			buildPhases = (
+				D55E42C91A158EA600DD91E7 /* Sources */,
+				D55E42CA1A158EA600DD91E7 /* Frameworks */,
+				D55E42CB1A158EA600DD91E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D55E42CF1A158EA600DD91E7 /* PBXTargetDependency */,
+			);
+			name = ColorSistersTests;
+			productName = ColorSistersTests;
+			productReference = D55E42CD1A158EA600DD91E7 /* ColorSistersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D55E42A91A158EA500DD91E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Kokko, Inc.";
+				TargetAttributes = {
+					D55E42B01A158EA500DD91E7 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					D55E42CC1A158EA600DD91E7 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = D55E42B01A158EA500DD91E7;
+					};
+				};
+			};
+			buildConfigurationList = D55E42AC1A158EA500DD91E7 /* Build configuration list for PBXProject "ColorSisters" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D55E42A81A158EA500DD91E7;
+			productRefGroup = D55E42B21A158EA500DD91E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D55E42B01A158EA500DD91E7 /* ColorSisters */,
+				D55E42CC1A158EA600DD91E7 /* ColorSistersTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D55E42AF1A158EA500DD91E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2DEE9CA1A2E781D0063C236 /* Eigen in Resources */,
+				D24F18551A2E3EEE003491FC /* 2007_3x8_ini.cht in Resources */,
+				D55E42C31A158EA500DD91E7 /* Main.storyboard in Resources */,
+				D24F18571A2E3EEE003491FC /* haarcascade_frontalface_default.xml in Resources */,
+				D55E42C81A158EA500DD91E7 /* LaunchScreen.xib in Resources */,
+				D55E42C51A158EA500DD91E7 /* Images.xcassets in Resources */,
+				D24F18511A2E3ED6003491FC /* FaceShades.csv in Resources */,
+				D24F185D1A2E404D003491FC /* chart_v16_ini.cht in Resources */,
+				D24F185A1A2E3FF1003491FC /* product_images.bundle in Resources */,
+				D24F184E1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55E42CB1A158EA600DD91E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D24F184F1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */,
+				D24F18581A2E3EEE003491FC /* haarcascade_frontalface_default.xml in Resources */,
+				D24F18561A2E3EEE003491FC /* 2007_3x8_ini.cht in Resources */,
+				D24F185E1A2E404D003491FC /* chart_v16_ini.cht in Resources */,
+				D24F18521A2E3ED6003491FC /* FaceShades.csv in Resources */,
+				D24F185B1A2E3FF1003491FC /* product_images.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D55E42AD1A158EA500DD91E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5D950D31A1F01A3007B3AF2 /* KokkoProductInfo.m in Sources */,
+				D59752D91A15C1FA009415BA /* KokkoDetailedMatchViewController.m in Sources */,
+				D2DEE97D1A2E60B50063C236 /* color_measure.cpp in Sources */,
+				D2DEE9821A2E60B50063C236 /* skinpixels.cpp in Sources */,
+				D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */,
+				D2DEE97C1A2E60B50063C236 /* chart.cpp in Sources */,
+				D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */,
+				D2DEE97E1A2E60B50063C236 /* colorspace.c in Sources */,
+				D59DF8B41A238FB000387161 /* KokkoInterface.mm in Sources */,
+				D5C7CB391A1C435200AAEEA7 /* UIImage+Match.mm in Sources */,
+				D2DEE9811A2E60B50063C236 /* pipeline.cpp in Sources */,
+				D2DEE97B1A2E60B50063C236 /* chart_detector.cpp in Sources */,
+				D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */,
+				D2DEE97F1A2E60B50063C236 /* exemplar.cpp in Sources */,
+				D55E42B71A158EA500DD91E7 /* main.m in Sources */,
+				D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */,
+				D59752D61A15B48A009415BA /* KokkoTableViewController.m in Sources */,
+				D59819F81A1C6E3200855190 /* Readme.md in Sources */,
+				D2DEE9801A2E60B50063C236 /* face_extractor.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55E42C91A158EA600DD91E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5C350D61A278B4000CB0F8C /* KokkoInterfaceTests.m in Sources */,
+				D55E42D41A158EA600DD91E7 /* ColorSistersTests.m in Sources */,
+				D5C7CB3B1A1C441300AAEEA7 /* InterfaceTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D55E42CF1A158EA600DD91E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D55E42B01A158EA500DD91E7 /* ColorSisters */;
+			targetProxy = D55E42CE1A158EA600DD91E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D55E42C11A158EA500DD91E7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D55E42C21A158EA500DD91E7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D55E42C61A158EA500DD91E7 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D55E42C71A158EA500DD91E7 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D55E42D51A158EA600DD91E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "__COMPILED_ON_XCODE=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D55E42D61A158EA600DD91E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "__COMPILED_ON_XCODE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D55E42D81A158EA600DD91E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ColorSisters/Frameworks",
+				);
+				INFOPLIST_FILE = ColorSisters/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_GENERATE_MAP_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/ImageAnalysis $(PROJECT_DIR)/ColorSisters/Frameworks";
+			};
+			name = Debug;
+		};
+		D55E42D91A158EA600DD91E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ColorSisters/Frameworks",
+				);
+				INFOPLIST_FILE = ColorSisters/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_GENERATE_MAP_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/ImageAnalysis $(PROJECT_DIR)/ColorSisters/Frameworks";
+			};
+			name = Release;
+		};
+		D55E42DB1A158EA600DD91E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ColorSisters/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ColorSistersTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ColorSisters.app/ColorSisters";
+			};
+			name = Debug;
+		};
+		D55E42DC1A158EA600DD91E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ColorSisters/Frameworks",
+				);
+				INFOPLIST_FILE = ColorSistersTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ColorSisters.app/ColorSisters";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D55E42AC1A158EA500DD91E7 /* Build configuration list for PBXProject "ColorSisters" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D55E42D51A158EA600DD91E7 /* Debug */,
+				D55E42D61A158EA600DD91E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D55E42D71A158EA600DD91E7 /* Build configuration list for PBXNativeTarget "ColorSisters" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D55E42D81A158EA600DD91E7 /* Debug */,
+				D55E42D91A158EA600DD91E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D55E42DA1A158EA600DD91E7 /* Build configuration list for PBXNativeTarget "ColorSistersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D55E42DB1A158EA600DD91E7 /* Debug */,
+				D55E42DC1A158EA600DD91E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D55E42BB1A158EA500DD91E7 /* ColorSisters.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D55E42BC1A158EA500DD91E7 /* ColorSisters.xcdatamodel */,
+			);
+			currentVersion = D55E42BC1A158EA500DD91E7 /* ColorSisters.xcdatamodel */;
+			path = ColorSisters.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D55E42A91A158EA500DD91E7 /* Project object */;
+}
