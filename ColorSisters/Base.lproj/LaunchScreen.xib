@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -12,13 +12,13 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 Kokko, Inc. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="  Copyright (c) 2014 Kokko, Inc. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye" userLabel="Copyright (c) 2014 Kokko, Inc. All rights reserved.">
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="Atf-5a-Ws4"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -31,41 +31,41 @@
                         </mask>
                     </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CS_ios640x960" translatesAutoresizingMaskIntoConstraints="NO" id="afG-05-HUG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="CS_ios640x960" translatesAutoresizingMaskIntoConstraints="NO" id="afG-05-HUG">
                     <rect key="frame" x="8" y="8" width="464" height="423"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="afG-05-HUG" secondAttribute="bottom" constant="8" symbolic="YES" id="30r-Pc-qWh"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="30u-bb-AbO"/>
-                <constraint firstItem="afG-05-HUG" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="FlU-kO-YUM"/>
-                <constraint firstItem="afG-05-HUG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="85" id="Ft7-Ld-s8E"/>
-                <constraint firstItem="afG-05-HUG" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="LDa-6R-aCD"/>
-                <constraint firstItem="afG-05-HUG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="cDO-yv-E1l"/>
+                <constraint firstItem="afG-05-HUG" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="33i-7w-mYo"/>
+                <constraint firstItem="afG-05-HUG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="CVX-k4-r8z"/>
+                <constraint firstItem="afG-05-HUG" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="FHy-YD-RlZ"/>
+                <constraint firstItem="afG-05-HUG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="M8e-1g-zfR"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="afG-05-HUG" secondAttribute="bottom" constant="8" symbolic="YES" id="fZf-dk-dsL"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="shs-xU-gmJ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="FlU-kO-YUM"/>
-                    <exclude reference="Ft7-Ld-s8E"/>
-                    <exclude reference="LDa-6R-aCD"/>
-                    <exclude reference="cDO-yv-E1l"/>
-                    <exclude reference="30r-Pc-qWh"/>
+                    <exclude reference="33i-7w-mYo"/>
+                    <exclude reference="CVX-k4-r8z"/>
+                    <exclude reference="FHy-YD-RlZ"/>
+                    <exclude reference="M8e-1g-zfR"/>
                     <exclude reference="30u-bb-AbO"/>
+                    <exclude reference="fZf-dk-dsL"/>
                     <exclude reference="shs-xU-gmJ"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="constraints">
-                    <include reference="FlU-kO-YUM"/>
-                    <include reference="Ft7-Ld-s8E"/>
-                    <include reference="LDa-6R-aCD"/>
-                    <include reference="cDO-yv-E1l"/>
-                    <include reference="30r-Pc-qWh"/>
+                    <include reference="33i-7w-mYo"/>
+                    <include reference="CVX-k4-r8z"/>
+                    <include reference="FHy-YD-RlZ"/>
+                    <include reference="M8e-1g-zfR"/>
                     <include reference="30u-bb-AbO"/>
+                    <include reference="fZf-dk-dsL"/>
                     <include reference="shs-xU-gmJ"/>
                 </mask>
             </variation>

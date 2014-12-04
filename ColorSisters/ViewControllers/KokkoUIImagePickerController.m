@@ -11,6 +11,8 @@
 @interface KokkoUIImagePickerController ()
 
 @property (nonatomic) UIImagePickerController *imagePickerController;
+@property (nonatomic) BOOL imageReady;
+@property (nonatomic) UIImage *image;
 
 @end
 
@@ -26,31 +28,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (IBAction)showCamera:(UIBarButtonItem *)sender {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+    [self imagePicker];
 }
 
-- (IBAction)showPhotoPicker:(UIBarButtonItem *)sender {
-    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-}
+- (void) imagePicker {
+    // Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.
+    if(self.imageReady == NO) {
+        if([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+            [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+            self.imageReady = YES;
+        } else {
+            [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            self.imageReady = YES;
+        }
+    }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    self.imageView.image = image;
-    
-    KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
-    [kokkoClass initWithImage:image];
-
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
@@ -69,6 +64,56 @@
     
     self.imagePickerController = imagePickerController;
     [self presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    self.image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    self.imageView.image = self.image;
+    
+
+    // This will dismiss the picker sourceType
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Button event handlers
+
+- (IBAction)showCamera:(UIBarButtonItem *)sender {
+    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (IBAction)showPhotoPicker:(UIBarButtonItem *)sender {
+    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (IBAction)findFoundation:(UIButton *)sender {
+    KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
+    [kokkoClass initWithImage:self.image];
+    [kokkoClass getRecommendations];
+    
+    // TODO - add popup with results from kokkoClass
+    [self showMatchesAlert];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    // Cancel should take you back to the launch pages
+    // TODO:  a better way to dismiss back to launcher page
+    // This will dismiss the imagePicker
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // This should take us back to the launcher page
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    //    self.imageReady = NO;
+}
+
+- (void)showMatchesAlert {
+    NSString *title = NSLocalizedString(@"Match Found", nil);
+    NSString *message = NSLocalizedString(@"Found x shades, across y brands", nil);
+    NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 /*

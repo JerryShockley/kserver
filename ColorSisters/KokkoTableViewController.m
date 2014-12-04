@@ -14,6 +14,8 @@
 
 @implementation KokkoTableViewController
 
+NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way to reference the detail view controller
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -37,6 +39,12 @@
                                @"1.jpg",
                                @"1.jpg",
                                ];
+    
+    // Do any additional setup after loading the view,
+//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:nil];
+//    self.navigationItem.leftBarButtonItem = addButton;
+    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,44 +80,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.tableViewImage = [UIImage imageNamed:[self.imageMatchesArray objectAtIndex:indexPath.row]];
-    [self performSegueWithIdentifier:@"detail" sender:self];
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Navigation
 
@@ -118,9 +89,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if([segue.identifier isEqual:@"detail"]) {
-        KokkoDetailedMatchViewController *detailVC = (KokkoDetailedMatchViewController *)segue.destinationViewController;
-        detailVC.detailedMatch = self.tableViewImage;
+    if([segue.identifier isEqual:detailControllerName]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSString *object = self.titleMatchesArray[indexPath.row];
+        [[segue destinationViewController] setDetailItem:object];
     }
 }
 

@@ -4,10 +4,10 @@ Copyright (c) 2014 Kokko, Inc. All rights reserved.
 
 
 ## Toolchain
-* Xcode Version 6.1 (6A1052d)
+* Xcode Version 6.1.1 (6A2008a)
 * iOS SDK 8.1
 * Deployment Target 7.1
-* Mavericks, OS X 10.9.5 (13F34)
+* Yosemite, OS X 10.10.1 (14B25)
 * [Markdown](http://daringfireball.net/projects/markdown/) for HTML documentation from Readme.md
 * Git, https://<user>@kokko.git.cloudforge.com/ioscolorsisters.git
 * [Cloud Forge](https://kokko.git.cloudforge.com/ioscolorsisters)
@@ -21,6 +21,24 @@ Builds are tested against
 * iPhone 5c iOS 8.1.1 (12B435)
 
 ## Build Notes
+
+### 3 Dec 2014
+* Matches - table and storyboard fixed
+* Getting Started - removed 'jarring' UI issue with navi bar'
+* Getting Started - added 10 second timer
+* Removed Project warning
+
+### 2 Dec 2014
+* Getting Started - set black background for the entire view
+* Getting Started - support gestures for horizontal scroll
+* Camera View - Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.
+* Camera View - Cancel should take you back to the launch pages
+* Camera View - Flash control is disabled (rear camera)
+* Known Issues with this build
+  * TODO - Image Processing - Find Foundation background view shows - http://stackoverflow.com/questions/2971483/hide-uitoolbar-uibarbuttonitems
+  * TODO - Dead end to results page - needs programmatic push to table view
+  * TODO - Matches - needs images pulled in
+  * TODO - Since you have the data, could fake up showing a recommendation.
 
 ### 27 Nov 2014
 * Updated KokkoInterface with: unit tests, exception handling, NSArray returns, and proper signatures based on feedback
@@ -45,7 +63,6 @@ ColorSisters[4970:3070480] KokkoInterface init in didFinish() = 0x7fb2c0452420
 
 ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7fb2c0452420
 ```
-
 
 ### 24 Nov 2014
 * Version 1.4, Build 4
@@ -73,16 +90,6 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 * Version 1.0, Build 1
 
 
-### Known Issues
-* Unit test of Interface is not working, see ColorSisterTests/InterfaceTests.m
-* InterfaceTests.m compiles, but debugger does not trip in Unit test
-* LaunchScreen.xib - needs spec
-* Getting started needs text - "Launch and Tutorial (page 4-5 of Nov 12 spec)"
-  * Needs 8 second timer
-* Matches page - Layout is crowded at top
-* Share Page - needs wiring to web service
-
-
 ### Fixed Issues
 * Storyboards are universal, and is messing up layouts on iPod Touch & iPhone 5c devices and simulators
 * First revision of Interface, See Interface/UIImage+Match.m
@@ -92,6 +99,16 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 
 
 # Images
+
+# Screen Shots and Previews
+## GettingStarted-preview.png
+![alt text](./Documentation/GettingStarted-preview.png "")
+***
+
+## ShareResults-preview.png
+![alt text](./Documentation/ShareResults-preview.png "")
+***
+
 ## Icon
 ### Icon-60
 ![alt text](Images.xcassets/AppIcon.appiconset/Icon-60@2x.png "")

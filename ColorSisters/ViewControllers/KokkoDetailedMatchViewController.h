@@ -7,8 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KokkoDetailedMatchViewController : UIViewController
+@interface KokkoDetailedMatchViewController : UIViewController <UISplitViewControllerDelegate>
 
-@property (nonatomic, retain) UIImage *detailedMatch;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) id detailItem;
+
+@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end
