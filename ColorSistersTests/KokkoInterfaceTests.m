@@ -58,8 +58,8 @@ KokkoInterface* kokkoClass;
 }
 
 - (void)testgetRecommendations {
-    NSArray *recommendations = [kokkoClass getRecommendations];
-    NSLog (@"recommendtions = %@", recommendations[0]);
+    NSDictionary *recommendations = [kokkoClass getRecommendations];
+    NSLog (@"recommendtions = %@", recommendations);
 }
 
 - (void)testExample {
