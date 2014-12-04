@@ -1,0 +1,124 @@
+# Kokko Chart Description
+# The Kokko V16 chart has 4 rows of 4 squares, all surrounded by two black square lines.
+[Name]
+name = Kokko_V16
+
+# This section describes the rectangular image edges surrounding the color regions.
+# Every edge is represented by its coordinates (top left x/y and bottom right x/y).
+[Frame]
+nbr_edges = 3
+edge1 = 260 264 1333 1337
+edge2 = 149 154 1444 1449
+edge3 = 37 42 1555 1559
+
+# Number of color regions
+[ColorRegions]
+number = 24
+
+# Each region is represented by its coordinates (top left x/y and bottom right x/y),
+# its printed color (RGB) and an optional parameter 'option'. Option can be
+# 'not_used_in_transform', if the color should not be used when computing the color
+# transform, 'white' or 'black' for the special regions sampling black and white.
+[Region1]
+coordinates = 297 302 518 523
+printed_color = 98 74 71
+
+[Region2]
+coordinates = 556 302 777 523
+printed_color = 201 166 154
+
+[Region3]
+coordinates = 815 302 1036 523
+printed_color = 135 97 79
+
+[Region4]
+coordinates = 1074 302 1295 523
+printed_color = 205 168 153
+
+[Region5]
+coordinates = 297 561 518 782
+printed_color = 187 149 135
+
+[Region6]
+coordinates = 556 561 777 782
+printed_color = 153 115 94
+
+[Region7]
+coordinates = 815 561 1036 782
+printed_color = 187 145 134
+
+[Region8]
+coordinates = 1074 561 1295 782
+printed_color = 145 100 82
+
+[Region9]
+coordinates = 297 820 518 1041
+printed_color = 176 139 118
+
+[Region10]
+coordinates = 556 820 777 1041
+printed_color = 172 125 117
+
+[Region11]
+coordinates = 815 820 1036 1041
+printed_color = 188 148 135
+
+[Region12]
+coordinates = 1074 820 1295 1041
+printed_color = 206 152 143
+
+[Region13]
+coordinates = 297 1079 518 1300
+printed_color = 157 118 91
+
+[Region14]
+coordinates = 556 1079 777 1300
+printed_color = 201 154 147
+
+[Region15]
+coordinates = 815 1079 1036 1300
+printed_color = 116 84 75
+
+[Region16]
+coordinates = 1074 1079 1295 1300
+printed_color = 199 170 155
+
+[Region17]
+coordinates = 170 264 240 1337
+printed_color = 254 254 254
+option = white
+
+[Region18]
+coordinates = 1353 264 1424 1337
+printed_color = 254 254 254
+option = white
+
+[Region19]
+coordinates = 260 174 1333 244
+printed_color = 254 254 254
+option = white
+
+[Region20]
+coordinates = 260 1357 1333 1429
+printed_color = 254 254 254
+option = white
+
+[Region21]
+coordinates = 57 154 129 1449
+printed_color = 39 38 39
+option = black
+
+[Region22]
+coordinates = 1464 154 1535 1449
+printed_color = 39 38 39
+option = black
+
+[Region23]
+coordinates = 149 62 1444 134
+printed_color = 39 38 39
+option = black
+
+[Region24]
+coordinates = 149 1469 1444 1539
+printed_color = 39 38 39
+option = black

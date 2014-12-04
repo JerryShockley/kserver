@@ -1,0 +1,144 @@
+# Kokko Chart Description
+# The HPL chart has 3 rows of 8 squares per row, all surrounded by two black rectangular borders
+[Name]
+name = HPL_2007_3x8
+
+# This section describes the rectangular image edges surrounding the color regions.
+# Every edge is represented by its coordinates (top left x/y and bottom right x/y).
+[Frame]
+nbr_edges = 3
+edge1 = 357 312 2642 1273
+edge2 = 251 205 2749 1377
+edge3 = 144 98 2856 1484
+
+# Number of color regions
+[ColorRegions]
+number = 28
+
+# Each region is represented by its coordinates (top left x/y and bottom right x/y),
+# its printed color (RGB) and an optional parameter 'option'. Option can be
+# 'not_used_in_transform', if the color should not be used when computing the color
+# transform, 'white' or 'black' for the special regions sampling black and white.
+[Region1]
+coordinates = 460 416 680 636 
+printed_color = 58 58 146
+option = not_used_in_transform
+
+[Region2]
+coordinates = 728 416 950 636
+printed_color = 34 147 81
+option = not_used_in_transform
+
+[Region3]
+coordinates = 991 416 1212 636
+printed_color = 205 64 61
+option = not_used_in_transform
+
+[Region4]
+coordinates = 1258 416 1478 636
+printed_color = 115 118 115
+option = not_used_in_transform
+
+[Region5]
+coordinates = 1521 416 1742 636
+printed_color = 201 205 196
+option = not_used_in_transform
+
+[Region6]
+coordinates = 1784 416 2004 636
+printed_color = 244 213 29
+option = not_used_in_transform
+
+[Region7]
+coordinates = 2051 416 2272 636
+printed_color = 0 125 173
+option = not_used_in_transform
+
+[Region8]
+coordinates = 2313 416 2534 636
+printed_color = 200 85 139
+option = not_used_in_transform
+
+[Region9]
+coordinates = 460 683 680 904
+printed_color = 96 70 52
+
+[Region10]
+coordinates = 728 683 950 904
+printed_color = 134 93 58
+
+[Region11]
+coordinates = 991 683 1212 904
+printed_color = 153 111 70
+
+[Region12]
+coordinates = 1258 683 1478 904
+printed_color = 176 129 86
+
+[Region13]
+coordinates = 1521 683 1742 904
+printed_color = 179 139 92
+
+[Region14]
+coordinates = 1784 683 2004 904
+printed_color = 193 147 107
+
+[Region15]
+coordinates = 2051 683 2272 904
+printed_color = 206 153 119
+
+[Region16]
+coordinates = 2313 683 2534 904
+printed_color = 206 167 124
+
+[Region17]
+coordinates = 460 946 680 1167
+printed_color = 111 77 50
+
+[Region18]
+coordinates = 728 946 950 1167
+printed_color = 154 113 65
+
+[Region19]
+coordinates = 991 946 1212 1167
+printed_color = 172 128 84
+
+[Region20]
+coordinates = 1258 946 1478 1167
+printed_color = 176 124 92
+
+[Region21]
+coordinates = 1521 946 1742 1167
+printed_color = 191 145 109
+
+[Region22]
+coordinates = 1784 946 2004 1167
+printed_color = 192 149 107
+
+[Region23]
+coordinates = 2051 946 2272 1167
+printed_color = 208 160 124
+
+[Region24]
+coordinates = 2313 946 2534 1167
+printed_color = 208 164 124
+
+[Region25]
+coordinates = 268 224 332 1356
+printed_color = 254 254 254
+option = white
+
+[Region26]
+coordinates = 2656 224 2732 1356
+printed_color = 254 254 254
+option = white
+
+[Region27]
+coordinates = 164 120 220 1464
+printed_color = 39 38 39
+option = black
+
+[Region28]
+coordinates = 2768 120 2832 1464
+printed_color = 39 38 39
+option = black
