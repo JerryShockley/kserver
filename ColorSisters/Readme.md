@@ -26,6 +26,7 @@ Builds are tested against
 * Matches - table and storyboard fixed
 * Getting Started - removed 'jarring' UI issue with navi bar'
 * Getting Started - added 10 second timer
+* Removed Project warning
 
 ### 2 Dec 2014
 * Getting Started - set black background for the entire view
@@ -34,11 +35,10 @@ Builds are tested against
 * Camera View - Cancel should take you back to the launch pages
 * Camera View - Flash control is disabled (rear camera)
 * Known Issues with this build
-  * Image Processing - Find Foundation background view shows
-  * Dead end to results page
-  * Share Results - Layout and storyboard previews are fine, but device shows an error (under investigation, see Images below)
-  * Matches - TODO: needs images pulled in
-  * TODO:  Since you have the data, could fake up showing a recommendation.
+  * TODO - Image Processing - Find Foundation background view shows - http://stackoverflow.com/questions/2971483/hide-uitoolbar-uibarbuttonitems
+  * TODO - Dead end to results page - needs programmatic push to table view
+  * TODO - Matches - needs images pulled in
+  * TODO - Since you have the data, could fake up showing a recommendation.
 
 ### 27 Nov 2014
 * Updated KokkoInterface with: unit tests, exception handling, NSArray returns, and proper signatures based on feedback
