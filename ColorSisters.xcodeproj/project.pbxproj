@@ -19,6 +19,7 @@
 		D24F185B1A2E3FF1003491FC /* product_images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D24F18591A2E3FF1003491FC /* product_images.bundle */; };
 		D24F185D1A2E404D003491FC /* chart_v16_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F185C1A2E404D003491FC /* chart_v16_ini.cht */; };
 		D24F185E1A2E404D003491FC /* chart_v16_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F185C1A2E404D003491FC /* chart_v16_ini.cht */; };
+		D2A207EA1A337F440025E488 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A207E91A337F440025E488 /* boost.framework */; };
 		D2DEE97B1A2E60B50063C236 /* chart_detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */; };
 		D2DEE97C1A2E60B50063C236 /* chart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96C1A2E60B00063C236 /* chart.cpp */; };
 		D2DEE97D1A2E60B50063C236 /* color_measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96E1A2E60B00063C236 /* color_measure.cpp */; };
@@ -65,6 +66,7 @@
 		D24F18541A2E3EEE003491FC /* haarcascade_frontalface_default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_default.xml; sourceTree = "<group>"; };
 		D24F18591A2E3FF1003491FC /* product_images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = product_images.bundle; sourceTree = "<group>"; };
 		D24F185C1A2E404D003491FC /* chart_v16_ini.cht */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chart_v16_ini.cht; sourceTree = "<group>"; };
+		D2A207E91A337F440025E488 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = boost.framework; sourceTree = "<group>"; };
 		D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chart_detector.cpp; path = ColorSisters/ImageAnalysis/chart_detector.cpp; sourceTree = "<group>"; };
 		D2DEE96B1A2E60AF0063C236 /* chart_detector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chart_detector.h; path = ColorSisters/ImageAnalysis/chart_detector.h; sourceTree = "<group>"; };
 		D2DEE96C1A2E60B00063C236 /* chart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chart.cpp; path = ColorSisters/ImageAnalysis/chart.cpp; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2A207EA1A337F440025E488 /* boost.framework in Frameworks */,
 				D2DEE9C71A2E77EB0063C236 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +165,7 @@
 		D2DEE9C81A2E780E0063C236 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2A207E91A337F440025E488 /* boost.framework */,
 				D2DEE9C91A2E781D0063C236 /* Eigen */,
 				D2DEE9C61A2E77EA0063C236 /* opencv2.framework */,
 			);
