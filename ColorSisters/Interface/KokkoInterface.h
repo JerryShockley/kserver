@@ -14,4 +14,5 @@
 - (CGRect *) findChart;
 - (CGRect *) findFace;
 - (NSDictionary *) getRecommendations;
+- (NSDictionary *)getRecommendationsUIONLY;
 @end

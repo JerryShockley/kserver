@@ -35,8 +35,10 @@ SkinToneMatcher imagePipe(false);
  * load the Imaging Library has a big data set loaded from files
  */
 +(void) init{
+#ifdef	THREADED
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSLog(@"KokkoInterface async via Grand Central Dispatch");
+#endif	// THREADED
 	//get the documents directory:
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -57,7 +59,9 @@ SkinToneMatcher imagePipe(false);
 	    // need some way to record this exception and prevent app from continuing
 	}
         NSLog(@"KokkoInterface init in didFinish() = %p", kokkoClass);
+#ifdef	THREADED
     });
+#endif	// THREADED
 }
 
 - (void) initWithImage:(UIImage *)imageToAnalyze {
@@ -126,6 +130,16 @@ SkinToneMatcher imagePipe(false);
     }
 
     return [matches copy];
+}
+
+- (NSDictionary *)getRecommendationsUIONLY {
+    NSArray *dior = [NSArray arrayWithObjects: @"301", @"200", @"400", nil];
+    NSArray *loreal = [NSArray arrayWithObjects: @"C4", @"N4", @"C5", nil];
+    NSArray *mac = [NSArray arrayWithObjects: @"NC15", nil];
+    NSArray *maybelline = [NSArray arrayWithObjects: @"D4", @"D2", nil];
+    NSArray *revlon = [NSArray arrayWithObjects: @"250", @"240", @"220", nil];
+    NSDictionary *brands = @{@"Dior" : dior, @"L'Oreal" : loreal, @"MAC" : mac, @"Maybelline": maybelline, @"Revlon": revlon};
+    return brands;
 }
 
 #ifdef FOR_THE_FUTURE
