@@ -22,6 +22,9 @@ Builds are tested against
 
 ## Build Notes
 
+### 4 Dec 2014
+* Added Match and match details from hardcoded data
+
 ### 3 Dec 2014
 * Matches - table and storyboard fixed
 * Getting Started - removed 'jarring' UI issue with navi bar'

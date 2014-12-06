@@ -19,10 +19,7 @@ NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleMatchesArray = @[@"Bobbi Brown",
-                               @"Clinique",
-                               @"Dior",
-                               @"Lancome",
+    self.titleMatchesArray = @[@"Dior",
                                @"L'Oreal",
                                @"M.A.C",
                                @"Maybelline",
@@ -30,14 +27,11 @@ NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way
                                ];
     
     
-    self.imageMatchesArray = @[@"1.jpg",
-                               @"1.jpg",
-                               @"1.jpg",
-                               @"1.jpg",
-                               @"1.jpg",
-                               @"1.jpg",
-                               @"1.jpg",
-                               @"1.jpg",
+    self.imageMatchesArray = @[@"product_images.bundle/Dior/100.png",
+                               @"product_images.bundle/L'Oreal/C1.png",
+                               @"product_images.bundle/MAC/C3.5.png",
+                               @"product_images.bundle/Maybelline/D2.png",
+                               @"product_images.bundle/Revlon/110.png",
                                ];
     
     // Do any additional setup after loading the view,
@@ -91,7 +85,7 @@ NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way
     
     if([segue.identifier isEqual:detailControllerName]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSString *object = self.titleMatchesArray[indexPath.row];
+        NSString *object = self.imageMatchesArray[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
     }
 }
