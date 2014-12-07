@@ -73,12 +73,12 @@
                     <navigationItem key="navigationItem" title="Selected Photo" id="tyb-kc-q1J"/>
                     <connections>
                         <outlet property="imageView" destination="YLV-IM-ZEc" id="Hgo-Rf-7V3"/>
-                        <segue destination="Brq-Tv-oTd" kind="presentation" identifier="segueToMatches" id="5Hy-dH-hS8"/>
+                        <segue destination="Brq-Tv-oTd" kind="show" identifier="segueToMatches" id="d6d-my-ZAV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBY-Yx-2pF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-450" y="615"/>
+            <point key="canvasLocation" x="-229.5" y="665"/>
         </scene>
         <!--Kokko Page Control View Controller-->
         <scene sceneID="sfF-oW-WW5">
@@ -273,7 +273,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="Brq-Tv-oTd" kind="relationship" relationship="rootViewController" id="jOy-16-0qq"/>
+                        <segue destination="jSO-EX-Mcd" kind="relationship" relationship="rootViewController" id="Neq-1S-i1n"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpm-or-KN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -461,7 +461,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jOy-16-0qq"/>
-        <segue reference="Bnm-5c-lN4"/>
+        <segue reference="tIG-6A-s85"/>
     </inferredMetricsTieBreakers>
 </document>
