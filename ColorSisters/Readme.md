@@ -24,6 +24,11 @@ Builds are tested against
 
 ### 4 Dec 2014
 * Added Match and match details from hardcoded data
+* Added a recommendations dictionary, via getRecommendationsUIONLY()
+* Known Issues with this build
+  * TODO - Image Processing - Find Foundation background view shows - http://stackoverflow.com/questions/2971483/hide-uitoolbar-uibarbuttonitems
+  * TODO - alternate version of build Target, with build targets for image analysis or UI only
+ 
 
 ### 3 Dec 2014
 * Matches - table and storyboard fixed
@@ -39,9 +44,7 @@ Builds are tested against
 * Camera View - Flash control is disabled (rear camera)
 * Known Issues with this build
   * TODO - Image Processing - Find Foundation background view shows - http://stackoverflow.com/questions/2971483/hide-uitoolbar-uibarbuttonitems
-  * TODO - Dead end to results page - needs programmatic push to table view
-  * TODO - Matches - needs images pulled in
-  * TODO - Since you have the data, could fake up showing a recommendation.
+  * TODO - alternate version of build Target, with build targets
 
 ### 27 Nov 2014
 * Updated KokkoInterface with: unit tests, exception handling, NSArray returns, and proper signatures based on feedback
