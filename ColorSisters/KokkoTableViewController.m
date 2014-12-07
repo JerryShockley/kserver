@@ -28,8 +28,8 @@ NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way
     
     
     self.imageMatchesArray = @[@"product_images.bundle/Dior/100.png",
-                               @"product_images.bundle/L'Oreal/C1.png",
-                               @"product_images.bundle/MAC/C3.5.png",
+                               @"product_images.bundle/L'Oreal/C1.jpg",
+                               @"product_images.bundle/MAC/C3.5.jpg",
                                @"product_images.bundle/Maybelline/D2.png",
                                @"product_images.bundle/Revlon/110.png",
                                ];

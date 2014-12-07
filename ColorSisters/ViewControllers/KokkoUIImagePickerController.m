@@ -87,11 +87,14 @@
 
 - (IBAction)findFoundation:(UIButton *)sender {
     KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
-    [kokkoClass initWithImage:self.image];
-    [kokkoClass getRecommendations];
-    
+//    [kokkoClass initWithImage:self.image];
+//    [kokkoClass getRecommendations];
+
     // TODO - add popup with results from kokkoClass
-    [self showMatchesAlert];
+//    [self showMatchesAlert];
+    // TODO - removed:  test to pass data to new scene
+    [self performSegueWithIdentifier:@"segueToMatches" sender:self];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
@@ -116,7 +119,7 @@
     [alert show];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -124,6 +127,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
