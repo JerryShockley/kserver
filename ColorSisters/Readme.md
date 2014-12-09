@@ -22,12 +22,17 @@ Builds are tested against
 
 ## Build Notes
 
+### 9 Dec 2014
+* Updated camera picker flow
+* Updated Show Matches Alert
+* Known Issues with this build
+  * TODO - Should redo the camera/camera picker flow
+  * TODO - Image Processing - Find Foundation background view shows - http://stackoverflow.com/questions/2971483/hide-uitoolbar-uibarbuttonitems
+  * TODO - alternate version of build Target, with build targets for image analysis or UI only
+
 ### 4 Dec 2014
 * Added Match and match details from hardcoded data
 * Added a recommendations dictionary, via getRecommendationsUIONLY()
-* Known Issues with this build
-  * TODO - Image Processing - Find Foundation background view shows - http://stackoverflow.com/questions/2971483/hide-uitoolbar-uibarbuttonitems
-  * TODO - alternate version of build Target, with build targets for image analysis or UI only
  
 
 ### 3 Dec 2014
@@ -114,6 +119,14 @@ ColorSisters[4970:3070447] KokkoInterface init in didFinishPickingMedia() = 0x7f
 ## ShareResults-preview.png
 ![alt text](./Documentation/ShareResults-preview.png "")
 ***
+***
+
+## Match-Found-Alert.png
+![alt text](./Documentation/Match-Found-Alert.png "")
+
+***
+
+
 
 ## Icon
 ### Icon-60

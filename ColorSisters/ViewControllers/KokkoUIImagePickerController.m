@@ -14,6 +14,8 @@
 @property (nonatomic) BOOL imageReady;
 @property (nonatomic) UIImage *image;
 
+/// Matches dictionary to be passed to the table view via a segue
+@property (nonatomic) NSDictionary *shadeMatches;
 @end
 
 @implementation KokkoUIImagePickerController
@@ -89,10 +91,11 @@
     KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
 //    [kokkoClass initWithImage:self.image];
 //    [kokkoClass getRecommendations];
+    self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
 
     // TODO - add popup with results from kokkoClass
-//    [self showMatchesAlert];
-    // TODO - removed:  test to pass data to new scene
+    [self showMatchesAlert];
+
     [self performSegueWithIdentifier:@"segueToMatches" sender:self];
 
 }
@@ -110,8 +113,15 @@
 }
 
 - (void)showMatchesAlert {
+    int brandCnt = 0, shadeCnt = 0;
+    
+    NSString *brandName;
+    for (brandName in self.shadeMatches) {
+        brandCnt++;
+        shadeCnt += [[self.shadeMatches objectForKey: brandName] count];
+    }
     NSString *title = NSLocalizedString(@"Match Found", nil);
-    NSString *message = NSLocalizedString(@"Found x shades, across y brands", nil);
+    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Found %lu shades across %lu brands", @"Found {total number of shades} across {number of brands} brands"), shadeCnt, brandCnt];
     NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
