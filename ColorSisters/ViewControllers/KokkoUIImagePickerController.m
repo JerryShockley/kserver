@@ -31,7 +31,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self imagePicker];
+//    [self imagePicker];  // TODO
 }
 
 - (void) imagePicker {

@@ -31,6 +31,25 @@
                                     <action selector="findFoundation:" destination="KGb-kh-VSH" eventType="touchUpInside" id="MnD-1K-lcG"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32U-rR-Ddc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Photo Library" id="a08-3Q-5eL">
+                                        <connections>
+                                            <action selector="showPhotoPicker:" destination="KGb-kh-VSH" id="rPs-K4-DfZ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ohe-T5-xSa"/>
+                                    <barButtonItem systemItem="camera" id="lev-BQ-XKe">
+                                        <connections>
+                                            <action selector="showCamera:" destination="KGb-kh-VSH" id="Bce-2G-6dJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="389" width="327" height="44"/>
+                                </variation>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -45,6 +64,7 @@
                             <mask key="subviews">
                                 <exclude reference="YLV-IM-ZEc"/>
                                 <exclude reference="iaP-fj-S3O"/>
+                                <exclude reference="32U-rR-Ddc"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="L55-GG-j8U"/>
@@ -53,6 +73,11 @@
                                 <exclude reference="Sof-BQ-9fE"/>
                                 <exclude reference="d4J-7c-7Ed"/>
                                 <exclude reference="krM-iS-y69"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="32U-rR-Ddc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -78,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBY-Yx-2pF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-229.5" y="665"/>
+            <point key="canvasLocation" x="-178.5" y="659"/>
         </scene>
         <!--Kokko Page Control View Controller-->
         <scene sceneID="sfF-oW-WW5">
