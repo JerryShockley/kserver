@@ -132,12 +132,16 @@ SkinToneMatcher imagePipe(false);
     return [matches copy];
 }
 
+/*!
+ * Hardcoded data for testing User Interface
+ * TODO - initial NSDictionary data strucutre did not have .png nor .jpg extensions
+ */
 - (NSDictionary *)getRecommendationsUIONLY {
-    NSArray *dior = [NSArray arrayWithObjects: @"301", @"200", @"400", nil];
-    NSArray *loreal = [NSArray arrayWithObjects: @"C4", @"N4", @"C5", nil];
-    NSArray *mac = [NSArray arrayWithObjects: @"NC15", nil];
-    NSArray *maybelline = [NSArray arrayWithObjects: @"D4", @"D2", nil];
-    NSArray *revlon = [NSArray arrayWithObjects: @"250", @"240", @"220", nil];
+    NSArray *dior = [NSArray arrayWithObjects: @"301.png", @"200.png", @"400.png", nil];
+    NSArray *loreal = [NSArray arrayWithObjects: @"C4.jpg", @"N4.jpg", @"C5.jpg", nil];
+    NSArray *mac = [NSArray arrayWithObjects: @"NC15.jpg", nil];
+    NSArray *maybelline = [NSArray arrayWithObjects: @"D4.png", @"D2.png", nil];
+    NSArray *revlon = [NSArray arrayWithObjects: @"250.png", @"240.png", @"220.png", nil];
     NSDictionary *brands = @{@"Dior" : dior, @"L'Oreal" : loreal, @"MAC" : mac, @"Maybelline": maybelline, @"Revlon": revlon};
     return brands;
 }
