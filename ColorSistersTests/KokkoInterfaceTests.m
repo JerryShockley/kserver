@@ -62,6 +62,23 @@ KokkoInterface* kokkoClass;
     NSLog (@"recommendtions = %@", recommendations);
 }
 
+- (void)testgetRecommendationsUIONLY {
+    NSDictionary *shadeMatches = [kokkoClass getRecommendationsUIONLY];
+    NSLog (@"recommendtions = %@", shadeMatches);
+    
+    NSArray *shadeSorted = [[shadeMatches allKeys] sortedArrayUsingSelector: @selector(compare:)];
+    for (NSString *brand in shadeSorted) {
+        NSLog(@"Brand = %@", brand);
+        
+        NSArray *shadeImageArray = [shadeMatches objectForKey: brand];
+        
+        for(NSString *shadeImage in shadeImageArray) {
+            NSLog(@"  %@", shadeImage);
+        }
+    }
+}
+
+
 - (void)testExample {
     // This is an example of a functional test case.
     XCTAssert(YES, @"Pass");
