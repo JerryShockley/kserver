@@ -7,6 +7,7 @@
 
 #import "KokkoUIImagePickerController.h"
 #import "KokkoInterface.h"
+#import "KokkoTableViewController.h"
 
 @interface KokkoUIImagePickerController ()
 
@@ -136,6 +137,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    KokkoTableViewController *tableView = (KokkoTableViewController*)[segue destinationViewController];
+    [tableView setDetailItem:self.shadeMatches];
 }
 
 

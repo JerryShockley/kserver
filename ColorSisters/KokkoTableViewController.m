@@ -16,18 +16,33 @@
 
 NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way to reference the detail view controller
 
+NSMutableArray *titleMatchesArray;
+NSMutableArray *subtitleMatchesArray;
+NSMutableArray *imageMatchesArray;
+
+NSDictionary *shadeMatches;
+
+- (void)setDetailItem:(id)newDetailItem
+{
+    if (_detailItem != newDetailItem) {
+        _detailItem = newDetailItem;
+        
+        titleMatchesArray = [[NSMutableArray alloc] init];
+        
+        for (NSString *brand in self.detailItem) {
+            NSLog(@"%@", brand);
+            [titleMatchesArray addObject:brand];
+        }
+        
+        NSLog(@"titleMatchesArray = %@", titleMatchesArray);
+
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleMatchesArray = @[@"Dior",
-                               @"L'Oreal",
-                               @"M.A.C",
-                               @"Maybelline",
-                               @"Revlon",
-                               ];
-    
-    
-    self.imageMatchesArray = @[@"product_images.bundle/Dior/100.png",
+    imageMatchesArray = @[@"product_images.bundle/Dior/100.png",
                                @"product_images.bundle/L'Oreal/C1.jpg",
                                @"product_images.bundle/MAC/C3.5.jpg",
                                @"product_images.bundle/Maybelline/D2.png",
@@ -57,7 +72,7 @@ NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     // Return the number of rows in the section.
-    return [self.titleMatchesArray count];
+    return [titleMatchesArray count];
 }
 
 
@@ -66,14 +81,14 @@ NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [self.titleMatchesArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [titleMatchesArray objectAtIndex:indexPath.row];
     cell.detailTextLabel.text = @"";
     
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.tableViewImage = [UIImage imageNamed:[self.imageMatchesArray objectAtIndex:indexPath.row]];
+    self.tableViewImage = [UIImage imageNamed:[imageMatchesArray objectAtIndex:indexPath.row]];
 }
 
 #pragma mark - Navigation
@@ -85,7 +100,7 @@ NSString *detailControllerName = @"showDetail";  // TODO:  might be a better way
     
     if([segue.identifier isEqual:detailControllerName]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSString *object = self.imageMatchesArray[indexPath.row];
+        NSString *object = imageMatchesArray[indexPath.row];  // TODO Pass in Array
         [[segue destinationViewController] setDetailItem:object];
     }
 }
