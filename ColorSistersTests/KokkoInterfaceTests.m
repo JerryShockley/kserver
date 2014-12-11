@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "KokkoInterface.h"
+#import "KokkoData.h"
 
 @interface KokkoInterfaceTests : XCTestCase
 
@@ -66,16 +67,9 @@ KokkoInterface* kokkoClass;
     NSDictionary *shadeMatches = [kokkoClass getRecommendationsUIONLY];
     NSLog (@"recommendtions = %@", shadeMatches);
     
-    NSArray *shadeSorted = [[shadeMatches allKeys] sortedArrayUsingSelector: @selector(compare:)];
-    for (NSString *brand in shadeSorted) {
-        NSLog(@"Brand = %@", brand);
-        
-        NSArray *shadeImageArray = [shadeMatches objectForKey: brand];
-        
-        for(NSString *shadeImage in shadeImageArray) {
-            NSLog(@"  %@", shadeImage);
-        }
-    }
+    KokkoData *data = [[KokkoData alloc] init];
+    [data logRecommendationsDictionary:shadeMatches];
+
 }
 
 
