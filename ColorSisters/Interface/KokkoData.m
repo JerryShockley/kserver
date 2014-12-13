@@ -14,6 +14,10 @@ NSString *imageBundlePath = @"product_images.bundle";
 
 
 
+/*!
+ * Pass in the entire NSDictionary, parse and log the components
+ * @returns void
+ */
 - (void) logRecommendationsDictionary:(NSDictionary *) shadeMatches {
 
     /// looks like 'product_images.bundle/'
@@ -44,4 +48,24 @@ NSString *imageBundlePath = @"product_images.bundle";
         }
     }
 }
+
+/*!
+ * Pass in the entire NSDictionary with index number
+ * @returns NSArray
+ */
+- (NSArray *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger *) index {
+    
+    NSArray *retValue;
+    
+    // Iterate over brand
+    for (NSString *brand in shadeMatches) {
+        NSLog(@"# Iterate over unsorted Match shades for Brand = %@", brand);
+        
+        NSArray *shadeImageArray = [shadeMatches objectForKey: brand];
+
+    }
+    
+    return retValue;
+}
+
 @end

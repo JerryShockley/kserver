@@ -69,6 +69,8 @@ KokkoInterface* kokkoClass;
     
     KokkoData *data = [[KokkoData alloc] init];
     [data logRecommendationsDictionary:shadeMatches];
+    
+    [data setRecommendationsArray:shadeMatches :0];
 
 }
 
