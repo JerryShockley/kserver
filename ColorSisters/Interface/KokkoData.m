@@ -50,20 +50,30 @@ NSString *imageBundlePath = @"product_images.bundle";
 }
 
 /*!
- * Pass in the entire NSDictionary with index number
- * @returns NSArray
+ * Pass in the entire NSDictionary
+ * @returns NSArray which is used to the set the data rows for the UITableView
  */
-- (NSArray *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger *) index {
+- (NSArray *) setRecommendationsArray:(NSDictionary *) shadeMatches {
     
-    NSArray *retValue;
+    NSMutableArray *retValue = [[NSMutableArray alloc] init];
     
-    // Iterate over brand
+    // Iterate over brand, and create an Array
     for (NSString *brand in shadeMatches) {
-        NSLog(@"# Iterate over unsorted Match shades for Brand = %@", brand);
-        
-        NSArray *shadeImageArray = [shadeMatches objectForKey: brand];
-
+        [retValue addObject:brand];
     }
+    
+    return (NSArray *) retValue;
+}
+
+
+/*!
+ *
+ * Pass in the entire NSDictionary
+ * @returns NSDictionary, with only one key, which is just a slice of the original NSDictionary
+ * For use by the UIDetailedTableView
+ */
+- (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger *) index {
+    NSDictionary *retValue = [[NSDictionary alloc] init];
     
     return retValue;
 }

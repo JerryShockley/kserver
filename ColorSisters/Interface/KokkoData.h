@@ -9,5 +9,6 @@
 
 @interface KokkoData : NSObject
 - (void) logRecommendationsDictionary:(NSDictionary *) shadeMatches;
-- (NSArray *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger *) index;
+- (NSArray *) setRecommendationsArray:(NSDictionary *) shadeMatches;
+- (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger *) index;
 @end

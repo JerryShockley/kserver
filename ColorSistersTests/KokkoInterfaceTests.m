@@ -70,7 +70,9 @@ KokkoInterface* kokkoClass;
     KokkoData *data = [[KokkoData alloc] init];
     [data logRecommendationsDictionary:shadeMatches];
     
-    [data setRecommendationsArray:shadeMatches :0];
+    [data setRecommendationsArray:shadeMatches];
+    
+    [data setRecommendationsArray:shadeMatches : 0];
 
 }
 
@@ -84,6 +86,13 @@ KokkoInterface* kokkoClass;
     // This is an example of a performance test case.
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
+        NSDictionary *shadeMatches = [kokkoClass getRecommendationsUIONLY];
+        NSLog (@"recommendtions = %@", shadeMatches);
+        
+        KokkoData *data = [[KokkoData alloc] init];
+        [data logRecommendationsDictionary:shadeMatches];
+        
+        [data setRecommendationsArray:shadeMatches :0];
     }];
 }
 
