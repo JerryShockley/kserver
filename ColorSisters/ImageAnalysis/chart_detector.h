@@ -38,13 +38,13 @@ public:
 	chart.load(chart_layout_file);
     }
     
-    void detect(const cv::Mat& image, const std::string& out_path = "");
+    std::vector<cv::Point> detect(const cv::Mat& image, const std::string& out_path = "");
     
-    inline void detect(const std::string &image_file_name, const std::string& out_path = "") {
+    inline std::vector<cv::Point> detect(const std::string &image_file_name, const std::string& out_path = "") {
 	// image_file_name is the complete path and file name, including any extension.
 	// out_path is a full path and base file name; distinct output files can be
 	// created by appending a suffix and/or extension.
-	detect(cv::imread(image_file_name, CV_LOAD_IMAGE_COLOR), out_path);
+      return detect(cv::imread(image_file_name, CV_LOAD_IMAGE_COLOR), out_path);
     }
 
     void save_results(const std::string &dest_file) const;
@@ -60,7 +60,7 @@ public:
 
   void clockwise_rectangle(polygon_t &rect) const;
 
-  void shrink(polygonf_t &rect, float percentage) const;
+  void shrink(polygonf_t &rect, int shrink_ratio) const;
 
   void project_regions(const cv::Mat &h,
 		       std::vector<polygon_t> &projected,
@@ -74,7 +74,7 @@ public:
 
   cv::Mat compute_homography(const polygonf_t &source,
 			     const std::vector<polygon_t> &rectangles,
-                             const cv::Mat &image) const;
+                             const cv::Mat &image, bool &mirrored) const;
 };
 
 #endif

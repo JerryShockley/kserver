@@ -9,11 +9,29 @@
 
 #include <stdio.h>
 #include <set>
+#include <cassert>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include "chart_detector.h"
+
+// Once the chart has been located, the chart definition is used to determine
+// where the corners of each color square should be. But we don't want to
+// sample right to the edges because we may pick up some of the border color.
+// So we reduce the size of the square to insure that we only sample colors
+// well inside it. This constant controls how much smaller the sampled square
+// will be from the defined size, as a percentage. So 0 = 0% smaller (same
+// size as defined square) and 20 = 20% smaller. Since it is a percentage, the
+// legal values are 0% - 100%.
+#define	REDUCED_SQUARE_SIZE_COLOR	25
+
+// As part of the chart detection process we compute the intensity of each
+// color square. Like what's described above, we want to sample near the center
+// of the square. This is less sensitive to the number of pixels sampled, so
+// the square can be smaller. Thus this constant is defined as positive offset
+// to the value defined above.
+#define	REDUCED_SQUARE_SIZE_INTENSITY	(REDUCED_SQUARE_SIZE_COLOR + 5)
 
 
 using namespace std;
@@ -36,7 +54,15 @@ int compare_order(const vector<intel> &a, const vector <intel> &b)
   vector<intel>::size_type n = a.size();
   for (int i=0; i<(int)n; i++) {
     if (a[i].x != b[i].x || a[i].y != b[i].y) {
-      difference++;
+      int diff = -1;
+      for (int j=0; j<(int)n; j++) {
+        if (a[i].x == b[j].x && a[i].y == b[j].y) {
+          diff = abs(i-j);
+          break;
+        }
+      }
+      assert(diff != -1);
+      difference += diff;
     }
   }
   return difference;
@@ -97,8 +123,9 @@ float get_rect_area(const polygonf_t &poly)
   return norm(side1) * norm(side2);
 }
 
-void ChartDetector::detect(const Mat& original, const string& out_path)
+vector<Point> ChartDetector::detect(const Mat& original, const string& out_path)
 {
+    assert(original.channels() == 3);
     Mat image = original;
     Mat debug_image;
     
@@ -183,7 +210,7 @@ void ChartDetector::detect(const Mat& original, const string& out_path)
     
     // make sure all rectangles are aligned the same way
     for (unsigned int i=1; i<rectangles.size(); i++) {
-	align_rectangle(rectangles[i], rectangles[0][0]);
+      align_rectangle(rectangles[i], rectangles[0][0]);
     }
     
     // find chart homography
@@ -193,7 +220,8 @@ void ChartDetector::detect(const Mat& original, const string& out_path)
 	    source.push_back(chart.get_frame()[j][i]);
 	}
     }
-    Mat h = compute_homography(source, rectangles, image);
+    bool mirrored;
+    Mat h = compute_homography(source, rectangles, image, mirrored);
     
     float x_scale = original.cols / (float)image.cols;
     float y_scale = original.rows / (float)image.rows;
@@ -205,47 +233,71 @@ void ChartDetector::detect(const Mat& original, const string& out_path)
 	mult.at<double>(2, 2) = 1;
 	h = mult * h;
     }
+
+    // compute bounding box
+    vector<Point> bounding_box;
+    double min_x = original.cols, max_x = 0, min_y = original.rows, max_y = 0;
+    unsigned long rect = rectangles.size() - 1;
+    for (unsigned int j=0; j<rectangles[rect].size(); j++) {
+      if (rectangles[rect][j].x * x_scale < min_x) {
+        min_x = rectangles[rect][j].x * x_scale;
+      }
+      if (rectangles[rect][j].x * x_scale > max_x) {
+        max_x = rectangles[rect][j].x * x_scale;
+      }
+      if (rectangles[rect][j].y * y_scale < min_y) {
+        min_y = rectangles[rect][j].y * y_scale;
+      }
+      if (rectangles[rect][j].y * y_scale > max_y) {
+        max_y = rectangles[rect][j].y * y_scale;
+      }
+    }
+    bounding_box.push_back(Point(min_x, min_y));
+    bounding_box.push_back(Point(max_x, min_y));
+    bounding_box.push_back(Point(max_x, max_y));
+    bounding_box.push_back(Point(min_x, max_y));
     
     // project squares to image
     vector<polygon_t> projected_squares;
-    project_regions(h, projected_squares, 20);
+    project_regions(h, projected_squares, REDUCED_SQUARE_SIZE_COLOR);
     
     if (debug) {
-	Scalar green( 0, 255, 0);
-	Scalar blue( 255, 0, 0);
+      Scalar green( 0, 255, 0);
+      Scalar blue( 255, 0, 0);
+      Scalar red( 0, 0, 255);
 	
-	// rescale rectangles (if needed)
-	for (unsigned int j=0; j<rectangles.size(); j++) {
-	    for (unsigned int i=0; i<rectangles[j].size(); i++) {
-		rectangles[j][i].x *= x_scale;
-		rectangles[j][i].y *= y_scale;
-	    }
-	}
+      // rescale rectangles (if needed)
+      for (unsigned int j=0; j<rectangles.size(); j++) {
+        for (unsigned int i=0; i<rectangles[j].size(); i++) {
+          rectangles[j][i].x *= x_scale;
+          rectangles[j][i].y *= y_scale;
+        }
+      }
 	
-	// draw chart frame
-	drawContours(debug_image, rectangles, -1, green, 2);
+      // draw chart frame
+      drawContours(debug_image, rectangles, -1, green, 2);
 	
-	// draws chart corners
-	polygonf_t dest;
-	perspectiveTransform(source, dest, h);
-	for (int i=0; i<4; i++) {
-	    circle(debug_image, dest[i], 6 * x_scale, i == 0 ? blue : green, 2);
-	}
+      // draws chart corners
+      polygonf_t dest;
+      perspectiveTransform(source, dest, h);
+      for (int i=0; i<4; i++) {	    
+        circle(debug_image, dest[i], 6 * x_scale, i == 0 ? (mirrored ? red : blue) : green, 2);
+      }
 	
-	// draw projected squares
-	drawContours(debug_image, projected_squares, -1, blue, 2);
+      // draw projected squares
+      drawContours(debug_image, projected_squares, -1, blue, 2);
 	
-	// saving color squares image
-	Mat image_mask(debug_image.rows, debug_image.cols, CV_8UC3, Scalar(0, 0, 0));
-	Scalar on(1, 1, 1);
-	drawContours(image_mask, projected_squares, -1, on, -1);
-	string colorSquaresFile(out_path + ".cmsk.png");
-	imwrite(colorSquaresFile.c_str(), original.mul(image_mask));
+      // saving color squares image
+      Mat image_mask(debug_image.rows, debug_image.cols, CV_8UC3, Scalar(0, 0, 0));
+      Scalar on(1, 1, 1);
+      drawContours(image_mask, projected_squares, -1, on, -1);
+      string colorSquaresFile(out_path + ".cmsk.png");
+      imwrite(colorSquaresFile.c_str(), original.mul(image_mask));
 	
-	// Write out the image file with a bounding box around all the matched
-	// rectangles in the color chart.
-	string detectedFileName(out_path + ".cbox.png");
-	imwrite(detectedFileName.c_str(), debug_image);
+      // Write out the image file with a bounding box around all the matched
+      // rectangles in the color chart.
+      string detectedFileName(out_path + ".cbox.png");
+      imwrite(detectedFileName.c_str(), debug_image);
     }
     
     // compute color statistics and write them out
@@ -253,17 +305,19 @@ void ChartDetector::detect(const Mat& original, const string& out_path)
     // color chart and write out the color values for each square.
     size_t n = projected_squares.size();
     for (unsigned int i=0; i<n; i++) {
-	Mat compute_mask(original.rows, original.cols, CV_8U, Scalar(0));
-	vector<polygon_t> sq;
-	sq.push_back(projected_squares[i]);
-	drawContours(compute_mask, sq, 0, 1, -1);
-	Scalar mean, std_dev;
-	meanStdDev(original, mean, std_dev, compute_mask);
+      Mat compute_mask(original.rows, original.cols, CV_8U, Scalar(0));
+      vector<polygon_t> sq;
+      sq.push_back(projected_squares[i]);
+      drawContours(compute_mask, sq, 0, 1, -1);
+      Scalar mean, std_dev;
+      meanStdDev(original, mean, std_dev, compute_mask);
 	
-	chart.set_sampled_color(i, mean, std_dev);
+      chart.set_sampled_color(i, mean, std_dev);
     }
     if (debug)
-	chart_details.close();
+      chart_details.close();
+
+    return bounding_box;
 }
 
 
@@ -344,16 +398,19 @@ void ChartDetector::clockwise_rectangle(polygon_t &rect) const
 }
 
 // shrink rectangle by 'amount'
-void ChartDetector::shrink(polygonf_t &rect, float percentage) const
+void ChartDetector::shrink(polygonf_t &rect, int shrink_ratio) const
 {
-  Point2f center(0, 0);
+    assert(0 <= shrink_ratio && shrink_ratio <= 100);
+    double shrink_factor = ((100.0 - shrink_ratio) / 100.0);
+
+    Point2f center(0, 0);
   for (int i=0; i<4; i++) {
     center += rect[i];
   }
   center = center * 0.25;
   for (int i=0; i<4; i++) {
     Point2f v = rect[i] - center;
-    rect[i] = center + v * ((100-percentage) / 100.0);
+    rect[i] = center + v * shrink_factor;
   }
 }
 
@@ -375,10 +432,18 @@ void ChartDetector::project_regions(const Mat &h, vector<polygon_t> &projected,
 }
 
 Mat ChartDetector::compute_homography(const polygonf_t &source, const vector<polygon_t> &rectangles,
-                                      const Mat &image) const
+                                      const Mat &image, bool &mirrored) const
 {
-  const vector<ColorRegion> &regions = chart.get_regions();
-    colorRegionSize_t nbr_colors = regions.size();
+  // select only color regions
+  const vector<ColorRegion> &all_regions = chart.get_regions();
+  vector<ColorRegion> regions;
+  for (auto reg = all_regions.begin(); reg != all_regions.end(); ++reg) {
+    if (reg->type != BLACK && reg->type != WHITE) {
+      regions.push_back(*reg);
+    }
+  }
+  colorRegionSize_t nbr_colors = regions.size();
+  // create reference order
   vector<intel> ref_int(nbr_colors);
   for (colorRegionSize_t i=0; i<nbr_colors; i++) {
     ref_int[i].intensity = 0.2126 * regions[i].printed_color.red + 0.7152 
@@ -389,15 +454,21 @@ Mat ChartDetector::compute_homography(const polygonf_t &source, const vector<pol
   sort (ref_int.begin(), ref_int.end(), compare_intel);
 
   vector<Mat> homographies;
-  colorRegionSize_t min = nbr_colors;
+  colorRegionSize_t min = nbr_colors * nbr_colors;
   int orientation = -1;
-  // test each of the 4 possible rotations
-  for (int side=0; side<4; side++) {
+  int mirror[4] = { 1, 0, 3, 2};
+  // test each of the 4 possible rotations + mirror
+  for (int side=0; side<8; side++) {
     polygonf_t dest;
     for (unsigned int j=0; j<rectangles.size(); j++) {
       polygonSize_t n = rectangles[j].size();
       for (polygonSize_t i=0; i<n; i++) {
-        dest.push_back(rectangles[j][(i+side)%n]);
+        if (side < 4) {
+          dest.push_back(rectangles[j][(i+side)%n]);
+        }
+        else {
+          dest.push_back(rectangles[j][(mirror[i]+side)%n]);
+        }
       }
     }
 
@@ -405,7 +476,7 @@ Mat ChartDetector::compute_homography(const polygonf_t &source, const vector<pol
 
     // project squares to image
     vector<polygon_t> projected;
-    project_regions(homographies[side], projected, 30);
+    project_regions(homographies[side], projected, REDUCED_SQUARE_SIZE_INTENSITY);
 
     // compute color statistics
     vector<intel> sample_int(nbr_colors);
@@ -428,6 +499,9 @@ Mat ChartDetector::compute_homography(const polygonf_t &source, const vector<pol
       orientation = side;
     }
   }
+  assert(orientation != -1);
+ 
+  mirrored = orientation > 3;
 
   return homographies[orientation];
 }

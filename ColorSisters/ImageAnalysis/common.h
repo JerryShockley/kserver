@@ -9,6 +9,13 @@
 
 #include <string>
 
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+// Will define TARGET_OS_IPHONE to 1 if compiling for iOS, 0 if for Mac OS
+#else	// __APPLE__
+#define	TARGET_OS_IPHONE    0
+#endif	// __APPLE__
+
 class KokkoException
 {
  private:

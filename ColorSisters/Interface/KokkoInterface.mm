@@ -43,6 +43,7 @@ SkinToneMatcher imagePipe(false);
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	//make a file name to write the data to using the documents directory:
+	NSLog(@"Debug files will be stored in: '%@'", documentsDirectory);
 	NSString *outFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"image"];
 	
 	NSString* faceCascade = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_default" ofType:@"xml"];

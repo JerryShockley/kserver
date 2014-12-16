@@ -56,7 +56,6 @@ public:
     Recommendations recommend(const cv::Mat& picture) {
 	return recommend(picture, BrandSet());
     }
-    
     Recommendations recommend(const FaceRank& matches, const BrandSet& theseBrands) {
 	return refImages.recommend(matches, theseBrands);
     }
@@ -83,6 +82,8 @@ private:
     ExemplarDB refImages;		    // DB of reference images and shade assignments
     bool useFaceMask;			    // use a smaller set of pixels just capturing skin
     std::string intermediateFilePath;	    // where to write interemediate files
+
+    int checkExifOrientation(const std::string &image_name) const;
 };
 
 #endif /* defined(__image_pipeline__pipeline__) */

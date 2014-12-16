@@ -12,11 +12,33 @@
 
 using namespace std;
 
-// This is the largest "distance" between two images that will be considered for a potential
-// match, and should be determined based on extensive data analysis. The current value was
-// chosen to exclude at least 1/2 of the reference data set.
+// The Kuiper test is used to determine the "distance" between two sets of
+// face pixels, as a way of comparing how similar their coloring is. We
+// calculate the kuiper distance on each channel of a pixel (pixel values have
+// been normalized to [0.0, 1.0]) and then sum the distances across the three
+// channels (representing RGB or Lab -- we don't care). Thus the value is in
+// the range [0, 3].
+//
+// The two constants below limit whether a face being compared should be added
+// to the ranked list of face matches (the list is ordered by increasing Kuiper
+// distance). The upper bound is essentially an optimization to reduce the size
+// of the list. As our exemplar (reference face) data set gets larger, we should
+// be able to reduce this number. My goal is an upper limit of < 1.0. Currently
+// it is set to 2.0 because there are some faces where there are no close
+// exemplars.
+//
+// The lower bound is not as obvious -- why do we need it? When running the
+// test suite, we may be comparing a face to itself. If the pixel sets being
+// compared are identical, the Kuiper distance would be 0. However, for reasons
+// not understood, modifications to the code (not changing the image processing
+// algorithms) will occasionally result in tiny differences in the pixel
+// values--sometimes just one pixel out of 20,000. But this is enough to make
+// the Kuiper distance > 0, and thus a face would match against itself. I
+// empirically determined that a threshold of 0.025 is adequate to exclude these
+// not-quite-identical-but-in-reality-the-same-face matches.
 
-#define KUIPER_DIST_MAX	1.0			// maximum Kuiper distance to consider a match
+#define KUIPER_DIST_MIN 0.025
+#define KUIPER_DIST_MAX	2.0	// maximum Kuiper distance to consider a match
 
 // Forward references
 
@@ -58,12 +80,11 @@ FaceRank ExemplarDB::match(const SkinPixels& candidateFace)
 	
 	// Insert this comparison result into the ordered list of rankings for this reference face
 	
-	// Exclude exact matches (distanceKuiper == 0.0), because that almost
-	// certainly means that the two faces being compared are the same image
-	// file (we could be "certain" by comparing the raw data for an exact
-	// match, but the odds of two different images resulting in a Kuiper
-	// distance of exactly 0.0 is virtually nil).
-	if (0.0 < distanceKuiper && distanceKuiper <= KUIPER_DIST_MAX) {
+	// Exclude nearly exact matches (distanceKuiper <= KUIPER_DIST_MIN),
+	// because that almost certainly means that the two faces being
+	// compared are the same image, and exclude really big distances to
+	// keep the list shorter (essentially just an optimization).
+	if (KUIPER_DIST_MIN < distanceKuiper && distanceKuiper <= KUIPER_DIST_MAX) {
 	    faces.insert(FaceRank::value_type(distanceKuiper, rit->second));
 	}
     }
