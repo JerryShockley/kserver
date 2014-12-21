@@ -68,11 +68,13 @@ class Chart
 
   inline const std::vector<ColorRegion> &get_regions() const { return regions; }
 
-  inline const ColorRegion &get_region(int i) const {
+  inline const ColorRegion &get_region(colorRegionSize_t i) const {
     return regions.at(i);
   }
 
-  inline void set_sampled_color(int i, const cv::Scalar &mean, const cv::Scalar &stddev) {
+  inline void set_sampled_color(colorRegionSize_t i,
+				const cv::Scalar &mean,
+				const cv::Scalar &stddev) {
     regions.at(i).sampled_mean.red = mean[2];
     regions.at(i).sampled_mean.green = mean[1];
     regions.at(i).sampled_mean.blue = mean[0];

@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <set>
 #include <cassert>
+#include <climits>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -36,6 +37,7 @@
 
 using namespace std;
 using namespace cv;
+
 
 struct intel {
   float intensity;
@@ -123,26 +125,21 @@ float get_rect_area(const polygonf_t &poly)
   return norm(side1) * norm(side2);
 }
 
-vector<Point> ChartDetector::detect(const Mat& original, const string& out_path)
+Rect ChartDetector::detect(const Mat& original, const string& out_path)
 {
-    assert(original.channels() == 3);
+    double shrinkFactor = 1.0;		// no shrinking original image (yet)
     Mat image = original;
-    Mat debug_image;
+    assert(original.channels() == 3);
     
     // create debug image, if necessary
-    if (out_path != "") {
-	debug = true;
-	chart_details.open(out_path + ".cdbg.txt");
-	chart_details << "Ratio: " << chart.get_ratio() << endl;
-	debug_image = image.clone();
-    }
+    bool debug = out_path != "";
     
     // resize image if needed
-    if (max(image.cols, image.rows) > max_image_width) {
-	int max_dim = max(image.cols, image.rows);
-	float factor = (float)max_image_width / max_dim;
+    int max_dim = max(image.cols, image.rows);
+    if (max_dim > max_image_dim) {
+	shrinkFactor = (double)max_image_dim / max_dim;
 	Mat small;
-	resize(image, small, cv::Size(0,0), factor, factor, INTER_LANCZOS4);
+	resize(image, small, cv::Size(0,0), shrinkFactor, shrinkFactor, INTER_LANCZOS4);
 	image = small;
     }
     
@@ -180,21 +177,17 @@ vector<Point> ChartDetector::detect(const Mat& original, const string& out_path)
     }
     
     // select chart rectangles
-    long outer = select_rectangles(rectangles);
-    if (outer < (int)(chart.get_frame().size() - 1)) {
+    polygonSize_t outer = select_rectangles(rectangles, out_path);
+    if (outer < chart.get_frame().size() - 1) {
 	if (debug) {
 	    drawContours(image, rectangles, -1, Scalar(0, 0, 255), 2);
 	    string outimage(out_path + ".cdbg.png");
 	    imwrite(outimage.c_str(), image);
 	}
-	char message[512];
-	if (outer < 0) {
-	    sprintf(message, "Unable to locate chart.");
-	}
-	else {
-	    sprintf(message, "Only %ld chart borders found.", outer);
-	}
-	throw KokkoException(message);
+	if (outer == 0)
+	    throw KokkoException("Unable to locate chart.");
+	else
+	    throw KokkoException("No valid chart found; only " + to_string(outer) + " borders located.");
     }
     
     // make sure first rectangle is clockwise and first corner is top left
@@ -223,65 +216,44 @@ vector<Point> ChartDetector::detect(const Mat& original, const string& out_path)
     bool mirrored;
     Mat h = compute_homography(source, rectangles, image, mirrored);
     
-    float x_scale = original.cols / (float)image.cols;
-    float y_scale = original.rows / (float)image.rows;
     // rescale homography for the original image (if needed)
     if (original.cols > image.cols) {
+	double x_scale = original.cols / (double)image.cols;
+	double y_scale = original.rows / (double)image.rows;
 	Mat mult = Mat::zeros(3, 3, CV_64F);
 	mult.at<double>(0, 0) = x_scale;
 	mult.at<double>(1, 1) = y_scale;
 	mult.at<double>(2, 2) = 1;
 	h = mult * h;
+	
+	// Also provide re-scaled coordinates for found rectangles to draw
+	// on the original image
+	for (polygonSize_t j=0; j<rectangles.size(); j++) {
+	    for (polygonSize_t i=0; i<rectangles[j].size(); i++) {
+		rectangles[j][i].x *= x_scale;
+		rectangles[j][i].y *= y_scale;
+	    }
+	}
     }
 
-    // compute bounding box
-    vector<Point> bounding_box;
-    double min_x = original.cols, max_x = 0, min_y = original.rows, max_y = 0;
-    unsigned long rect = rectangles.size() - 1;
-    for (unsigned int j=0; j<rectangles[rect].size(); j++) {
-      if (rectangles[rect][j].x * x_scale < min_x) {
-        min_x = rectangles[rect][j].x * x_scale;
-      }
-      if (rectangles[rect][j].x * x_scale > max_x) {
-        max_x = rectangles[rect][j].x * x_scale;
-      }
-      if (rectangles[rect][j].y * y_scale < min_y) {
-        min_y = rectangles[rect][j].y * y_scale;
-      }
-      if (rectangles[rect][j].y * y_scale > max_y) {
-        max_y = rectangles[rect][j].y * y_scale;
-      }
-    }
-    bounding_box.push_back(Point(min_x, min_y));
-    bounding_box.push_back(Point(max_x, min_y));
-    bounding_box.push_back(Point(max_x, max_y));
-    bounding_box.push_back(Point(min_x, max_y));
-    
     // project squares to image
     vector<polygon_t> projected_squares;
     project_regions(h, projected_squares, REDUCED_SQUARE_SIZE_COLOR);
     
     if (debug) {
-      Scalar green( 0, 255, 0);
-      Scalar blue( 255, 0, 0);
-      Scalar red( 0, 0, 255);
-	
-      // rescale rectangles (if needed)
-      for (unsigned int j=0; j<rectangles.size(); j++) {
-        for (unsigned int i=0; i<rectangles[j].size(); i++) {
-          rectangles[j][i].x *= x_scale;
-          rectangles[j][i].y *= y_scale;
-        }
-      }
+      const Scalar green( 0, 255, 0);
+      const Scalar blue( 255, 0, 0);
+      const Scalar red( 0, 0, 255);
 	
       // draw chart frame
+	Mat debug_image = original.clone();
       drawContours(debug_image, rectangles, -1, green, 2);
 	
       // draws chart corners
       polygonf_t dest;
       perspectiveTransform(source, dest, h);
       for (int i=0; i<4; i++) {	    
-        circle(debug_image, dest[i], 6 * x_scale, i == 0 ? (mirrored ? red : blue) : green, 2);
+        circle(debug_image, dest[i], 6 / shrinkFactor, i == 0 ? (mirrored ? red : blue) : green, 2);
       }
 	
       // draw projected squares
@@ -303,8 +275,8 @@ vector<Point> ChartDetector::detect(const Mat& original, const string& out_path)
     // compute color statistics and write them out
     // This is the actual goal behind all this code -- isolate the color squares in the
     // color chart and write out the color values for each square.
-    size_t n = projected_squares.size();
-    for (unsigned int i=0; i<n; i++) {
+    polygonSize_t n = projected_squares.size();
+    for (polygonSize_t i=0; i<n; i++) {
       Mat compute_mask(original.rows, original.cols, CV_8U, Scalar(0));
       vector<polygon_t> sq;
       sq.push_back(projected_squares[i]);
@@ -314,12 +286,13 @@ vector<Point> ChartDetector::detect(const Mat& original, const string& out_path)
 	
       chart.set_sampled_color(i, mean, std_dev);
     }
-    if (debug)
-      chart_details.close();
-
-    return bounding_box;
+    
+    // Pass in the largest rectangle that was found in the chart; this function
+    // merely aligns the four corners to the axes. NOTE: this call assumes
+    // rectangles has been re-scaled so that the coordinates are relative to
+    // the original image, not the scaled image.
+    return boundingRect(rectangles[rectangles.size() - 1]);
 }
-
 
 
 void ChartDetector::save_results(const string &dest_file) const
@@ -363,6 +336,7 @@ void ChartDetector::align_rectangle(polygon_t &rect) const
     }
   }
 }
+
 
 // make sure the first corner of the rectangle is the closest to the ref point
 void ChartDetector::align_rectangle(polygon_t &rect, const cv::Point &ref) const
@@ -431,7 +405,8 @@ void ChartDetector::project_regions(const Mat &h, vector<polygon_t> &projected,
   }
 }
 
-Mat ChartDetector::compute_homography(const polygonf_t &source, const vector<polygon_t> &rectangles,
+Mat ChartDetector::compute_homography(const polygonf_t &source,
+				      const vector<polygon_t> &rectangles,
                                       const Mat &image, bool &mirrored) const
 {
   // select only color regions
@@ -511,27 +486,30 @@ bool compare_area (const polygon_t &a, const polygon_t &b) {
 }
 
 // TODO: deal with outer rectangle occluded
-int ChartDetector::validate_group(const vector<polygon_t> &rectangles, 
-                                  model_group_t &group, const vector<float> &ratios)
+polygonSize_t ChartDetector::validate_group(const vector<polygon_t> &rectangles,
+					    model_group_t &group,
+					    const vector<float> &ratios,
+					    ofstream* chart_details)
 {
-  size_t gn = group.indices.size();
-  if (debug) {
-    chart_details << gn << " rectangles in group." << endl;
+  polygonSize_t gn = group.indices.size();
+  if (chart_details) {
+    *chart_details << gn << " rectangles in group." << endl;
   }
-  unsigned int passed = 0;
-  set<int> indices;
-  for (int i=0; i<(int)(gn-1); i++) {
-    double ratio = float(get_rect_area(rectangles[group.indices[i+1]])) / get_rect_area(rectangles[group.indices[i]]);
-    if (debug) {
-      chart_details << "  ratio: " << ratio << endl;
+  polygonSize_t passed = 0;
+  set<polygonSize_t> indices;
+    // Compare each rectange in the group to the previous one
+  for (polygonSize_t i=1; i<gn; i++) {
+    float ratio = float(get_rect_area(rectangles[group.indices[i]])) / get_rect_area(rectangles[group.indices[i-1]]);
+    if (chart_details) {
+      *chart_details << "  ratio: " << ratio << endl;
     }
     if (fabs(ratio - ratios[passed]) < 0.05) {
       passed++;
+      if (!indices.count(group.indices[i-1])) {
+        indices.insert(group.indices[i-1]);
+      }
       if (!indices.count(group.indices[i])) {
         indices.insert(group.indices[i]);
-      }
-      if (!indices.count(group.indices[i+1])) {
-        indices.insert(group.indices[i+1]);
       }
     }
     if (passed == ratios.size()) {
@@ -540,8 +518,8 @@ int ChartDetector::validate_group(const vector<polygon_t> &rectangles,
   }
   if (passed >= ratios.size()-1) {
     group.indices.resize(indices.size());
-    int i = 0;
-    for (set<int>::iterator it = indices.begin(); it != indices.end(); ++it) {
+    polygonSize_t i = 0;
+    for (set<polygonSize_t>::iterator it = indices.begin(); it != indices.end(); ++it) {
       group.indices[i++] = *it;
     }
   }
@@ -549,68 +527,89 @@ int ChartDetector::validate_group(const vector<polygon_t> &rectangles,
 }
 
 // select the rectangles corresponding to the chart boundary
-polygonSize_t ChartDetector::select_rectangles(vector<polygon_t> &rectangles)
+polygonSize_t ChartDetector::select_rectangles(vector<polygon_t> &rectangles, const string& debugFilePrefix)
 {
-  // sort rectangles by decreasing area
-  sort(rectangles.begin(), rectangles.end(), compare_area);
-
-  // compute ratio of areas in rectangles from model
-  size_t ms = chart.get_frame().size();
-  vector<float> ratios;
-  for (size_t i=0; i<ms-1; i++) {
-    ratios.push_back(float(get_rect_area(chart.get_frame()[i+1])) / get_rect_area(chart.get_frame()[i]));
+    bool debug = (debugFilePrefix != "");
+    ofstream chart_details;
+    ofstream* detailp = nullptr;
+    
     if (debug) {
-      chart_details << "ratio: " << ratios.back() << endl;
+	chart_details.open(debugFilePrefix + ".cdbg.txt");
+	chart_details << "Ratio: " << chart.get_ratio() << endl;
+	detailp = &chart_details;
     }
-  }
-  // group rectangles with the same center (to deal with multiple charts)
-  size_t n = rectangles.size();
-  vector<model_group_t> groups;
-  const double center_threshold = 0.015;
-  for (int i=0; i<(int)n; i++)
-    {
-      Point2f center = get_center(rectangles[i]);
-      if (debug) {
-        chart_details << "center: " << center.x << " - " << center.y << endl;
-      }
-      bool placed = false;
-      for (vector<model_group_t>::iterator it = groups.begin(); it != groups.end(); ++it) {
-        double diff = norm(it->center - center);
-        double diagonal = norm(rectangles[i][2] - rectangles[i][0]);
-        if (debug) {
-          chart_details << "diff : " << diff << ", diagonal: " << diagonal << ", ratio: " << diff/ diagonal << endl;
-        }
-        if (diff / diagonal < center_threshold) {
-          it->indices.push_back(i);
-          placed = true;
-          break;
-        }
-      }
-      if (!placed) {
-        model_group_t new_group;
-        new_group.indices.push_back(i);
-        new_group.center = center;
-        groups.push_back(new_group);
-      }
+
+    // sort rectangles by decreasing area
+    sort(rectangles.begin(), rectangles.end(), compare_area);
+
+    // compute ratio of areas in rectangles from model
+    size_t ms = chart.get_frame().size();
+    vector<float> ratios;
+    for (size_t i=1; i<ms; i++) {
+	ratios.push_back(float(get_rect_area(chart.get_frame()[i])) / get_rect_area(chart.get_frame()[i-1]));
+	if (debug) {
+	    chart_details << "ratio: " << ratios.back() << endl;
+	}
     }
-  if (debug) {
-    chart_details << "Found " << groups.size() << " groups." << endl;
-  }
-  // return the first group that passes the area ratio test
-  for (vector<model_group_t>::iterator it = groups.begin(); it != groups.end(); ++it) {
-    if (validate_group(rectangles, *it, ratios) >= (int)(ratios.size()-1)) {
-      vector<polygon_t> temp(it->indices.size());
-      for (unsigned int i=0; i<it->indices.size(); i++) {
-        temp[i] = rectangles[it->indices[i]];
-      }
-      rectangles.resize(it->indices.size());
-      for (unsigned int i=0; i<it->indices.size(); i++) {
-        rectangles[i] = temp[i];
-      }
-      return rectangles.size();
+    
+    // group rectangles with the same center (to deal with multiple charts)
+    polygonSize_t n = rectangles.size();
+    vector<model_group_t> groups;
+    const double center_threshold = 0.015;
+    for (polygonSize_t i=0; i<n; i++) {
+	Point2f center = get_center(rectangles[i]);
+	if (debug) {
+	    chart_details << "center: " << center.x << " - " << center.y << endl;
+	}
+	bool placed = false;
+	for (vector<model_group_t>::iterator it = groups.begin(); it != groups.end(); ++it) {
+	    double diff = norm(it->center - center);
+	    double diagonal = norm(rectangles[i][2] - rectangles[i][0]);
+	    if (debug) {
+		chart_details << "diff : " << diff << ", diagonal: " << diagonal << ", ratio: " << diff/ diagonal << endl;
+	    }
+	    if (diff / diagonal < center_threshold) {
+		  it->indices.push_back(i);
+		  placed = true;
+		  break;
+	    }
+	}
+	if (!placed) {
+	    model_group_t new_group;
+	    new_group.indices.push_back(i);
+	    new_group.center = center;
+	    groups.push_back(new_group);
+	}
     }
-  }
-  return -1;
+    if (debug) {
+	chart_details << "Found " << groups.size() << " groups." << endl;
+    }
+    // return the first group that passes the area ratio test
+    n = 0;				// no groups found (yet)
+    vector<model_group_t>::iterator it;
+    for (it = groups.begin(); it != groups.end(); ++it) {
+	if (validate_group(rectangles, *it, ratios, detailp) >= ratios.size()-1) {
+	    n = it->indices.size();
+	    break;
+	}
+    }
+    if (n > 0) {
+	vector<polygon_t> temp(n);
+	for (polygonSize_t i=0; i<n; i++) {
+	    temp[i] = rectangles[it->indices[i]];
+	}
+#ifdef OLDCODE
+	for (polygonSize_t i=0; i<n; i++) {
+	    rectangles[i] = temp[i];
+	}
+#else
+	rectangles = temp;
+#endif
+    }
+    if (debug)
+	chart_details.close();
+    return n;
 }
+
 
 #endif

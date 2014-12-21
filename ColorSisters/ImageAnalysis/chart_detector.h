@@ -18,7 +18,7 @@ typedef polygon_t::size_type polygonSize_t;
 
 struct model_group_t
 {
-  std::vector<int> indices;
+  std::vector<polygonSize_t> indices;
   cv::Point2f center;
 };
 
@@ -27,24 +27,28 @@ class ChartDetector
 {
 private:
     Chart chart;
-    bool debug;
-    std::ofstream chart_details;
-    static const int max_image_width = 1000;
+    static const int max_image_dim = 1000;
 
 public:
-    ChartDetector() : debug(false) {}
+    ChartDetector() {}
 
     inline void init(const std::string& chart_layout_file) {
 	chart.load(chart_layout_file);
     }
     
-    std::vector<cv::Point> detect(const cv::Mat& image, const std::string& out_path = "");
+    // The primary interface to the Chart Detector. image contains the
+    // image to be analyzed; debugFilesPrefix, if a non-empty string, must be a
+    // full path + base file name; several output files with various
+    // intermediate results will be created (each with a different extension).
+    // The return value is the bounding box around the chart. An exception is
+    // thrown if no chart is found.
+    cv::Rect detect(const cv::Mat& image, const std::string& debugFilesPrefix = "");
     
-    inline std::vector<cv::Point> detect(const std::string &image_file_name, const std::string& out_path = "") {
-	// image_file_name is the complete path and file name, including any extension.
-	// out_path is a full path and base file name; distinct output files can be
-	// created by appending a suffix and/or extension.
-      return detect(cv::imread(image_file_name, CV_LOAD_IMAGE_COLOR), out_path);
+    // Similar to above, but given a path to an image stored in the file
+    // system instead.
+    inline cv::Rect detect(const std::string &image_file_name,
+			   const std::string& debugFilesPrefix = "") {
+        return detect(cv::imread(image_file_name, CV_LOAD_IMAGE_COLOR), debugFilesPrefix);
     }
 
     void save_results(const std::string &dest_file) const;
@@ -57,7 +61,7 @@ public:
   void align_rectangle(polygon_t &rect) const;
 
   void align_rectangle(polygon_t &rect, const cv::Point &ref) const;
-
+    
   void clockwise_rectangle(polygon_t &rect) const;
 
   void shrink(polygonf_t &rect, int shrink_ratio) const;
@@ -66,11 +70,13 @@ public:
 		       std::vector<polygon_t> &projected,
                        int shrink_ratio) const;
 
-  polygonSize_t select_rectangles(std::vector<polygon_t> &rectangles);
+    polygonSize_t select_rectangles(std::vector<polygon_t> &rectangles,
+				    const std::string& debugFilePrefix);
 
-  int validate_group(const std::vector<polygon_t> &rectangles, 
-                     model_group_t &group, 
-                     const std::vector<float> &ratios);
+  polygonSize_t validate_group(const std::vector<polygon_t> &rectangles,
+			       model_group_t &group,
+			       const std::vector<float> &ratios,
+			       std::ofstream *debug_out);
 
   cv::Mat compute_homography(const polygonf_t &source,
 			     const std::vector<polygon_t> &rectangles,

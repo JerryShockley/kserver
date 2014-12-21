@@ -47,7 +47,7 @@ public:
     Recommendations recommend(const std::string& imageFileName) {
 	return recommend(imageFileName, BrandSet());
     }
-    
+
     Recommendations recommend(const cv::Mat& picture, const BrandSet& theseBrands) {
 	SkinPixels skin;
 	extractSkinPixels(picture, skin);
@@ -56,19 +56,20 @@ public:
     Recommendations recommend(const cv::Mat& picture) {
 	return recommend(picture, BrandSet());
     }
+
     Recommendations recommend(const FaceRank& matches, const BrandSet& theseBrands) {
 	return refImages.recommend(matches, theseBrands);
     }
     Recommendations recommend(const FaceRank& matches) {
 	return refImages.recommend(matches, BrandSet());
     }
+
     Recommendations recommend(const SkinPixels& pixels, const BrandSet& theseBrands) {
 	return refImages.recommend(pixels, theseBrands);
     }
     Recommendations recommend(const SkinPixels& pixels) {
 	return refImages.recommend(pixels, BrandSet());
     }
-    
     
     bool getMaskMode() const		{ return useFaceMask; }
     void setMaskMode(bool useMask)	{ useFaceMask = useMask; }

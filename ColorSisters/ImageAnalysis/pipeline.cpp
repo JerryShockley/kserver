@@ -145,16 +145,18 @@ void SkinToneMatcher::extractSkinPixels(const Mat& original, SkinPixels& pixels)
 	    // Save the detected face area
 	    imwrite(intermediateFilePath + ".fbox.png", face);
 
+	Mat recoloredFace = recolorImage(face, measure);
 	if (useFaceMask) {
 	    // Extract a subset of the face which should only contain skin pixels.
-	    
-	    Mat facePixels = extractSkinFromFace(face);
-	    Mat recoloredFace = recolorImage(facePixels, measure);
-	    pixels.load(recoloredFace);
+	    // This step must be performed AFTER the recoloring step, otherwise
+	    // the masked off areas (which are still present in the image, it is
+	    // not resized) are changed from (0,0,0) by the recoloring and this
+	    // greatly biases the results.
+	    Mat facePixels = extractSkinFromFace(recoloredFace);
+	    pixels.load(facePixels);
 	    if (debug)
-		imwrite(intermediateFilePath + ".fskn.png", recoloredFace);
+		imwrite(intermediateFilePath + ".fskn.png", facePixels);
 	} else {
-	    Mat recoloredFace = recolorImage(face, measure);
 	    pixels.load(recoloredFace);
 	}
     }
