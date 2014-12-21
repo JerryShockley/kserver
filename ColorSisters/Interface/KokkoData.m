@@ -72,10 +72,45 @@ NSString *imageBundlePath = @"product_images.bundle";
  * @returns NSDictionary, with only one key, which is just a slice of the original NSDictionary
  * For use by the UIDetailedTableView
  */
-- (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger *) index {
-    NSDictionary *retValue = [[NSDictionary alloc] init];
+- (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger) index {
+
+    // test iterator on shadeMatches
     
-    return retValue;
+    /// looks like 'product_images.bundle/'
+    NSString *pathDir = [NSString stringWithFormat:@"%@%@", imageBundlePath, @"/"];  // an incredible amount of code to append a '/', but generally safer than expecting it to be in the string
+    
+    /// looks like 'product_images.bundle/Dior/'
+    NSString *pathDirWithBrand;
+    
+    /// looks like 'product_images.bundle/Dior/100.png'
+    NSString *pathDirWithBrandAndImageFile;
+    
+
+    NSArray *values = [shadeMatches allValues];
+    NSArray *keys = [shadeMatches allKeys];
+    
+    NSString *brand = keys[index];
+    NSArray *detail = values[index];
+    
+    NSMutableArray *retValue = [[NSMutableArray alloc] init];
+    
+    // Iterate over brand, and create an Array
+    for (NSString *brand in shadeMatches) {
+        
+    }
+    
+    pathDirWithBrand = [NSString stringWithFormat:@"%@%@%@", pathDir, brand, @"/"];
+    
+    for(NSString *shadeImage in detail) {
+        
+        pathDirWithBrandAndImageFile = [pathDirWithBrand stringByAppendingString:[NSString stringWithFormat:@"%@", shadeImage]];
+        NSLog(@"  %@", pathDirWithBrandAndImageFile);
+        [retValue addObject:pathDirWithBrandAndImageFile];
+    }
+
+    // New dict based on the ith row
+    NSDictionary *dictDetailedRecommendation = [[NSDictionary alloc] initWithObjectsAndKeys:retValue, brand, nil];  // Note the order is values, keys
+    return dictDetailedRecommendation;
 }
 
 @end

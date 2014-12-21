@@ -67,13 +67,16 @@ KokkoInterface* kokkoClass;
     NSDictionary *shadeMatches = [kokkoClass getRecommendationsUIONLY];
     NSLog (@"recommendtions = %@", shadeMatches);
     
+    NSInteger row = 0;
+    
     KokkoData *data = [[KokkoData alloc] init];
-    [data logRecommendationsDictionary:shadeMatches];
+//    [data logRecommendationsDictionary:shadeMatches];
+//
+//    [data setRecommendationsArray:shadeMatches];
     
-    [data setRecommendationsArray:shadeMatches];
-    
-    [data setRecommendationsArray:shadeMatches : 0];
+    NSDictionary *detailedRecs = [data setRecommendationsArray:shadeMatches : row];
 
+    
 }
 
 

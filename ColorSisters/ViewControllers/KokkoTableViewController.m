@@ -7,6 +7,7 @@
 
 #import "KokkoTableViewController.h"
 #import "KokkoDetailedMatchViewController.h"
+#import "KokkoData.h"
 
 @interface KokkoTableViewController ()
 
@@ -100,8 +101,12 @@ NSDictionary *shadeMatches;
     
     if([segue.identifier isEqual:detailControllerName]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSString *object = imageMatchesArray[indexPath.row];  // TODO Pass in Array
-        [[segue destinationViewController] setDetailItem:object];
+        NSInteger row = indexPath.row;
+        
+        KokkoData *data = [[KokkoData alloc] init];
+        NSDictionary *detailedRecs = [data setRecommendationsArray:self.detailItem : row];
+
+        [[segue destinationViewController] setDetailItem:detailedRecs];
     }
 }
 

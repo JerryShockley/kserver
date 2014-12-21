@@ -35,11 +35,14 @@
     // Update the user interface for the detail item.
     
     if (self.detailItem) {
-        self.title = self.detailItem;
-
-        self.detailDescriptionLabel.text = self.detailItem;
-        NSLog(@"detailImage = %@", self.detailItem);
-        self.detailImage.image = [UIImage imageNamed:self.detailItem];
+        
+        // Detail Item is a dictionary, extract the keys and values into appropriate structures
+        NSString *title = [self.detailItem allKeys][0];  // extract the 'key', whcih is a string
+        NSArray *images = [self.detailItem allValues][0]; // extract the 'value', which is an array
+        
+        self.title = title;
+        self.detailDescriptionLabel.text = title;
+        self.detailImage.image = [UIImage imageNamed:images[0]];  // TODO need to pass off to PageView Controller, not just 0th image
     }
 }
 
