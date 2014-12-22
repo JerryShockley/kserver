@@ -34,7 +34,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-//    [self imagePicker];  // TODO
+    [self imagePicker];
 }
 
 - (void) imagePicker {
@@ -90,9 +90,8 @@
 
 - (IBAction)findFoundation:(UIButton *)sender {
     KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
-//    [kokkoClass initWithImage:self.image];
-//    [kokkoClass getRecommendations];
-    self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
+    [kokkoClass initWithImage:self.image];
+    self.shadeMatches = [kokkoClass getRecommendations];
 
     // TODO - add popup with results from kokkoClass
     [self showMatchesAlert];
