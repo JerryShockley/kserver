@@ -7,9 +7,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KokkoDetailedMatchViewController : UIViewController <UISplitViewControllerDelegate>
+@interface KokkoDetailedMatchViewController : UIViewController
 
+// For the Pageview
+@property (strong, nonatomic) UIPageViewController *pageViewController;
+@property /*(strong, nonatomic)*/ NSArray *pageTitles;
+@property /*(strong, nonatomic)*/ NSArray *pageImages;
+
+
+@property NSUInteger pageIndex;
+@property NSString *titleText;
+@property NSString *imageFile;
+
+/// For passing in data from the Segue
 @property (strong, nonatomic) id detailItem;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *detailImage;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
