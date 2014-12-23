@@ -1,4 +1,5 @@
 require 'pundit'
+require File.expand_path("../../../view_models/ransack_search", __FILE__)
 
 class Devise::RegistrationsController < DeviseController
   include PunditHelper
@@ -11,17 +12,8 @@ class Devise::RegistrationsController < DeviseController
   # TODO Improve table behavior
   def index
     authorize User
-    # save last search params in session. We only save blank search params if 
-    # referrer is index. Note no other referrers would give us non-blank search params.
-    save_search_params(session, params) if referrer_is_index?(params)
-      
-    @search_params = retrieve_search_params(session, params)
-    @search = User.search(@search_params)
-    @record_count ||= @search.result(distinct: true).count
-    @users = @search.result(distinct: true).page(params[:page])
-    @search.build_condition if @search.conditions.empty?
-    @search.build_sort if @search.sorts.empty?
-    
+    @srch ||= RansackSearch.new(User)
+    @srch.execute_search(session, params)
     respond_to do |format|
       format.html  
       format.js 
@@ -220,30 +212,6 @@ class Devise::RegistrationsController < DeviseController
   
   
   private
-  
-    def referrer_is_index?(params)
-      !params[:q].nil?
-    end
-
-  
-    def save_search_params(session, params)
-      search_val = params[:q]
-      
-      if search_val.blank?
-        session[:q] = {params[:controller] => { params[:action] => nil }}
-      else 
-        session[:q] = {params[:controller] => { params[:action] => search_val }}
-      end
-    end
-
-    
-    def retrieve_search_params(session, params)
-      p = session.try(:[],:q).try(:[], params[:controller]).try(:[], params[:action])
-      p.nil? ? {} : p
-    end
-
-
-
   
   # Checks whether a password is needed or not. For validations only.
   # Passwords are always required if it's a new record, or if the password

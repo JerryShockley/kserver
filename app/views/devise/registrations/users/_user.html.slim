@@ -1,4 +1,4 @@
-= @users.each_with_object('') do |object, string|
+= @srch.records.each_with_object('') do |object, string|
   tr.user
     = model_fields.each_with_object('') do |field, string|
       td

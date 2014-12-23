@@ -4,7 +4,7 @@
       | Users
 
     .panel  
-      = search_form_for @search, url: search_users_path do |f|
+      = search_form_for @srch.search, url: search_users_path do |f|
         fieldset#sort_fieldset 
           legend Column Sorting
           = f.sort_fields do |s|
@@ -26,11 +26,11 @@
     .row
       .large-12.columns
         p
-          = "SQL: #{@users.to_sql}"
+          = "SQL: #{@srch.records.to_sql}"
     .row
       .large-12.columns
         p 
-          = display_results_count(@record_count)
+          = display_results_count(@srch.record_count)
     .row
       .large-12.columns
         table.admin#users
@@ -39,14 +39,14 @@
               = model_fields.each_with_object('') do |field, string|
                 th
                   - if field == :sign_in_count
-                    = sort_link(@search, "Sign in #", method: :put )
+                    = sort_link(@srch.search, "Sign in #", method: :put )
                   - else
-                    = sort_link(@search, field, method: :put )
+                    = sort_link(@srch.search, field, method: :put )
               th
                  = "Operations"
           tbody.tdata
             = render "devise/registrations/users/user"
       .row
-        = paginate @users
+        = paginate @srch.records
         
         
