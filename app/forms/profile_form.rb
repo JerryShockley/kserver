@@ -8,13 +8,10 @@ class ProfileForm
   include ActiveModel::Model
   include Virtus.model
   
-  attr_reader :profile, :user, :requests_card
+  attr_reader :profile, :user
   
   MIN_PASSWORD_LENGTH = 6
   
-  attribute :first_name, String
-  attribute :last_name, String
-  attribute :email, String
   attribute :street1, String
   attribute :street2, String
   attribute :city, String
@@ -25,6 +22,17 @@ class ProfileForm
   attribute :role, String
   attribute :source, String
   
+  # Duplicate col names with same values
+  attribute :first_name, String
+  attribute :last_name, String
+  attribute :email, String
+  
+  # Duplicate col names with distinct values
+  attribute :user_created_at
+  attribute :profile_created_at
+  attribute :user_updated_at
+  attribute :profile_updated_at
+
   validates_presence_of :email, :first_name, :last_name, :postal_code
   # validate :verify_complete_mailing_address
   validate :unique_email
@@ -38,8 +46,10 @@ class ProfileForm
                LS MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH 
                OK OR PA RI SC SD TN TX UT VA NT WE WI WV WY AA AE AP
               ) 
-  
-  
+              
+    # Unique non-editable user values
+  delegate  :sign_in_count, :last_sign_in_at, :reset_password_sent_at, 
+            :remember_created_at,  to: :user
   
   def persisted?
     false
@@ -50,21 +60,20 @@ class ProfileForm
     if obj == nil # Create
       @profile = Profile.new
       @user = User.new
-    else   # Edit
-      if obj.class == Profile
-        @profile = obj
-        @user = find_user_or_empty_object
-      elsif obj.class == User
-        @user = obj
-        @profile = find_profile_or_empty_object
-      else
-        raise ArgumentError, "Unexpected object Class: #{obj.class}", caller
-      end
-      sync_duplicate_obj_attributes(profile, user)
-      set_object_attributes( self, unique_objects_attributes )
+    elsif obj.class == Profile   # Edit
+      @profile = obj
+      @user = find_user_or_empty_object
+    elsif obj.class == User
+      @user = obj
+      @profile = find_profile_or_empty_object
+    else
+      raise ArgumentError, "Unexpected object Class: #{obj.class}", caller
     end
+    sync_duplicate_obj_attributes(profile, user)
+    set_object_attributes( self, unique_objects_attributes )
     self.receive_emails = true if profile.new_record?
     self.role = 'customer' if user.new_record?
+    sync_duplicate_attributes_with_distinct_values
   end
 
   
@@ -74,26 +83,48 @@ class ProfileForm
     set_object_attributes(self, params)
     set_object_attributes(user, params.slice(*user_param_keys))
     set_object_attributes(profile, params.slice(*profile_param_keys)) 
-                                   
     if valid?
       unless user.new_record? && !params.has_key?(:password)
-        user.save! # saves profile too!
+        user.save!
         profile.save!
         user.profile = profile
       else
         profile.user_id = nil 
         profile.save!
-      end         
+      end 
+      sync_duplicate_attributes_with_distinct_values        
       true
     else
       false
     end
   end
   
+  def ProfileForm.find(id)
+    ProfileForm.new(Profile.find_by(user_id: id))
+  end
+
+  
+  
+  def displayable_attribute_keys
+    [:first_name, :last_name, :email, :role, :receive_emails, :source, :street1, :street2, :city, :state, 
+     :postal_code, :sign_in_count, :last_sign_in_at, :reset_password_sent_at, :remember_created_at, 
+     :user_created_at, :profile_created_at, :user_updated_at, :profile_updated_at]
+  end
+  
+
+  
   
 
   private
-  
+
+  def sync_duplicate_attributes_with_distinct_values
+    self.user_created_at = user.created_at
+    self.profile_created_at = profile.created_at
+    self.user_updated_at = user.updated_at
+    self.profile_updated_at = profile.updated_at
+    
+  end
+
   def unique_email     
     verify_unique_email(user) && verify_unique_email(profile)
   end
@@ -116,8 +147,8 @@ class ProfileForm
 
   
   # Returns a new hash with all keys converted to symbols. This is useful because ActiveRecord.attributes
-  # returns keys as strings, while Self.attribtures (via Virtus) returns keys as symbols which is the most 
-  # useful form.
+  # returns keys as strings, while Self.attribtures (via Virtus) returns keys as symbols which is the  
+  # preferred form.
   def keys_to_sym(hash)
     sym_key_hash = {}
     hash.each { |k, v|  sym_key_hash[k.to_sym] = v }
@@ -187,12 +218,19 @@ class ProfileForm
     end
 
     def set_object_attributes(obj, params)
-      params.each  {|k, v| obj.send(:"#{k}=", filter_role(k, v))}
+      # params.each  {|k, v| obj.send("#{k.to_s}=", filter_value_convert_role(k, v))}
+      params.each do |k, v|
+        x = filter_value_convert_role(k, v)
+        obj.send("#{k.to_s}=", x)
+        # byebug
+      end
     end
     
-    def filter_role(key, val)
+    # Returns val unless key == role, in which case val is converted from numeric array 
+    # index to a string
+    def filter_value_convert_role(key, val)
       val = ["customer", "writer", "editor", "administrator", "sysadmin"][val.to_i] if key == :role && (val.class == Fixnum)
-      val
+      return val
     end
   
   

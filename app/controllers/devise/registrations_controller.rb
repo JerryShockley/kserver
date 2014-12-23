@@ -30,8 +30,10 @@ class Devise::RegistrationsController < DeviseController
   
 
   def show
-    @user = User.find(params[:id])
-    authorize @user
+    id = params[:id] ? params[:id] : current_user.id
+    @profile_form = ProfileForm.find(id)
+    self.resource = @profile_form.user
+    authorize @profile_form.user
   end
   
 
@@ -87,7 +89,7 @@ class Devise::RegistrationsController < DeviseController
     # This occurs because we have two routes to this action (devise: assumes current user and 
     # ours: passes an id)
     id = params[:id] ? params[:id] : current_user.id
-    @profile_form = ProfileForm.new(User.find(id))
+    @profile_form = ProfileForm.find(id)  #ProfileForm.new(User.find(id))
     self.resource = @profile_form.user
     authorize @profile_form.user
     
