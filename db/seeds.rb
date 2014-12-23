@@ -116,14 +116,9 @@ else
     puts("Created cust user")
   
   
-    # Create unrelated users and profiles
-    100.times do
-     FactoryGirl.create :cust
-     FactoryGirl.create :profile
-    end
   
     # Create linked users and profiles
-    100.times do
+    200.times do
      FactoryGirl.create(:create_customer_profile)
     end
 
