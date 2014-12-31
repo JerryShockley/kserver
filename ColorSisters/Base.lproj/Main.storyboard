@@ -308,7 +308,7 @@
         <!--Detail-->
         <scene sceneID="YvJ-Hs-aQT">
             <objects>
-                <viewController storyboardIdentifier="PageContentViewController2" title="Detail" id="PMS-v5-5GH" customClass="KokkoDetailedMatchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KokkoDetailedMatchViewController" title="Detail" id="PMS-v5-5GH" customClass="KokkoDetailedMatchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ep9-ak-bbE"/>
                         <viewControllerLayoutGuide type="bottom" id="QHT-bE-ghn"/>
@@ -496,25 +496,7 @@
                 <pageViewController storyboardIdentifier="DetailPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Oal-MJ-bA5" userLabel="Detail Page View Controller" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jnd-dQ-VV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-987" y="1523"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="crU-7E-2zZ">
-            <objects>
-                <viewController storyboardIdentifier="ViewController" id="feD-ka-hzG" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Vyp-xA-Dv7"/>
-                        <viewControllerLayoutGuide type="bottom" id="K36-Yd-oKw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rvr-C6-mfb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W6G-7q-6Wf" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-263" y="1502"/>
+            <point key="canvasLocation" x="-1143" y="1621"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

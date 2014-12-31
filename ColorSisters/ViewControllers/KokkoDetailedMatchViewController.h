@@ -7,11 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KokkoDetailedMatchViewController : UIViewController
+@interface KokkoDetailedMatchViewController : UIViewController <UIPageViewControllerDataSource>
 
 // For the Pageview
 @property (strong, nonatomic) UIPageViewController *pageViewController;
-@property /*(strong, nonatomic)*/ NSArray *pageTitles;
+@property /*(strong, nonatomic)*/ NSString *pageTitle;
 @property /*(strong, nonatomic)*/ NSArray *pageImages;
 
 
