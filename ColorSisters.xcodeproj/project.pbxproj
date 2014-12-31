@@ -37,13 +37,14 @@
 		D55E42C31A158EA500DD91E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C11A158EA500DD91E7 /* Main.storyboard */; };
 		D55E42C51A158EA500DD91E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C41A158EA500DD91E7 /* Images.xcassets */; };
 		D55E42C81A158EA500DD91E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C61A158EA500DD91E7 /* LaunchScreen.xib */; };
-		D59752D91A15C1FA009415BA /* KokkoDetailedMatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */; };
 		D59DF8B41A238FB000387161 /* KokkoInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = D59DF8B31A238FB000387161 /* KokkoInterface.mm */; };
 		D5C350D61A278B4000CB0F8C /* KokkoInterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C350D51A278B4000CB0F8C /* KokkoInterfaceTests.m */; };
 		D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */; };
 		D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */; };
 		D5D950D31A1F01A3007B3AF2 /* KokkoProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D950D21A1F01A3007B3AF2 /* KokkoProductInfo.m */; };
 		D73A89651A44940500AB98AC /* KokkoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73A89641A44940500AB98AC /* KokkoTableViewController.m */; };
+		D78B100C1A54AB4600933F10 /* KokkoDetailPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78B100B1A54AB4600933F10 /* KokkoDetailPageContentViewController.m */; };
+		D7A1AFFE1A54ACB3006AA755 /* KokkoDetailPageControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A1AFFD1A54ACB3006AA755 /* KokkoDetailPageControlViewController.m */; };
 		D7ED1E401A39FC0B008834EE /* KokkoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D7ED1E3F1A39FC0B008834EE /* KokkoData.m */; };
 		D7ED1E411A39FC0B008834EE /* KokkoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D7ED1E3F1A39FC0B008834EE /* KokkoData.m */; };
 /* End PBXBuildFile section */
@@ -98,8 +99,6 @@
 		D55E42C71A158EA500DD91E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D55E42CD1A158EA600DD91E7 /* ColorSistersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorSistersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55E42D21A158EA600DD91E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D59752D71A15C1FA009415BA /* KokkoDetailedMatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoDetailedMatchViewController.h; path = ViewControllers/KokkoDetailedMatchViewController.h; sourceTree = "<group>"; };
-		D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoDetailedMatchViewController.m; path = ViewControllers/KokkoDetailedMatchViewController.m; sourceTree = "<group>"; };
 		D59819F71A1C6E3200855190 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		D59DF8B21A238FB000387161 /* KokkoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoInterface.h; path = Interface/KokkoInterface.h; sourceTree = "<group>"; };
 		D59DF8B31A238FB000387161 /* KokkoInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = KokkoInterface.mm; path = Interface/KokkoInterface.mm; sourceTree = "<group>"; };
@@ -112,6 +111,10 @@
 		D5D950D41A1F01E6007B3AF2 /* KokkoProductInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoProductInfo.h; path = Interface/KokkoProductInfo.h; sourceTree = "<group>"; };
 		D73A89631A44940500AB98AC /* KokkoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoTableViewController.h; path = ViewControllers/KokkoTableViewController.h; sourceTree = "<group>"; };
 		D73A89641A44940500AB98AC /* KokkoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoTableViewController.m; path = ViewControllers/KokkoTableViewController.m; sourceTree = "<group>"; };
+		D78B100A1A54AB4600933F10 /* KokkoDetailPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoDetailPageContentViewController.h; path = ViewControllers/KokkoDetailPageContentViewController.h; sourceTree = "<group>"; };
+		D78B100B1A54AB4600933F10 /* KokkoDetailPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoDetailPageContentViewController.m; path = ViewControllers/KokkoDetailPageContentViewController.m; sourceTree = "<group>"; };
+		D7A1AFFC1A54ACB3006AA755 /* KokkoDetailPageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoDetailPageControlViewController.h; path = ViewControllers/KokkoDetailPageControlViewController.h; sourceTree = "<group>"; };
+		D7A1AFFD1A54ACB3006AA755 /* KokkoDetailPageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoDetailPageControlViewController.m; path = ViewControllers/KokkoDetailPageControlViewController.m; sourceTree = "<group>"; };
 		D7ED1E3E1A39FC0B008834EE /* KokkoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoData.h; path = Interface/KokkoData.h; sourceTree = "<group>"; };
 		D7ED1E3F1A39FC0B008834EE /* KokkoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoData.m; path = Interface/KokkoData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,16 +246,18 @@
 		D57FA3E91A159F03007FD997 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D78B100A1A54AB4600933F10 /* KokkoDetailPageContentViewController.h */,
+				D78B100B1A54AB4600933F10 /* KokkoDetailPageContentViewController.m */,
+				D7A1AFFC1A54ACB3006AA755 /* KokkoDetailPageControlViewController.h */,
+				D7A1AFFD1A54ACB3006AA755 /* KokkoDetailPageControlViewController.m */,
 				D50174481A339D7200243D4C /* KokkoPageContentViewController.h */,
 				D50174491A339D7200243D4C /* KokkoPageContentViewController.m */,
 				D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */,
 				D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */,
-				D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */,
-				D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */,
-				D59752D71A15C1FA009415BA /* KokkoDetailedMatchViewController.h */,
-				D59752D81A15C1FA009415BA /* KokkoDetailedMatchViewController.m */,
 				D73A89631A44940500AB98AC /* KokkoTableViewController.h */,
 				D73A89641A44940500AB98AC /* KokkoTableViewController.m */,
+				D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */,
+				D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -385,10 +390,11 @@
 			files = (
 				D5D950D31A1F01A3007B3AF2 /* KokkoProductInfo.m in Sources */,
 				D7ED1E401A39FC0B008834EE /* KokkoData.m in Sources */,
-				D59752D91A15C1FA009415BA /* KokkoDetailedMatchViewController.m in Sources */,
 				D2DEE97D1A2E60B50063C236 /* color_measure.cpp in Sources */,
 				D2DEE9821A2E60B50063C236 /* skinpixels.cpp in Sources */,
+				D7A1AFFE1A54ACB3006AA755 /* KokkoDetailPageControlViewController.m in Sources */,
 				D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */,
+				D78B100C1A54AB4600933F10 /* KokkoDetailPageContentViewController.m in Sources */,
 				D2DEE97C1A2E60B50063C236 /* chart.cpp in Sources */,
 				D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */,
 				D2DEE97E1A2E60B50063C236 /* colorspace.c in Sources */,

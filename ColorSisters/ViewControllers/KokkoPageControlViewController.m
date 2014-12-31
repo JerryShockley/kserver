@@ -8,7 +8,6 @@
 #import "KokkoPageControlViewController.h"
 
 @interface KokkoPageControlViewController ()
-
 @end
 
 @implementation KokkoPageControlViewController
@@ -17,6 +16,7 @@ NSUInteger currentIndex = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Create the data model
     self.pageTitles = @[@"TODO description Page1.png", @"TODO description Page2.png", @"TODO description Page3.png"]; // TODO:  need strings
     self.pageImages = @[@"Page1.png", @"Page2.png", @"Page3.png"];
@@ -38,9 +38,8 @@ NSUInteger currentIndex = 0;
                                        animated:NO
                                      completion:nil];
     
-
-    [self addChildViewController:_pageViewController];
-    [self.view addSubview:_pageViewController.view];
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
 
     [NSTimer scheduledTimerWithTimeInterval:intervalGettingStartedSeconds
@@ -104,7 +103,7 @@ NSUInteger currentIndex = 0;
     return pageContentViewController;
 }
 
-#pragma mark - Page View Controller Data Source
+#pragma mark - UIPageViewControllerDataSource Protocol
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
