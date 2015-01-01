@@ -6,7 +6,7 @@
 //
 
 #import "KokkoTableViewController.h"
-#import "KokkoDetailedMatchViewController.h"
+#import "KokkoDetailPageControlViewController.h"
 #import "KokkoData.h"
 
 @interface KokkoTableViewController ()
@@ -99,15 +99,14 @@ NSDictionary *shadeMatches;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if([segue.identifier isEqual:detailControllerName]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSInteger row = indexPath.row;
-        
-        KokkoData *data = [[KokkoData alloc] init];
-        NSDictionary *detailedRecs = [data setRecommendationsArray:self.detailItem : row];
 
-        [[segue destinationViewController] setDetailItem:detailedRecs];
-    }
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSInteger row = indexPath.row;
+    
+    KokkoData *data = [[KokkoData alloc] init];
+    NSDictionary *detailedRecs = [data setRecommendationsArray:self.detailItem : row];
+
+    [[segue destinationViewController] setDetailItem:detailedRecs];
 }
 
 

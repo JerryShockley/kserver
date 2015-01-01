@@ -103,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBY-Yx-2pF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-178.5" y="659"/>
+            <point key="canvasLocation" x="-1764" y="-137"/>
         </scene>
         <!--Kokko Page Control View Controller-->
         <scene sceneID="sfF-oW-WW5">
@@ -114,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Mv-vT-p7K" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1176" y="-115.5"/>
+            <point key="canvasLocation" x="-924" y="-863"/>
         </scene>
         <!--Page Content View Controller-->
         <scene sceneID="m7u-fm-vyh">
@@ -224,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhB-N1-5eY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1155" y="615"/>
+            <point key="canvasLocation" x="-168" y="-857"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="hRX-hB-3nB">
@@ -232,7 +232,7 @@
                 <pageViewController storyboardIdentifier="PageViewController" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="93p-iT-XKU" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cV3-ba-5tY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1875" y="-115.5"/>
+            <point key="canvasLocation" x="557" y="-873"/>
         </scene>
         <!--Matches-->
         <scene sceneID="oog-M0-Ia6">
@@ -261,7 +261,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="PMS-v5-5GH" kind="show" identifier="showDetail" id="NC6-VM-aL3"/>
+                                    <segue destination="HnP-l1-7PQ" kind="show" identifier="showDetail" id="f5s-Ol-oy3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -284,7 +284,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygb-Dp-MFn" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-450" y="-858.75"/>
+            <point key="canvasLocation" x="-1764" y="635"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="evS-iK-owc">
@@ -303,12 +303,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpm-or-KN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1176" y="-858.75"/>
+            <point key="canvasLocation" x="-1764" y="-863"/>
         </scene>
         <!--Detail-->
         <scene sceneID="YvJ-Hs-aQT">
             <objects>
-                <viewController storyboardIdentifier="PageContentViewController2" title="Detail" id="PMS-v5-5GH" customClass="KokkoDetailedMatchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KokkoDetailPageContentViewController" title="Detail" id="PMS-v5-5GH" customClass="KokkoDetailPageContentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ep9-ak-bbE"/>
                         <viewControllerLayoutGuide type="bottom" id="QHT-bE-ghn"/>
@@ -317,7 +317,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Match Details" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Oha-Tk-11I">
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Match Details" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Oha-Tk-11I">
                                 <rect key="frame" x="20" y="469" width="560" height="87"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -327,7 +327,7 @@
                                     <rect key="frame" x="-11" y="435" width="422" height="29"/>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-QU-8xV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-QU-8xV">
                                 <rect key="frame" x="0.0" y="64" width="600" height="416"/>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="16" y="64" width="359" height="363"/>
@@ -337,13 +337,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QHT-bE-ghn" firstAttribute="top" secondItem="Oha-Tk-11I" secondAttribute="bottom" constant="87" id="6MQ-ws-BYJ"/>
-                            <constraint firstItem="Oha-Tk-11I" firstAttribute="centerY" secondItem="G6S-OL-dTI" secondAttribute="centerY" id="6lw-NE-kf2"/>
+                            <constraint firstItem="Oha-Tk-11I" firstAttribute="centerX" secondItem="gqz-QU-8xV" secondAttribute="centerX" id="7wW-sW-eYR"/>
+                            <constraint firstItem="Oha-Tk-11I" firstAttribute="centerX" secondItem="G6S-OL-dTI" secondAttribute="centerX" id="A0A-os-80y"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="centerX" secondItem="gqz-QU-8xV" secondAttribute="centerX" id="E1g-7n-j8A"/>
+                            <constraint firstItem="Oha-Tk-11I" firstAttribute="bottom" secondItem="QHT-bE-ghn" secondAttribute="top" id="ENT-Yc-WGq"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="centerX" secondItem="G6S-OL-dTI" secondAttribute="centerX" id="GVZ-S5-g35"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="top" secondItem="gqz-QU-8xV" secondAttribute="bottom" constant="84" id="Q2H-xN-A3l"/>
-                            <constraint firstItem="Oha-Tk-11I" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leading" constant="20" symbolic="YES" id="TGx-sD-AHF"/>
+                            <constraint firstItem="Oha-Tk-11I" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leadingMargin" constant="4" id="R6V-lv-6tw"/>
+                            <constraint firstItem="gqz-QU-8xV" firstAttribute="top" secondItem="ep9-ak-bbE" secondAttribute="bottom" id="StW-yu-nWQ"/>
+                            <constraint firstItem="gqz-QU-8xV" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leading" id="Vqx-4R-bAe"/>
+                            <constraint firstItem="QHT-bE-ghn" firstAttribute="top" secondItem="gqz-QU-8xV" secondAttribute="bottom" constant="76" id="YK4-5s-K1H"/>
+                            <constraint firstItem="Oha-Tk-11I" firstAttribute="top" secondItem="ep9-ak-bbE" secondAttribute="bottom" constant="405" id="bJr-el-JA0"/>
                             <constraint firstItem="gqz-QU-8xV" firstAttribute="top" secondItem="ep9-ak-bbE" secondAttribute="bottom" id="ehg-y6-XMo"/>
-                            <constraint firstAttribute="trailing" secondItem="Oha-Tk-11I" secondAttribute="trailing" constant="20" symbolic="YES" id="kOH-jf-ssG"/>
                             <constraint firstItem="gqz-QU-8xV" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leading" id="oTH-9h-K92"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leadingMargin" constant="4" id="uG6-33-kKy"/>
                         </constraints>
@@ -362,12 +367,9 @@
                             <mask key="constraints">
                                 <include reference="ehg-y6-XMo"/>
                                 <include reference="oTH-9h-K92"/>
-                                <exclude reference="6lw-NE-kf2"/>
                                 <include reference="E1g-7n-j8A"/>
                                 <include reference="GVZ-S5-g35"/>
                                 <include reference="Q2H-xN-A3l"/>
-                                <exclude reference="TGx-sD-AHF"/>
-                                <exclude reference="kOH-jf-ssG"/>
                                 <include reference="uG6-33-kKy"/>
                                 <include reference="6MQ-ws-BYJ"/>
                             </mask>
@@ -391,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7i2-BW-5qK" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1884" y="1283"/>
+            <point key="canvasLocation" x="-192" y="635"/>
         </scene>
         <!--Share Results-->
         <scene sceneID="FD7-sd-zhD">
@@ -488,7 +490,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYd-Tk-d36" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127.5" y="-122"/>
+            <point key="canvasLocation" x="-1754" y="1392"/>
         </scene>
         <!--Detail Page View Controller-->
         <scene sceneID="GTh-AX-nYX">
@@ -496,25 +498,18 @@
                 <pageViewController storyboardIdentifier="DetailPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Oal-MJ-bA5" userLabel="Detail Page View Controller" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jnd-dQ-VV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-987" y="1523"/>
+            <point key="canvasLocation" x="557" y="635"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="crU-7E-2zZ">
+        <!--Kokko Detail Page Control View Controller-->
+        <scene sceneID="Wtn-r6-jHm">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="feD-ka-hzG" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Vyp-xA-Dv7"/>
-                        <viewControllerLayoutGuide type="bottom" id="K36-Yd-oKw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rvr-C6-mfb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
+                <viewController id="HnP-l1-7PQ" customClass="KokkoDetailPageControlViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WvR-Wr-WIm"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W6G-7q-6Wf" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Sm-IJ-M9g" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-263" y="1502"/>
+            <point key="canvasLocation" x="-916" y="635"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
