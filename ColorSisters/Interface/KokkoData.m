@@ -10,7 +10,7 @@
 @implementation KokkoData
 
 /// path to image bundle
-NSString *imageBundlePath = @"product_images.bundle";
+static NSString *imageBundlePath = @"product_images.bundle";
 
 
 
@@ -72,7 +72,7 @@ NSString *imageBundlePath = @"product_images.bundle";
  * @returns NSDictionary, with only one key, which is just a slice of the original NSDictionary
  * For use by the UIDetailedTableView
  */
-- (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger) index {
+- (NSDictionary *) setRecommendationsArray:(NSDictionary *)shadeMatches index:(NSInteger)index {
 
     // test iterator on shadeMatches
     
@@ -95,10 +95,10 @@ NSString *imageBundlePath = @"product_images.bundle";
     NSMutableArray *retValue = [[NSMutableArray alloc] init];
     
     // Iterate over brand, and create an Array
-    for (NSString *brand in shadeMatches) {
+/*    for (NSString *brand in shadeMatches) {
         
     }
-    
+*/
     pathDirWithBrand = [NSString stringWithFormat:@"%@%@%@", pathDir, brand, @"/"];
     
     for(NSString *shadeImage in detail) {
@@ -111,6 +111,18 @@ NSString *imageBundlePath = @"product_images.bundle";
     // New dict based on the ith row
     NSDictionary *dictDetailedRecommendation = [[NSDictionary alloc] initWithObjectsAndKeys:retValue, brand, nil];  // Note the order is values, keys
     return dictDetailedRecommendation;
+}
+
+
+- (NSDictionary *)setRecommendationsForBrand:(NSString *)brand withMatches:(NSArray *)matches
+{
+    NSMutableArray *paths = [[NSMutableArray alloc] init];
+    
+    [matches enumerateObjectsUsingBlock:^(NSString *obj,NSUInteger idx,BOOL *stop) {
+        [paths addObject:[NSString stringWithFormat:@"%@/%@/%@",imageBundlePath,brand,obj]];
+    }];
+    
+    return @{brand: paths};
 }
 
 @end

@@ -21,12 +21,6 @@ NSUInteger currentIndex = 0;
     self.pageTitles = @[@"TODO description Page1.png", @"TODO description Page2.png", @"TODO description Page3.png"]; // TODO:  need strings
     self.pageImages = @[@"Page1.png", @"Page2.png", @"Page3.png"];
     
-    // Override point for customization after application launch.
-    UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor blueColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    pageControl.backgroundColor = [UIColor blackColor];
-    
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;

@@ -16,9 +16,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
+    // Set the page control characteristics for a consistent look throughout the app
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor blueColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    pageControl.backgroundColor = [UIColor clearColor];
+    pageControl.hidesForSinglePage = YES;
+
     [KokkoInterface init];
+    
     return YES;
 }
 
