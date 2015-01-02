@@ -100,13 +100,15 @@ NSDictionary *shadeMatches;
     // Pass the selected object to the new view controller.
     
 
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSInteger row = indexPath.row;
-    
-    KokkoData *data = [[KokkoData alloc] init];
-    NSDictionary *detailedRecs = [data setRecommendationsArray:self.detailItem : row];
-
-    [[segue destinationViewController] setDetailItem:detailedRecs];
+    if([segue.identifier isEqual:detailControllerName]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSInteger row = indexPath.row;
+        
+        KokkoData *data = [[KokkoData alloc] init];
+        NSDictionary *detailedRecs = [data setRecommendationsArray:self.detailItem : row];
+        
+        [[segue destinationViewController] setDetailItem:detailedRecs];
+    }
 }
 
 

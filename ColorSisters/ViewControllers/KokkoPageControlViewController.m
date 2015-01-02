@@ -18,7 +18,9 @@ NSUInteger currentIndex = 0;
     [super viewDidLoad];
     
     // Create the data model
-    self.pageTitles = @[@"TODO description Page1.png", @"TODO description Page2.png", @"TODO description Page3.png"]; // TODO:  need strings
+    self.pageTitles = @[@"Use your cell phone camera to find the perfect foundation for you.",
+                        @"We match you skin tone to the ideal shade from our trusted brands.",
+                        @"Just hold our Color Chart next to your face.  Use this App to take your picture -- that's it!"];
     self.pageImages = @[@"Page1.png", @"Page2.png", @"Page3.png"];
     
     // Override point for customization after application launch.
