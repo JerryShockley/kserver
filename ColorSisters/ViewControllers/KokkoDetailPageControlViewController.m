@@ -31,8 +31,6 @@
                        direction:UIPageViewControllerNavigationDirectionForward
                         animated:NO
                       completion:nil];
-        
-        _pvc.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 430);
         _pvc.view.backgroundColor = [UIColor whiteColor];
     }
     return _pvc;

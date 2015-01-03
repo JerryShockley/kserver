@@ -10,6 +10,5 @@
 
 @property NSString *titleText;
 @property NSString *imageFile;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
