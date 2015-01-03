@@ -111,7 +111,12 @@ NSArray *images;
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return [self.pageImages count];
+    if([self.pageImages count] > 1) {
+        return [self.pageImages count];
+    } else {
+        return 0;        
+    }
+
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
