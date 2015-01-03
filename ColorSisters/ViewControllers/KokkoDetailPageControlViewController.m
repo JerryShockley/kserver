@@ -7,6 +7,7 @@
 
 #import "KokkoDetailPageControlViewController.h"
 #import "KokkoDetailPageContentViewController.h"
+#import "KokkoShareViewController.h"
 
 @interface KokkoDetailPageControlViewController() <UIPageViewControllerDataSource>
 
@@ -45,12 +46,12 @@
     
     // Nav bar
     self.navigationItem.title = [self.detailItem allKeys][0];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                           target:self
-                                                                                           action:@selector(tapShare:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(tapShare:)];
     // Ensure content sits below the navigation bar
     self.edgesForExtendedLayout = UIRectEdgeNone;
-
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.pvc.view];
@@ -77,7 +78,8 @@
 
 - (void)tapShare:(id)sender
 {
-    // Share action goes here
+    KokkoShareViewController *svc = [[KokkoShareViewController alloc] init];
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 

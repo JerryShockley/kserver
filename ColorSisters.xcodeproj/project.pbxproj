@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C290193A1A58A49F0090F22C /* KokkoShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29019391A58A49F0090F22C /* KokkoShareViewController.m */; };
 		D24F184E1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */; };
 		D24F184F1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */; };
 		D24F18511A2E3ED6003491FC /* FaceShades.csv in Resources */ = {isa = PBXBuildFile; fileRef = D24F18501A2E3ED6003491FC /* FaceShades.csv */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C29019381A58A49F0090F22C /* KokkoShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoShareViewController.h; path = ViewControllers/KokkoShareViewController.h; sourceTree = "<group>"; };
+		C29019391A58A49F0090F22C /* KokkoShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoShareViewController.m; path = ViewControllers/KokkoShareViewController.m; sourceTree = "<group>"; };
 		D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FacePixels.fpdb.txt; sourceTree = "<group>"; };
 		D24F18501A2E3ED6003491FC /* FaceShades.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FaceShades.csv; sourceTree = "<group>"; };
 		D24F18531A2E3EEE003491FC /* 2007_3x8_ini.cht */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2007_3x8_ini.cht; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				D73A89641A44940500AB98AC /* KokkoTableViewController.m */,
 				D5CCF9061A15977D00E30397 /* KokkoUIImagePickerController.h */,
 				D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */,
+				C29019381A58A49F0090F22C /* KokkoShareViewController.h */,
+				C29019391A58A49F0090F22C /* KokkoShareViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 				D78B100C1A54AB4600933F10 /* KokkoDetailPageContentViewController.m in Sources */,
 				D2DEE97C1A2E60B50063C236 /* chart.cpp in Sources */,
 				D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */,
+				C290193A1A58A49F0090F22C /* KokkoShareViewController.m in Sources */,
 				D2DEE97E1A2E60B50063C236 /* colorspace.c in Sources */,
 				D59DF8B41A238FB000387161 /* KokkoInterface.mm in Sources */,
 				D2DEE9811A2E60B50063C236 /* pipeline.cpp in Sources */,

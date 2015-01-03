@@ -7,6 +7,7 @@
 
 #import "KokkoTableViewController.h"
 #import "KokkoData.h"
+#import "KokkoShareViewController.h"
 
 @interface KokkoTableViewController ()
 
@@ -15,6 +16,15 @@
 
 @implementation KokkoTableViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(tapShare:)];
+}
 
 #pragma mark - Table view data source
 
@@ -48,5 +58,13 @@
     }
 }
 
+
+#pragma mark - Actions
+
+- (void)tapShare:(id)sender
+{
+    KokkoShareViewController *svc = [[KokkoShareViewController alloc] init];
+    [self.navigationController pushViewController:svc animated:YES];
+}
 
 @end
