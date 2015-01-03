@@ -7,11 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class DetailViewController;
-
 @interface KokkoTableViewController : UITableViewController
 
-@property (strong, nonatomic) id detailItem;
-@property (strong, nonatomic) DetailViewController *detailViewController;
-@property (nonatomic, retain) UIImage *tableViewImage;
+@property (strong, nonatomic) NSDictionary* detailItem;
+
 @end
