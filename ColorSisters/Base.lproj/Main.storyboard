@@ -566,6 +566,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brP-ZE-gsG">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                             <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Match Details" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Oha-Tk-11I">
                                 <rect key="frame" x="20" y="469" width="560" height="87"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -581,22 +585,30 @@
                         <constraints>
                             <constraint firstItem="QHT-bE-ghn" firstAttribute="top" secondItem="Oha-Tk-11I" secondAttribute="bottom" constant="87" id="6MQ-ws-BYJ"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="centerX" secondItem="gqz-QU-8xV" secondAttribute="centerX" id="7wW-sW-eYR"/>
+                            <constraint firstItem="brP-ZE-gsG" firstAttribute="trailing" secondItem="gqz-QU-8xV" secondAttribute="trailing" id="86Q-at-O7O"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="centerX" secondItem="G6S-OL-dTI" secondAttribute="centerX" id="A0A-os-80y"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="bottom" secondItem="QHT-bE-ghn" secondAttribute="top" id="ENT-Yc-WGq"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="top" secondItem="gqz-QU-8xV" secondAttribute="bottom" constant="8" symbolic="YES" id="OtV-0j-7Ab"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leadingMargin" constant="-27" id="PsC-c5-iSC"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leadingMargin" constant="4" id="R6V-lv-6tw"/>
                             <constraint firstItem="gqz-QU-8xV" firstAttribute="top" secondItem="ep9-ak-bbE" secondAttribute="bottom" id="StW-yu-nWQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="brP-ZE-gsG" secondAttribute="trailing" constant="8" id="T8E-rq-XKn"/>
+                            <constraint firstItem="brP-ZE-gsG" firstAttribute="top" secondItem="Oha-Tk-11I" secondAttribute="bottom" constant="2" id="Vcf-JS-TEf"/>
                             <constraint firstItem="gqz-QU-8xV" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leading" id="Vqx-4R-bAe"/>
                             <constraint firstItem="QHT-bE-ghn" firstAttribute="top" secondItem="gqz-QU-8xV" secondAttribute="bottom" constant="76" id="YK4-5s-K1H"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="centerX" secondItem="G6S-OL-dTI" secondAttribute="centerX" id="YMN-6R-rNd"/>
                             <constraint firstItem="Oha-Tk-11I" firstAttribute="top" secondItem="ep9-ak-bbE" secondAttribute="bottom" constant="405" id="bJr-el-JA0"/>
                             <constraint firstItem="gqz-QU-8xV" firstAttribute="top" secondItem="ep9-ak-bbE" secondAttribute="bottom" id="bcr-fh-WKd"/>
+                            <constraint firstItem="brP-ZE-gsG" firstAttribute="leading" secondItem="gqz-QU-8xV" secondAttribute="leading" id="e8x-n6-4I1"/>
+                            <constraint firstItem="QHT-bE-ghn" firstAttribute="top" secondItem="brP-ZE-gsG" secondAttribute="bottom" constant="20" id="fPm-R8-IkI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gqz-QU-8xV" secondAttribute="trailing" constant="9" id="fVQ-i6-dTy"/>
                             <constraint firstItem="QHT-bE-ghn" firstAttribute="top" secondItem="Oha-Tk-11I" secondAttribute="bottom" constant="92" id="mdN-cG-NH3"/>
                             <constraint firstItem="gqz-QU-8xV" firstAttribute="leading" secondItem="G6S-OL-dTI" secondAttribute="leadingMargin" id="zzm-09-3oR"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="brP-ZE-gsG"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="bcr-fh-WKd"/>
                                 <exclude reference="fVQ-i6-dTy"/>
@@ -604,16 +616,24 @@
                                 <exclude reference="OtV-0j-7Ab"/>
                                 <exclude reference="PsC-c5-iSC"/>
                                 <exclude reference="YMN-6R-rNd"/>
+                                <exclude reference="86Q-at-O7O"/>
+                                <exclude reference="T8E-rq-XKn"/>
+                                <exclude reference="Vcf-JS-TEf"/>
+                                <exclude reference="e8x-n6-4I1"/>
                                 <exclude reference="6MQ-ws-BYJ"/>
+                                <exclude reference="fPm-R8-IkI"/>
                                 <exclude reference="mdN-cG-NH3"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="brP-ZE-gsG"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="StW-yu-nWQ"/>
                                 <exclude reference="Vqx-4R-bAe"/>
                                 <include reference="bcr-fh-WKd"/>
-                                <include reference="fVQ-i6-dTy"/>
+                                <exclude reference="fVQ-i6-dTy"/>
                                 <include reference="zzm-09-3oR"/>
                                 <exclude reference="7wW-sW-eYR"/>
                                 <exclude reference="A0A-os-80y"/>
@@ -623,8 +643,13 @@
                                 <exclude reference="R6V-lv-6tw"/>
                                 <include reference="YMN-6R-rNd"/>
                                 <exclude reference="bJr-el-JA0"/>
+                                <include reference="86Q-at-O7O"/>
+                                <include reference="T8E-rq-XKn"/>
+                                <include reference="Vcf-JS-TEf"/>
+                                <include reference="e8x-n6-4I1"/>
                                 <exclude reference="6MQ-ws-BYJ"/>
                                 <exclude reference="YK4-5s-K1H"/>
+                                <include reference="fPm-R8-IkI"/>
                                 <include reference="mdN-cG-NH3"/>
                             </mask>
                         </variation>
@@ -643,6 +668,7 @@
                     <connections>
                         <outlet property="backgroundImageView" destination="gqz-QU-8xV" id="DdT-C9-zLm"/>
                         <outlet property="titleLabel" destination="Oha-Tk-11I" id="fCQ-Lt-RqQ"/>
+                        <outlet property="webView" destination="brP-ZE-gsG" id="Oko-I4-PCR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7i2-BW-5qK" sceneMemberID="firstResponder"/>
@@ -860,6 +886,6 @@ Want to know more? Give us your e-mail address and we will send you the entire l
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tIG-6A-s85"/>
+        <segue reference="Bnm-5c-lN4"/>
     </inferredMetricsTieBreakers>
 </document>
