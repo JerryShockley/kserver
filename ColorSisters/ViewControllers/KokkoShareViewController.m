@@ -7,6 +7,7 @@
 //
 
 #import "KokkoShareViewController.h"
+#import "KokkoUIImagePickerController.h"
 
 @interface KokkoShareViewController ()
 
@@ -308,7 +309,12 @@
 
 - (void)tapNewPhoto:(id)sender
 {
-    // Do something here
+    for (UIViewController *vc in [self.navigationController viewControllers]) {
+        if ([vc isKindOfClass:[KokkoUIImagePickerController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 @end
