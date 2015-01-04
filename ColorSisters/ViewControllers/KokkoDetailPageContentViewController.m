@@ -19,7 +19,7 @@
 - (UIImageView *)backgroundImageView
 {
     if (!_backgroundImageView) {
-        self.backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.imageFile]];
+        self.backgroundImageView = [[UIImageView alloc] initWithImage:self.image];
         [_backgroundImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
         _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     }

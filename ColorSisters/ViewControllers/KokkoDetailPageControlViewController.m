@@ -8,6 +8,7 @@
 #import "KokkoDetailPageControlViewController.h"
 #import "KokkoDetailPageContentViewController.h"
 #import "KokkoShareViewController.h"
+#import "KokkoProductInfo.h"
 
 @interface KokkoDetailPageControlViewController() <UIPageViewControllerDataSource>
 
@@ -60,15 +61,46 @@
 - (KokkoDetailPageContentViewController *)viewControllerAtIndex:(NSInteger)index
 {
     // Test for out of bounds
-    NSArray *images = [self.detailItem allValues][0];
-    if (([images count] == 0) || (index >= [images count]) || (index < 0)) {
+    NSArray *shades = [self.detailItem allValues][0];
+    if (([shades count] == 0) || (index >= [shades count]) || (index < 0)) {
         return nil;
+    }
+
+    // Establish brand and shade
+    NSString *brand = [self.detailItem allKeys][0];
+    NSString *shade = shades[index];
+
+    // Get the product data
+    NSString *bundle = [NSString stringWithFormat:@"%@/product_images.bundle",[[NSBundle mainBundle] resourcePath]];
+    KokkoProductInfo *prodData = [[KokkoProductInfo alloc] initWithContentsOfBundle:bundle];
+    UIImage *image = [prodData getProductImageForBrand:brand withShade:shade];
+    
+    NSString *prefix = @"";
+    if ([shades count]==2) {
+        if (index==0) {
+            prefix = @"Best Match: ";
+        } else {
+            prefix = @"Alternative: ";
+        }
+    } else if ([shades count]>2) {
+        if (index==0) {
+            prefix = @"Best Match: ";
+        } else {
+            prefix = [NSString stringWithFormat:@"Alternative #%ld: ",(long)index];
+        }
+    }
+    
+    NSString *title = [NSString stringWithFormat:@"%@%@",prefix,shade];
+
+    NSString *longname = [prodData getProductNameForBrand:brand withShade:shade];
+    if (longname) {
+        title = [title stringByAppendingFormat:@" - %@",longname];
     }
     
     // Create a new view controller and pass suitable data
     KokkoDetailPageContentViewController *pageContentViewController = [[KokkoDetailPageContentViewController alloc] init];
-    pageContentViewController.imageFile = images[index];
-    pageContentViewController.titleText = @"Best Match";
+    pageContentViewController.image = image;
+    pageContentViewController.titleText = title;
     pageContentViewController.view.tag = index;
     return pageContentViewController;
 }

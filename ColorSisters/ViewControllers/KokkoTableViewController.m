@@ -53,8 +53,7 @@
     if([segue.identifier isEqual:@"showDetail"]) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         NSString *brand = cell.textLabel.text;
-        
-        [[segue destinationViewController] setDetailItem:[[[KokkoData alloc] init] setRecommendationsForBrand:brand withMatches:self.detailItem[brand]]];
+        [[segue destinationViewController] setDetailItem:@{brand: self.detailItem[brand]}];
     }
 }
 

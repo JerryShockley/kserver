@@ -9,6 +9,6 @@
 @interface KokkoDetailPageContentViewController : UIViewController
 
 @property NSString *titleText;
-@property NSString *imageFile;
+@property UIImage *image;
 
 @end

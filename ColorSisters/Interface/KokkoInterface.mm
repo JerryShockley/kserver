@@ -110,41 +110,40 @@ SkinToneMatcher imagePipe(false);
     
     Recommendations brshades;
     try {
-	brshades = imagePipe.recommend(cvImage);
+        brshades = imagePipe.recommend(cvImage);
     }
     catch (KokkoException e) {
-	NSLog(@"Kokko Exception: %s\n", e.get_message().c_str());
-	return nil;
+        NSLog(@"Kokko Exception: %s\n", e.get_message().c_str());
+        return nil;
     }
-	
+    
     NSMutableDictionary *matches = [[NSMutableDictionary alloc] init];
     
     for (auto bi = brshades.cbegin(), bend = brshades.cend(); bi != bend; ++bi) {
-	const ShadeList& theShades = bi->second;
-	NSMutableArray *shades = [[NSMutableArray alloc] init];
-	for (auto si = theShades.cbegin(), siend = theShades.cend(); si != siend; ++si) {
-	    NSString *shadeName = [NSString stringWithUTF8String:(*si)->getShadeCode().c_str()];
-	    [shades addObject:shadeName];
-	}
-	NSString *brandName = [NSString stringWithUTF8String:bi->first.c_str()];
-	matches[brandName] = [shades copy];		// store immutable list of shades in Brand table
+        const ShadeList& theShades = bi->second;
+        NSMutableArray *shades = [[NSMutableArray alloc] init];
+        for (auto si = theShades.cbegin(), siend = theShades.cend(); si != siend; ++si) {
+            NSString *shadeName = [NSString stringWithUTF8String:(*si)->getShadeCode().c_str()];
+            [shades addObject:shadeName];
+        }
+        NSString *brandName = [NSString stringWithUTF8String:bi->first.c_str()];
+        matches[brandName] = [shades copy];		// store immutable list of shades in Brand table
     }
-
+    
     return [matches copy];
 }
 
 /*!
  * Hardcoded data for testing User Interface
- * TODO - initial NSDictionary data strucutre did not have .png nor .jpg extensions
  */
 - (NSDictionary *)getRecommendationsUIONLY {
-    NSArray *dior = [NSArray arrayWithObjects: @"301.png", @"200.png", @"400.png", nil];
-    NSArray *loreal = [NSArray arrayWithObjects: @"C4.jpg", @"N4.jpg", @"C5.jpg", nil];
-    NSArray *mac = [NSArray arrayWithObjects: @"NC15.jpg", nil];
-    NSArray *maybelline = [NSArray arrayWithObjects: @"D4.png", @"D2.png", nil];
-    NSArray *revlon = [NSArray arrayWithObjects: @"250.png", @"240.png", @"220.png", nil];
-    NSDictionary *brands = @{@"Dior" : dior, @"L'Oreal" : loreal, @"MAC" : mac, @"Maybelline": maybelline, @"Revlon": revlon};
-    return brands;
+    return @{
+             @"Dior"        :@[@"301", @"200", @"400"],
+             @"L'Oreal"     :@[@"C4", @"N4", @"C5"],
+             @"MAC"         :@[@"NC15"],
+             @"Maybelline"  :@[@"D4", @"D2"],
+             @"Revlon"      :@[@"250", @"240", @"220"],
+             };
 }
 
 #ifdef FOR_THE_FUTURE
