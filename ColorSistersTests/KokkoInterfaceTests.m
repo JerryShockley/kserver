@@ -74,7 +74,7 @@ KokkoInterface* kokkoClass;
 //
 //    [data setRecommendationsArray:shadeMatches];
     
-    NSDictionary *detailedRecs = [data setRecommendationsArray:shadeMatches : row];
+    [data setRecommendationsArray:shadeMatches index:row];
 
     
 }
@@ -95,7 +95,7 @@ KokkoInterface* kokkoClass;
         KokkoData *data = [[KokkoData alloc] init];
         [data logRecommendationsDictionary:shadeMatches];
         
-        [data setRecommendationsArray:shadeMatches :0];
+        [data setRecommendationsArray:shadeMatches index:0];
     }];
 }
 

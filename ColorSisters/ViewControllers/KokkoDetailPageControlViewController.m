@@ -6,112 +6,102 @@
 //
 
 #import "KokkoDetailPageControlViewController.h"
+#import "KokkoDetailPageContentViewController.h"
+#import "KokkoShareViewController.h"
 
-@interface KokkoDetailPageControlViewController ()
+@interface KokkoDetailPageControlViewController() <UIPageViewControllerDataSource>
+
+@property (strong, nonatomic) UIPageViewController *pvc;
+
 @end
 
+
 @implementation KokkoDetailPageControlViewController
-NSString *title;
-NSArray *images;
 
-#pragma mark - Managing the detail item
 
-/*!
- * Extract Data passed over from the Segue
- */
-- (void)setDetailItem:(NSDictionary *)newDetailItem
+#pragma mark - Accessors
+
+- (UIPageViewController *)pvc
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Detail Item is a dictionary, extract the keys and values into appropriate structures
-        title = [self.detailItem allKeys][0];  // extract the 'key', whcih is a string
-        images = [self.detailItem allValues][0]; // extract the 'value', which is an array
+    if (!_pvc) {
+        self.pvc = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                                                   navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                 options:nil];
+        _pvc.dataSource = self;
+        [_pvc setViewControllers:@[[self viewControllerAtIndex:0]]
+                       direction:UIPageViewControllerNavigationDirectionForward
+                        animated:NO
+                      completion:nil];
+        _pvc.view.backgroundColor = [UIColor whiteColor];
     }
+    return _pvc;
 }
+
+
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Create the data model
-    self.pageTitle = title;
-    self.pageImages = images;
+    // Nav bar
+    self.navigationItem.title = [self.detailItem allKeys][0];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(tapShare:)];
+    // Ensure content sits below the navigation bar
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    // Override point for customization after application launch.
-    UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor blueColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    pageControl.backgroundColor = [UIColor whiteColor];
-    
-    // Create page view controller
-    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailPageViewController"];
-    self.pageViewController.dataSource = self;
-    
-    KokkoDetailPageControlViewController *startingViewController = [self viewControllerAtIndex:0];
-    self.viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:self.viewControllers
-                                      direction:UIPageViewControllerNavigationDirectionForward
-                                       animated:NO
-                                     completion:nil];
-    
-    [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
-    [self.pageViewController didMoveToParentViewController:self];
-
-
-    NSLog(@"setting detail page view %@ to image %@", title, images[self.pageIndex]);
-    self.backgroundImageView.image = [UIImage imageNamed:images[self.pageIndex]];
-    self.titleLabel.text = title;
+    [self.view addSubview:self.pvc.view];
 }
 
-- (KokkoDetailPageControlViewController *)viewControllerAtIndex:(NSUInteger)index
+- (KokkoDetailPageContentViewController *)viewControllerAtIndex:(NSInteger)index
 {
-    if (([self.pageImages count] == 0) || (index >= [self.pageImages count])) {
+    // Test for out of bounds
+    NSArray *images = [self.detailItem allValues][0];
+    if (([images count] == 0) || (index >= [images count]) || (index < 0)) {
         return nil;
     }
     
-    // Create a new view controller and pass suitable data.
-    KokkoDetailPageControlViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"KokkoDetailPageContentViewController"];
-    pageContentViewController.imageFile = self.pageImages[index];
-    pageContentViewController.titleText = self.pageTitle;
-    pageContentViewController.pageIndex = index;
-    
+    // Create a new view controller and pass suitable data
+    KokkoDetailPageContentViewController *pageContentViewController = [[KokkoDetailPageContentViewController alloc] init];
+    pageContentViewController.imageFile = images[index];
+    pageContentViewController.titleText = @"Best Match";
+    pageContentViewController.view.tag = index;
     return pageContentViewController;
 }
 
-#pragma mark - UIPageViewControllerDataSource Protocol
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+#pragma mark - Actions
+
+- (void)tapShare:(id)sender
 {
-    NSUInteger index = ((KokkoDetailPageControlViewController*) viewController).pageIndex;
-    
-    if ((index == 0) || (index == NSNotFound)) {
-        return nil;
-    }
-    
-    index--;
-    return [self viewControllerAtIndex:index];
+    KokkoShareViewController *svc = [[KokkoShareViewController alloc] init];
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+
+#pragma mark - UIPageViewControllerDataSource Protocol
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
+      viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = ((KokkoDetailPageControlViewController*) viewController).pageIndex;
-    
-    if (index == NSNotFound) {
-        return nil;
-    }
-    
-    index++;
-    if (index == [self.pageImages count]) {
-        return nil;
-    }
-    return [self viewControllerAtIndex:index];
+    NSInteger index = ((KokkoDetailPageControlViewController*) viewController).view.tag;
+    return [self viewControllerAtIndex:index-1];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
+       viewControllerAfterViewController:(UIViewController *)viewController
+{
+    NSInteger index = ((KokkoDetailPageControlViewController*) viewController).view.tag;
+    return [self viewControllerAtIndex:index+1];
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return [self.pageImages count];
+    return [[self.detailItem allValues][0] count];
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
@@ -119,10 +109,5 @@ NSArray *images;
     return 0;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

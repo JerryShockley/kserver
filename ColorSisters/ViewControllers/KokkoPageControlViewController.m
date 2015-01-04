@@ -23,12 +23,6 @@ NSUInteger currentIndex = 0;
                         @"Just hold our Color Chart next to your face.  Use this App to take your picture -- that's it!"];
     self.pageImages = @[@"Page1.png", @"Page2.png", @"Page3.png"];
     
-    // Override point for customization after application launch.
-    UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor blueColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    pageControl.backgroundColor = [UIColor blackColor];
-    
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;

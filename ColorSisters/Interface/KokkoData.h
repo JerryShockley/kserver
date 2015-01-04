@@ -8,7 +8,10 @@
 #import <Foundation/Foundation.h>
 
 @interface KokkoData : NSObject
+
 - (void) logRecommendationsDictionary:(NSDictionary *) shadeMatches;
 - (NSArray *) setRecommendationsArray:(NSDictionary *) shadeMatches;
-- (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches :(NSInteger *) index;
+- (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches index:(NSInteger)index;
+- (NSDictionary *)setRecommendationsForBrand:(NSString *)brand withMatches:(NSArray *)matches;
+
 @end

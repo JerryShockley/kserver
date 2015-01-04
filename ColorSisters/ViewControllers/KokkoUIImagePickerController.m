@@ -21,22 +21,6 @@
 
 @implementation KokkoUIImagePickerController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self imagePicker];
-}
-
 - (void) imagePicker {
     // Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.
     if(self.imageReady == NO) {
@@ -90,8 +74,9 @@
 
 - (IBAction)findFoundation:(UIButton *)sender {
     KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
-    [kokkoClass initWithImage:self.image];
-    self.shadeMatches = [kokkoClass getRecommendations];
+//    [kokkoClass initWithImage:self.image];
+//    [kokkoClass getRecommendations];
+    self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
 
     // TODO - add popup with results from kokkoClass
     [self showMatchesAlert];
@@ -132,11 +117,7 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
     KokkoTableViewController *tableView = (KokkoTableViewController*)[segue destinationViewController];
     [tableView setDetailItem:self.shadeMatches];
 }
