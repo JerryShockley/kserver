@@ -1,1 +1,21 @@
-L'Oreal True Match Liquid
+<html>
+<head>
+<style>
+* {margin: 0; padding: 0;}
+body { background: #fff; font-family: Arial, Verdana, sans-serif; padding: 10px; }
+h1 { font-size: 16px; }
+h2 { font-size: 14px; margin-top: 10px;}
+p { font-size: 12px; }
+</style>
+</head>
+
+<body>
+<h1>L'Oreal True Match Liquid</h1>
+<h2>Description</h2>
+<p>
+True Match Super Blendable Makeup SPF 17 is the best foundation for normal to very oily skin.  It has a fluid, silky feel and blends superbly, setting to a natural matte, slightly powedery finish that is translucent enough to let your skin show through, while still providing light coverage that diffuses minor flaws and redness.  The sunscreen is pure titanium dioxide, making this a gentle choice for skin (the forumula is also fragrance-free).
+</p>
+<h2>Reviews</h2>
+<p>TBD</p>
+</body>
+</html>
