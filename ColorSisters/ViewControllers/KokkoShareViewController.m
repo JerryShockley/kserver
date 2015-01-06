@@ -48,7 +48,7 @@
         _messageLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _messageLabel.numberOfLines = 0; // Grow as needed
-        _messageLabel.font = [UIFont systemFontOfSize:14];
+        _messageLabel.font = [UIFont systemFontOfSize:15];
     }
     return _messageLabel;
 }
@@ -110,7 +110,7 @@
         _footerLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _footerLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _footerLabel.numberOfLines = 0; // Grow as needed
-        _footerLabel.font = [UIFont systemFontOfSize:10];
+        _footerLabel.font = [UIFont systemFontOfSize:11];
     }
     return _footerLabel;
 }

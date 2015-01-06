@@ -8,10 +8,8 @@
 #import <UIKit/UIKit.h>
 #import "KokkoPageContentViewController.h"
 
-@interface KokkoPageControlViewController : UIViewController <UIPageViewControllerDataSource>
+@interface KokkoPageControlViewController : UIViewController 
 
-@property (strong, nonatomic) UIPageViewController *pageViewController;
-@property (strong, nonatomic) NSArray *viewControllers;
 @property (strong, nonatomic) NSArray *pageTitles;
 @property (strong, nonatomic) NSArray *pageImages;
 

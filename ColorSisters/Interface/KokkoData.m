@@ -114,15 +114,4 @@ static NSString *imageBundlePath = @"product_images.bundle";
 }
 
 
-- (NSDictionary *)setRecommendationsForBrand:(NSString *)brand withMatches:(NSArray *)matches
-{
-    NSMutableArray *paths = [[NSMutableArray alloc] init];
-    
-    [matches enumerateObjectsUsingBlock:^(NSString *obj,NSUInteger idx,BOOL *stop) {
-        [paths addObject:[NSString stringWithFormat:@"%@/%@/%@",imageBundlePath,brand,obj]];
-    }];
-    
-    return @{brand: paths};
-}
-
 @end

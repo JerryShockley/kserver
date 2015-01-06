@@ -9,7 +9,7 @@
 #import "KokkoInterface.h"
 #import "KokkoTableViewController.h"
 
-@interface KokkoUIImagePickerController ()
+@interface KokkoUIImagePickerController () <UIAlertViewDelegate>
 
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (nonatomic) BOOL imageReady;
@@ -78,11 +78,7 @@
 //    [kokkoClass getRecommendations];
     self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
 
-    // TODO - add popup with results from kokkoClass
     [self showMatchesAlert];
-
-    [self performSegueWithIdentifier:@"segueToMatches" sender:self];
-
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
@@ -122,5 +118,12 @@
     [tableView setDetailItem:self.shadeMatches];
 }
 
+
+#pragma mark - Alert view delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self performSegueWithIdentifier:@"segueToMatches" sender:self];
+}
 
 @end

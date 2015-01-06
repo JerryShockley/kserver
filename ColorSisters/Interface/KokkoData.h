@@ -12,6 +12,5 @@
 - (void) logRecommendationsDictionary:(NSDictionary *) shadeMatches;
 - (NSArray *) setRecommendationsArray:(NSDictionary *) shadeMatches;
 - (NSDictionary *) setRecommendationsArray:(NSDictionary *) shadeMatches index:(NSInteger)index;
-- (NSDictionary *)setRecommendationsForBrand:(NSString *)brand withMatches:(NSArray *)matches;
 
 @end
