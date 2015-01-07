@@ -28,6 +28,11 @@
 
 #pragma mark - Accessors
 
+- (CGFloat)buttonHeight
+{
+    return (self.view.frame.size.height<568) ? 30 : 80;
+}
+
 - (UIPageViewController *)pvc
 {
     if (!_pvc) {
@@ -37,7 +42,7 @@
         _pvc.dataSource = self;
         _pvc.delegate = self;
         _pvc.view.autoresizingMask = UIViewAutoresizingNone;
-        _pvc.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-66);
+        _pvc.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-self.buttonHeight);
         [_pvc setViewControllers:@[[self viewControllerAtIndex:0]]
                        direction:UIPageViewControllerNavigationDirectionForward
                         animated:NO
@@ -51,7 +56,9 @@
     if (!_getStartedButton) {
         self.getStartedButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_getStartedButton setTitle:@"Get Started" forState:UIControlStateNormal];
-        _getStartedButton.frame = CGRectMake(0, self.pvc.view.frame.size.height, self.view.frame.size.width, 66);
+        _getStartedButton.titleLabel.font = [UIFont systemFontOfSize:20];
+        _getStartedButton.frame = CGRectMake(0, self.pvc.view.frame.size.height, self.view.frame.size.width, self.buttonHeight);
+        _getStartedButton.backgroundColor = [UIColor blackColor];
         [_getStartedButton addTarget:self action:@selector(tapGetStarted:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _getStartedButton;
