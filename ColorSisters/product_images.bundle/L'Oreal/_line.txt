@@ -5,7 +5,7 @@
 body { background: #fff; font-family: Arial, Verdana, sans-serif; padding: 10px; }
 h1 { font-size: 16px; }
 h2 { font-size: 14px; margin-top: 10px;}
-p { font-size: 12px; }
+p { font-size: 14px; }
 </style>
 </head>
 
@@ -16,6 +16,20 @@ p { font-size: 12px; }
 True Match Super Blendable Makeup SPF 17 is the best foundation for normal to very oily skin.  It has a fluid, silky feel and blends superbly, setting to a natural matte, slightly powedery finish that is translucent enough to let your skin show through, while still providing light coverage that diffuses minor flaws and redness.  The sunscreen is pure titanium dioxide, making this a gentle choice for skin (the forumula is also fragrance-free).
 </p>
 <h2>Reviews</h2>
-<p>TBD</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>Linda J.</u>     2014/12/19</p><p>
+I love how smooth and creamy this feels on my skin.  And five minutes after I put it on, I forget that I am wearing it at all.
+It's easy to remove at the end of the day.
+</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>Byoo-tee-li-shus</u>     2014/11/30</p><p>>
+I have tried <i>so</i> many different foundation products over the years, but most make my skin break out. True Match was the
+first reasonably priced foundation that doesn't do anything but give my skin a nice, even appearance.  HIGHLY RECOMMENDED!!!
+</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎</font>  <u>Kushwant</u>     2014/11/16</p><p>This
+used to be my favorite foundation, but better products are available now and Loreal hasn't kept up with the competition. It's
+fine, but I prefer Bobbi Brown or SK-II.
+<br>
+</p>
+<p>
+</p>
 </body>
 </html>

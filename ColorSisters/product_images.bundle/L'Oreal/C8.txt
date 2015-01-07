@@ -1,1 +1,1 @@
-Cocoa C8
+Cocoa
