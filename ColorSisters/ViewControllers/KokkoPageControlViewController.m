@@ -18,6 +18,11 @@
 
 @end
 
+// This constant defines the interval, in seconds, before the launch screen
+// will automatically scroll to the next page. Any manual transition to a new
+// page will reset the delay.
+#define	INTERVAL_BEFORE_AUTO_PAGE_SCROLL    8
+
 
 @implementation KokkoPageControlViewController
 
@@ -59,7 +64,7 @@
     [super viewDidLoad];
     
     self.currentIndex = 0;
-    self.intervalGettingStartedSeconds = 10;
+    self.intervalGettingStartedSeconds = INTERVAL_BEFORE_AUTO_PAGE_SCROLL;
     
     // Create the data model
     self.pageTitles = @[@"Use your cell phone camera to find the perfect foundation for you.",
@@ -111,7 +116,7 @@
 
 - (void) scrollingTimer:(NSTimer*)timer {
     NSLog(@"Timer fired");
-    self.currentIndex = ([self presentationIndexForPageViewController:self.pvc]+1)%3;
+    self.currentIndex = ([self presentationIndexForPageViewController:self.pvc]+1) % [self.pageTitles count];
     [self.pvc setViewControllers:@[[self viewControllerAtIndex:self.currentIndex]]
                        direction:UIPageViewControllerNavigationDirectionForward
                         animated:YES
