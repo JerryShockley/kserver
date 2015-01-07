@@ -96,13 +96,18 @@
 - (void)showMatchesAlert {
     int brandCnt = 0, shadeCnt = 0;
     
-    NSString *brandName;
+    NSString *brandName, *title, *message;
     for (brandName in self.shadeMatches) {
         brandCnt++;
         shadeCnt += [[self.shadeMatches objectForKey: brandName] count];
     }
-    NSString *title = NSLocalizedString(@"Match Found", nil);
-    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Found %lu shades across %lu brands", @"Found {total number of shades} across {number of brands} brands"), shadeCnt, brandCnt];
+    if (brandCnt == 0) {
+	title = NSLocalizedString(@"No Matches Found", nil);
+	message = NSLocalizedString(@"Either retake the photo or select a different photo from the Camera Roll", nil);;
+    } else {
+	title = NSLocalizedString(@"Match Found", nil);
+	message = [NSString stringWithFormat:NSLocalizedString(@"Found %lu shades across %lu brands", @"Found {total number of shades} across {number of brands} brands"), shadeCnt, brandCnt];
+    }
     NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
@@ -123,7 +128,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self performSegueWithIdentifier:@"segueToMatches" sender:self];
+    if ([self.shadeMatches count] > 0)
+	[self performSegueWithIdentifier:@"segueToMatches" sender:self];
 }
 
 @end
