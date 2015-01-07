@@ -43,7 +43,7 @@
 {
     if (!_messageLabel) {
         self.messageLabel = [[UILabel alloc] init];
-        _messageLabel.text = @"Want to know more? Give us your e-mail address and we will send you the entire list of your matching shades, tips on choosing the right formulation for your skin, and links to videos showing how to apply foundation perfectly every time.";
+        _messageLabel.text = @"Want to know more? Give us your e-mail address and we will send you tips on choosing the right formulation for your skin and links to videos showing how to apply foundation perfectly every time.";
         [_messageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         _messageLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -61,6 +61,7 @@
         _firstNameField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _firstNameField.borderStyle = UITextBorderStyleRoundedRect;
         _firstNameField.placeholder = @"First Name";
+	_firstNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     }
     return _firstNameField;
 }
@@ -73,6 +74,7 @@
         _lastNameField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _lastNameField.borderStyle = UITextBorderStyleRoundedRect;
         _lastNameField.placeholder = @"Last Name (optional)";
+	_lastNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     }
     return _lastNameField;
 }
@@ -85,6 +87,8 @@
         _emailField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _emailField.borderStyle = UITextBorderStyleRoundedRect;
         _emailField.placeholder = @"Email";
+	_emailField.keyboardType = UIKeyboardTypeEmailAddress;
+	_emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     }
     return _emailField;
 }
