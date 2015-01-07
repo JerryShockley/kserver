@@ -96,7 +96,7 @@
 - (UIWebView *)webView
 {
     if (!_webView) {
-        self.webView = [[UIWebView alloc] init];
+        self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
         [_webView loadHTMLString:[self.prodInfo getDescriptionForBrand:self.brand] baseURL:nil];
         _webView.scrollView.scrollEnabled = NO;
         _webView.delegate = self;
@@ -207,7 +207,8 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    CGFloat h = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
+    CGFloat navHeight = self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
+    CGFloat h = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue] + navHeight;
     CGFloat w = self.view.frame.size.width;
 
     webView.frame = CGRectMake(0, self.pagerHeight, w, h);
