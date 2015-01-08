@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Camera View Controller-->
@@ -17,21 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YLV-IM-ZEc">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaP-fj-S3O">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Find Foundation">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="findFoundation:" destination="KGb-kh-VSH" eventType="touchUpInside" id="MnD-1K-lcG"/>
-                                </connections>
-                            </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32U-rR-Ddc">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="Il9-fk-EwI"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem title="Photo Library" id="a08-3Q-5eL">
                                         <connections>
@@ -45,52 +36,101 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Il9-fk-EwI"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="Il9-fk-EwI"/>
+                                    </mask>
+                                </variation>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="60" width="319" height="44"/>
                                 </variation>
                             </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YLV-IM-ZEc">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="347" id="bCT-8N-UcG"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="bCT-8N-UcG"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="bCT-8N-UcG"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaP-fj-S3O">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="71" id="2oM-W7-sHm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Find Foundation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2oM-W7-sHm"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="86" y="675" width="187" height="71"/>
+                                    <mask key="constraints">
+                                        <include reference="2oM-W7-sHm"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="findFoundation:" destination="KGb-kh-VSH" eventType="touchUpInside" id="MnD-1K-lcG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YLV-IM-ZEc" firstAttribute="top" secondItem="xuO-Na-yT9" secondAttribute="top" id="61q-im-gZG"/>
-                            <constraint firstItem="iaP-fj-S3O" firstAttribute="centerX" secondItem="YLV-IM-ZEc" secondAttribute="centerX" id="L55-GG-j8U"/>
-                            <constraint firstAttribute="trailing" secondItem="YLV-IM-ZEc" secondAttribute="trailing" id="Sof-BQ-9fE"/>
-                            <constraint firstAttribute="bottom" secondItem="iaP-fj-S3O" secondAttribute="bottom" constant="20" symbolic="YES" id="Tmm-Jq-qym"/>
-                            <constraint firstItem="YLV-IM-ZEc" firstAttribute="bottom" secondItem="Njc-eY-Sxb" secondAttribute="top" id="d4J-7c-7Ed"/>
-                            <constraint firstItem="YLV-IM-ZEc" firstAttribute="leading" secondItem="xuO-Na-yT9" secondAttribute="leading" id="krM-iS-y69"/>
+                            <constraint firstItem="YLV-IM-ZEc" firstAttribute="leading" secondItem="32U-rR-Ddc" secondAttribute="leading" id="9nL-3k-Y4e"/>
+                            <constraint firstItem="32U-rR-Ddc" firstAttribute="top" secondItem="YLV-IM-ZEc" secondAttribute="bottom" constant="66" id="GwT-LO-ybh"/>
+                            <constraint firstItem="32U-rR-Ddc" firstAttribute="bottom" secondItem="Njc-eY-Sxb" secondAttribute="top" id="Qxs-Df-afS"/>
+                            <constraint firstItem="iaP-fj-S3O" firstAttribute="leading" secondItem="xuO-Na-yT9" secondAttribute="leadingMargin" constant="70" id="Sda-Yv-8cb"/>
+                            <constraint firstItem="32U-rR-Ddc" firstAttribute="leading" secondItem="xuO-Na-yT9" secondAttribute="leading" id="gtb-oV-UBW"/>
+                            <constraint firstItem="32U-rR-Ddc" firstAttribute="top" secondItem="iaP-fj-S3O" secondAttribute="bottom" constant="10" id="lRM-gl-Eon"/>
+                            <constraint firstItem="YLV-IM-ZEc" firstAttribute="top" secondItem="tKB-og-0vg" secondAttribute="bottom" constant="8" symbolic="YES" id="tt6-C8-jI9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="32U-rR-Ddc"/>
                                 <exclude reference="YLV-IM-ZEc"/>
                                 <exclude reference="iaP-fj-S3O"/>
-                                <exclude reference="32U-rR-Ddc"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="L55-GG-j8U"/>
-                                <exclude reference="Tmm-Jq-qym"/>
-                                <exclude reference="61q-im-gZG"/>
-                                <exclude reference="Sof-BQ-9fE"/>
-                                <exclude reference="d4J-7c-7Ed"/>
-                                <exclude reference="krM-iS-y69"/>
+                                <exclude reference="9nL-3k-Y4e"/>
+                                <exclude reference="tt6-C8-jI9"/>
+                                <exclude reference="Sda-Yv-8cb"/>
+                                <exclude reference="GwT-LO-ybh"/>
+                                <exclude reference="Qxs-Df-afS"/>
+                                <exclude reference="gtb-oV-UBW"/>
+                                <exclude reference="lRM-gl-Eon"/>
                             </mask>
                         </variation>
-                        <variation key="widthClass=compact">
+                        <variation key="heightClass=regular">
                             <mask key="subviews">
                                 <include reference="32U-rR-Ddc"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
                                 <include reference="YLV-IM-ZEc"/>
                                 <include reference="iaP-fj-S3O"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="L55-GG-j8U"/>
-                                <include reference="Tmm-Jq-qym"/>
-                                <include reference="61q-im-gZG"/>
-                                <include reference="Sof-BQ-9fE"/>
-                                <include reference="d4J-7c-7Ed"/>
-                                <include reference="krM-iS-y69"/>
+                                <include reference="9nL-3k-Y4e"/>
+                                <include reference="tt6-C8-jI9"/>
+                                <include reference="Sda-Yv-8cb"/>
+                                <include reference="GwT-LO-ybh"/>
+                                <include reference="Qxs-Df-afS"/>
+                                <include reference="gtb-oV-UBW"/>
+                                <include reference="lRM-gl-Eon"/>
                             </mask>
                         </variation>
                     </view>
@@ -102,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBY-Yx-2pF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1764" y="-137"/>
+            <point key="canvasLocation" x="-1764" y="-168"/>
         </scene>
         <!--Kokko Page Control View Controller-->
         <scene sceneID="sfF-oW-WW5">
