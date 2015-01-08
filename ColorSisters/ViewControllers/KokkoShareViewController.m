@@ -9,7 +9,7 @@
 #import "KokkoShareViewController.h"
 #import "KokkoUIImagePickerController.h"
 
-@interface KokkoShareViewController ()
+@interface KokkoShareViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UILabel *messageLabel;
@@ -18,6 +18,11 @@
 @property (nonatomic,strong) UITextField *lastNameField;
 @property (nonatomic,strong) UITextField *emailField;
 @property (nonatomic,strong) UIButton *signupButton;
+@property (nonatomic) CGPoint center;
+@property (nonatomic,strong) UIToolbar *toolbar;
+@property (nonatomic,strong) NSArray *responders;
+@property (nonatomic) NSInteger responderIndex;
+@property (nonatomic,strong) UISegmentedControl *prevNextSeg;
 
 @end
 
@@ -26,6 +31,14 @@
 - (CGFloat)labelMargin { return 10.; }
 - (CGFloat)fieldMargin { return 20.; }
 - (CGFloat)vMargin { return 15.; }
+
+- (NSArray *)responders
+{
+    if (!_responders) {
+        self.responders = @[self.emailField,self.firstNameField,self.lastNameField];
+    }
+    return _responders;
+}
 
 - (UILabel *)titleLabel
 {
@@ -61,7 +74,9 @@
         _firstNameField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _firstNameField.borderStyle = UITextBorderStyleRoundedRect;
         _firstNameField.placeholder = @"First Name";
-	_firstNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _firstNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _firstNameField.delegate = self;
+        _firstNameField.inputAccessoryView = self.toolbar;
     }
     return _firstNameField;
 }
@@ -74,7 +89,9 @@
         _lastNameField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _lastNameField.borderStyle = UITextBorderStyleRoundedRect;
         _lastNameField.placeholder = @"Last Name (optional)";
-	_lastNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _lastNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _lastNameField.delegate = self;
+        _lastNameField.inputAccessoryView = self.toolbar;
     }
     return _lastNameField;
 }
@@ -87,8 +104,10 @@
         _emailField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _emailField.borderStyle = UITextBorderStyleRoundedRect;
         _emailField.placeholder = @"Email";
-	_emailField.keyboardType = UIKeyboardTypeEmailAddress;
-	_emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+        _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _emailField.delegate = self;
+        _emailField.inputAccessoryView = self.toolbar;
     }
     return _emailField;
 }
@@ -119,8 +138,38 @@
     return _footerLabel;
 }
 
+- (UISegmentedControl *)prevNextSeg
+{
+    if (!_prevNextSeg) {
+        self.prevNextSeg = [[UISegmentedControl alloc] initWithItems:@[@"Prev",@"Next"]];
+        _prevNextSeg.momentary = YES;
+        [_prevNextSeg addTarget:self action:@selector(prevNext:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _prevNextSeg;
+}
+
+- (UIToolbar *)toolbar
+{
+    if (!_toolbar)  {
+        self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+        [_toolbar setItems:@[
+                             [[UIBarButtonItem alloc] initWithCustomView:self.prevNextSeg],
+                             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                             [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                              style:UIBarButtonItemStyleBordered
+                                                             target:self
+                                                             action:@selector(dismissKeyboard)]
+                             ]
+         ];
+    }
+    return _toolbar;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.responderIndex = 0;
     
     // Ensure content sits below the navigation bar
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -130,6 +179,10 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(tapNewPhoto:)];
+
+    // Let us know when the keyboard will show
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name: UIKeyboardWillHideNotification object:nil];
 
     // Child views
     [self.view addSubview:self.titleLabel];
@@ -303,6 +356,15 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.center = self.view.center;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - Actions
 
@@ -320,5 +382,53 @@
         }
     }
 }
+
+
+#pragma mark - UITextFieldDelegate methods
+
+- (void)textFieldDidBeginEditing:(UITextField *)theTextField {
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect frame = self.view.frame;
+        CGFloat y = -theTextField.frame.origin.y + self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height + 10;
+        frame.origin = CGPointMake(frame.origin.x,y);
+        self.view.frame = frame;
+    }];
+    self.responderIndex = [self.responders indexOfObject:theTextField];
+    [self setPrevNextState];
+}
+
+- (void) keyboardWillHide:(NSNotification *)note
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.center = self.center;
+    }];
+}
+
+- (void)prevNext:(UISegmentedControl *)sender
+{
+    if ([sender selectedSegmentIndex]==0) {
+        self.responderIndex = (self.responderIndex-1) % [self.responders count];
+    } else {
+        self.responderIndex = (self.responderIndex+1) % [self.responders count];
+    }
+    [self.responders[self.responderIndex] becomeFirstResponder];
+    [self setPrevNextState];
+}
+
+- (void)setPrevNextState
+{
+    [self.prevNextSeg setEnabled:(self.responderIndex!=0) forSegmentAtIndex:0];
+    [self.prevNextSeg setEnabled:(self.responderIndex!=([self.responders count]-1)) forSegmentAtIndex:1];
+}
+
+- (void)dismissKeyboard
+{
+    for (UIView *v in [self.view subviews]) {
+        if ([v respondsToSelector:@selector(resignFirstResponder)]) {
+            [v resignFirstResponder];
+        }
+    }
+}
+
 
 @end
