@@ -9,7 +9,7 @@
 #import "KokkoShareViewController.h"
 #import "KokkoUIImagePickerController.h"
 
-@interface KokkoShareViewController ()
+@interface KokkoShareViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UILabel *messageLabel;
@@ -18,6 +18,7 @@
 @property (nonatomic,strong) UITextField *lastNameField;
 @property (nonatomic,strong) UITextField *emailField;
 @property (nonatomic,strong) UIButton *signupButton;
+@property (nonatomic) CGPoint center;
 
 @end
 
@@ -61,7 +62,8 @@
         _firstNameField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _firstNameField.borderStyle = UITextBorderStyleRoundedRect;
         _firstNameField.placeholder = @"First Name";
-	_firstNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _firstNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _firstNameField.delegate = self;
     }
     return _firstNameField;
 }
@@ -74,7 +76,8 @@
         _lastNameField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _lastNameField.borderStyle = UITextBorderStyleRoundedRect;
         _lastNameField.placeholder = @"Last Name (optional)";
-	_lastNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _lastNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        _lastNameField.delegate = self;
     }
     return _lastNameField;
 }
@@ -87,8 +90,9 @@
         _emailField.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _emailField.borderStyle = UITextBorderStyleRoundedRect;
         _emailField.placeholder = @"Email";
-	_emailField.keyboardType = UIKeyboardTypeEmailAddress;
-	_emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+        _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _emailField.delegate = self;
     }
     return _emailField;
 }
@@ -130,6 +134,10 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(tapNewPhoto:)];
+
+    // Let us know when the keyboard will show
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name: UIKeyboardWillHideNotification object:nil];
 
     // Child views
     [self.view addSubview:self.titleLabel];
@@ -303,6 +311,15 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.center = self.view.center;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - Actions
 
@@ -320,5 +337,30 @@
         }
     }
 }
+
+
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)theTextField {
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect frame = self.view.frame;
+        CGFloat y = -theTextField.frame.origin.y + self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height + 10;
+        frame.origin = CGPointMake(frame.origin.x,y);
+        self.view.frame = frame;
+    }];
+}
+
+- (void) keyboardWillHide:(NSNotification *)note
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.center = self.center;
+    }];
+}
+
+
 
 @end
