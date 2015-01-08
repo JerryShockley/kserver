@@ -21,6 +21,13 @@
 
 @implementation KokkoUIImagePickerController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self imagePicker];
+}
+
 - (void) imagePicker {
     // Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.
     if(self.imageReady == NO) {
