@@ -15,6 +15,7 @@
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (nonatomic) BOOL imageReady;
 @property (nonatomic) UIImage *image;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UIButton *findFoundationButton;
 
 /// Matches dictionary to be passed to the table view via a segue
@@ -116,6 +117,37 @@
     }
 }
 
+- (void)showBusyIndicator
+{
+    if (!_activityView) {
+	_activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	[self.view addSubview:_activityView];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_activityView
+							      attribute:NSLayoutAttributeCenterX
+							      relatedBy:NSLayoutRelationEqual
+								 toItem:self.view
+							      attribute:NSLayoutAttributeCenterX
+							     multiplier:1.0
+							       constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_activityView
+							      attribute:NSLayoutAttributeCenterY
+							      relatedBy:NSLayoutRelationEqual
+								 toItem:self.view
+							      attribute:NSLayoutAttributeCenterY
+							     multiplier:1.0
+							       constant:0.0]];
+	[_activityView startAnimating];
+    }
+}
+
+- (void)hideBusyIndicator
+{
+    if (_activityView) {
+	[_activityView removeFromSuperview];
+	_activityView = nil;
+    }
+}
+
 
 #pragma mark - Button event handlers
 
@@ -129,11 +161,14 @@
 
 - (IBAction)findFoundation:(UIButton *)sender {
     KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
+    
+    [self showBusyIndicator];
+    
     [kokkoClass initWithImage:self.image];
-//    [kokkoClass getRecommendations];
-    self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
+    self.shadeMatches = [kokkoClass getRecommendations];
+    //    self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
+    [self hideBusyIndicator];
     [self hideFindFoundationButton];
-
     [self showMatchesAlert];
 }
 
@@ -148,6 +183,8 @@
     
     //    self.imageReady = NO;
 }
+
+#pragma mark - Miscellaneous subviews
 
 - (void)showMatchesAlert {
     int brandCnt = 0, shadeCnt = 0;
