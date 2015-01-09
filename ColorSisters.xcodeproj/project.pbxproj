@@ -31,6 +31,7 @@
 		D2DEE9821A2E60B50063C236 /* skinpixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9791A2E60B40063C236 /* skinpixels.cpp */; };
 		D2DEE9C71A2E77EB0063C236 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DEE9C61A2E77EA0063C236 /* opencv2.framework */; };
 		D2DEE9CA1A2E781D0063C236 /* Eigen in Resources */ = {isa = PBXBuildFile; fileRef = D2DEE9C91A2E781D0063C236 /* Eigen */; };
+		D2F006941A5F439100ED865A /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F006931A5F439100ED865A /* UIImage+fixOrientation.m */; };
 		D501744A1A339D7200243D4C /* KokkoPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50174491A339D7200243D4C /* KokkoPageContentViewController.m */; };
 		D55E42B71A158EA500DD91E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B61A158EA500DD91E7 /* main.m */; };
 		D55E42BA1A158EA500DD91E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D55E42B91A158EA500DD91E7 /* AppDelegate.m */; };
@@ -89,6 +90,8 @@
 		D2DEE97A1A2E60B50063C236 /* skinpixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skinpixels.h; path = ColorSisters/ImageAnalysis/skinpixels.h; sourceTree = "<group>"; };
 		D2DEE9C61A2E77EA0063C236 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ColorSisters/Frameworks/opencv2.framework; sourceTree = "<group>"; };
 		D2DEE9C91A2E781D0063C236 /* Eigen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Eigen; path = ColorSisters/Frameworks/Eigen; sourceTree = "<group>"; };
+		D2F006921A5F439100ED865A /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+fixOrientation.h"; path = "Interface/UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		D2F006931A5F439100ED865A /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+fixOrientation.m"; path = "Interface/UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D50174481A339D7200243D4C /* KokkoPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoPageContentViewController.h; path = ViewControllers/KokkoPageContentViewController.h; sourceTree = "<group>"; };
 		D50174491A339D7200243D4C /* KokkoPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoPageContentViewController.m; path = ViewControllers/KokkoPageContentViewController.m; sourceTree = "<group>"; };
 		D55E42B11A158EA500DD91E7 /* ColorSisters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSisters.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +273,8 @@
 		D5C7CB321A1C41AE00AAEEA7 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				D2F006921A5F439100ED865A /* UIImage+fixOrientation.h */,
+				D2F006931A5F439100ED865A /* UIImage+fixOrientation.m */,
 				D7ED1E3E1A39FC0B008834EE /* KokkoData.h */,
 				D7ED1E3F1A39FC0B008834EE /* KokkoData.m */,
 				D5D950D41A1F01E6007B3AF2 /* KokkoProductInfo.h */,
@@ -393,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F006941A5F439100ED865A /* UIImage+fixOrientation.m in Sources */,
 				D5D950D31A1F01A3007B3AF2 /* KokkoProductInfo.m in Sources */,
 				D7ED1E401A39FC0B008834EE /* KokkoData.m in Sources */,
 				D2DEE97D1A2E60B50063C236 /* color_measure.cpp in Sources */,
