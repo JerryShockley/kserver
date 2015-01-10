@@ -96,11 +96,20 @@ void SkinToneMatcher::extractSkinPixels(const Mat& original, SkinPixels& pixels)
     static int from1to3[] = { 0, 0, 0, 1, 0, 2 };
     
     bool debug = (intermediateFilePath != "");
-    Mat picture;			// contains a version of original with 3 channels
+    Mat picture, image;		// contains a version of original with 3 channels
     
+    // It's not clear this channel mapping code is really needed any more. We
+    // introduced it because iOS UIImage objects are four channels (RGBA). But
+    // now 4->3 channel mapping is done in the iOS interface layer (because it
+    // also had to do channel swapping, RGBA->BGR), and it seems likely that
+    // any other channel mapping will need to be done in a platform-dependent
+    // way. There is also little practical reason to handle 1-channel images,
+    // because although the chart detector and face detector will work, the
+    // overall purpose of this code is moot without color information.
+    // So I think this code should be removed in a future version.
     switch (original.channels()) {
 	case 4:
-	{				// Scope necessary because var decl follows label
+	{			// Scope necessary because var decl follows label
 	    Mat rgba2rgb(original.size(), CV_8UC3);
 	    mixChannels( &original, 1, &rgba2rgb, 1, from4to3, 3 );
 	    picture = rgba2rgb;
@@ -122,43 +131,52 @@ void SkinToneMatcher::extractSkinPixels(const Mat& original, SkinPixels& pixels)
 	default:
 	    throw KokkoException("Unsupported number of channels: %d" + to_string(original.channels()));
     }
+    // Scale the image (if needed) so that we don't have to operate on
+    // huge data sets.
+    int max_dim = std::max(picture.cols, picture.rows);
+    if (max_dim > 960) {
+	double shrink = 960.0 / max_dim;
+	resize(picture, image, cv::Size(0,0), shrink, shrink, cv::INTER_LANCZOS4);
+    } else
+	image = picture;
+
    
     try {
 	// Find the chart
-	detector.detect(picture, intermediateFilePath);
+	detector.detect(image, intermediateFilePath);
     
 	// create color transform
 	ColorMeasure measure(detector.get_chart());
+	Mat color_corrected = recolorImage(image, measure);
+	
+	// Apply openCV face detector
+	Mat face = extractFace(color_corrected, face_cascade);
 	
 	if (debug) {
 	    // Save color corrected image
-	    Mat color_corrected = recolorImage(picture, measure);
 	    imwrite(intermediateFilePath + ".xfix.png", color_corrected);
 	    // Save sampled color values
 	    detector.get_chart().save_sampled_data(intermediateFilePath + ".cclr.txt");
-	}
-	
-	// Apply openCV face detector
-	Mat face = extractFace(picture, face_cascade);
-	
-	if (debug)
 	    // Save the detected face area
 	    imwrite(intermediateFilePath + ".fbox.png", face);
-
-	Mat recoloredFace = recolorImage(face, measure);
+	}
+	
 	if (useFaceMask) {
 	    // Extract a subset of the face which should only contain skin pixels.
 	    // This step must be performed AFTER the recoloring step, otherwise
 	    // the masked off areas (which are still present in the image, it is
 	    // not resized) are changed from (0,0,0) by the recoloring and this
 	    // greatly biases the results.
-	    Mat facePixels = extractSkinFromFace(recoloredFace);
-	    pixels.load(facePixels);
+	    Mat faceSubset = extractSkinFromFace(face);
+	    pixels.load(faceSubset);
 	    if (debug)
-		imwrite(intermediateFilePath + ".fskn.png", facePixels);
+		imwrite(intermediateFilePath + ".fskn.png", faceSubset);
 	} else {
-	    pixels.load(recoloredFace);
+	    pixels.load(face);
 	}
+	if (debug)
+	    // Write out the actual pixel values from the face
+	    pixels.save(intermediateFilePath + ".fpix.txt");
     }
     catch (cv::Exception e) {
 	throw KokkoException("OpenCV error: " + e.msg );
