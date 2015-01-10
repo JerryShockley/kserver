@@ -78,7 +78,8 @@
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *imageToUse = [info valueForKey:UIImagePickerControllerOriginalImage];
     if (imageToUse.imageOrientation != UIImageOrientationUp)
-	NSLog(@"Original image orientation is %ld--adjust before use", imageToUse.imageOrientation);
+	NSLog(@"Original image orientation is %ld--adjust before use",
+	      (long)imageToUse.imageOrientation);
     // Need code here to set the imageView window size
     self.image = [imageToUse orientImageUp];
     self.imageView.image = self.image;
