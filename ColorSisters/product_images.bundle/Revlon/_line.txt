@@ -5,15 +5,31 @@
 body { background: #fff; font-family: Arial, Verdana, sans-serif; padding: 10px; }
 h1 { font-size: 16px; }
 h2 { font-size: 14px; margin-top: 10px;}
-p { font-size: 12px; }
+p { font-size: 14px; }
 </style>
 </head>
 
 <body>
 <h1>Revlon Colorstay Makeup for Combination/Oily Skin</h1>
 <h2>Description</h2>
-<p>TBD</p>
+<p>
+Longwearing coverage with Time Release Technology and a lightweight formula that won’t cake, fade,
+or rub off. Specifically made for combination or oily skin to control oil absorption and shine.
+Your look stays flawless throughout the day. 
+</p>
 <h2>Reviews</h2>
-<p>TBD</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>Yvonne</u>     2014/12/03</p><p>
+I believe in only buying the best, because I'm worth it. There is no better foundation than Dior.  Yeah, it costs a bundle but I love how it creates an irridescent glow to my skin.
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>Alice</u>     2014/11/30</p><p>
+I have tried <i>so</i> many different foundation products over the years, but most make my skin
+break out. Dior is the only makeup I can wear every day that doesn't do anything but give my skin a
+nice, even appearance.  LOVE IT!!!
+</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎</font>  <u>Kushwant</u>     2014/11/16</p><p>This
+used to be my favorite foundation, but better products are available now and Dior hasn't kept up with the competition. It's fine, but I prefer Bobbi Brown or SK-II.
+<br>
+</p>
+<p>
+</p>
 </body>
 </html>

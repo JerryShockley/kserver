@@ -2,18 +2,49 @@
 <head>
 <style>
 * {margin: 0; padding: 0;}
-body { background: #fff; font-family: Arial, Verdana, sans-serif;  padding: 10px;}
+body { background: #fff; font-family: Arial, Verdana, sans-serif; padding: 10px; }
 h1 { font-size: 16px; }
 h2 { font-size: 14px; margin-top: 10px;}
-p { font-size: 12px; }
+p { font-size: 14px; }
 </style>
 </head>
 
 <body>
-<h1>MAC Pro Longwear Liquid</h1>
+<h1>M.A.C. Pro Longwear Foundation</h1>
 <h2>Description</h2>
-<p>TBD</p>
+<p>
+A comfortable, long-wearing foundation that gives up to 15 hours of wear in any environmental
+condition. Lightweight and creamy, applies and blends easily leaving the skin feeling soft and free
+to breathe all day while controlling oil. Specially treated micronized pigments help give a
+smoother, more flawless, natural finish with stay-true colour.
+</p>
 <h2>Reviews</h2>
-<p>TBD</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>SilkyLady</u>     2014/06/01</p><p>
+Now Ladies I must say this foundation truly impressed me. Heres why, I was at my cousin's memorial
+event on 5/31/14. When I tell you it had to be every bit of 85 degrees. Did not matter because my
+Prolongwear was on the case. I forgot to put my Colour Correcting Cream on too. I normally put the
+CC cream underneath all of my foundations or BB (beauty balm) to assist with staying power of my
+foundation or bb cream and also to combat oily shine. I set the prolongwear with my MSFN in Dark. I
+got matched for this foundation this past Friday and I am in love. I am a NC 50 in Prolongwear.
+This was my very first liquid foundation in my life. I am usually a powder girl for sure. I sat on
+my Uncle Bill's patio and it was blazing hot even sitting under an umbrella. I put my foundation on
+at 1pm and it stayed on my face until 12:10 am. I had to use my blot powder a grand total of 3
+times. That is amazing because with any other foundation or bb cream, its every 2 hrs with blot
+powder touch-ups( 4 hrs if I use loose powder). If it wasn't so hot, it probably would have been
+once. The compliments were endless and my family (poor things) did not even know who I was.
+Everyone was telling me I was glowing and how beautiful I was. Even my brother which hates makeup
+told me I was pretty. Ladies, if you face is oily, this is a Godsend. If you still want to be fly
+when the temperature is high. then is is your guy. Stay Faceful Ladies!!!!!!! 
+</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>Jenecis</u>     2014/08/20</p><p>
+For the past year and half I have been on the hunt for a foundation that meets all of my needs - great color match (that doesn't oxidize), long-wearing, weightless and keeps my combo/oily skin under control (without looking matte/flat). It's a lot to ask of ONE product so I was beginning to give up...until I tried MAC's PLW foundation! O-M-G! I apply the foundation around 6:30am and don't get home until 7pm, and my face still looks great! No powder touch-ups, MAYBE blotting with a blotting sheet mid-day, but other than that, the minimal amt of oil that comes through makes it look super natural (I wouldn't even call it dewey). I'll only touch up with powder if I'm going out after work and want to look extra polished. This baby has met and exceeded all of my expections! A definite must-try! (BTW - I don't have sensitive skin so I can't speak to whether it would be good for those who do break out from certain ingredients).  In terms of my shade and application method: I'm currently darker than normal, so I'm wearing NC44 but think I'll have to get NC42 and mix it come winter. Or I might try to mix it with the PLW concealer that I have in NC35. I use a flat top kabuki brush to apply and have been meaning to try it with my BB sponge. I moisturize with a yellow moisturizing gel (from a mid-price skincare line that starts with C and has a Q in it LOL), prime with MAC's Natural Radiance in yellow and set with MSFN in Medium Tan (thank you for this new color BTW! Love it!). I pair with the PLW concealer in NW30 for underneath my eyes (also lasts all day), and set the undereye with MAC'S translucent pressed powder. 
+</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎</font>  <u>Kushwant</u>     2014/11/16</p><p>This
+used to be my favorite foundation, but better products are available now and Loreal hasn't kept up with the competition. It's
+fine, but I prefer Bobbi Brown or SK-II.
+<br>
+</p>
+<p>
+</p>
 </body>
 </html>

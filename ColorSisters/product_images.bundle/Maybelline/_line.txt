@@ -2,18 +2,45 @@
 <head>
 <style>
 * {margin: 0; padding: 0;}
-body { background: #fff; font-family: Arial, Verdana, sans-serif;  padding: 10px;}
+body { background: #fff; font-family: Arial, Verdana, sans-serif; padding: 10px; }
 h1 { font-size: 16px; }
 h2 { font-size: 14px; margin-top: 10px;}
-p { font-size: 12px; }
+h3 { font-size: 13px; margin-top: 10px;}
+p { font-size: 14px; }
 </style>
 </head>
 
 <body>
 <h1>Maybelline Dream Liquid Mouse</h1>
 <h2>Description</h2>
-<p>TBD</p>
+<p>
+100% PORELESS SKIN
+<br>
+AIR-BRUSHED PERFECTION
+<br>
+Ideal for Normal Skin
+<h3>Why You'll Love It</h3>
+<p>
+<ul>
+<li>Air-whipped liquid provides perfecting coverage for 100% poreless skin</li>
+<li>Ideal for normal skin</li>
+<li>Oil-free, fragrance-free,&nbsp; Dermatologist-tested, allergy-tested, non-comedogenic – won’t clog pores, safe for sensitive skin</li>
+</ul>
+</p>
 <h2>Reviews</h2>
-<p>TBD</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>Elizabeth Prosper</u>     2014/12/08</p><p>
+I love this foundation, because you barely feel it on your face and it gives you nice coverage.
+</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎❤︎</font>  <u>p_sarah15</u>     2014/10/14</p><p>
+I have been using this foundation for a very long time bc the bottle lasts so long. i have very
+good skin but some redness on my nose. it completely covers my redness so i don't even need
+concealer.  it doesn't clog my pores or make me look cakey.
+</p>
+<p><font color="#e36c09" size="4">❤︎❤︎❤︎</font>  <u>Kushwant</u>     2014/11/16</p><p>This
+used to be my favorite foundation, but better products are available now and Dior hasn't kept up with the competition. It's fine, but I prefer Bobbi Brown or SK-II.
+<br>
+</p>
+<p>
+</p>
 </body>
 </html>
