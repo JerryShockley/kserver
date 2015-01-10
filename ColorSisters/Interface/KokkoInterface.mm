@@ -44,7 +44,6 @@ SkinToneMatcher imagePipe(false);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	//make a file name to write the data to using the documents directory:
 	NSLog(@"Debug files will be stored in: '%@'", documentsDirectory);
-	NSString *outFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"image"];
 	
 	NSString* faceCascade = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_default" ofType:@"xml"];
 	NSString* chartLayout = [[NSBundle mainBundle] pathForResource:@"chart_v16_ini" ofType:@"cht"];
@@ -53,7 +52,11 @@ SkinToneMatcher imagePipe(false);
 	try {
 	    imagePipe.init([chartLayout UTF8String], [faceCascade UTF8String]);
 	    imagePipe.loadExemplarDB([exemplarsDB UTF8String], [faceShadeDB UTF8String]);
+#if TARGET_IPHONE_SIMULATOR
+	    // Only generate debug output if running on the simulator
+	    NSString *outFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"image"];
 	    imagePipe.setIntermediateFilePath([outFilePath UTF8String]);
+#endif
 	}
 	catch (KokkoException e) {
 	    NSLog(@"Kokko Exception: %s\n", e.get_message().c_str());
@@ -65,9 +68,32 @@ SkinToneMatcher imagePipe(false);
 #endif	// THREADED
 }
 
-- (void) initWithImage:(UIImage *)imageToAnalyze {
-    
-    UIImageToMat(imageToAnalyze, cvImage);
+- (void) initWithImage:(UIImage *)imageToAnalyze
+{
+    // mixChannels() takes uses an array to specify the mapping of input
+    // channels to output channels. Although declared as a single dimensioned
+    // array of integers; the interepretation is really an array of pairs;
+    // the first element (lower-indexed) is the channel number in the input
+    // array, and the second (index + 1) is the channel number in the output
+    // array to copy to. So the array below is saying:
+    //	IN-CHAN    OUT-CHAN
+    //   0 (R)  ->    2
+    //   1 (G)  ->    1
+    //   2 (B)  ->    0
+    //   3 (A)  -> <not copied>
+    const static int rgba2bgr[] = { 0, 2,
+				    1, 1,
+				    2, 0 };
+    cv::Mat rgba;
+    UIImageToMat(imageToAnalyze, rgba);
+
+    // UIImageToMat converts a UIImage into a OpenCV Mat, with 4 channels
+    // in the order R, G, B, A. the IA library expects a 3-channel Mat with
+    // the channel order B, G, R. mixChannels will fortunately do all the hard
+    // work for us.
+    cv::Mat bgr(rgba.size(), CV_8UC3);
+    mixChannels( &rgba, 1, &bgr, 1, rgba2bgr, 3 );
+    cvImage = bgr;
 }
 
 - (CGRect *) findChart {
@@ -86,7 +112,8 @@ SkinToneMatcher imagePipe(false);
     }
 }
 
-- (CGRect *) findFace {
+- (CGRect *) findFace
+{
     
     CGRect *face;
     
@@ -102,12 +129,12 @@ SkinToneMatcher imagePipe(false);
     }
 }
 
-/**
- * the data returned is a list of lists: the top level list is the brands, and each element in that list has a list of matching shades.
- * an NSArray, with each element being a <brand-name, Array> pair.
+/*
+ * The Dictionary returned has brand names as the keys; each value is an
+ * immutable array of shade names.
  */
-- (NSDictionary *)getRecommendations {
-    
+- (NSDictionary *)getRecommendations
+{
     Recommendations brshades;
     try {
         brshades = imagePipe.recommend(cvImage);
@@ -127,16 +154,17 @@ SkinToneMatcher imagePipe(false);
             [shades addObject:shadeName];
         }
         NSString *brandName = [NSString stringWithUTF8String:bi->first.c_str()];
-        matches[brandName] = [shades copy];		// store immutable list of shades in Brand table
+        matches[brandName] = [shades copy];	// store immutable list of shades in Brand table
     }
     
-    return [matches copy];
+    return [matches copy];	// return immutable Dictionary of brands & shades
 }
 
 /*!
  * Hardcoded data for testing User Interface
  */
-- (NSDictionary *)getRecommendationsUIONLY {
+- (NSDictionary *)getRecommendationsUIONLY
+{
     return @{
              @"Dior"        :@[@"301", @"200", @"400"],
              @"L'Oreal"     :@[@"C4", @"N4", @"C5"],
@@ -145,70 +173,5 @@ SkinToneMatcher imagePipe(false);
              @"Revlon"      :@[@"250", @"240", @"220"],
              };
 }
-
-#ifdef FOR_THE_FUTURE
-#ifdef SAVE_DEBUG_INFO
-// Write out the pixel values if there is no further processing
-// or if the debug flag is set.
-skin.setImageID([[imageName stringByAppendingString: @".ppm"] UTF8String]);
-skin.setFloat(true);
-skin.save([[outFilePath stringByAppendingString: @".fpix.txt"] UTF8String]);
-skin.sortChans();
-#endif // SAVE_DEBUG_INFO
-
-FaceRank matches = imagePipe.matchFaces(skin);
-
-#ifdef SAVE_DEBUG_INFO
-std::ofstream myCout([[outFilePath stringByAppendingString: @".iout.txt"] UTF8String]);
-// Each line is in the form:
-//    K-dist: <Kuiper-distance> <imagename>
-for (FaceRank::const_iterator mi = matches.cbegin(), mend = matches.cend(); mi != mend; mi++) {
-    myCout << "K-dist: " << mi->first << ' ' << mi->second->getID() << std::endl;
-}
-#endif // SAVE_DEBUG_INFO
-
-KokkoProductInfo *prodData = [[KokkoProductInfo alloc] initWithContentsOfBundle:@""];
-// Each line is of the form:
-// Brand: <brand-name> <shade-1> <shade-2> ...
-for (auto bi = brshades.cbegin(), bend = brshades.cend(); bi != bend; ++bi) {
-#ifdef SAVE_DEBUG_INFO
-    myCout << "Brand: " << bi->first;
-#endif // SAVE_DEBUG_INFO
-    
-    const ShadeList& theShades = bi->second;
-    NSString *brandName = [NSString stringWithUTF8String:bi->first.c_str()];
-    NSString *shadeName = [NSString stringWithUTF8String:(*(theShades.cbegin()))->getShadeCode().c_str()];
-    UIImage *prodImage = [prodData getProductImageForBrand:brandName withShade:shadeName];
-    if (prodImage != nil) {
-	UIImage *displayImage = prodImage;
-	NSLog(@"Matched brand '%@' for shade '%@'", brandName, shadeName);
-	NSString *desc = [prodData getDescriptionForBrand:brandName];
-	if (desc != nil)
-	    NSLog(@"Brand description = '%@'", desc);
-	NSString *shadedesc = [prodData getProductNameForBrand:brandName withShade:shadeName];
-	NSString *prodInfo;
-	
-	if (shadedesc != nil)
-	    NSLog(@"Shade name is '%@'", shadedesc);
-	if (desc != nil)
-	    prodInfo = desc;
-	else
-	    prodInfo = brandName;
-	if (shadedesc != nil)
-	    prodInfo = [prodInfo stringByAppendingFormat:@" %@", shadedesc];
-	else
-	    prodInfo = [prodInfo stringByAppendingFormat:@" %@", shadeName];
-    }
-#ifdef SAVE_DEBUG_INFO
-    for (auto si = theShades.cbegin(), siend = theShades.cend(); si != siend; ++si)
-	myCout << ' ' << (*si)->getShadeCode();
-    myCout << std::endl;
-#endif // SAVE_DEBUG_INFO
-}
-#ifdef SAVE_DEBUG_INFO
-myCout.close();
-#endif // SAVE_DEBUG_INFO
-
-#endif	// FOR_THE_FUTURE
 
 @end
