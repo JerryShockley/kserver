@@ -24,8 +24,10 @@ using namespace std;
 // distance). The upper bound is essentially an optimization to reduce the size
 // of the list. As our exemplar (reference face) data set gets larger, we should
 // be able to reduce this number. My goal is an upper limit of < 1.0. Currently
-// it is set to 2.0 because there are some faces where there are no close
-// exemplars.
+// it is set to 3.0 (put all images on the rank-ordered list) because there are
+// some faces where there are no close exemplars, and we are using exemplars
+// collected with one color chart but new images are corrected using a different
+// color chart.
 //
 // The lower bound is not as obvious -- why do we need it? When running the
 // test suite, we may be comparing a face to itself. If the pixel sets being
@@ -38,7 +40,7 @@ using namespace std;
 // not-quite-identical-but-in-reality-the-same-face matches.
 
 #define KUIPER_DIST_MIN 0.025
-#define KUIPER_DIST_MAX	2.0	// maximum Kuiper distance to consider a match
+#define KUIPER_DIST_MAX	3.0	// maximum Kuiper distance to consider a match
 
 // Forward references
 
