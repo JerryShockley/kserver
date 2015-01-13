@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root  to: 'welcome#index'
   get 'welcome/index', as: 'welcome'
-
-
+  
   devise_scope :user  do
     get "/account/users" => "devise/registrations#index", as: :users
     put "account/users" => "devise/registrations#index", as: :search_users
@@ -19,6 +18,9 @@ Rails.application.routes.draw do
   devise_for :users, path: 'account'
   
   resources :profiles, only: [:create, :new, :edit, :update]
+  resources :invitations, only: [:create, :new, :show]
+
+
   
   
 end

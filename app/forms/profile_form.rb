@@ -12,6 +12,7 @@ class ProfileForm
   
   MIN_PASSWORD_LENGTH = 6
   
+  
   attribute :street1, String
   attribute :street2, String
   attribute :city, String
@@ -55,6 +56,10 @@ class ProfileForm
     false
   end
    
+  def id
+    profile.id
+  end
+
   
   def initialize(obj = nil)
     if obj == nil # Create
@@ -100,7 +105,9 @@ class ProfileForm
   end
   
   def ProfileForm.find(id)
-    ProfileForm.new(Profile.find_by(user_id: id))
+    p = Profile.find(id)
+    return nil if p.nil?
+    ProfileForm.new(p)
   end
 
   

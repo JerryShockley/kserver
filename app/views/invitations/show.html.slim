@@ -1,0 +1,43 @@
+.row
+  br
+  h3.row.columns.large-12.large-offset-2.medium-offset-2.small-offset-2
+    | Show Invitation Request
+  br
+    = error_messages! @profile_form
+.row
+  .row.columns.large-12.large-offset-2.medium-offset-2.small-offset-2
+    table.show#users
+      tr
+        td = "First name"
+        td  = @profile_form.first_name
+      tr
+        td = "Last name"
+        td  = @profile_form.last_name
+      tr
+        td = "Email"
+        td  = @profile_form.email
+      tr
+        td = "Invitation code"
+        td  = @profile_form.source
+      tr
+        td = "Receive emails"
+        td  = @profile_form.receive_emails
+      tr
+        td = "Street"
+        td  = @profile_form.street1
+      tr
+        td = "Street 2"
+        td  = @profile_form.street2
+      tr
+        td = "City"
+        td  = @profile_form.city
+      tr
+        td = "State"
+        td  = @profile_form.state
+      tr
+        td = "Zip code"
+        td  = @profile_form.postal_code
+    .row
+      .columns.large-2.medium-3.small-6.large-offset-2.medium-offset-2.small-offset-2
+        = button_to "OK", 'http://colorsisters.com', method: :get, class: 'button cbutton'
+    
