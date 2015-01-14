@@ -49,12 +49,12 @@
       /     br
       /       .large-6.columns.medium-6
       /         = f.input :password, :autocomplete => 'off', hint: "Minimum of 6 characters is required."
-      .row
+      .row.clear
         .large-12.columns
- 
-      = f.submit 'Submit', :class => 'button expand'
-
-  .row
-  br
-    .large-12.columns
-        = button_to "Cancel", 'http://colorsisters.com', method: :get, class: 'button left'
+          ul.button-group.float.right
+            li
+              / input.button.radius type='button'
+              = link_to "Cancel", 'http://colorsisters.com', class: 'button radius'
+               
+            li
+              button.button.radius type='submit' value="Submit" Submit
