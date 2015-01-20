@@ -8,7 +8,7 @@
 
 # Populating 1 User for each role
 
-require 'factory_girl'
+require 'factory_girl_rails'
 
 
 
@@ -46,8 +46,8 @@ if Rails.env.production?
   #   User.create!(first_name: "Scott", last_name: "Trappe", password: Rails.application.secrets.password_root,
   #               email: "scott@kokkoinc.com", role: :administrator)
   #   puts "\nSeeded database with Scott Trappe User records\n\n"
-
-  end
+  #
+  # end
 
   puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1}"
   puts "--  Removing #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
