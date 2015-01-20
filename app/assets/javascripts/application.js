@@ -25,3 +25,5 @@ Foundation.global.namespace = '';
 
 
 
+
+$(function(){ $(document).foundation(); });
