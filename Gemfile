@@ -28,7 +28,7 @@ gem 'mina'
 gem 'mina-unicorn', require: false
 gem 'mina-sidekiq', require: false
 gem 'factory_girl_rails'
-gem 'factory_girl_rails'
+gem 'faker'
 gem 'foundicons-rails'
 
 group :development do
@@ -59,7 +59,6 @@ group :test do
   gem 'poltergeist'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'faker'
   gem 'launchy'
   gem 'selenium-webdriver'
 end
