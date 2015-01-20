@@ -1,4 +1,3 @@
-
 require 'pundit'
 
 class ApplicationController < ActionController::Base

@@ -23,9 +23,12 @@ gem 'kaminari'
 gem 'virtus'
 gem 'reform'
 gem 'videojs_rails'
+gem 'money-rails'
 gem 'mina'
 gem 'mina-unicorn', require: false
 gem 'mina-sidekiq', require: false
+gem 'foundicons-rails'
+
 group :development do
   gem 'better_errors'
   # gem 'pry-rescue'

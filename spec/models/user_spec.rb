@@ -3,16 +3,16 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
+#  email                  :text             default(""), not null
+#  encrypted_password     :text             default(""), not null
+#  reset_password_token   :text
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
+#  current_sign_in_ip     :text
+#  last_sign_in_ip        :text
 #  created_at             :datetime
 #  updated_at             :datetime
 #  first_name             :string(255)
@@ -60,38 +60,38 @@ describe User do
       end
     end
     
-    describe "titleize_names" do
-      
-      it "capitalizes first_name" do
-        name_lcase = "janet"
-        name_ucase = "Janet"
-        user = build_stubbed :cust, first_name: name_lcase
-        user.send :titleize_names
-        expect(user.first_name).to match name_ucase
-      end
-      
-      it "capitalizes last_name" do
-        name_lcase = "smith"
-        name_ucase = "Smith"
-        user = build_stubbed :cust, last_name: name_lcase
-        user.send :titleize_names
-        expect(user.last_name).to match name_ucase
-      end
-      
-      it "downcases email" do
-        email_lcase = "janet_smith@abc.com"
-        email_ucase = "Janet_Smith@AbC.Com"
-        user = build_stubbed :cust, email: email_ucase
-        user.send :titleize_names
-        expect(user.email).to match email_lcase
-      end
-      
-      it "is called before save" do 
-        user = User.new
-        expect(user).to receive(:titleize_names)
-        user.run_callbacks :save        
-      end
-    end
+    # describe "titleize_names" do
+    #
+    #   it "capitalizes first_name" do
+    #     name_lcase = "janet"
+    #     name_ucase = "Janet"
+    #     user = build_stubbed :cust, first_name: name_lcase
+    #     user.send :titleize_names
+    #     expect(user.first_name).to match name_ucase
+    #   end
+    #
+    #   it "capitalizes last_name" do
+    #     name_lcase = "smith"
+    #     name_ucase = "Smith"
+    #     user = build_stubbed :cust, last_name: name_lcase
+    #     user.send :titleize_names
+    #     expect(user.last_name).to match name_ucase
+    #   end
+    #
+    #   it "downcases email" do
+    #     email_lcase = "janet_smith@abc.com"
+    #     email_ucase = "Janet_Smith@AbC.Com"
+    #     user = build_stubbed :cust, email: email_ucase
+    #     user.send :titleize_names
+    #     expect(user.email).to match email_lcase
+    #   end
+    #
+    #    # it "is called before save" do
+      #   user = User.new
+      #   expect(user).to receive(:titleize_names)
+      #   user.run_callbacks :save
+      # end
+    # end
     
   
 

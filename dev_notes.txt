@@ -1,0 +1,13 @@
+DEPLOY 
+  dependencies:  config/deploy.rb
+  cmd line:  mina deploy 
+  
+UNICORN APP SERVER
+  dependencies:  config/unicorn.rb
+  cmd line:  bundle exec unicorn_rails -D -E production -c config/unicorn.rb
+  
+NGINX HTTP Server & Mail Proxy
+  dependencies:  /etc/nginx/nginx.conf, /etc/nginx/sites-available (these site defs are sym-linked 
+  into adjacent sites-enabled directory)
+  
+  cmd line: sudo service nginx start | stop | restart

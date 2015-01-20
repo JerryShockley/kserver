@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   
   resources :profiles, only: [:create, :new, :edit, :update]
   resources :invitations, only: [:create, :new, :show]
+  resources :looks
 
 
   

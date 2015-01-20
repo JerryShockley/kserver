@@ -1,0 +1,33 @@
+.product_review
+  .row
+    .columns.small-12
+      - user = User.last
+      - profile = user.profile
+      .row.profile1
+        ul class="small-block-grid-#{non_skin_physical_attribute_count(user)}"
+          - physical_attributes(user).each do |label, value|
+            li
+              = "#{label.to_s.humanize.titleize}: " + value
+      .row.profile2
+        = "Skin type: #{profile.skin_type}" unless profile.skin_type.blank?
+  .row.review_right
+    .columns.large-3
+      = image_tag("profile/head_shot.jpg", class: "review_headshot")
+    .columns.large-9
+      .row
+        - ([1,2,3,4,5][Random.rand(4)]).times do
+          = image_tag("product/review_star.png")
+      .row
+        p.use_again
+          = "Use again: #{review.use_again ? 'Yes':'No'}"
+        p.recommend
+          = "Recommend: #{review.recommended  ? 'Yes':'No'} "
+      .row
+        p.review
+          = review.review
+      .row
+        = link_to("Read all reviews", "product_reviews", class: :all_reviews)
+      
+        
+      
+  

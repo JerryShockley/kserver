@@ -80,7 +80,4 @@ class ProfilesController < ApplicationController
     @profile_form
   end
 
-
-
-
 end

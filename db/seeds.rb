@@ -9,12 +9,49 @@
 # Populating 1 User for each role
 
 
+
+def build_products 
+  10.times do
+    FactoryGirl.create :look_with_product_sets
+  end
+    
+end
+
+def remove_products
+  Product.destroy_all
+  ProductApp.destroy_all
+  ProductCluster.destroy_all
+  
+  ProductRecommendation.destroy_all
+  ImageUsage.destroy_all
+  Image.destroy_all
+  VideoUsage.destroy_all
+  Video.destroy_all
+  ProductReview.destroy_all
+  ProductSet.destroy_all
+  Look.destroy_all
+end
+
+
+
 if Rails.env.production?
-  User.create!(first_name: "Jerry", last_name: "Shockley", password: Rails.application.secrets.password_root, 
+  unless User.where email: "jerry@kokkoinc.com"
+    User.create!(first_name: "Jerry", last_name: "Shockley", password: Rails.application.secrets.password_root, 
                 email: "jerry@kokkoinc.com", role: :sysadmin)
-  User.create!(first_name: "Scott", last_name: "Trappe", password: Rails.application.secrets.password_root, 
+    puts "\nSeeded database with Jerry Shockley User records\n\n"
+  end
+  unless User.where email: "scott@kokkoinc.com"
+    User.create!(first_name: "Scott", last_name: "Trappe", password: Rails.application.secrets.password_root, 
                 email: "scott@kokkoinc.com", role: :administrator)
-  puts "\nSeeded database with #{User.count} User records\n\n"
+    puts "\nSeeded database with Scott Trappe User records\n\n"
+
+  end
+
+  remove_products
+  build_products
+
+  puts "--  Created #{Product.count} Product record#{"s" if Product.count > 1} during reseeding\n\n"
+  
 else
 
   require 'factory_girl'
@@ -23,10 +60,21 @@ else
       Rails::logger
   end
 
-  puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} and #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
+  puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1}"
+  puts "--  Removing #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
+  puts "--  Removing #{Look.count} Look record#{"s" if Look.count > 1} before reseeding"
+  puts "--  Removing #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} before reseeding"
+  puts "--  Removing #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} before reseeding"
+  puts "--  Removing #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} before reseeding"
+  puts "--  Removing #{Product.count} Product record#{"s" if Product.count > 1} before reseeding"
+  puts "--  Removing #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} before reseeding"
+  puts "--  Removing #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} before reseeding"
+  
+
   User.destroy_all
   Profile.destroy_all
-
+  remove_products
+  puts "\n"
   usr = User.new
     usr.first_name = "Nina"
     usr.last_name = "Bhatti"
@@ -122,6 +170,18 @@ else
      FactoryGirl.create(:create_customer_profile)
     end
 
-  puts "--  Created #{User.count} User record#{"s" if Profile.count > 1} and #{Profile.count} Profile record#{"s" if Profile.count > 1} during reseeding\n\n"
+    puts "\n--  Created #{User.count} User record#{"s" if User.count > 1}"
+    puts "--  Created #{Profile.count} Profile record#{"s" if Profile.count > 1} during reseeding"
+
+
+    build_products
+    
+    puts "--  Created #{Look.count} Look record#{"s" if Look.count > 1} during reseeding"
+    puts "--  Created #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} during reseeding"
+    puts "--  Created #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} during reseeding"
+    puts "--  Created #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} during reseeding"
+    puts "--  Created #{Product.count} Product record#{"s" if Product.count > 1} during reseeding"
+    puts "--  Created #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} during reseeding"
+    puts "--  Created #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} during reseeding"
   
 end
