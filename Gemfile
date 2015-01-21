@@ -27,8 +27,6 @@ gem 'money-rails'
 gem 'mina'
 gem 'mina-unicorn', require: false
 gem 'mina-sidekiq', require: false
-gem 'factory_girl_rails'
-gem 'faker'
 gem 'foundicons-rails'
 
 group :development do
@@ -52,6 +50,9 @@ group :development, :test do
   gem 'jasmine-rails'
   gem 'jasmine-jquery-rails'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  
 end
 group :test do
   # gem 'capybara-screenshot'
