@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2021ED01A6EE4CE00E15AF1 /* KokkoCameraOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2021ECF1A6EE4CE00E15AF1 /* KokkoCameraOverlayController.m */; };
 		C290193A1A58A49F0090F22C /* KokkoShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29019391A58A49F0090F22C /* KokkoShareViewController.m */; };
 		D24F184E1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */; };
 		D24F184F1A2E3ECA003491FC /* FacePixels.fpdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */; };
@@ -62,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2021ECE1A6EE4CE00E15AF1 /* KokkoCameraOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoCameraOverlayController.h; path = ViewControllers/KokkoCameraOverlayController.h; sourceTree = "<group>"; };
+		C2021ECF1A6EE4CE00E15AF1 /* KokkoCameraOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoCameraOverlayController.m; path = ViewControllers/KokkoCameraOverlayController.m; sourceTree = "<group>"; };
 		C29019381A58A49F0090F22C /* KokkoShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoShareViewController.h; path = ViewControllers/KokkoShareViewController.h; sourceTree = "<group>"; };
 		C29019391A58A49F0090F22C /* KokkoShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoShareViewController.m; path = ViewControllers/KokkoShareViewController.m; sourceTree = "<group>"; };
 		D24F184D1A2E3ECA003491FC /* FacePixels.fpdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FacePixels.fpdb.txt; sourceTree = "<group>"; };
@@ -266,6 +269,8 @@
 				D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */,
 				C29019381A58A49F0090F22C /* KokkoShareViewController.h */,
 				C29019391A58A49F0090F22C /* KokkoShareViewController.m */,
+				C2021ECE1A6EE4CE00E15AF1 /* KokkoCameraOverlayController.h */,
+				C2021ECF1A6EE4CE00E15AF1 /* KokkoCameraOverlayController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 			files = (
 				D2F006941A5F439100ED865A /* UIImage+fixOrientation.m in Sources */,
 				D5D950D31A1F01A3007B3AF2 /* KokkoProductInfo.m in Sources */,
+				C2021ED01A6EE4CE00E15AF1 /* KokkoCameraOverlayController.m in Sources */,
 				D7ED1E401A39FC0B008834EE /* KokkoData.m in Sources */,
 				D2DEE97D1A2E60B50063C236 /* color_measure.cpp in Sources */,
 				D2DEE9821A2E60B50063C236 /* skinpixels.cpp in Sources */,

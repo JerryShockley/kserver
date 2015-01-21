@@ -8,6 +8,7 @@
 #import "KokkoTableViewController.h"
 #import "KokkoData.h"
 #import "KokkoShareViewController.h"
+#import "KokkoDetailPageControlViewController.h"
 
 @interface KokkoTableViewController ()
 
@@ -28,33 +29,42 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [[self.detailItem allKeys] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] init];
+    }
     
     cell.textLabel.text = [[[self.detailItem allKeys] sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:nil ascending:YES]]] objectAtIndex:indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
 
-
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqual:@"showDetail"]) {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
-        NSString *brand = cell.textLabel.text;
-        [[segue destinationViewController] setDetailItem:@{brand: self.detailItem[brand]}];
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Figure out what was tapped
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *brand = cell.textLabel.text;
+    
+    // Create the detail view
+    KokkoDetailPageControlViewController *dvc = [[KokkoDetailPageControlViewController alloc] init];
+    dvc.detailItem = @{brand: self.detailItem[brand]};
+    
+    // Present the detail view
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 

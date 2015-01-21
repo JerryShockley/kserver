@@ -7,11 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KokkoUIImagePickerController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@interface KokkoUIImagePickerController : UIViewController
 
-- (IBAction)showCamera:(UIBarButtonItem *)sender;
-- (IBAction)showPhotoPicker:(UIBarButtonItem *)sender;
-- (IBAction)findFoundation:(UIButton *)sender;
+@property (nonatomic, strong) UIImage *image;
 
 @end

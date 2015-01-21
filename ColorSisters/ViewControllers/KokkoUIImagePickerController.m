@@ -13,179 +13,130 @@
 @interface KokkoUIImagePickerController () <UIAlertViewDelegate>
 
 @property (nonatomic) UIImagePickerController *imagePickerController;
-@property (nonatomic) BOOL imageReady;
-@property (nonatomic) UIImage *image;
-@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) UIButton *findFoundationButton;
 
-/// Matches dictionary to be passed to the table view via a segue
+// Matches dictionary to be passed to the table view
 @property (nonatomic) NSDictionary *shadeMatches;
+
 @end
 
 @implementation KokkoUIImagePickerController
+
+
+#pragma mark - Accessors
+
+- (UIImageView *)imageView
+{
+    if (!_imageView) {
+        _imageView = [[UIImageView alloc] initWithImage:self.image];
+        [_imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    }
+    return _imageView;
+}
+
+- (UIButton*)findFoundationButton
+{
+    if (!_findFoundationButton) {
+        self.findFoundationButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_findFoundationButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_findFoundationButton setTitle:@"Find Foundation" forState:UIControlStateNormal];
+        _findFoundationButton.titleLabel.font = [UIFont systemFontOfSize:20];
+        _findFoundationButton.backgroundColor = [UIColor blackColor];
+        [_findFoundationButton addTarget:self action:@selector(findFoundation:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _findFoundationButton;
+}
+
+- (UIActivityIndicatorView *)spinner
+{
+    if (!_spinner) {
+        self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [_spinner setTranslatesAutoresizingMaskIntoConstraints:NO];
+    }
+    return _spinner;
+}
+
+
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self imagePicker];
-}
+    [self.view addSubview:self.spinner];
+    [self.view addSubview:self.findFoundationButton];
+    [self.view addSubview:self.imageView];
 
-- (void) imagePicker {
-    // Once you touch “getting started” it should open the camera view (viewfinder mode), unless the camera is unavailable, in which case open in picker view.
-    if (self.imageReady == NO) {
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-	    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
-            self.imageReady = YES;
-        } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-            [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-            self.imageReady = YES;
-        }
-	// ST: The only other source type is PhotoAlbum, should that be supported as well?
-    }
-    // If neither camera nor photo roll is available, must handle this error case --
-    // probably display a popup with "no camera or photo library available" message
-}
-
-- (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
-{
+    self.navigationItem.title = @"Selected Photo";
     
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.sourceType = sourceType;
-    imagePickerController.delegate = self;
+    // Constrain subviews
+    NSDictionary *views = @{
+                            @"button": self.findFoundationButton,
+                            @"image": self.imageView,
+                            };
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[image]-[button]-20-|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
     
-    if (sourceType == UIImagePickerControllerSourceTypeCamera)
-    {
-	// Default case for us is the user taking a selfie, so use the
-	// front-facing camera if it is available
-	if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront])
-	    imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-	// We don't want the user taking a photo with the flash--interferes
-	// with the image color analysis. Unfortunately, because we want the
-	// user to be able to choose between front and rear facing cameras,
-	// we have to expose the Camera Controls, and that means they can turn
-	// on the flash if they want. But at least we can set the default to
-	// Off rather than Auto.
-        imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-        imagePickerController.showsCameraControls = YES;
-    }
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:1
+                                                           constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:self.image.size.height/self.image.size.width
+                                                           constant:0]];
     
-    self.imagePickerController = imagePickerController;
-    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.findFoundationButton
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1
+                                                           constant:0]];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.spinner
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.spinner
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.0
+                                                           constant:0.0]];
 }
 
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *imageToUse = [info valueForKey:UIImagePickerControllerOriginalImage];
-    if (imageToUse.imageOrientation != UIImageOrientationUp)
-	NSLog(@"Original image orientation is %ld--adjust before use",
-	      (long)imageToUse.imageOrientation);
-    // Need code here to set the imageView window size
-    self.image = [imageToUse orientImageUp];
-    self.imageView.image = self.image;
+
+#pragma mark - Actions
+
+- (void)findFoundation:(UIButton *)sender
+{
+    // Busy
+    [self.spinner startAnimating];
     
-    [self.view addSubview:self.showFindFoundationButton];
-
-    // This will dismiss the picker sourceType
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Dynamic UI elements
-
-- (UIButton*)showFindFoundationButton
-{
-    if (!_findFoundationButton) {
-	self.findFoundationButton = [UIButton buttonWithType:UIButtonTypeSystem];
-	[_findFoundationButton setTitle:@"Find Foundation" forState:UIControlStateNormal];
-	_findFoundationButton.titleLabel.font = [UIFont systemFontOfSize:20];
-	// ST: The '- 100' and '- 50' is a hack and needs to be fixed.
-	_findFoundationButton.frame = CGRectMake(0,
-						 self.imagePickerController.view.frame.size.height - 100,
-						 self.imagePickerController.view.frame.size.width,
-						 30);
-	// ST: Not sure the background color should be set. Perhaps should be left as nil
-	_findFoundationButton.backgroundColor = [UIColor blackColor];
-	[_findFoundationButton addTarget:self action:@selector(findFoundation:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _findFoundationButton;
-}
-
-- (void)hideFindFoundationButton
-{
-    if (_findFoundationButton) {
-	[_findFoundationButton removeFromSuperview];
-	_findFoundationButton = nil;
-    }
-}
-
-- (void)showBusyIndicator
-{
-    if (!_activityView) {
-	_activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	[self.view addSubview:_activityView];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_activityView
-							      attribute:NSLayoutAttributeCenterX
-							      relatedBy:NSLayoutRelationEqual
-								 toItem:self.view
-							      attribute:NSLayoutAttributeCenterX
-							     multiplier:1.0
-							       constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_activityView
-							      attribute:NSLayoutAttributeCenterY
-							      relatedBy:NSLayoutRelationEqual
-								 toItem:self.view
-							      attribute:NSLayoutAttributeCenterY
-							     multiplier:1.0
-							       constant:0.0]];
-	[_activityView startAnimating];
-    }
-}
-
-- (void)hideBusyIndicator
-{
-    if (_activityView) {
-	[_activityView removeFromSuperview];
-	_activityView = nil;
-    }
-}
-
-
-#pragma mark - Button event handlers
-
-- (IBAction)showCamera:(UIBarButtonItem *)sender {
-    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
-}
-
-- (IBAction)showPhotoPicker:(UIBarButtonItem *)sender {
-    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-}
-
-- (IBAction)findFoundation:(UIButton *)sender {
     KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
-    
-    [self showBusyIndicator];
-    
     [kokkoClass initWithImage:self.image];
     self.shadeMatches = [kokkoClass getRecommendations];
     //    self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
-    [self hideBusyIndicator];
-    [self hideFindFoundationButton];
+
+    // Done
+    [self.spinner stopAnimating];
     [self showMatchesAlert];
 }
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-    // Cancel should take you back to the launch pages
-    // TODO:  a better way to dismiss back to launcher page
-    // This will dismiss the imagePicker
-    [self dismissViewControllerAnimated:YES completion:nil];
-    // This should take us back to the launcher page
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    
-    //    self.imageReady = NO;
-}
-
-#pragma mark - Miscellaneous subviews
 
 - (void)showMatchesAlert {
     int brandCnt = 0, shadeCnt = 0;
@@ -196,11 +147,12 @@
         shadeCnt += [[self.shadeMatches objectForKey: brandName] count];
     }
     if (brandCnt == 0) {
-	title = NSLocalizedString(@"No Matches Found", nil);
-	message = NSLocalizedString(@"Either retake the photo or select a different photo from the Camera Roll", nil);;
+        title = NSLocalizedString(@"No Matches Found", nil);
+        message = NSLocalizedString(@"Either retake the photo or select a different photo from the Camera Roll", nil);
+        self.findFoundationButton.enabled = NO;
     } else {
-	title = NSLocalizedString(@"Match Found", nil);
-	message = [NSString stringWithFormat:NSLocalizedString(@"Found %lu shades across %lu brands", @"Found {total number of shades} across {number of brands} brands"), shadeCnt, brandCnt];
+        title = NSLocalizedString(@"Match Found", nil);
+        message = [NSString stringWithFormat:NSLocalizedString(@"Found %lu shades across %lu brands", @"Found {total number of shades} across {number of brands} brands"), shadeCnt, brandCnt];
     }
     NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
     
@@ -210,20 +162,15 @@
 }
 
 
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    KokkoTableViewController *tableView = (KokkoTableViewController*)[segue destinationViewController];
-    [tableView setDetailItem:self.shadeMatches];
-}
-
-
 #pragma mark - Alert view delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([self.shadeMatches count] > 0)
-	[self performSegueWithIdentifier:@"segueToMatches" sender:self];
+    if ([self.shadeMatches count]>0) {
+        KokkoTableViewController *tvc = [[KokkoTableViewController alloc] init];
+        tvc.detailItem = self.shadeMatches;
+        [self.navigationController pushViewController:tvc animated:YES];
+    }
 }
 
 @end

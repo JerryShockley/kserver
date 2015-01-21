@@ -8,6 +8,7 @@
 
 #import "KokkoShareViewController.h"
 #import "KokkoUIImagePickerController.h"
+#import "KokkoPageControlViewController.h"
 
 @interface KokkoShareViewController () <UITextFieldDelegate>
 
@@ -376,7 +377,7 @@
 - (void)tapNewPhoto:(id)sender
 {
     for (UIViewController *vc in [self.navigationController viewControllers]) {
-        if ([vc isKindOfClass:[KokkoUIImagePickerController class]]) {
+        if ([vc isKindOfClass:[KokkoPageControlViewController class]]) {
             [self.navigationController popToViewController:vc animated:YES];
             break;
         }
