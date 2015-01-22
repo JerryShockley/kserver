@@ -71,7 +71,7 @@
     if (!_imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         _imagePicker.modalPresentationStyle = UIModalPresentationCurrentContext;
-        _imagePicker.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        _imagePicker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         _imagePicker.delegate = self;
     }
     return _imagePicker;
@@ -217,7 +217,7 @@
 - (void)showSelectedImage:(UIImage *)image
 {
     self.comingBack = YES;
-    
+
     KokkoUIImagePickerController *pvc = [[KokkoUIImagePickerController alloc] init];
     pvc.image = image;
     [self.navigationController pushViewController:pvc animated:NO];

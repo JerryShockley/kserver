@@ -72,15 +72,15 @@
     self.navigationItem.title = @"Selected Photo";
     
     // Constrain subviews
-    NSDictionary *views = @{
-                            @"button": self.findFoundationButton,
-                            @"image": self.imageView,
-                            };
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[image]-[button]-20-|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
-    
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeTop
+                                                         multiplier:1.0
+                                                           constant:10]];
+
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
@@ -118,6 +118,15 @@
                                                           attribute:NSLayoutAttributeCenterY
                                                          multiplier:1.0
                                                            constant:0.0]];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.findFoundationButton
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:-30]];
+    
 }
 
 

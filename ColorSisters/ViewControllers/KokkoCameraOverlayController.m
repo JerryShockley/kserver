@@ -30,6 +30,7 @@
         self.shutterButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_shutterButton setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_shutterButton setImage:[UIImage imageNamed:@"ShutterRelease"] forState:UIControlStateNormal];
+        [_shutterButton setImage:[UIImage imageNamed:@"ShutterReleaseDown"] forState:UIControlStateHighlighted];
         [_shutterButton addTarget:self action:@selector(tapShutter:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _shutterButton;
@@ -42,7 +43,7 @@
         [_cancelButton setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(tapCancel:) forControlEvents:UIControlEventTouchUpInside];
-        _cancelButton.titleLabel.font = [UIFont systemFontOfSize:20];
+        _cancelButton.titleLabel.font = [UIFont systemFontOfSize:18];
     }
     return _cancelButton;
 }
@@ -52,6 +53,7 @@
     if (!_flipButton) {
         self.flipButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_flipButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_flipButton setTintColor:[UIColor whiteColor]];
         [_flipButton setImage:[UIImage imageNamed:@"Flip"] forState:UIControlStateNormal];
         [_flipButton addTarget:self action:@selector(tapFlip:) forControlEvents:UIControlEventTouchUpInside];
         _flipButton.hidden = ! ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]
@@ -110,7 +112,7 @@
 
     // Constrain subviews
     const CGFloat shutterScale = 0.25;
-    const CGFloat otherScale = 0.1;
+    const CGFloat secondaryScale = 0.18;
 
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.shutterButton
@@ -166,7 +168,7 @@
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeWidth
-                                                         multiplier:otherScale
+                                                         multiplier:secondaryScale
                                                            constant:0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.rollButton
@@ -174,7 +176,7 @@
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeWidth
-                                                         multiplier:otherScale
+                                                         multiplier:secondaryScale
                                                            constant:0]];
     
 
@@ -200,7 +202,7 @@
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeWidth
-                                                         multiplier:otherScale
+                                                         multiplier:secondaryScale
                                                            constant:0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.flipButton
@@ -208,23 +210,23 @@
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeWidth
-                                                         multiplier:otherScale
+                                                         multiplier:secondaryScale
                                                            constant:0]];
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.cancelButton
-                                                          attribute:NSLayoutAttributeLeft
+                                                          attribute:NSLayoutAttributeRight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
-                                                          attribute:NSLayoutAttributeLeft
+                                                          attribute:NSLayoutAttributeRight
                                                          multiplier:1
-                                                           constant:20]];
+                                                           constant:-8]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.cancelButton
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeTop
                                                          multiplier:1
-                                                           constant:20]];
+                                                           constant:25]];
 
     
 }
