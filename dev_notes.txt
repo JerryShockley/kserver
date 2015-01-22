@@ -11,3 +11,21 @@ NGINX HTTP Server & Mail Proxy
   into adjacent sites-enabled directory)
   
   cmd line: sudo service nginx start | stop | restart
+
+
+Navicat connection via ssh
+
+General tab/page
+
+ip address: localhost
+port: 5432
+Username: kokko
+password: black30cat48
+
+
+ip address: signup.colorsisters.com
+port: 6287
+username: deployer
+Authentication Method: public key
+Private key: /User/jerry/.ssh/id_rsa
+passphrase: ssh passphrase from when you created your ssh key
