@@ -1,9 +1,9 @@
 class LooksController < ApplicationController
   
-  # /profiles
-  # def index
-  #   load_look_forms
-  # end
+  # /looks
+  def index
+    @looks = Look.all
+  end
 
   # /looks/:id
   def show

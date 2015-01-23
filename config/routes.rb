@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
-  root  to: 'welcome#index'
+  root  to: 'looks#index'
   get 'welcome/index', as: 'welcome'
   
   devise_scope :user  do

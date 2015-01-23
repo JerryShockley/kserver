@@ -1,0 +1,21 @@
+.row.looks_container
+  .columns.large-12.text-center
+    p.look_name ColorSisters Looks for You
+    .row.title_sep.text-center
+      = image_tag("home_page/xsepWhite.png", class: :sep_image)
+    
+  .row
+    .columns.small-12
+      ul.large-block-grid-3.medium-block-grid-2.small-block-grid-1
+        - @looks.each do |look|
+          li
+            a.looks href=look_path(look.id)
+              p.looks_title.text-center
+                = look.title
+              = image_tag("look/look.jpg", class: :look_image_item)
+              p.looks_desc_tag Description
+              p.looks_desc = look.desc
+            
+      
+    
+    

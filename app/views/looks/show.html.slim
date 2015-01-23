@@ -1,8 +1,17 @@
 .row
   .row.title_row
-    .columns.small-12.text-center
-        p.look_number ColorSisters Look 39:
-        p.look_name Dinner and Dessert
+    .columns.large-12.text-center
+        p.look_number "ColorSisters Look #{@look.id.to_s}:"
+        p.look_name = @look.title
+  .row.image_sep.text-center
+        = image_tag("home_page/xsepWhite.png", class: :sep_image)
+  .row.desc_row
+    .columns.large-6
+      p.title Description
+      p.desc = @look.desc
+    .columns.large-6
+      p.title Usage
+      p.usage = @look.usage_directions
   .row.container1
     .columns.small-12
       .col_container.columns.large-5.medium-9

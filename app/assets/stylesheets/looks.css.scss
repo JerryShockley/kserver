@@ -15,12 +15,41 @@ $lt-black: #303030;
 //
 //}
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^    looks    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.row.looks_container {
+  background: black;
+  padding: 2.5rem;
+  color: white;
+}
 
+.looks_title {
+  color: white;
+  font: 200 1rem/1.3rem Raleway;
+  
+}
+
+.row.title_sep {
+  padding-bottom: 4rem;
+}
+
+p.looks_desc_tag {
+  color:$lt-blue;
+  font: 200 .8rem/1.3rem Raleway;
+  padding-top: 1rem;
+}
+
+ 
+p.looks_desc {
+  color: white;
+  font: 200 .8rem/1.3rem Raleway;
+}
+
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^    looks/show/id     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // *****************  Title 
 .title_row {
   background: black;
   padding: 0;
-  border: 1px solid $lt-blue;
+//  border: 1px solid $lt-blue;
   
 }
 
@@ -29,8 +58,8 @@ p.look_number{
   position: relative;
   color: $lt-blue;
   font: normal 1.7rem/1.8rem Raleway;
-  padding-bottom: 1%;
-  padding-top: 2%;
+  padding-bottom: 0.7%;
+  padding-top: 2.3%;
   
 //  padding: 1% 3%;
 }
@@ -40,6 +69,54 @@ p.look_name {
   color: white;
   padding-left: 1.5%;
 }
+
+
+.row.image_sep {
+  background: black;
+  padding-top:1%;
+  padding-bottom: 2%;
+  
+}
+
+.sep_image {
+  vertical-align: middle;
+  max-height: 1.6rem;
+//  width: auto;
+}
+
+
+// ********************   Directions and Usage
+
+.row.desc_row {
+  background: black;
+//  width: 100%;
+}
+
+p.title {
+  position: relative;
+  left: 32%;
+  color: $lt-blue;
+  padding-top: 3%;
+  font: normal 1.3rem/1.5rem Raleway;
+  margin-bottom: 1%;
+}
+
+p.desc {
+//  border: 1px solid gray;
+  margin: 0;
+  padding: 1% 3% 3% 3%;
+  color: white;
+  font: 200 .8rem/1.3rem Raleway;
+  margin-bottom: 1.5%;
+  
+}
+
+p.usage {
+  @extend p.desc;
+  
+}
+
+
 
 // ********************   Right Column - Image
 
