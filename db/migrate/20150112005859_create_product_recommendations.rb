@@ -3,7 +3,7 @@ class CreateProductRecommendations < ActiveRecord::Migration
     create_table :product_recommendations do |t|
       t.references :product_cluster, index: true, null: false
       t.references :product_app, index: true, null: false
-
+      t.integer :priority, default: 50, null: false
       t.timestamps
     end
   end

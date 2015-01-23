@@ -22,6 +22,8 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
+
+
 FactoryGirl.define do
   sequence(:pname) do |n|
     "Very Cool Product #{n}"
@@ -51,13 +53,16 @@ FactoryGirl.define do
     
     factory :product_with_reviews do
       ignore do
-        # app_cnt {[1,4,2,2,2,3,1,5,1,2,2,1,4,3,3,4,2][Random.rand(16)]}
+        # app_cnt {[1,4,2,15,2,3,1,5,9,7,2,12,4,3,3,4,2][Random.rand(16)]}
         app_cnt 2
       end
       
       
       after(:create) do |product, evaluator|
-        create_list(:product_review, evaluator.app_cnt, product: product, user_id: Random.rand(10..180))
+        @usr_f ||= User.first.id
+        @usr_l ||= User.last.id        
+        create_list(:product_review, evaluator.app_cnt, product: product, 
+                    user_id: Random.rand(@usr_f..@usr_l))
       end
       
     end

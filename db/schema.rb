@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116194811) do
+ActiveRecord::Schema.define(version: 20150122230151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "custom_look_products", force: true do |t|
+    t.integer  "custom_look_id"
+    t.integer  "product_app_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "custom_look_products", ["custom_look_id"], name: "index_custom_look_products_on_custom_look_id", using: :btree
+  add_index "custom_look_products", ["product_app_id"], name: "index_custom_look_products_on_product_app_id", using: :btree
+
+  create_table "custom_looks", force: true do |t|
+    t.integer  "product_set_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "custom_looks", ["product_set_id"], name: "index_custom_looks_on_product_set_id", using: :btree
+  add_index "custom_looks", ["user_id"], name: "index_custom_looks_on_user_id", using: :btree
 
   create_table "image_usages", force: true do |t|
     t.text     "page"
@@ -78,8 +98,9 @@ ActiveRecord::Schema.define(version: 20150116194811) do
   add_index "product_clusters", ["user_id"], name: "index_product_clusters_on_user_id", using: :btree
 
   create_table "product_recommendations", force: true do |t|
-    t.integer  "product_cluster_id", null: false
-    t.integer  "product_app_id",     null: false
+    t.integer  "product_cluster_id",              null: false
+    t.integer  "product_app_id",                  null: false
+    t.integer  "priority",           default: 50, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -151,6 +172,7 @@ ActiveRecord::Schema.define(version: 20150116194811) do
     t.string   "hair_color"
     t.string   "age"
     t.string   "skin_type"
+    t.text     "img_filename"
   end
 
   add_index "profiles", ["email"], name: "index_profiles_on_email", unique: true, using: :btree

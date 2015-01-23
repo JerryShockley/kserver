@@ -40,7 +40,7 @@ FactoryGirl.define do
 
 
     after(:create) do |product_cluster, evaluator|
-      n = Random.rand(1..8)
+      n = Random.rand(2..8)
       while n > 0 do
         product_cluster.product_apps << create(:product_app, role: evaluator.role, category: evaluator.category,
                                   user_id: evaluator.user_id )

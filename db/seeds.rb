@@ -13,8 +13,12 @@ require 'factory_girl_rails'
 
 
 def build_products 
-  2.times do
-    FactoryGirl.create :look_with_product_sets
+  usr_f = User.first.id
+  usr_l = User.last.id
+  puts "\nfirst user = #{usr_f}     last_usr = #{usr_l}"
+  
+  10.times do
+    FactoryGirl.create :look_with_product_sets, user_id: Random.rand(usr_f..usr_l)
   end
     
 end
@@ -29,10 +33,39 @@ def remove_products
   Image.destroy_all
   VideoUsage.destroy_all
   Video.destroy_all
+  CustomLook.destroy_all
+  CustomLookProduct.destroy_all
   ProductReview.destroy_all
   ProductSet.destroy_all
   Look.destroy_all
 end
+
+
+def display_records_to_be_removed
+  puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
+  puts "--  Removing #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
+  puts "--  Removing #{Look.count} Look record#{"s" if Look.count > 1} before reseeding"
+  puts "--  Removing #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} before reseeding"
+  puts "--  Removing #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} before reseeding"
+  puts "--  Removing #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} before reseeding"
+  puts "--  Removing #{Product.count} Product record#{"s" if Product.count > 1} before reseeding"
+  puts "--  Removing #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} before reseeding"
+  puts "--  Removing #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} before reseeding"
+  puts "--  Removing #{CustomLook.count} CustomLook record#{"s" if CustomLook.count > 1} before reseeding"
+  puts "--  Removing #{CustomLookProduct.count} CustomLookProduct record#{"s" if CustomLookProduct.count > 1} before reseeding"
+end
+
+def display_product_records_added
+  puts "--  Created #{Look.count} Look record#{"s" if Look.count > 1} during reseeding"
+  puts "--  Created #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} during reseeding"
+  puts "--  Created #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} during reseeding"
+  puts "--  Created #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} during reseeding"
+  puts "--  Created #{Product.count} Product record#{"s" if Product.count > 1} during reseeding"
+  puts "--  Created #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} during reseeding"
+  puts "--  Created #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} during reseeding"
+  
+end
+
 
 
 
@@ -49,27 +82,11 @@ if Rails.env.production?
   #
   # end
 
-  puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1}"
-  puts "--  Removing #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
-  puts "--  Removing #{Look.count} Look record#{"s" if Look.count > 1} before reseeding"
-  puts "--  Removing #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} before reseeding"
-  puts "--  Removing #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} before reseeding"
-  puts "--  Removing #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} before reseeding"
-  puts "--  Removing #{Product.count} Product record#{"s" if Product.count > 1} before reseeding"
-  puts "--  Removing #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} before reseeding"
-  puts "--  Removing #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} before reseeding"
-
+  display_records_to_be_removed
   remove_products
   build_products
 
-  puts "--  Created #{Look.count} Look record#{"s" if Look.count > 1} during reseeding"
-  puts "--  Created #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} during reseeding"
-  puts "--  Created #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} during reseeding"
-  puts "--  Created #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} during reseeding"
-  puts "--  Created #{Product.count} Product record#{"s" if Product.count > 1} during reseeding"
-  puts "--  Created #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} during reseeding"
-  puts "--  Created #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} during reseeding"
-
+  display_product_records_added
   
 else
 
@@ -77,16 +94,7 @@ else
       Rails::logger
   end
 
-  puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1}"
-  puts "--  Removing #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
-  puts "--  Removing #{Look.count} Look record#{"s" if Look.count > 1} before reseeding"
-  puts "--  Removing #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} before reseeding"
-  puts "--  Removing #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} before reseeding"
-  puts "--  Removing #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} before reseeding"
-  puts "--  Removing #{Product.count} Product record#{"s" if Product.count > 1} before reseeding"
-  puts "--  Removing #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} before reseeding"
-  puts "--  Removing #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} before reseeding"
-  
+  display_records_to_be_removed
 
   User.destroy_all
   Profile.destroy_all
@@ -183,22 +191,14 @@ else
   
   
     # Create linked users and profiles
-    200.times do
+    100.times do
      FactoryGirl.create(:create_customer_profile)
     end
 
     puts "\n--  Created #{User.count} User record#{"s" if User.count > 1}"
     puts "--  Created #{Profile.count} Profile record#{"s" if Profile.count > 1} during reseeding"
 
-
     build_products
-    
-    puts "--  Created #{Look.count} Look record#{"s" if Look.count > 1} during reseeding"
-    puts "--  Created #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} during reseeding"
-    puts "--  Created #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} during reseeding"
-    puts "--  Created #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} during reseeding"
-    puts "--  Created #{Product.count} Product record#{"s" if Product.count > 1} during reseeding"
-    puts "--  Created #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} during reseeding"
-    puts "--  Created #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} during reseeding"
-  
+    display_product_records_added  
 end
+

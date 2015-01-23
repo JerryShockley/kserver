@@ -15,19 +15,46 @@ $lt-black: #303030;
 //
 //}
 
-.col_container {
-  position: relative;
-//  width: 37%;
-//  padding: 0;
+
+// *****************  Title 
+.title_row {
+  background: black;
+  padding: 0;
+  border: 1px solid $lt-blue;
   
 }
 
-.container {
-  background: black;
-  padding: 0;
-  margin: 0;
+p.look_number{
+  display: inline-block;
+  position: relative;
+  color: $lt-blue;
+  font: normal 1.7rem/1.8rem Raleway;
+  padding-bottom: 1%;
+  padding-top: 2%;
+  
+//  padding: 1% 3%;
+}
+
+p.look_name {
+  @extend p.look_number;
+  color: white;
+  padding-left: 1.5%;
+}
+
+// ********************   Right Column - Image
+
+.col_container {
+  position: relative;
   
 }
+
+.row.overview_img {
+  img.look_image {
+    width: 150%;
+    height: auto;
+  }
+}
+
 
 .look_nav {
   margin-top: 4%;
@@ -35,6 +62,7 @@ $lt-black: #303030;
   padding-left: 5%;
   padding-right: 5%;
 }
+
 
 .look_cart {
   position: relative;
@@ -51,34 +79,51 @@ $lt-black: #303030;
 .customize {
   @extend .look_cart;
   float: right;
-  padding-right: 6%;
-  padding-left: 6%;
+  padding-right: 6.5%;
+  padding-left: 6.5%;
 }
 
-.row.overview_img {
+
+
+// *********************   Left Column - Products
+
+.container1 {
+  background: black;
+  width: 100%;
   
 }
+
+
+
 .category {
   position: relative;
+  margin: 0;
   background: black;
   height: 100%;
-  border: 2px solid gray;
+  border: 1px solid gray;
 }
 
-
-
    
-  p.cat {
-    display: inline-block;
-    position: relative;
-    background: black;
-    color: white;
-    border: .12rem solid white;
-    font: normal 1.3rem/2rem Raleway; 
-    margin: .6rem 1.5rem;
-    padding: 0rem 1rem;
-  
-  }
+p.how_to {
+  display: inline-block;
+  postion: relative;
+  float: right;
+  color: $lt-blue;
+  padding: 2.5% 5% 1% 1%;
+  font: normal 1.3rem/2rem Raleway; 
+}
+
+p.cat {
+  display: inline-block;
+  position: relative;
+//  background: black;
+  color: white;
+  border: .11rem solid white;
+  font: normal 1.3rem/2rem Raleway; 
+  margin: .6rem 1.1rem;
+  padding: 0rem 1rem;
+
+}
   
 
 dl.accordion {
@@ -86,10 +131,50 @@ dl.accordion {
   dd.accordion-navigation {
     position: relative;
 
+  
+    a {
+      position: relative;
+      background: black;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin: 0;
+      border: 0;
+      height: 95px;
+// -------------------------------   Product Summary
+      .product_summary {
+        background: black;
+        color: white;
+        height: 95px;
+        border: 1px solid gray;
+
+        .role {
+          position: relative;
+          font: normal .7rem/1.3rem Raleway; 
+          color: GoldenRod;
+          margin-bottom: 0;
+          padding-top: .4rem;
+
+        }
+
+        .full_name {
+          position: relative;
+          font: 200 .7rem/1.3rem Raleway; 
+          margin-bottom: 0;
+        }
+
+
+        .color {
+          position: relative;
+          font: 200 .7rem/1.3rem Raleway;
+        }
+      }  
+      
+    }
+
+// --------------------   Product Detail
     .prod_detail {
       border: .15rem solid gray;
-      margin-left: 0;
-      margin-right: 0;
+      margin: 0;
       padding-top: .8rem;
       padding-right: .5rem;
       
@@ -127,46 +212,9 @@ dl.accordion {
       
     }
   
-  
-    a {
-      position: relative;
-      padding-top: 0;
-      padding-bottom: 0;
-      margin: 0;
-      height: 95px;
-    
-      .product_summary {
-        background: black;
-        color: white;
-        height: 95px;
-        border: 1px solid gray;
-
-        .role {
-          position: relative;
-          font: normal .7rem/1.3rem Raleway; 
-          color: GoldenRod;
-          margin-bottom: 0;
-          padding-top: .4rem;
-
-        }
-
-        .full_name {
-          position: relative;
-          font: 200 .7rem/1.3rem Raleway; 
-          margin-bottom: 0;
-        }
 
 
-        .color {
-          position: relative;
-          font: 200 .7rem/1.3rem Raleway;
-        }
-      }  
-      
-    }
-
-
-
+// -------------------------------   Product Review
     .product_review {
       position: relative;
       background: DimGray;
@@ -193,7 +241,6 @@ dl.accordion {
       li {
         position: relative;
         font: 200 .7rem/1.3rem Raleway;
-//        padding: 1% 1% 3% 1%;
         padding-bottom: 0;
         padding-left: 1.56rem;
         color: GoldenRod;
@@ -203,7 +250,6 @@ dl.accordion {
       .profile2 {
         position: relative;
         font: 200 .7rem/1.3rem Raleway;
-//        padding: 1% 1% 3% 1%;
         color: GoldenRod;
         padding-top: 0;
         padding-left: 1rem;
@@ -228,15 +274,13 @@ dl.accordion {
       }
     }
     
-    
-  
-
     .content {
+      background: black;
       margin: 0;
       border: 0;
       padding: 0;
     }
-      
+
   
   }  
   

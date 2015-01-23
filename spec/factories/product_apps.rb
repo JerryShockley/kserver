@@ -34,9 +34,9 @@ FactoryGirl.define do
   factory :product_app do
     category [:face, :eyes, :lips, :cheeks][Random.rand(3)]
     # association product, factory: :product
-    product_id {create(:product_with_reviews).id}
-    user_id 3
     role  {ROLES_HASH[category][Random.rand(SIZE[category])]}
+    user_id 3
+    association :product, factory: :product_with_reviews
     
     # trait :random_role do
     #   role 1

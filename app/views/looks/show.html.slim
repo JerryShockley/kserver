@@ -1,23 +1,30 @@
-.row.container
-  .col_container.columns.large-5.medium-9
-    - [:face, :eyes, :lips, :cheeks].each do |category|
-      div  class="category"
-        p.cat
-          = category.to_s.titleize
-      dl class="accordion"  data-accordion=""
-        - @set.clusters_by_category(category).each do |cluster|
-            - cluster.product_apps.each_index do |i|
-              - if i == 0
-                / dl.accordion  data-accordion=""
-                = render("looks/role_product", product_app: cluster.product_apps[i])
-      
-  .image.columns.large-7.medium-3
-    .row.overview_img
-      = image_tag('look/look.jpg' , alt: "ColorSisters look overview")
-    .row
-      .columns.small-12.look_nav
-        = link_to("ADD LOOK TO CART", "add_look", class: :look_cart)
-        = link_to("CUSTOMIZE", "customize", class: :customize)
+.row
+  .row.title_row
+    .columns.small-12.text-center
+        p.look_number ColorSisters Look 39:
+        p.look_name Dinner and Dessert
+  .row.container1
+    .columns.small-12
+      .col_container.columns.large-5.medium-9
+        - [:face, :eyes, :lips, :cheeks].each do |category|
+          div  class="category"
+            p.cat
+              = category.to_s.titleize
+            p.how_to See How
+          dl class="accordion"  data-accordion=""
+            - @set.clusters_by_category(category).each do |cluster|
+                - cluster.product_apps.each_index do |i|
+                  - if i == 0
+                    / dl.accordion  data-accordion=""
+                    = render("looks/role_product", product_app: cluster.product_apps[i])
+  
+      .image.columns.large-7.medium-3
+        .row.overview_img
+          = image_tag('look/look.jpg' , class: :look_img, alt: "ColorSisters look overview")
+        .row
+          .columns.small-12.look_nav
+            = link_to("ADD LOOK TO CART", "add_look", class: :look_cart)
+            = link_to("CUSTOMIZE", "customize", class: :customize)
         
       
           

@@ -5,5 +5,6 @@ class AddSkinColorToProfile < ActiveRecord::Migration
     add_column :profiles, :hair_color, :string
     add_column :profiles, :age, :string
     add_column :profiles, :skin_type, :string
-  end
+    add_column :profiles, :img_filename, :text
+  end 
 end

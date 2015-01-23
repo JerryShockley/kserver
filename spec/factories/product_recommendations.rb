@@ -11,9 +11,12 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
+
+
 FactoryGirl.define do
   factory :product_recommendation do
     product_cluster nil
     product_app nil
+    
   end
 end

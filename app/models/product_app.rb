@@ -14,8 +14,12 @@
 class ProductApp < ActiveRecord::Base
   belongs_to :product
   belongs_to :user
-  has_many :product_recommendations, dependent: :destroy, inverse_of: :product_app
+  has_many :product_recommendations, inverse_of: :product_app
   has_many :product_clusters, through: :product_recommendations
+  
+  has_many :custom_look_products, inverse_of: :product_app
+  has_many :custom_looks, through: :custom_look_products
+  
   
   def self.by_category(category)
     ProductApp.includes(:product).where("product_apps.category = ?", self.categories[category.to_s].to_s).order(:brand)
