@@ -174,4 +174,38 @@ SkinToneMatcher imagePipe(false);
              };
 }
 
+
+#pragma mark - Group all the activity into one call
+
+- (void)analyzeImage:(UIImage *)image
+            delegate:(id <KokkoInterfaceDelegate>)delegate
+{
+    // Register the recipient of our results
+    self.delegate = delegate;
+    
+    // Initialize
+    [self initWithImage:image];
+    
+    // Bogus call to "found chart"
+    //  TODO: This should come from some bit of code that actually has the rectangle
+    if ([self.delegate respondsToSelector:@selector(kokkoInterface:foundChartRect:)]) {
+        [self.delegate kokkoInterface:self foundChartRect:CGRectMake(10,100,20,20)];
+    }
+    
+    // Bogus call to "found face"
+    //  TODO: This should come from some bit of code that actually has the rectangle
+    if ([self.delegate respondsToSelector:@selector(kokkoInterface:foundFaceRect:)]) {
+        [self.delegate kokkoInterface:self foundFaceRect:CGRectMake(100,200,20,20)];
+    }
+    
+    // Run the matching routine
+    NSDictionary *shadeMatches = [self getRecommendations];
+    
+    // Return result to the delegate
+    if ([self.delegate respondsToSelector:@selector(kokkoInterface:foundShadeMatches:)]) {
+        [self.delegate kokkoInterface:self foundShadeMatches:shadeMatches];
+    }
+}
+
+
 @end

@@ -10,7 +10,7 @@
 #import "KokkoInterface.h"
 #import "KokkoTableViewController.h"
 
-@interface KokkoUIImagePickerController () <UIAlertViewDelegate>
+@interface KokkoUIImagePickerController () <UIAlertViewDelegate,KokkoInterfaceDelegate>
 
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIImageView *imageView;
@@ -136,18 +136,32 @@
 {
     // Busy
     [self.spinner startAnimating];
-    
-    KokkoInterface* kokkoClass = [KokkoInterface sharedKokkoInterface];
-    [kokkoClass initWithImage:self.image];
-    self.shadeMatches = [kokkoClass getRecommendations];
-    //    self.shadeMatches = [kokkoClass getRecommendationsUIONLY];
-
-    // Done
-    [self.spinner stopAnimating];
-    [self showMatchesAlert];
+    [[KokkoInterface sharedKokkoInterface] analyzeImage:self.image delegate:self];
 }
 
-- (void)showMatchesAlert {
+
+#pragma mark - Kokko Image Processing Delegate
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface foundFaceRect:(CGRect)faceRect
+{
+    NSLog(@"Found face at %.1f,%.1f",faceRect.origin.x, faceRect.origin.y);
+}
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface foundChartRect:(CGRect)chartRect
+{
+    NSLog(@"Found chart at %.1f,%.1f",chartRect.origin.x, chartRect.origin.y);
+}
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface analysisProgress:(CGFloat)progress
+{
+    NSLog(@"Analaysis progress is %.2f",progress);
+}
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface foundShadeMatches:(NSDictionary *)shadeMatches
+{
+    self.shadeMatches = shadeMatches;
+    [self.spinner stopAnimating];
+
     int brandCnt = 0, shadeCnt = 0;
     
     NSString *brandName, *title, *message;
