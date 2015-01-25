@@ -11,6 +11,7 @@
 
 @interface KokkoCameraOverlayController ()
 
+@property (nonatomic, strong) UIView *topRect;
 @property (nonatomic, strong) UIButton *shutterButton;
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIButton *flipButton;
@@ -23,6 +24,15 @@
 
 
 #pragma mark - Accessors
+
+- (UIView *)topRect
+{
+    if (!_topRect) {
+        self.topRect = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+        _topRect.backgroundColor = [UIColor whiteColor];
+    }
+    return _topRect;
+}
 
 - (UIButton *)shutterButton
 {
@@ -39,7 +49,7 @@
 - (UIButton *)cancelButton
 {
     if (!_cancelButton) {
-        self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_cancelButton setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(tapCancel:) forControlEvents:UIControlEventTouchUpInside];
@@ -105,6 +115,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view addSubview:self.topRect];
     [self.view addSubview:self.cancelButton];
     [self.view addSubview:self.shutterButton];
     [self.view addSubview:self.flipButton];
