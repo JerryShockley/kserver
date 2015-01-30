@@ -116,5 +116,13 @@
     }
 }
 
+- (void)cancelAnalysis
+{
+    self.delegate = nil;
+    // In a background thread world, kill the thread. Here we just release
+    // the memory for the KokkoImage object.
+    kia = nil;
+}
+
 
 @end
