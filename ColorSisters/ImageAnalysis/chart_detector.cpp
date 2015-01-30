@@ -545,12 +545,9 @@ polygonSize_t ChartDetector::select_rectangles(vector<polygon_t> &rectangles, co
     // compute ratio of areas in rectangles from model
     size_t ms = chart.get_frame().size();
     vector<float> ratios;
-    for (size_t i=1; i<ms; i++) {
+    for (size_t i=1; i<ms; i++)
 	ratios.push_back(float(get_rect_area(chart.get_frame()[i])) / get_rect_area(chart.get_frame()[i-1]));
-	if (debug) {
-	    chart_details << "ratio: " << ratios.back() << endl;
-	}
-    }
+
     
     // group rectangles with the same center (to deal with multiple charts)
     polygonSize_t n = rectangles.size();
@@ -582,6 +579,8 @@ polygonSize_t ChartDetector::select_rectangles(vector<polygon_t> &rectangles, co
 	}
     }
     if (debug) {
+	for (auto f : ratios)
+	    chart_details << "ratio: " << f << endl;
 	chart_details << "Found " << groups.size() << " groups." << endl;
     }
     // return the first group that passes the area ratio test

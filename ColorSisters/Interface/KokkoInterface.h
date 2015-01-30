@@ -20,10 +20,6 @@
 
 - (void)analyzeImage:(UIImage *)image
             delegate:(id <KokkoInterfaceDelegate>)delegate;
-- (void) initWithImage:(UIImage *)imageToAnalyze;
-- (CGRect *) findChart;
-- (CGRect *) findFace;
-- (NSDictionary *) getRecommendations;
 - (NSDictionary *)getRecommendationsUIONLY;
 
 @end

@@ -2,7 +2,7 @@
 //  skinpixels.h
 //
 //  Created by Scott Trappe on 5/20/14.
-//  Copyright (c) 2014 Kokko, Inc. All rights reserved.
+//  Copyright (c) 2014, 2015 Kokko, Inc. All rights reserved.
 //
 
 #ifndef __skinpixels__
@@ -39,13 +39,14 @@ public:
     typedef std::vector<ChanValInt>	Channel;
     typedef enum {f_any, f_chans, f_counts, f_pixels} format_t;
     typedef enum {cs_rgb, cs_lab} colorspace_t;
+    typedef enum {l_none, l_noMin, l_noMax, l_noMinMax} limit_t;
     
     SkinPixels() : imageID(""), shadeName(""), pixelCnt(0), format(f_any),
 		    colorSpace(cs_rgb), asFloat(false), sorted(true) {
 	memset(valCnts, 0, sizeof(valCnts));
     }
     void	clear();
-    void	load(const cv::Mat& image);
+    void	load(const cv::Mat& image, limit_t filter = l_none);
     bool    	loadOneFace(TextInput& pixelFile,
 			    ChanValInt minVal = 0,
 			    ChanValInt maxVal = CHAN_MAX_INT);
@@ -63,7 +64,7 @@ public:
     bool	getFloat() const	    { return asFloat; }
     bool	getSorted() const	    { return sorted; }
     const Channel& getChan(unsigned c) const  { return chans[c]; }
-    const DataLineVal *getCntChan(unsigned c) const { return valCnts[c]; }
+    const DataLineVal *getChanCnt(unsigned c) const { return valCnts[c]; }
     
     // Change dataset
     void	setShadeName(const std::string& name)	{ shadeName = name; }

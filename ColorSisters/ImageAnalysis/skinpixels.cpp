@@ -2,7 +2,7 @@
 //  skinpixels.cpp
 //
 //  Created by Scott Trappe on 5/20/14.
-//  Copyright (c) 2014 Kokko, Inc. All rights reserved.
+//  Copyright (c) 2014, 2015 Kokko, Inc. All rights reserved.
 //
 // FACE PIXEL DATA FILE FORMAT (.fpix.txt, .fpdb.txt)
 // ==================================================
@@ -211,7 +211,7 @@ void SkinPixels::clear()
 
 
 // load -- read in pixel values from an openCV iamge
-void SkinPixels::load(const cv::Mat& image)
+void SkinPixels::load(const cv::Mat& image, limit_t filter)
 {
     cv::Mat bgr_planes[NUM_CHANS], vectorized[NUM_CHANS];
     
@@ -235,12 +235,38 @@ void SkinPixels::load(const cv::Mat& image)
     
     // Now comes the relatively expensive copy of data from the OpenCV
     // matrix into the SkinPixels array of channels.
-    for (auto i = 0; i < NUM_CHANS; i++) {
-	const uchar* p = vectorized[i].ptr<uchar>(0);
-	
-	// Copy data to a vector.  Note that (p + mat.cols) points to the
-	// end of the row.
-	chans[i].assign(p, p + vectorized[i].cols);
+    if (filter == l_none) {
+	// If no filtering is done, can do a mass copy using the vector<>
+	// assign() function
+	for (auto chan = 0; chan < NUM_CHANS; chan++) {
+	    const uchar* p = vectorized[chan].ptr<uchar>(0);
+	    
+	    // Copy data to a vector.  Note that (p + mat.cols) points to the
+	    // end of the row.
+	    chans[chan].assign(p, p + vectorized[chan].cols);
+	}
+    } else {
+	// filter out pixels that are either all zeros or all ones from the
+	// matrix (these represent masked-off portions of the image, don't
+	// want it polluting the data set. Unfortunately, means we have to
+	// copy over the data pixel-by-pixel to do the comparisons.
+	int numPixels = vectorized[0].cols;
+	for (auto chan = 0; chan < NUM_CHANS; chan++)
+	    chans[chan].reserve(numPixels);	// make big enough
+	for (int i = 0; i < numPixels; i++) {
+	    unsigned chanSum = 0;
+	    for (auto chan = 0; chan < NUM_CHANS; chan++)
+		chanSum += vectorized[chan].at<uchar>(i);
+	    
+	    if ((chanSum > 0 && chanSum < (NUM_CHANS * 255)) ||
+		(chanSum == 0 && filter == l_noMax) ||
+		(chanSum == (NUM_CHANS * 255) && filter == l_noMin))
+		// Either the pixel is not all zeros or all ones, or
+		// it was all zeros and the filter mode was l_noMax (so all
+		// zeroes is OK) or all ones and the filter mode was l_noMin
+		for (auto chan = 0; chan < NUM_CHANS; chan++)
+		    chans[chan].push_back(vectorized[chan].at<uchar>(i));
+	}
     }
     pixelCnt = chans[0].size();
     format = f_pixels;		    // data is still organized by pixel

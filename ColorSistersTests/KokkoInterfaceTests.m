@@ -42,6 +42,7 @@ KokkoInterface* kokkoClass;
 
 }
 
+#ifdef IMPLEMENT_TESTS
 - (void)testinitWithImage {
     // TODO:  add test with real images
     UIImage *img;
@@ -62,6 +63,7 @@ KokkoInterface* kokkoClass;
     NSDictionary *recommendations = [kokkoClass getRecommendations];
     NSLog (@"recommendtions = %@", recommendations);
 }
+#endif
 
 - (void)testgetRecommendationsUIONLY {
     NSDictionary *shadeMatches = [kokkoClass getRecommendationsUIONLY];

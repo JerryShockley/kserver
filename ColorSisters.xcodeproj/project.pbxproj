@@ -22,13 +22,14 @@
 		D24F185D1A2E404D003491FC /* chart_v16_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F185C1A2E404D003491FC /* chart_v16_ini.cht */; };
 		D24F185E1A2E404D003491FC /* chart_v16_ini.cht in Resources */ = {isa = PBXBuildFile; fileRef = D24F185C1A2E404D003491FC /* chart_v16_ini.cht */; };
 		D2A207EA1A337F440025E488 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A207E91A337F440025E488 /* boost.framework */; };
+		D2D1C5E71A797BEE004332AB /* face_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2D1C5E31A797BEE004332AB /* face_filter.cpp */; };
+		D2D1C5E81A797BEE004332AB /* kokko_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2D1C5E51A797BEE004332AB /* kokko_image.cpp */; };
+		D2D1C5EA1A79B0FE004332AB /* KokkoImageWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = D2D1C5E91A79B0FE004332AB /* KokkoImageWrapper.mm */; };
 		D2DEE97B1A2E60B50063C236 /* chart_detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */; };
 		D2DEE97C1A2E60B50063C236 /* chart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96C1A2E60B00063C236 /* chart.cpp */; };
 		D2DEE97D1A2E60B50063C236 /* color_measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE96E1A2E60B00063C236 /* color_measure.cpp */; };
 		D2DEE97E1A2E60B50063C236 /* colorspace.c in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9701A2E60B10063C236 /* colorspace.c */; };
 		D2DEE97F1A2E60B50063C236 /* exemplar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9731A2E60B20063C236 /* exemplar.cpp */; };
-		D2DEE9801A2E60B50063C236 /* face_extractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9751A2E60B30063C236 /* face_extractor.cpp */; };
-		D2DEE9811A2E60B50063C236 /* pipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9771A2E60B30063C236 /* pipeline.cpp */; };
 		D2DEE9821A2E60B50063C236 /* skinpixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DEE9791A2E60B40063C236 /* skinpixels.cpp */; };
 		D2DEE9C71A2E77EB0063C236 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DEE9C61A2E77EA0063C236 /* opencv2.framework */; };
 		D2DEE9CA1A2E781D0063C236 /* Eigen in Resources */ = {isa = PBXBuildFile; fileRef = D2DEE9C91A2E781D0063C236 /* Eigen */; };
@@ -40,7 +41,7 @@
 		D55E42C31A158EA500DD91E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C11A158EA500DD91E7 /* Main.storyboard */; };
 		D55E42C51A158EA500DD91E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C41A158EA500DD91E7 /* Images.xcassets */; };
 		D55E42C81A158EA500DD91E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D55E42C61A158EA500DD91E7 /* LaunchScreen.xib */; };
-		D59DF8B41A238FB000387161 /* KokkoInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = D59DF8B31A238FB000387161 /* KokkoInterface.mm */; };
+		D59DF8B41A238FB000387161 /* KokkoInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D59DF8B31A238FB000387161 /* KokkoInterface.m */; };
 		D5C350D61A278B4000CB0F8C /* KokkoInterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C350D51A278B4000CB0F8C /* KokkoInterfaceTests.m */; };
 		D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */; };
 		D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF9071A15977D00E30397 /* KokkoUIImagePickerController.m */; };
@@ -74,6 +75,12 @@
 		D24F18591A2E3FF1003491FC /* product_images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = product_images.bundle; sourceTree = "<group>"; };
 		D24F185C1A2E404D003491FC /* chart_v16_ini.cht */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chart_v16_ini.cht; sourceTree = "<group>"; };
 		D2A207E91A337F440025E488 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = boost.framework; sourceTree = "<group>"; };
+		D2D1C5E31A797BEE004332AB /* face_filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = face_filter.cpp; path = ColorSisters/ImageAnalysis/face_filter.cpp; sourceTree = "<group>"; };
+		D2D1C5E41A797BEE004332AB /* face_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = face_filter.h; path = ColorSisters/ImageAnalysis/face_filter.h; sourceTree = "<group>"; };
+		D2D1C5E51A797BEE004332AB /* kokko_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kokko_image.cpp; path = ColorSisters/ImageAnalysis/kokko_image.cpp; sourceTree = "<group>"; };
+		D2D1C5E61A797BEE004332AB /* kokko_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kokko_image.h; path = ColorSisters/ImageAnalysis/kokko_image.h; sourceTree = "<group>"; };
+		D2D1C5E91A79B0FE004332AB /* KokkoImageWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = KokkoImageWrapper.mm; path = Interface/KokkoImageWrapper.mm; sourceTree = "<group>"; };
+		D2D1C5EB1A79B16C004332AB /* KokkoImageWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KokkoImageWrapper.h; path = Interface/KokkoImageWrapper.h; sourceTree = "<group>"; };
 		D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chart_detector.cpp; path = ColorSisters/ImageAnalysis/chart_detector.cpp; sourceTree = "<group>"; };
 		D2DEE96B1A2E60AF0063C236 /* chart_detector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chart_detector.h; path = ColorSisters/ImageAnalysis/chart_detector.h; sourceTree = "<group>"; };
 		D2DEE96C1A2E60B00063C236 /* chart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chart.cpp; path = ColorSisters/ImageAnalysis/chart.cpp; sourceTree = "<group>"; };
@@ -85,10 +92,6 @@
 		D2DEE9721A2E60B20063C236 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ColorSisters/ImageAnalysis/common.h; sourceTree = "<group>"; };
 		D2DEE9731A2E60B20063C236 /* exemplar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = exemplar.cpp; path = ColorSisters/ImageAnalysis/exemplar.cpp; sourceTree = "<group>"; };
 		D2DEE9741A2E60B20063C236 /* exemplar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = exemplar.h; path = ColorSisters/ImageAnalysis/exemplar.h; sourceTree = "<group>"; };
-		D2DEE9751A2E60B30063C236 /* face_extractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = face_extractor.cpp; path = ColorSisters/ImageAnalysis/face_extractor.cpp; sourceTree = "<group>"; };
-		D2DEE9761A2E60B30063C236 /* face_extractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = face_extractor.h; path = ColorSisters/ImageAnalysis/face_extractor.h; sourceTree = "<group>"; };
-		D2DEE9771A2E60B30063C236 /* pipeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pipeline.cpp; path = ColorSisters/ImageAnalysis/pipeline.cpp; sourceTree = "<group>"; };
-		D2DEE9781A2E60B40063C236 /* pipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pipeline.h; path = ColorSisters/ImageAnalysis/pipeline.h; sourceTree = "<group>"; };
 		D2DEE9791A2E60B40063C236 /* skinpixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skinpixels.cpp; path = ColorSisters/ImageAnalysis/skinpixels.cpp; sourceTree = "<group>"; };
 		D2DEE97A1A2E60B50063C236 /* skinpixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skinpixels.h; path = ColorSisters/ImageAnalysis/skinpixels.h; sourceTree = "<group>"; };
 		D2DEE9C61A2E77EA0063C236 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ColorSisters/Frameworks/opencv2.framework; sourceTree = "<group>"; };
@@ -110,7 +113,7 @@
 		D55E42D21A158EA600DD91E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D59819F71A1C6E3200855190 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		D59DF8B21A238FB000387161 /* KokkoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoInterface.h; path = Interface/KokkoInterface.h; sourceTree = "<group>"; };
-		D59DF8B31A238FB000387161 /* KokkoInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = KokkoInterface.mm; path = Interface/KokkoInterface.mm; sourceTree = "<group>"; };
+		D59DF8B31A238FB000387161 /* KokkoInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoInterface.m; path = Interface/KokkoInterface.m; sourceTree = "<group>"; };
 		D5C350D51A278B4000CB0F8C /* KokkoInterfaceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KokkoInterfaceTests.m; sourceTree = "<group>"; };
 		D5CCF9031A15945500E30397 /* KokkoPageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KokkoPageControlViewController.h; path = ViewControllers/KokkoPageControlViewController.h; sourceTree = "<group>"; };
 		D5CCF9041A15945500E30397 /* KokkoPageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KokkoPageControlViewController.m; path = ViewControllers/KokkoPageControlViewController.m; sourceTree = "<group>"; };
@@ -151,10 +154,10 @@
 		D2DEE9C51A2E61680063C236 /* ImageAnalysis */ = {
 			isa = PBXGroup;
 			children = (
-				D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */,
-				D2DEE96B1A2E60AF0063C236 /* chart_detector.h */,
 				D2DEE96C1A2E60B00063C236 /* chart.cpp */,
 				D2DEE96D1A2E60B00063C236 /* chart.h */,
+				D2DEE96A1A2E60AF0063C236 /* chart_detector.cpp */,
+				D2DEE96B1A2E60AF0063C236 /* chart_detector.h */,
 				D2DEE96E1A2E60B00063C236 /* color_measure.cpp */,
 				D2DEE96F1A2E60B10063C236 /* color_measure.h */,
 				D2DEE9701A2E60B10063C236 /* colorspace.c */,
@@ -162,10 +165,10 @@
 				D2DEE9721A2E60B20063C236 /* common.h */,
 				D2DEE9731A2E60B20063C236 /* exemplar.cpp */,
 				D2DEE9741A2E60B20063C236 /* exemplar.h */,
-				D2DEE9751A2E60B30063C236 /* face_extractor.cpp */,
-				D2DEE9761A2E60B30063C236 /* face_extractor.h */,
-				D2DEE9771A2E60B30063C236 /* pipeline.cpp */,
-				D2DEE9781A2E60B40063C236 /* pipeline.h */,
+				D2D1C5E31A797BEE004332AB /* face_filter.cpp */,
+				D2D1C5E41A797BEE004332AB /* face_filter.h */,
+				D2D1C5E51A797BEE004332AB /* kokko_image.cpp */,
+				D2D1C5E61A797BEE004332AB /* kokko_image.h */,
 				D2DEE9791A2E60B40063C236 /* skinpixels.cpp */,
 				D2DEE97A1A2E60B50063C236 /* skinpixels.h */,
 			);
@@ -278,6 +281,8 @@
 		D5C7CB321A1C41AE00AAEEA7 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				D2D1C5E91A79B0FE004332AB /* KokkoImageWrapper.mm */,
+				D2D1C5EB1A79B16C004332AB /* KokkoImageWrapper.h */,
 				D2F006921A5F439100ED865A /* UIImage+fixOrientation.h */,
 				D2F006931A5F439100ED865A /* UIImage+fixOrientation.m */,
 				D7ED1E3E1A39FC0B008834EE /* KokkoData.h */,
@@ -285,7 +290,7 @@
 				D5D950D41A1F01E6007B3AF2 /* KokkoProductInfo.h */,
 				D5D950D21A1F01A3007B3AF2 /* KokkoProductInfo.m */,
 				D59DF8B21A238FB000387161 /* KokkoInterface.h */,
-				D59DF8B31A238FB000387161 /* KokkoInterface.mm */,
+				D59DF8B31A238FB000387161 /* KokkoInterface.m */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 				TargetAttributes = {
 					D55E42B01A158EA500DD91E7 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 86JT6626FJ;
 					};
 					D55E42CC1A158EA600DD91E7 = {
 						CreatedOnToolsVersion = 6.1;
@@ -415,17 +421,18 @@
 				D2DEE97C1A2E60B50063C236 /* chart.cpp in Sources */,
 				D55E42BD1A158EA500DD91E7 /* ColorSisters.xcdatamodeld in Sources */,
 				C290193A1A58A49F0090F22C /* KokkoShareViewController.m in Sources */,
+				D2D1C5E81A797BEE004332AB /* kokko_image.cpp in Sources */,
 				D2DEE97E1A2E60B50063C236 /* colorspace.c in Sources */,
-				D59DF8B41A238FB000387161 /* KokkoInterface.mm in Sources */,
-				D2DEE9811A2E60B50063C236 /* pipeline.cpp in Sources */,
+				D59DF8B41A238FB000387161 /* KokkoInterface.m in Sources */,
 				D73A89651A44940500AB98AC /* KokkoTableViewController.m in Sources */,
 				D2DEE97B1A2E60B50063C236 /* chart_detector.cpp in Sources */,
+				D2D1C5EA1A79B0FE004332AB /* KokkoImageWrapper.mm in Sources */,
+				D2D1C5E71A797BEE004332AB /* face_filter.cpp in Sources */,
 				D5CCF9051A15945500E30397 /* KokkoPageControlViewController.m in Sources */,
 				D2DEE97F1A2E60B50063C236 /* exemplar.cpp in Sources */,
 				D501744A1A339D7200243D4C /* KokkoPageContentViewController.m in Sources */,
 				D55E42B71A158EA500DD91E7 /* main.m in Sources */,
 				D5CCF9081A15977D00E30397 /* KokkoUIImagePickerController.m in Sources */,
-				D2DEE9801A2E60B50063C236 /* face_extractor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +571,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/ImageAnalysis $(PROJECT_DIR)/ColorSisters/Frameworks";
 			};
 			name = Debug;
@@ -584,6 +592,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/ImageAnalysis $(PROJECT_DIR)/ColorSisters/Frameworks";
 			};
 			name = Release;

@@ -3,7 +3,7 @@
 //  imagedb
 //
 //  Created by Scott Trappe on 8/27/14.
-//  Copyright (c) 2014 Kokko, Inc. All rights reserved.
+//  Copyright (c) 2014, 2015 Kokko, Inc. All rights reserved.
 //
 
 #include <utility>
@@ -25,9 +25,8 @@ using namespace std;
 // of the list. As our exemplar (reference face) data set gets larger, we should
 // be able to reduce this number. My goal is an upper limit of < 1.0. Currently
 // it is set to 3.0 (put all images on the rank-ordered list) because there are
-// some faces where there are no close exemplars, and we are using exemplars
-// collected with one color chart but new images are corrected using a different
-// color chart.
+// some faces with no close exemplars, and we are using exemplars collected with
+// one color chart but new images are corrected using a different color chart.
 //
 // The lower bound is not as obvious -- why do we need it? When running the
 // test suite, we may be comparing a face to itself. If the pixel sets being
@@ -44,7 +43,7 @@ using namespace std;
 
 // Forward references
 
-static	double	Kuiper(const SkinPixels::Channel& v1, const SkinPixels::Channel& v2, int nEvery);
+static double KuiperCounts(const unsigned v1[], const unsigned v2[], int maxVal);
 static	istream& safeGetLine(istream& is, string& t);
 
 
@@ -78,7 +77,8 @@ FaceRank ExemplarDB::match(const SkinPixels& candidateFace)
 	// sum the results to get an overall distance.
 	double distanceKuiper = 0.0;
 	for (auto i = 0; i < NUM_CHANS; i++)
-	    distanceKuiper += Kuiper(rit->second->getPixels().getChan(i), candidateFace.getChan(i), nEvery);
+	    distanceKuiper += KuiperCounts(rit->second->getPixels().getChanCnt(i),
+					   candidateFace.getChanCnt(i), CHAN_MAX_INT);
 	
 	// Insert this comparison result into the ordered list of rankings for this reference face
 	
@@ -108,8 +108,11 @@ FaceRank ExemplarDB::match(const string& candidateFileName)
     SkinPixels candidateFace;
     
     candidateFace.loadFirstFace(candidateFileName);
-    candidateFace.setFormat(SkinPixels::f_chans);   // force into channel format
-    candidateFace.sortChans();			    // data must be sorted for Kuiper comparison
+    // force into counts format for KuiperCounts comparison. This is wrong
+    // because I shouldn't have to know that deep down in the call chain I
+    // will be calling a particular version of the Kuiper function that uses
+    // data in counts format instead of "raw" pixel data. FIXME!!! 15/01/26.
+    candidateFace.setFormat(SkinPixels::f_counts);
     
     return match(candidateFace);
 }
@@ -168,6 +171,7 @@ Recommendations ExemplarDB::recommend(const FaceRank& matches, const BrandSet& j
 
 Recommendations ExemplarDB::recommend(const SkinPixels& pixels, const BrandSet& justThisBrand)
 {
+    // SRT 15/01/26. Perhaps add an assert() here that pixels.getFormat() == f_counts?
     return recommend(match(pixels), justThisBrand);
 }
 
@@ -198,8 +202,8 @@ void ExemplarDB::loadSkinPixels(const string& skinPixelFile)
 	throw KokkoException("Could not open file: \"" + skinPixelFile + "\": " + strerror(errno));
     
     while (facePixels.loadOneFace(faceData)) {
-	facePixels.setFormat(SkinPixels::f_chans);    // force into channel format
-	facePixels.sortChans();			    // data must be sorted for Kuiper comparison
+	 // force into counts format for KuiperCounts comparison
+	facePixels.setFormat(SkinPixels::f_counts);
 	
 	// Strip off any filename extension at the end of the image ID
 	// We should standardize on NOT including extensions in any of the image
@@ -316,42 +320,81 @@ void ExemplarDB::listDB()
 
 // Kuiper -- calculate the Kuiper "distance" for two data sets
 //
-// Assumes v1 and v2 are already sorted in ascending order
-// nEvery is the number of places to skip in the data to save time
+// This version of Kuiper operates off two arrays of frequency counts; the
+// element v1[i] is the count of the number of occurences of the value 'i'
+// in the data set. This representation requires far less memory and is much
+// faster to compare; 160x improvement was seen in testing. This version
+// also uses only integer operations in the loop which improve the consistency
+// of results reported.
+//
+// The return value is always in the range [0.0, 1.0]; 0.0 means the two data
+// sets were identical; 1.0 means they are uncorrelated.
+//
+// To understand how this algorithm works, refer to:
+//	venus/trunk/Kuiper/main.cpp
+// That file has multiple versions of the Kuiper algorithm and describes how
+// how each version works.
 
-static double Kuiper(const SkinPixels::Channel& v1, const SkinPixels::Channel& v2, int nEvery)
+static double KuiperCounts(const unsigned v1[], const unsigned v2[], int maxVal)
 {
-    SkinPixels::Channel::size_type n1 = v1.size();
-    SkinPixels::Channel::size_type n2 = v2.size();
-    SkinPixels::Channel::size_type j1 = 1, j2 = 1;
+    unsigned n1 = 0, n2 = 0;		// Number of elements being compared
     
-    double dplus = 0., dminus = 0., fn1 = 0., fn2 = 0.;
-    double dtminus = 0., dtplus = 0.;
-    SkinPixels::ChanValInt d1, d2;
-    const double en1 = n1;
-    const double en2 = n2;
+    // Find the total number of values represented by each counts array
+    for (auto i = 0; i <= maxVal; i++) {
+	n1 += v1[i];
+	n2 += v2[i];
+    }
+    if (n1 == 0 || n2 == 0)
+	return 0.0;
     
-    while (j1 <= n1 && j2 <= n2 ) {
-	d1 = v1[ j1 - 1 ];
-	d2 = v2[ j2 - 1 ];
+    uint_least64_t dplus = 0, dminus = 0;
+    uint_least64_t j1_scaled = n2, j2_scaled = n1;
+    unsigned c1 = 0, c2 = 0;		// count of how many occurences of val
+    int d1 = -1, d2 = -1;		// the values being compared
+    
+    for (;;) {
+	while (c1 == 0) {		// advance to the next data value
+	    if (d1 >= maxVal)
+		goto done;		// no more data values
+	    d1++;			// next data value
+	    c1 = v1[d1];		// # of occurences of this data value
+	}
+	while (c2 == 0) {
+	    if (d2 >= maxVal)
+		goto done;		// no more data values
+	    d2++;
+	    c2 = v2[d2];
+	}
+	
+	unsigned consumed;
+	if (d1 < d2)
+	    consumed = c1;
+	else if (d2 < d1)
+	    consumed = c2;
+	else
+	    consumed = min(c1, c2);
 	if (d1 <= d2) {
-	    j1 += nEvery;
-	    fn1 = j1 / en1;
+	    c1 -= consumed;
+	    j1_scaled += consumed * n2;
 	}
 	if (d2 <= d1) {
-	    j2 += nEvery;
-	    fn2 = j2 / en2;
+	    c2 -= consumed;
+	    j2_scaled += consumed * n1;
 	}
-	dtplus = fn2 - fn1;
-	dtminus = fn1 - fn2;
-	if (dtplus > dplus)
-	    dplus = dtplus;
-	if (dtminus > dminus)
-	    dminus = dtminus;
+	if (j2_scaled >= j1_scaled) {
+	    uint_least64_t dtplus = j2_scaled - j1_scaled;
+	    if (dtplus > dplus)
+		dplus = dtplus;
+	} else {
+	    uint_least64_t dtminus = j1_scaled - j2_scaled;
+	    if (dtminus > dminus)
+		dminus = dtminus;
+	}
     }
-    
-    return dplus + dminus;
+done:
+    return (double)(dplus + dminus) / (n1 * n2);
 }
+
 
 
 static std::istream& safeGetLine(std::istream& is, std::string& t)
