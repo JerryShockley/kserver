@@ -11,19 +11,23 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require video
 //= require foundation
+//= require foundation/foundation.accordion
 //= require_tree .
+//= require turbolinks
 
-$(function() {
-  $(document).foundation();
-});
+// $(function() {
+//   $(document).foundation();
+// });
 
 Foundation.global.namespace = '';
 
 
 
 
-$(function(){ $(document).foundation(); });
+$(function(){ 
+  $(document).foundation('reflow'); 
+});

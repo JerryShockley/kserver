@@ -23,6 +23,11 @@ class ProductCluster < ActiveRecord::Base
                   category.to_s).order(role: :asc)
     
   end 
+  
+  # TODO change algorithm to use product_recommendations instead of taking first
+  def default_product_app
+    product_apps.first
+  end
 
   #
   # def product_apps_by_role(role)

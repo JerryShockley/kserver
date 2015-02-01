@@ -39,5 +39,36 @@ module LooksHelper
     cnt += 1 unless profile.hair_color.blank?
     cnt
   end
+  
+  def product_role_count
+    @set.default_product_apps.size
+  end
+  
+  def total_product_cost
+    cost = @set.default_product_apps.map {|app| app.product.price_cents}
+    cost.inject(0, :+)/100.0
+  end
+  
+  def number_to_aligned_currency(num, digit_count)
+
+    ret_str = number_to_currency(num)
+    
+    # byebug
+    return ret_str if significand_digit_count(ret_str) > digit_count 
+
+    0.upto(digit_count - significand_digit_count(ret_str)) do |i|
+      ret_str = ret_str.insert(1, " ")
+    end
+    ret_str
+  end
+
+
+  private
+  
+  def significand_digit_count(num_str)
+    idx = num_str.index(".") - 1
+  end
+
+
 
 end

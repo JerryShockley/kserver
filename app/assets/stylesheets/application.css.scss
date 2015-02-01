@@ -18,8 +18,36 @@
  *= require_tree .
  */
 
+//html {
+//  max-width: 1920px;
+//  margin: 0 auto;
+//  background: black; /* Fills the page */
+//  position: relative; /* Fix for absolute positioning */
+//}
+
+.sticky-nav {
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 50px;
+  z-index: 100;
+}
+
+.nav-spacer {
+  height: 3rem;
+  background-color: black;
+}
+
+//nav.top-bar {
+//  height: 15%;
+//  ul.title-area {
+//    height: 15%;
+//  }
+//}
+
 li.name {
   padding-left: 10%;
+  padding-top: 1%;
 }
 .navbar_logo {
   height: 80%;

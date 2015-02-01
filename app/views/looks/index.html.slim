@@ -9,7 +9,7 @@
       ul.large-block-grid-3.medium-block-grid-2.small-block-grid-1
         - @looks.each do |look|
           li
-            a.looks href=look_path(look.id)
+            a href=look_path(look.id)
               p.looks_title.text-center
                 = look.title
               = image_tag("look/look.jpg", class: :look_image_item)

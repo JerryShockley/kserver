@@ -19,6 +19,24 @@ class ProductSet < ActiveRecord::Base
     return product_clusters if category.blank?
     product_clusters.find_all { |pc| pc.category == category.to_s}
   end
+  
+  def default_product_apps
+    product_clusters.each_with_object([]) {|cluster, apps| apps << cluster.product_apps[0]}
+  end
+  
+  def roles_hash
+    product_clusters.each_with_object({}) do |cluster, hash|
+      hash[cluster.category] = cluster.map {|app| app.role}
+    end
+  end
+  
+  def categories
+    categories = product_clusters.map {|cluster| cluster.category}
+    categories.uniq
+  end
+
+
+
 
   
   # def cluster_count(category=nil)

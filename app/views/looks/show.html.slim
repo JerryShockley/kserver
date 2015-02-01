@@ -1,39 +1,67 @@
-.row
+.row.show_container
   .row.title_row
-    .columns.large-12.text-center
-        p.look_number "ColorSisters Look #{@look.id.to_s}:"
-        p.look_name = @look.title
+    .columns.small-12.text-center
+      - @look_num = Random.rand(10..78).to_s
+      p.look_number = "ColorSisters Look: #{@look_num.to_s}"
+      p.look_name = @look.title
   .row.image_sep.text-center
+    .columns.small-12
         = image_tag("home_page/xsepWhite.png", class: :sep_image)
   .row.desc_row
-    .columns.large-6
+    .columns.medium-6.small-12.text-center
       p.title Description
       p.desc = @look.desc
-    .columns.large-6
+    .columns.medium-6.small-12.text-center
       p.title Usage
       p.usage = @look.usage_directions
-  .row.container1
-    .columns.small-12
-      .col_container.columns.large-5.medium-9
-        - [:face, :eyes, :lips, :cheeks].each do |category|
-          div  class="category"
+  .row.dual-col-container
+    .image.columns.large-6.medium-6.small-12.right
+      .row.overview_img
+        .columns.small-12
+          = image_tag('look/look.jpg' , class: :look_img, alt: "ColorSisters look overview")
+      .row.nav-links
+        .columns.small-12
+          .btn-grp
+            = link_to("LOOKS", looks_path)
+            = link_to("CUSTOMIZE", "customize", class: :customize)
+            = link_to("ADD LOOK TO CART", "add_look", class: :look_cart)
+
+
+      .row.price-summary
+        .columns.small-12.large-8.large-centered
+          p.price-summary-title.text-center
+             = "ColorSisters Look ##{@look_num} price summary"
+          .row.item-list
+            - @set.categories.each do |category|
+              .columns.small-12.small-centered
+                p.item-category = "#{category.titleize}: "
+              .row
+                - @set.clusters_by_category(category).each do |cluster|
+                  .columns.small-1
+                  .columns.small-6.small-offset-1
+                    p.item = cluster.role.humanize.titleize
+                  .columns.small-5.text-right 
+                    p.item-price
+                      =  number_to_aligned_currency(cluster.default_product_app.product.price, 2)
+        .row
+          columns.small-12
+            p.total_cost.text-center
+              = "#{product_role_count} items totaling #{number_to_aligned_currency(total_product_cost, 3)}"
+
+
+    .col-container.columns.medium-6.small-12.left
+      / .row
+      /   .columns.large-12
+      - @set.categories.each do |category|
+        .row.category1
+          .columns.large-12.medium-12.small-12.category.large-centered.medium-centered.small-cenered
             p.cat
               = category.to_s.titleize
             p.how_to See How
-          dl class="accordion"  data-accordion=""
-            - @set.clusters_by_category(category).each do |cluster|
-                - cluster.product_apps.each_index do |i|
-                  - if i == 0
-                    / dl.accordion  data-accordion=""
-                    = render("looks/role_product", product_app: cluster.product_apps[i])
-  
-      .image.columns.large-7.medium-3
-        .row.overview_img
-          = image_tag('look/look.jpg' , class: :look_img, alt: "ColorSisters look overview")
-        .row
-          .columns.small-12.look_nav
-            = link_to("ADD LOOK TO CART", "add_look", class: :look_cart)
-            = link_to("CUSTOMIZE", "customize", class: :customize)
+        dl class="accordion"  data-accordion="look_products"
+          - @set.clusters_by_category(category).each do |cluster|
+            = render("looks/role_product", product_app: cluster.default_product_app)
+
         
       
           

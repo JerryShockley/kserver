@@ -7,17 +7,29 @@ $lt-blue: #a6cfda;
 $lt-blue-h: #5a838e;
 $gold: #B6885A;
 $lt-black: #303030;
-//.row.product_summary {
-//  background: black;
-//  color: white;
-//  padding: .4rem;
-//
-//
+$bg-color: black;
+
+
+//.row.sticky-nav {
+//  margin: 0px;
+//  padding: 0px;
+//  width: 100%;
+//  max-width: 100%;
 //}
+
+.row .row {
+  margin: 0;
+  padding: 0;
+}
+
+.row.show_container, .row.looks_container  {
+  width: 100%;
+  max-width: 100%;
+}
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^    looks    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .row.looks_container {
-  background: black;
+  background-color: $bg-color;
   padding: 2.5rem;
   color: white;
 }
@@ -25,7 +37,7 @@ $lt-black: #303030;
 .looks_title {
   color: white;
   font: 200 1rem/1.3rem Raleway;
-  
+
 }
 
 .row.title_sep {
@@ -38,7 +50,7 @@ p.looks_desc_tag {
   padding-top: 1rem;
 }
 
- 
+
 p.looks_desc {
   color: white;
   font: 200 .8rem/1.3rem Raleway;
@@ -47,9 +59,8 @@ p.looks_desc {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^    looks/show/id     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // *****************  Title 
 .title_row {
-  background: black;
+  background-color: $bg-color;
   padding: 0;
-//  border: 1px solid $lt-blue;
   
 }
 
@@ -72,7 +83,7 @@ p.look_name {
 
 
 .row.image_sep {
-  background: black;
+  background-color: $bg-color;
   padding-top:1%;
   padding-bottom: 2%;
   
@@ -81,20 +92,17 @@ p.look_name {
 .sep_image {
   vertical-align: middle;
   max-height: 1.6rem;
-//  width: auto;
 }
 
 
 // ********************   Directions and Usage
 
 .row.desc_row {
-  background: black;
-//  width: 100%;
+  background-color: $bg-color;
 }
 
 p.title {
   position: relative;
-  left: 32%;
   color: $lt-blue;
   padding-top: 3%;
   font: normal 1.3rem/1.5rem Raleway;
@@ -103,8 +111,9 @@ p.title {
 
 p.desc {
 //  border: 1px solid gray;
-  margin: 0;
-  padding: 1% 3% 3% 3%;
+//  margin: 0;
+//  padding: 1% 3% 8% 3%;
+  padding: 2rem;
   color: white;
   font: 200 .8rem/1.3rem Raleway;
   margin-bottom: 1.5%;
@@ -121,244 +130,402 @@ p.usage {
 // ********************   Right Column - Image
 
 .col_container {
-  position: relative;
   
 }
 
 .row.overview_img {
   img.look_image {
-    width: 150%;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
     height: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 
+.add-to-cart-link, .customize-link {
+  display: inline-block;
+}
+
 .look_nav {
+//  display: inline-block;
   margin-top: 4%;
   margin-bottom: 5%;
   padding-left: 5%;
   padding-right: 5%;
 }
 
+.row.nav-links .columns {
+  
+  margin-top: 1rem;
+  
+  .btn-grp {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
 
-.look_cart {
-  position: relative;
-  display: inline;
-  background: black;
-  color: $lt_blue;
-  border: 1px solid $lt_blue;
-  padding: 1% 2.5% 1% 2.5%;
-  font: 200 .8rem/1.3rem Raleway;
-  float: left;
+    a {
+      display: inline-block;
+    //  position: relative;
+      background-color: $bg-color;
+      color: $lt_blue;
+      border: 1px outset $lt_blue;
+      margin: 0 .1rem 1rem .1rem;
+      padding: .5rem 1rem;
+      font: 200 .8rem/1.3rem Raleway;
+    //  float: left;
 
-}
-
-.customize {
-  @extend .look_cart;
-  float: right;
-  padding-right: 6.5%;
-  padding-left: 6.5%;
-}
-
-
-
-// *********************   Left Column - Products
-
-.container1 {
-  background: black;
-  width: 100%;
+    }
+    
+  }
+  
+  a:hover {
+    color: $lt-blue-h;
+  };
   
 }
 
 
+.row.price-summary {
+  color: white;
+  margin-top: 1.5rem;
+  
+  p.price-summary-title {
+    color: $lt-blue;
+    padding-bottom: 0;
+    margin-bottom: .4;
+    font: 400 1.1rem/1.5rem Raleway;
+
+  }
+  
+  .row.item-list {
+    
+    p {
+      margin: 0;
+      padding: 0;
+      font: 100 .9rem/1.3rem Raleway;
+    }    
+    
+  } // .row.item-list
+  
+  
+  p.total_cost {
+    color: white;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font: 400 1.2rem/1.5rem Raleway;
+    
+  }
+  
+}  // .row.price-summary
+
+
+
+.row.dual-col-container {
+//  padding: 2rem 2rem 2rem 4rem;
+//  background-color: $bg-color;
+//  width: 100%;
+//  margin-left: auto;
+//  margin-right: auto;
+  padding: 2rem;
+  background-color: $bg-color;
+}
+
+// *********************   Left Column - Products
+
+.col-container {
+  padding: 0 1% 0 2.5%;
+  margin: 0;
+  
+}
+
+.row.category1 {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  
+}
+
 
 .category {
   position: relative;
+  width: 100%;
   margin: 0;
-  background: black;
-  height: 100%;
-  border: 1px solid gray;
+  padding: 0;
+  border-top: 1px solid dimgray;
+  border-right: 2px solid dimgray;
+  border-bottom: 1px solid dimgray;
+  border-left: 2px solid dimgray;
+  
 }
 
    
 p.how_to {
   display: inline-block;
-  postion: relative;
   float: right;
   color: $lt-blue;
-  padding: 2.5% 5% 1% 1%;
+  margin: 0;
+  padding: .8rem 1rem 0rem .8rem;
   font: normal 1.3rem/2rem Raleway; 
 }
 
 p.cat {
   display: inline-block;
-  position: relative;
-//  background: black;
   color: white;
   border: .11rem solid white;
-  font: normal 1.3rem/2rem Raleway; 
-  margin: .6rem 1.1rem;
+  font: normal 1.3rem/2rem Raleway;
+  margin: 1rem 1rem 1rem 1.3rem;
   padding: 0rem 1rem;
 
 }
   
 
 dl.accordion {
-  
+  padding: 0;
+  margin: 0;
   dd.accordion-navigation {
-    position: relative;
+    display: block;
+    padding: 0;
+    margin: 0;
 
-  
     a {
-      position: relative;
-      background: black;
-      padding-top: 0;
-      padding-bottom: 0;
-      margin: 0;
       border: 0;
-      height: 95px;
-// -------------------------------   Product Summary
-      .product_summary {
-        background: black;
-        color: white;
-        height: 95px;
-        border: 1px solid gray;
-
-        .role {
-          position: relative;
-          font: normal .7rem/1.3rem Raleway; 
-          color: GoldenRod;
-          margin-bottom: 0;
-          padding-top: .4rem;
-
-        }
-
-        .full_name {
-          position: relative;
-          font: 200 .7rem/1.3rem Raleway; 
-          margin-bottom: 0;
-        }
-
-
-        .color {
-          position: relative;
-          font: 200 .7rem/1.3rem Raleway;
-        }
-      }  
-      
-    }
-
-// --------------------   Product Detail
-    .prod_detail {
-      border: .15rem solid gray;
+      background-color: $bg-color;
       margin: 0;
-      padding-top: .8rem;
-      padding-right: .5rem;
-      
-      p.prod_short_desc {
-        font: normal 1.3rem/1.5rem Raleway; 
-        
-      }
-     
-      p.prod_desc {
-        font: light 1.3rem/2rem Raleway; 
-        
-      }
-     
-      p.price {
-        display: inline-block;
-        font: normal 1.3rem/2rem Raleway; 
-        
-      }
-      
-      img {
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-      }
-      
-      p.add_cart_item {
-        position: relative;
-        display: inline;
-        background: black;
-        color: $lt_blue;
-        padding: 2.5%;
-        font: 200 .8rem/1.7rem Raleway;
-        left: 20%;
-      }
-      
-    }
-  
-
-
-// -------------------------------   Product Review
-    .product_review {
-      position: relative;
-      background: DimGray;
-      color: white;
-      padding:  1rem 1.5rem .9rem 1.5rem;
-       
-      p {
-        font: 200 .7rem/1rem Raleway; 
-  
-      }
-      p.use_again {
-        position: relative;
-        font: 200 .7rem/1rem Raleway; 
-        display: inline;
-  
-      }
-      p.recommend {
-        position: relative;
-        display: inline;
-        left: 15%;
-      }
-      
-      
-      li {
-        position: relative;
-        font: 200 .7rem/1.3rem Raleway;
-        padding-bottom: 0;
-        padding-left: 1.56rem;
-        color: GoldenRod;
-
-      }
-
-      .profile2 {
-        position: relative;
-        font: 200 .7rem/1.3rem Raleway;
-        color: GoldenRod;
-        padding-top: 0;
-        padding-left: 1rem;
-        padding-bottom: 1rem;
-
-      }
-
-      .row.review_right {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        
-      }
-      .review {
-        padding-top: .5rem;
-      }
-      .all_reviews {
-        background: black;
-        color: $lt_blue;
-        padding: 2.5%;
-        font: 200 .8rem/1.7rem Raleway;
-        
-      }
-    }
-    
-    .content {
-      background: black;
-      margin: 0;
-      border: 0;
       padding: 0;
-    }
+      
+// -------------------------------   Product Summary
 
+    .product_summary {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      color: white;
+      width: 100%;
+      min-width: 100%;
+      border-top: 1px solid dimgray;
+      border-right: 2px solid dimgray;
+      border-bottom: 1px solid dimgray;
+      border-left: 2px solid dimgray;
+      background-color: $bg-color;
+
+
+      .splotch {
+        display: inline-block;
+
+        svg {
+        }
+      }  // .splotch
+       
+      .summary_text {
+
+        display: inline-block;
+          padding-bottom: 2%;
+
+          p.role {
+           font: normal .8rem/1.3rem Raleway;
+           color: GoldenRod;
+           margin-bottom: 0;
+           padding-top: .4rem;
+
+         }
+
+         p.full_name {
+           font: 200 .8rem/1.1rem Raleway;
+           margin-bottom: 0;
+         }
+         
+         .row.last {
+           margin: 0;
+           padding: 0;
+           height: auto;
+           
+           .columns.color-name {
+             margin: 0;
+             padding: 0;
+           
+             p.color {
+               display: inline;
+               font: 200 .8rem/1.3rem Raleway;
+               margin: 0;
+               margin-right: 1.3rem;
+               padding: 0;
+             }
+           } // .columns.color-name
+           
+             .stars-col {
+               display: inline-block;
+               height: auto;
+               width: auto;
+               margin-left: 0;
+               margin-bottom: 0;
+               padding-left: 0;
+//               border: 1px solid red;
+             
+               .stars {
+                 display: inline;
+                 margin: 0;
+                 padding: 0;
+                 padding-right: .5rem;
+               }
+           
+  //             image {
+  //               display: inline;
+  //             }
+           
+               p.product-review-count {
+                 display: inline-block;
+                 margin: 0;
+                 font: 200 .8rem/1.1rem Raleway;
+               }
+             } // .stars-col
+           } // rows.last
+
+        }  // summary_text
+      }  // product_summary
+    }  // a
+    
+
+
+    .content {
+      margin: 0;
+      padding: 0;
+      background: red;
+    // --------------------------------   Product Detail
+      .prod_detail {
+          border-right: 2px solid gray;
+          border-left: 2px solid gray;
+          margin: 0;
+          padding-top: .8rem;
+          padding-right: .5rem;
+          width: 100%;
+          background-color: white;
+      
+
+          p.prod_short_desc {
+            font: 400 1rem/1.5rem Raleway;
+
+          }
+
+          p.prod_desc {
+            font: normal .8rem/1.2rem Raleway;
+
+          }
+
+          p.price {
+            display: inline-block;
+            font: normal 1rem/2rem Raleway;
+
+          }
+
+          img {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+          }
+
+          p.add_cart_item {
+            position: relative;
+            display: inline;
+            background-color: $bg-color;
+            color: $lt_blue;
+            padding: 2.5%;
+            font: 200 .8rem/1.7rem Raleway;
+            left: 20%;
+          }
+
+      }
+
+
+
+    // -------------------------------   Product Review
+      .product_review {
+        position: relative;
+        background-color: DimGray;
+        color: white;
+        margin: 0;
+        padding: 0;
+        padding-bottom: 1.2rem;
+
+        p {
+          font: 200 .7rem/1rem Raleway;
+
+        }
+        
+        row.use_again {
+          
+          p.use_again {
+            display: inline-block;
+            position: relative;
+            width: auto;
+            margin: 0;
+            font: 200 .7rem/1rem Raleway;
+
+
+          }
+          
+          p.recommend {
+            position: relative;
+            display: inline-block;
+            width: auto;
+            left: 8%;
+            margin: 0;
+          }
+        }  //  row.use_again
+
+        p.attrib { 
+          display: inline-block;
+          position: relative;
+          margin: 0;
+          padding: 0;
+          padding-right: .7rem;
+          font: 200 .7rem/1rem Raleway;
+          color: GoldenRod;
+
+        }
+        
+        .row.profile1 {
+          margin: 0;
+          padding: 0;
+          border: none;
+        }
+
+        .row.review_right {
+          margin-bottom: 0;
+          padding-bottom: 0;
+
+        }
+        
+        .review-headshot { 
+          margin: .5rem;
+          margin-left: 0;
+        }
+        .review {
+          padding-top: .5rem;
+          padding-bottom: 2%;
+          font: 200 .7rem/1.1rem Raleway;
+        }
+        .all_reviews {
+          background-color: $bg-color;
+          color: $lt_blue;
+          padding: 2.5%;
+          font: 200 .8rem/1.7rem Raleway;
+
+        }
+      }
+    }    
+//      }  //  .anchor
+//    }  //.row.dd
+  }    // dd accordion  
+} // dl accordion
   
-  }  
+        
   
-}

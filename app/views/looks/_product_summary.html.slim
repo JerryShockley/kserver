@@ -1,23 +1,22 @@
 .row.product_summary
-  .columns.large-2
-    svg height="80" width="80"
-      circle cx="22" cy="40" r="20" stroke-width=".5" stroke="grey" fill="#{product_app.product.hex_color_val}"
-  .columns.large-10
-    .row
-      .columns.small-12
-        p.role
-          = product_app.role.humanize.upcase
-    .row
-      .columns.small-12
-        p.full_name
-          = full_name(product_app.product)
-    .row
-      .columns.small-6
+  .columns.small-3.medium-2.large-2.block.splotch
+    svg.color_sample.centered height="42" width="42"
+      circle cx="21" cy="21" r="20" stroke-width=".5" stroke="grey" fill="#{product_app.product.hex_color_val}"
+  .summary_text.columns.small-9.medium-10.large-10
+    p.role
+      = product_app.role.humanize.upcase
+    p.full_name
+      = full_name(product_app.product)
+    .row.last
+      .columns.large-6.medium-6.small-12.left.color-name
         p.color
           = full_shade(product_app.product)
-      .columns.small-6
-        - ([1,2,3,4,5][Random.rand(4)]).times do
-          = image_tag("product/review_star.png")
+      .columns.large-6.medium6.small-12.stars-col
+        .stars
+          - ([1,2,3,4,5][Random.rand(4)]).times do
+            = image_tag("product/review_star.png")
+        p.product-review-count = " (#{Random.rand(0..500)})"
+          
         
 
   
