@@ -136,7 +136,7 @@
 {
     // Busy
     [self.spinner startAnimating];
-    [[KokkoInterface sharedKokkoInterface] analyzeImage:self.image delegate:self];
+    [[KokkoInterface sharedInstance] analyzeImage:self.image delegate:self];
 }
 
 
@@ -169,6 +169,9 @@
         brandCnt++;
         shadeCnt += [[self.shadeMatches objectForKey: brandName] count];
     }
+
+    NSLog(@"found %d shade matches", shadeCnt);
+    
     if (brandCnt == 0) {
         title = NSLocalizedString(@"No Matches Found", nil);
         message = NSLocalizedString(@"Either retake the photo or select a different photo from the Camera Roll", nil);
