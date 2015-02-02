@@ -15,11 +15,12 @@
 
 @property (nonatomic, weak) id <KokkoInterfaceDelegate> delegate;
 
-+ (KokkoInterface *) sharedInstance;
-- (void)initImageAnalysis;			// Should be called once at app init
++ (KokkoInterface*)sharedKokkoInterface;
++ (void)init;
 - (void)analyzeImage:(UIImage *)image
             delegate:(id <KokkoInterfaceDelegate>)delegate;
 - (void)cancelAnalysis;
+- (NSDictionary *)getRecommendationsUIONLY;
 
 @end
 

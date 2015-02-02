@@ -20,7 +20,7 @@ KokkoInterface* kokkoClass;
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    kokkoClass = [KokkoInterface sharedInstance];
+    kokkoClass = [KokkoInterface sharedKokkoInterface];
 }
 
 - (void)tearDown {
@@ -65,6 +65,22 @@ KokkoInterface* kokkoClass;
 }
 #endif
 
+- (void)testgetRecommendationsUIONLY {
+    NSDictionary *shadeMatches = [kokkoClass getRecommendationsUIONLY];
+    NSLog (@"recommendtions = %@", shadeMatches);
+    
+    NSInteger row = 0;
+    
+    KokkoData *data = [[KokkoData alloc] init];
+//    [data logRecommendationsDictionary:shadeMatches];
+//
+//    [data setRecommendationsArray:shadeMatches];
+    
+    [data setRecommendationsArray:shadeMatches index:row];
+
+    
+}
+
 
 - (void)testExample {
     // This is an example of a functional test case.
@@ -75,7 +91,7 @@ KokkoInterface* kokkoClass;
     // This is an example of a performance test case.
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
-        NSDictionary *shadeMatches = nil;
+        NSDictionary *shadeMatches = [kokkoClass getRecommendationsUIONLY];
         NSLog (@"recommendtions = %@", shadeMatches);
         
         KokkoData *data = [[KokkoData alloc] init];
