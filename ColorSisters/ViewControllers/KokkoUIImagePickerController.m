@@ -22,6 +22,11 @@
 @property (nonatomic, strong) UIView *chartBox;
 @property (nonatomic, readonly) CGFloat imageScale;
 
+@property (nonatomic) BOOL chartDone;
+@property (nonatomic) BOOL faceReady;
+@property (nonatomic) BOOL faceDone;
+@property (nonatomic) CGRect faceRect;
+
 
 // Matches dictionary to be passed to the table view
 @property (nonatomic) NSDictionary *shadeMatches;
@@ -205,7 +210,16 @@ static const CGFloat WipeHeight = 50;
 {
     // Busy
     [self.spinner startAnimating];
+
+    // State
     self.findFoundationButton.enabled = NO;
+    self.chartDone = NO;
+    self.faceReady = NO;
+    self.faceDone = NO;
+    self.faceRect = CGRectZero;
+    self.shadeMatches = nil;
+
+    // Go
     [[KokkoInterface sharedInstance] analyzeImage:self.image delegate:self];
 }
 
@@ -231,6 +245,7 @@ static const CGFloat WipeHeight = 50;
           fromRect:(CGRect)startRect
             toRect:(CGRect)finalRect
           withWipe:(UIView *)wipe
+        completion:(void(^)(BOOL))completion
 {
     box.frame = startRect;
     if (wipe) {
@@ -259,80 +274,93 @@ static const CGFloat WipeHeight = 50;
                                                                    box.frame = finalRect;
                                                                }
                                                                completion:^(BOOL finished) {
-                                                                   [UIView animateWithDuration:2
-                                                                                    animations:^{
-                                                                                        if (wipe) {
+                                                                   if (wipe) {
+                                                                       [UIView animateWithDuration:2
+                                                                                        animations:^{
                                                                                             CGRect frame = wipe.frame;
                                                                                             frame.origin = CGPointMake(0,finalRect.size.height + WipeHeight);
                                                                                             wipe.frame = frame;
                                                                                         }
-                                                                                    }
-                                                                                    completion:^(BOOL finished){}
-                                                                    ];
-                                                              }];
+                                                                                        completion:completion
+                                                                        ];
+                                                                   } else {
+                                                                       completion(YES);
+                                                                   }
+                                                               }];
                                           }
                           ];
                      }
      ];
 }
 
-#pragma mark - Kokko Image Processing Delegate
-
-- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
-         foundFaceRect:(CGRect)faceRect
+- (void)startChartAnimationWithRect:(CGRect)chartRect
 {
-    NSLog(@"Found face at (%.1f,%.1f) with size (%.1f,%.1f)",
-          faceRect.origin.x,
-          faceRect.origin.y,
-          faceRect.size.width,
-          faceRect.size.height);
-
-    if ((faceRect.size.height>1) && (faceRect.size.width>1)) {
-        [self.imageView addSubview:self.faceBox];
-        [self animateBox:self.faceBox
-                fromRect:self.imageView.frame
-                  toRect:[self scaleRect:faceRect byFactor:self.imageScale]
-                withWipe:self.faceWipe];
-    }
-}
-
-- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
-        foundChartRect:(CGRect)chartRect
-{
-    NSLog(@"Found chart at (%.1f,%.1f) with size (%.1f,%.1f)",
-          chartRect.origin.x,
-          chartRect.origin.y,
-          chartRect.size.width,
-          chartRect.size.height);
-
-    chartRect = [self resizeRect:chartRect byFactor:1.1];
-    NSLog(@"Resized chart rectangle: at (%.1f,%.1f) with size (%.1f,%.1f)",
-	  chartRect.origin.x,
-	  chartRect.origin.y,
-	  chartRect.size.width,
-	  chartRect.size.height);
-    
+    // If the result was vanishingly small, take that as a failure and skip
     if ((chartRect.size.height>1) && (chartRect.size.width>1)) {
+        
+        // Put the chart rect into the view
         [self.imageView addSubview:self.chartBox];
+        
+        // Need a block safe version of self to guard against retain cycles
+        __block KokkoUIImagePickerController *blockSelf = self;
+        
+        // Animate the chart rect
         [self animateBox:self.chartBox
                 fromRect:self.imageView.frame
                   toRect:[self scaleRect:chartRect byFactor:self.imageScale]
-                withWipe:nil];
+                withWipe:nil
+              completion:^(BOOL finished){
+                  
+                  // Indicate that the chart animation is complete
+                  blockSelf.chartDone = YES;
+                  
+                  // Start the face animation if the faceRect has been populated
+                  if (blockSelf.faceReady) {
+                      [blockSelf startFaceAnimationWithRect:blockSelf.faceRect];
+                  }
+              }];
+    } else {
+        self.chartDone = YES;
     }
 }
 
-- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
-      analysisProgress:(CGFloat)progress
+- (void)startFaceAnimationWithRect:(CGRect)faceRect
 {
-    NSLog(@"Analaysis progress is %.2f",progress);
+    // If the result was vanishingly small, take that as a failure and skip
+    if ((faceRect.size.height>1) && (faceRect.size.width>1)) {
+        
+        // Put the face rect into the view
+        [self.imageView addSubview:self.faceBox];
+
+        // Need a block safe version of self to guard against retain cycles
+        __block KokkoUIImagePickerController *blockSelf = self;
+        
+        // Animate the face rect, and show matches on completion, if ready
+        [self animateBox:self.faceBox
+                fromRect:self.imageView.frame
+                  toRect:[self scaleRect:faceRect byFactor:self.imageScale]
+                withWipe:self.faceWipe
+              completion:^(BOOL finished) {
+                  
+                  // Indicate that the face animation is complete
+                  blockSelf.faceDone = YES;
+                  
+                  // Show any ready matches (a non-nil value means it is ready)
+                  if (blockSelf.shadeMatches) {
+                      [blockSelf showMatches];
+                  }
+              }
+         ];
+    } else {
+        self.faceDone = YES;
+    }
 }
 
-- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
-     foundShadeMatches:(NSDictionary *)shadeMatches
-{
-    self.shadeMatches = shadeMatches;
-    [self.spinner stopAnimating];
 
+- (void)showMatches
+{
+    [self.spinner stopAnimating];
+    
     int brandCnt = 0, shadeCnt = 0;
     
     NSString *brandName, *title, *message;
@@ -358,6 +386,76 @@ static const CGFloat WipeHeight = 50;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
     
     [alert show];
+    
+    
+    // I don't think you need it, but in case you wanted to add more delay before
+    //  the alert shows, you could replace the above line with one like this:
+//    [alert performSelector:@selector(show) withObject:nil afterDelay:.5];
+    
+    
+}
+
+
+#pragma mark - Kokko Image Processing Delegate
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
+        foundChartRect:(CGRect)chartRect
+{
+    
+    NSLog(@"Found chart at (%.1f,%.1f) with size (%.1f,%.1f)",
+          chartRect.origin.x,
+          chartRect.origin.y,
+          chartRect.size.width,
+          chartRect.size.height);
+    
+    chartRect = [self resizeRect:chartRect byFactor:1.1];
+    
+    NSLog(@"Resized chart rectangle: at (%.1f,%.1f) with size (%.1f,%.1f)",
+          chartRect.origin.x,
+          chartRect.origin.y,
+          chartRect.size.width,
+          chartRect.size.height);
+    
+    // Chart should go whenever it can, as it is first
+    [self startChartAnimationWithRect:chartRect];
+}
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
+         foundFaceRect:(CGRect)faceRect
+{
+    NSLog(@"Found face at (%.1f,%.1f) with size (%.1f,%.1f)",
+          faceRect.origin.x,
+          faceRect.origin.y,
+          faceRect.size.width,
+          faceRect.size.height);
+    
+    // Face should only start if the chart is done, else just store the result
+    //  to be used after the chart completes
+    if (self.chartDone) {
+        [self startFaceAnimationWithRect:faceRect];
+    } else {
+        self.faceReady = YES;
+        self.faceRect = faceRect;
+    }
+}
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
+      analysisProgress:(CGFloat)progress
+{
+    NSLog(@"Analaysis progress is %.2f",progress);
+}
+
+- (void)kokkoInterface:(KokkoInterface *)kokkoInterface
+     foundShadeMatches:(NSDictionary *)shadeMatches
+{
+    // Record the result
+    self.shadeMatches = shadeMatches;
+    
+    // If the face animation is complete, show the result; else the stored
+    //  results will be used by the face animation completion block
+    if (self.faceDone) {
+        [self showMatches];
+    }
 }
 
 
