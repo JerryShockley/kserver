@@ -46,7 +46,7 @@ FWDRLUtils.onReady(function(){
     slideShowAutoPlay:"no",
     addKeyboardSupport:"yes",
     showCloseButton:"yes",
-    showFacebookButton:"no",
+    showFacebookButton:"yes",
     showZoomButton:"no",
     showSlideShowButton:"no",
     showSlideShowAnimation:"no",
@@ -87,7 +87,7 @@ FWDRLUtils.onReady(function(){
     //description settings
     descriptionWindowPosition:"bottom",
     showDescriptionButton:"yes",
-    showDescriptionByDefault:"no",
+    showDescriptionByDefault:"yes",
     descriptionWindowAnimationType:"motion",
     descriptionWindowBackgroundColor:"#FFFFFF",
     descriptionWindowBackgroundOpacity:.9,
@@ -119,5 +119,3 @@ FWDRLUtils.onReady(function(){
     timeColor:"#000000"
   });
 });
-
-$(document).on('page:load', ready)

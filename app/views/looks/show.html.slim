@@ -60,10 +60,14 @@
             p.cat
               = category.to_s.titleize
             ul id="how_to" style='display:none;'
-              li data-url="https://www.youtube.com/watch?v=DQpoOnI6wtM" 
-              li data-url="https://www.youtube.com/watch?v=5bmA5Fxnalo" 
-              li data-url="https://www.youtube.com/watch?v=d8QjJetlQHQ"
-              li data-url="https://www.youtube.com/watch?v=REqphQgUNgA"
+              li data-url="https://www.youtube.com/watch?v=DQpoOnI6wtM" data-thumbnail-path="#{image_path('product/img_4.jpg')}" 
+                p.gallery1DecHeader How to makeup your face
+              li data-url="https://www.youtube.com/watch?v=5bmA5Fxnalo"  data-thumbnail-path="#{image_path('product/img_5.jpg')}" 
+                p.gallery1DecHeader  How to makeup your eyes
+              li data-url="https://www.youtube.com/watch?v=d8QjJetlQHQ" data-thumbnail-path="#{image_path('product/img_6.jpg')}" 
+                p.gallery1DecHeader  How to makeup your lips
+              li data-url="https://www.youtube.com/watch?v=REqphQgUNgA" data-thumbnail-path="#{image_path('product/img_7.jpg')}" 
+                p.gallery1DecHeader  How to makeup your cheeks
             a.how_vid href="javascript:void(0)"  onclick="FWDRL.show('how_to', #{index});"  
               | See How
             
