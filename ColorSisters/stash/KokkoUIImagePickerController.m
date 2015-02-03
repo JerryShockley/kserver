@@ -73,8 +73,8 @@ static const CGFloat WipeHeight = 50;
 {
     if (!_faceBox) {
         self.faceBox = [[UIView alloc] init];
-        _faceBox.layer.borderColor = UIColor.greenColor.CGColor;
-        _faceBox.layer.borderWidth = 3;
+        _faceBox.layer.borderColor = UIColor.whiteColor.CGColor;
+        _faceBox.layer.borderWidth = 2;
         _faceBox.clipsToBounds = YES;
         [_faceBox addSubview:self.faceWipe];
     }
@@ -97,8 +97,8 @@ static const CGFloat WipeHeight = 50;
 {
     if (!_chartBox) {
         self.chartBox = [[UIView alloc] init];
-        _chartBox.layer.borderColor = UIColor.blueColor.CGColor;
-        _chartBox.layer.borderWidth = 3;
+        _chartBox.layer.borderColor = UIColor.whiteColor.CGColor;
+        _chartBox.layer.borderWidth = 2;
     }
     return _chartBox;
 }
@@ -191,7 +191,7 @@ static const CGFloat WipeHeight = 50;
 {
     [super viewWillDisappear:animated];
     
-    [[KokkoInterface sharedInstance] cancelAnalysis];
+    [[KokkoInterface sharedKokkoInterface] cancelAnalysis];
 
     // Start fresh when we return
     [self.faceBox removeFromSuperview];
@@ -205,27 +205,18 @@ static const CGFloat WipeHeight = 50;
 {
     // Busy
     [self.spinner startAnimating];
-    self.findFoundationButton.enabled = NO;
+<<<<<<< HEAD
     [[KokkoInterface sharedInstance] analyzeImage:self.image delegate:self];
+=======
+    self.findFoundationButton.enabled = NO;
+    [[KokkoInterface sharedKokkoInterface] analyzeImage:self.image delegate:self];
+>>>>>>> aa81f37efe067c274a7c78ca8f60b188158de7d5
 }
 
 - (CGRect)scaleRect:(CGRect)r byFactor:(CGFloat)f
 {
     return CGRectMake(r.origin.x/f, r.origin.y/f, r.size.width/f, r.size.height/f);
 }
-
-
-// Change the size of the rectangle but the center point stays at the same location
-// the same center point on the screen
-- (CGRect)resizeRect:(CGRect)r byFactor:(CGFloat)f
-{
-    CGFloat newWidth = r.size.width * f;
-    CGFloat newHeight = r.size.height * f;
-    return CGRectMake(r.origin.x - (newWidth - r.size.width)/2.0,
-		      r.origin.y - (newHeight - r.size.height)/2.0,
-		      newWidth, newHeight);
-}
-
 
 - (void)animateBox:(UIView *)box
           fromRect:(CGRect)startRect
@@ -246,7 +237,7 @@ static const CGFloat WipeHeight = 50;
                                                 finalRect.size.height-2*wiggle);
                      }
                      completion:^(BOOL finished){
-                         [UIView animateWithDuration:0.5
+                         [UIView animateWithDuration:0.3
                                           animations:^{
                                               box.frame = CGRectMake(finalRect.origin.x-wiggle/2.,
                                                                      finalRect.origin.y-wiggle/2.,
@@ -254,7 +245,7 @@ static const CGFloat WipeHeight = 50;
                                                                      finalRect.size.height+wiggle);
                                           }
                                           completion:^(BOOL finished){
-                                              [UIView animateWithDuration:0.5
+                                              [UIView animateWithDuration:0.3
                                                                animations:^{
                                                                    box.frame = finalRect;
                                                                }
@@ -305,13 +296,6 @@ static const CGFloat WipeHeight = 50;
           chartRect.size.width,
           chartRect.size.height);
 
-    chartRect = [self resizeRect:chartRect byFactor:1.1];
-    NSLog(@"Resized chart rectangle: at (%.1f,%.1f) with size (%.1f,%.1f)",
-	  chartRect.origin.x,
-	  chartRect.origin.y,
-	  chartRect.size.width,
-	  chartRect.size.height);
-    
     if ((chartRect.size.height>1) && (chartRect.size.width>1)) {
         [self.imageView addSubview:self.chartBox];
         [self animateBox:self.chartBox
@@ -340,7 +324,8 @@ static const CGFloat WipeHeight = 50;
         brandCnt++;
         shadeCnt += [[self.shadeMatches objectForKey: brandName] count];
     }
-    NSLog(@"kokkoInterface foundShadeMatches found %d", shadeCnt);
+
+    NSLog(@"found %d shade matches", shadeCnt);
     
     if (brandCnt == 0) {
         // Make sure we are not showing these

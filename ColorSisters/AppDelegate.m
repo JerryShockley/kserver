@@ -23,7 +23,7 @@
     pageControl.backgroundColor = [UIColor clearColor];
     pageControl.hidesForSinglePage = YES;
 
-    [KokkoInterface init];
+    [[KokkoInterface sharedInstance] initImageAnalysis];
     
     return YES;
 }
