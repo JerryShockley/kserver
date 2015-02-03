@@ -27,6 +27,11 @@
 @property (nonatomic) BOOL faceDone;
 @property (nonatomic) CGRect faceRect;
 
+@property (nonatomic, strong) UILabel *chartLabel;
+@property (nonatomic, strong) UILabel *faceLabel;
+@property (nonatomic, strong) UILabel *chartCheck;
+@property (nonatomic, strong) UILabel *faceCheck;
+
 
 // Matches dictionary to be passed to the table view
 @property (nonatomic) NSDictionary *shadeMatches;
@@ -113,6 +118,48 @@ static const CGFloat WipeHeight = 50;
     return self.imageView.image.size.width / self.view.frame.size.width;
 }
 
+- (UILabel *)chartLabel
+{
+    if (!_chartLabel) {
+        self.chartLabel = [[UILabel alloc] init];
+        [_chartLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _chartLabel.font = [UIFont systemFontOfSize:20];
+        _chartLabel.textColor = [UIColor whiteColor];
+    }
+    return _chartLabel;
+}
+
+- (UILabel *)faceLabel
+{
+    if (!_faceLabel) {
+        self.faceLabel = [[UILabel alloc] init];
+        [_faceLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _faceLabel.font = [UIFont systemFontOfSize:20];
+        _faceLabel.textColor = [UIColor whiteColor];
+    }
+    return _faceLabel;
+}
+
+- (UILabel *)chartCheck
+{
+    if (!_chartCheck) {
+        self.chartCheck = [[UILabel alloc] init];
+        [_chartCheck setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _chartCheck.font = [UIFont systemFontOfSize:20];
+    }
+    return _chartCheck;
+}
+
+- (UILabel *)faceCheck
+{
+    if (!_faceCheck) {
+        self.faceCheck = [[UILabel alloc] init];
+        [_faceCheck setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _faceCheck.font = [UIFont systemFontOfSize:20];
+    }
+    return _faceCheck;
+}
+
 
 #pragma mark - View Lifecycle
 
@@ -123,6 +170,10 @@ static const CGFloat WipeHeight = 50;
     [self.view addSubview:self.findFoundationButton];
     [self.view addSubview:self.imageView];
     [self.view addSubview:self.spinner];
+    [self.view addSubview:self.chartLabel];
+    [self.view addSubview:self.faceLabel];
+    [self.view addSubview:self.chartCheck];
+    [self.view addSubview:self.faceCheck];
 
     self.navigationItem.title = @"Selected Photo";
     
@@ -167,6 +218,70 @@ static const CGFloat WipeHeight = 50;
                                                          multiplier:1.0
                                                            constant:-30]];
 
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.chartLabel
+                                                          attribute:NSLayoutAttributeLeft
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeLeft
+                                                         multiplier:1
+                                                           constant:20]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.chartLabel
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.findFoundationButton
+                                                          attribute:NSLayoutAttributeTop
+                                                         multiplier:1.0
+                                                           constant:-30]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.chartCheck
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.chartLabel
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.chartCheck
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.chartLabel
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.faceLabel
+                                                          attribute:NSLayoutAttributeRight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeRight
+                                                         multiplier:1
+                                                           constant:-20]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.faceLabel
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.findFoundationButton
+                                                          attribute:NSLayoutAttributeTop
+                                                         multiplier:1.0
+                                                           constant:-30]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.faceCheck
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.faceLabel
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.faceCheck
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.faceLabel
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:0]];
+    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.spinner
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
@@ -180,7 +295,7 @@ static const CGFloat WipeHeight = 50;
                                                              toItem:self.findFoundationButton
                                                           attribute:NSLayoutAttributeCenterY
                                                          multiplier:1.0
-                                                           constant:0.0]];
+                                                           constant:-35.0]];
     
     
 }
@@ -190,6 +305,10 @@ static const CGFloat WipeHeight = 50;
     [super viewWillAppear:animated];
     
     self.findFoundationButton.enabled = YES;
+    self.chartLabel.text = @"";
+    self.faceLabel.text = @"";
+    self.chartCheck.text = @"";
+    self.faceCheck.text = @"";
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -228,7 +347,6 @@ static const CGFloat WipeHeight = 50;
     return CGRectMake(r.origin.x/f, r.origin.y/f, r.size.width/f, r.size.height/f);
 }
 
-
 // Change the size of the rectangle but the center point stays at the same location
 // the same center point on the screen
 - (CGRect)resizeRect:(CGRect)r byFactor:(CGFloat)f
@@ -236,21 +354,18 @@ static const CGFloat WipeHeight = 50;
     CGFloat newWidth = r.size.width * f;
     CGFloat newHeight = r.size.height * f;
     return CGRectMake(r.origin.x - (newWidth - r.size.width)/2.0,
-		      r.origin.y - (newHeight - r.size.height)/2.0,
-		      newWidth, newHeight);
+                      r.origin.y - (newHeight - r.size.height)/2.0,
+                      newWidth,
+                      newHeight);
 }
 
 
 - (void)animateBox:(UIView *)box
           fromRect:(CGRect)startRect
             toRect:(CGRect)finalRect
-          withWipe:(UIView *)wipe
         completion:(void(^)(BOOL))completion
 {
     box.frame = startRect;
-    if (wipe) {
-        wipe.frame = CGRectMake(0, -WipeHeight, self.view.frame.size.width,WipeHeight);
-    }
     CGFloat wiggle = finalRect.size.width * WiggleScale;
 
     [UIView animateWithDuration:.4
@@ -273,89 +388,140 @@ static const CGFloat WipeHeight = 50;
                                                                animations:^{
                                                                    box.frame = finalRect;
                                                                }
-                                                               completion:^(BOOL finished) {
-                                                                   if (wipe) {
-                                                                       [UIView animateWithDuration:2
-                                                                                        animations:^{
-                                                                                            CGRect frame = wipe.frame;
-                                                                                            frame.origin = CGPointMake(0,finalRect.size.height + WipeHeight);
-                                                                                            wipe.frame = frame;
-                                                                                        }
-                                                                                        completion:completion
-                                                                        ];
-                                                                   } else {
-                                                                       completion(YES);
-                                                                   }
-                                                               }];
+                                                               completion:completion
+                                               ];
                                           }
                           ];
                      }
      ];
 }
 
+- (void)animateLabel:(UILabel*)label
+             forPass:(BOOL)pass
+          completion:(void(^)(BOOL finished))completion
+{
+    label.text = pass ? @"\u2713" : @"\u2717";
+    label.textColor = pass ? UIColor.greenColor : UIColor.redColor;
+    label.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         label.transform = CGAffineTransformMakeScale(2, 2);
+                     }
+                     completion:completion
+     ];
+}
+
 - (void)startChartAnimationWithRect:(CGRect)chartRect
 {
+    self.chartLabel.text = @"Chart Found";
+    
+    // Need a block safe version of self to guard against retain cycles
+    __block KokkoUIImagePickerController *blockSelf = self;
+    
     // If the result was vanishingly small, take that as a failure and skip
     if ((chartRect.size.height>1) && (chartRect.size.width>1)) {
         
         // Put the chart rect into the view
         [self.imageView addSubview:self.chartBox];
         
-        // Need a block safe version of self to guard against retain cycles
-        __block KokkoUIImagePickerController *blockSelf = self;
-        
         // Animate the chart rect
         [self animateBox:self.chartBox
                 fromRect:self.imageView.frame
                   toRect:[self scaleRect:chartRect byFactor:self.imageScale]
-                withWipe:nil
               completion:^(BOOL finished){
                   
-                  // Indicate that the chart animation is complete
-                  blockSelf.chartDone = YES;
-                  
-                  // Start the face animation if the faceRect has been populated
-                  if (blockSelf.faceReady) {
-                      [blockSelf startFaceAnimationWithRect:blockSelf.faceRect];
-                  }
+                  // Set the label
+                  [self animateLabel:self.chartCheck
+                             forPass:YES
+                          completion:^(BOOL finished) {
+                              
+                                       // Indicate that the chart animation is complete
+                                       blockSelf.chartDone = YES;
+                                       
+                                       // Start the face animation if the faceRect has been populated
+                                       if (blockSelf.faceReady) {
+                                           [blockSelf startFaceAnimationWithRect:blockSelf.faceRect];
+                                       }
+                                       
+                                   }];
               }];
     } else {
-        self.chartDone = YES;
+        [self animateLabel:self.chartCheck
+                   forPass:NO
+                completion:^(BOOL finished) {
+                    
+                    // Indicate that the chart animation is complete
+                    blockSelf.chartDone = YES;
+                    
+                    // Start the face animation if the faceRect has been populated
+                    if (blockSelf.faceReady) {
+                        [blockSelf startFaceAnimationWithRect:blockSelf.faceRect];
+                    }
+                }];
     }
 }
 
 - (void)startFaceAnimationWithRect:(CGRect)faceRect
 {
+    [self.faceLabel setText:@"Face Found"];
+
+    // Need a block safe version of self to guard against retain cycles
+    __block KokkoUIImagePickerController *blockSelf = self;
+    
     // If the result was vanishingly small, take that as a failure and skip
     if ((faceRect.size.height>1) && (faceRect.size.width>1)) {
         
         // Put the face rect into the view
         [self.imageView addSubview:self.faceBox];
 
-        // Need a block safe version of self to guard against retain cycles
-        __block KokkoUIImagePickerController *blockSelf = self;
-        
         // Animate the face rect, and show matches on completion, if ready
+        CGRect finalRect = [self scaleRect:faceRect byFactor:self.imageScale];
+        self.faceWipe.frame = CGRectMake(0, -WipeHeight, self.view.frame.size.width,WipeHeight);
         [self animateBox:self.faceBox
                 fromRect:self.imageView.frame
-                  toRect:[self scaleRect:faceRect byFactor:self.imageScale]
-                withWipe:self.faceWipe
+                  toRect:finalRect
               completion:^(BOOL finished) {
                   
-                  // Indicate that the face animation is complete
-                  blockSelf.faceDone = YES;
+                  // Set the label
+                  [self animateLabel:self.faceCheck
+                             forPass:YES
+                          completion:^(BOOL finished) {
+                              [UIView animateWithDuration:2
+                                               animations:^{
+                                                   CGRect frame = blockSelf.faceWipe.frame;
+                                                   frame.origin = CGPointMake(0,finalRect.size.height + WipeHeight);
+                                                   blockSelf.faceWipe.frame = frame;
+                                               }
+                                               completion:^(BOOL finished){
+                                                   // Indicate that the face animation is complete
+                                                   blockSelf.faceDone = YES;
+                                                   
+                                                   // Show any ready matches (a non-nil value means it is ready)
+                                                   if (blockSelf.shadeMatches) {
+                                                       [blockSelf showMatches];
+                                                   }
+                                               }
+                               ];
+                          }];
                   
-                  // Show any ready matches (a non-nil value means it is ready)
-                  if (blockSelf.shadeMatches) {
-                      [blockSelf showMatches];
-                  }
               }
          ];
     } else {
-        self.faceDone = YES;
+        [self animateLabel:self.faceCheck
+                   forPass:NO
+                completion:^(BOOL finished) {
+                    // Indicate that the face animation is complete
+                    blockSelf.faceDone = YES;
+                    
+                    // Show any ready matches (a non-nil value means it is ready)
+                    if (blockSelf.shadeMatches) {
+                        [blockSelf showMatches];
+                    }
+                }
+         ];
     }
 }
-
 
 - (void)showMatches
 {
