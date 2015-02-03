@@ -17,7 +17,6 @@
 //= require foundation
 //= require foundation/foundation.accordion
 //= require FWDRL
-//= require app_assets
 //= require_tree .
 //= require turbolinks
 
@@ -120,3 +119,5 @@ FWDRLUtils.onReady(function(){
     timeColor:"#000000"
   });
 });
+
+$(document).on('page:load', ready)
