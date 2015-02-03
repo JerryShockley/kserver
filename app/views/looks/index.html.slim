@@ -1,4 +1,4 @@
-.row.looks_container
+.row.looks-container
   .columns.large-12.text-center
     p.look_name ColorSisters Looks for You
     .row.title_sep.text-center
@@ -12,6 +12,12 @@
             a href=look_path(look.id)
               p.looks_title.text-center
                 = look.title
+              .row.look-index
+                .columns.small-12.stars-col
+                  .stars
+                    - ([1,2,3,4,5][Random.rand(4)]).times do
+                      = image_tag("product/review_star.png")
+                  p.product-review-count = " (#{Random.rand(0..500)})"
               = image_tag("look/look.jpg", class: :look_image_item)
               p.looks_desc_tag Description
               p.looks_desc = look.desc

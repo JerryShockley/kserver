@@ -1,3 +1,5 @@
+
+
 .row.show_container
   .row.title_row
     .columns.small-12.text-center
@@ -52,18 +54,25 @@
     .col-container.columns.medium-6.small-12.left
       / .row
       /   .columns.large-12
-      - @set.categories.each do |category|
+      - @set.categories.each_with_index do |category, index|
         .row.category1
           .columns.large-12.medium-12.small-12.category.large-centered.medium-centered.small-cenered
             p.cat
               = category.to_s.titleize
-            p.how_to See How
+            ul id="how_to" style='display:none;'
+              li data-url="https://www.youtube.com/watch?v=DQpoOnI6wtM" 
+              li data-url="https://www.youtube.com/watch?v=5bmA5Fxnalo" 
+              li data-url="https://www.youtube.com/watch?v=d8QjJetlQHQ"
+              li data-url="https://www.youtube.com/watch?v=REqphQgUNgA"
+            a.how_vid href="javascript:void(0)"  onclick="FWDRL.show('how_to', #{index});"  
+              | See How
+            
+            
         dl class="accordion"  data-accordion="look_products"
           - @set.clusters_by_category(category).each do |cluster|
             = render("looks/role_product", product_app: cluster.default_product_app)
 
         
-      
-          
+
           
 

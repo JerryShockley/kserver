@@ -31,6 +31,7 @@ gem 'mina'
 gem 'mina-unicorn', require: false
 gem 'mina-sidekiq', require: false
 gem 'foundicons-rails'
+gem 'js_assets'
 
 group :development do
   gem 'better_errors'

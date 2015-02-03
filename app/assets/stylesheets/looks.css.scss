@@ -22,13 +22,13 @@ $bg-color: black;
   padding: 0;
 }
 
-.row.show_container, .row.looks_container  {
+.row.show_container, .row.looks-container  {
   width: 100%;
   max-width: 100%;
 }
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^    looks    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.row.looks_container {
+.row.looks-container {
   background-color: $bg-color;
   padding: 2.5rem;
   color: white;
@@ -37,11 +37,14 @@ $bg-color: black;
 .looks_title {
   color: white;
   font: 200 1rem/1.3rem Raleway;
-
+  padding: 0;
+  margin: 0 0 .2rem 0;
+  color: $lt-blue;
 }
 
 .row.title_sep {
-  padding-bottom: 4rem;
+  padding-top: .5rem;
+  padding-bottom: 3rem;
 }
 
 p.looks_desc_tag {
@@ -55,6 +58,36 @@ p.looks_desc {
   color: white;
   font: 200 .8rem/1.3rem Raleway;
 }
+
+
+.row.looks-container .row.look-index {
+  width: 100%;
+  text-align: center;
+  
+  .stars-col {
+    display: inline;
+    width: 100%;
+    margin: 0 auto;
+
+    .stars {
+      display: inline-block;
+      margin: 0 auto;
+      padding: 0;
+      padding-right: 0rem;
+    }
+
+    p.product-review-count {
+      display: inline-block;
+      margin: 0;
+      font: 200 .8rem/1.1rem Raleway;
+      color: white;
+   }
+  } // .stars-col  
+
+  
+}
+
+
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^    looks/show/id     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // *****************  Title 
@@ -133,16 +166,15 @@ p.usage {
   
 }
 
-.row.overview_img {
-  img.look_image {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
+img.look_image_item {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: .8rem auto 0rem auto;
+  padding: 0;
 }
+
 
 
 .add-to-cart-link, .customize-link {
@@ -267,12 +299,12 @@ p.usage {
 }
 
    
-p.how_to {
+a.how_vid {
   display: inline-block;
   float: right;
   color: $lt-blue;
   margin: 0;
-  padding: .8rem 1rem 0rem .8rem;
+  padding: 1rem 1rem 0rem .8rem;
   font: normal 1.3rem/2rem Raleway; 
 }
 
@@ -360,33 +392,24 @@ dl.accordion {
                padding: 0;
              }
            } // .columns.color-name
-           
+  
              .stars-col {
-               display: inline-block;
-               height: auto;
-               width: auto;
-               margin-left: 0;
-               margin-bottom: 0;
-               padding-left: 0;
-//               border: 1px solid red;
-             
+               display: inline;
+
                .stars {
-                 display: inline;
-                 margin: 0;
-                 padding: 0;
-                 padding-right: .5rem;
+                 display: inline-block;
+                 width: auto;
+                 margin: 0 auto;
+                 padding: 0 .5rem 0 0;
                }
-           
-  //             image {
-  //               display: inline;
-  //             }
-           
+
                p.product-review-count {
                  display: inline-block;
                  margin: 0;
                  font: 200 .8rem/1.1rem Raleway;
-               }
-             } // .stars-col
+                 color: white;
+              }
+             } // .stars-col  
            } // rows.last
 
         }  // summary_text
