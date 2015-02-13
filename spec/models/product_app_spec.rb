@@ -6,6 +6,7 @@
 #  role       :integer          not null
 #  product_id :integer          not null
 #  user_id    :integer
+#  color_id   :integer
 #  category   :integer          not null
 #  created_at :datetime
 #  updated_at :datetime

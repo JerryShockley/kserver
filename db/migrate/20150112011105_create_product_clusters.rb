@@ -8,6 +8,5 @@ class CreateProductClusters < ActiveRecord::Migration
       
       t.timestamps
     end    
-    add_index(:product_clusters, [:product_set_id, :category, :role], unique: true)
   end
 end

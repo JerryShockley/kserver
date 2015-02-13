@@ -6,6 +6,7 @@
 #  role       :integer          not null
 #  product_id :integer          not null
 #  user_id    :integer
+#  color_id   :integer
 #  category   :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
@@ -36,7 +37,8 @@ FactoryGirl.define do
     # association product, factory: :product
     role  {ROLES_HASH[category][Random.rand(SIZE[category])]}
     user_id 3
-    association :product, factory: :product_with_reviews
+    color_id 1
+    product
     
     # trait :random_role do
     #   role 1

@@ -26,7 +26,8 @@
 class Profile < ActiveRecord::Base
  
  belongs_to :user, inverse_of: :profile
-  
-
+ has_one :avatar, class_name: Image, :as => :imageable, dependent: :destroy
+ # has_one :avatar, class_name: "Image", through: image_usage
+ 
 
 end

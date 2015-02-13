@@ -29,7 +29,6 @@ SIZE ||= {
         }
       
 
-
 FactoryGirl.define do
   factory :product_cluster do
     category {[:face, :eyes, :lips, :cheeks][Random.rand(3)]}
@@ -41,12 +40,20 @@ FactoryGirl.define do
 
     after(:create) do |product_cluster, evaluator|
       n = Random.rand(2..8)
+      app_hash={}
+      # ROLES_HASH.keys.each do {|category| app_hash[category] = ProductApp.by_category(category)}
+        # i=0
       while n > 0 do
-        product_cluster.product_apps << create(:product_app, role: evaluator.role, category: evaluator.category,
-                                  user_id: evaluator.user_id )
+        product = Product.find(Random.rand(Product.first.id..Product.last.id))
+        color = product.colors.shuffle.first
+        ###### TODO load existing products from db vs creating unique
+        pa = create(:product_app, role: evaluator.role, category: evaluator.category,
+                                  user_id: evaluator.user_id, product: product, color_id: color.id )
+        product_cluster.product_apps << pa
+        pa.product_recommendations.first.priority = n
+        pa.save!
         n -= 1
       end
-      
     end
   end
 end

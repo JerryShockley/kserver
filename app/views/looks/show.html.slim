@@ -4,23 +4,33 @@
   .row.title_row
     .columns.small-12.text-center
       - @look_num = Random.rand(10..78).to_s
-      p.look_number = "ColorSisters Look: #{@look_num.to_s}"
+      p.look_number = "ColorSisters Look: #{@look.code}"
       p.look_name = @look.title
-  .row.image_sep.text-center
-    .columns.small-12
-        = image_tag("home_page/xsepWhite.png", class: :sep_image)
+  .row.star-row
+    columns.small-12.text-center.stars-col
+      .stars
+        - @look.avg_rating.round.times do
+          = image_tag("product/review_star.png")
+      p.product-review-count = " (#{@look.look_reviews_count})"
   .row.desc_row
     .columns.medium-6.small-12.text-center
       p.title Description
-      p.desc = @look.desc
     .columns.medium-6.small-12.text-center
       p.title Usage
+  .row.desc_row
+    .columns.medium-6.small-12.text-left
+      p.desc = @look.desc
+    .columns.medium-6.small-12.text-left
       p.usage = @look.usage_directions
+      
+  .row.image_sep.text-center
+    .columns.small-12
+        = image_tag("home_page/xsepWhite.png", class: :sep_image)
   .row.dual-col-container
     .image.columns.large-6.medium-6.small-12.right
       .row.overview_img
         .columns.small-12
-          = image_tag('look/look.jpg' , class: :look_img, alt: "ColorSisters look overview")
+          = image_tag(look_summary_image(@look).filepath , class: :look_img, alt: "ColorSisters look overview")
       .row.nav-links
         .columns.small-12
           .btn-grp
@@ -32,7 +42,7 @@
       .row.price-summary
         .columns.small-12.large-8.large-centered
           p.price-summary-title.text-center
-             = "ColorSisters Look ##{@look_num} price summary"
+             = "ColorSisters Look #{@look_num} Price Summary"
           .row.item-list
             - @set.categories.each do |category|
               .columns.small-12.small-centered
@@ -60,14 +70,16 @@
             p.cat
               = category.to_s.titleize
             ul id="how_to" style='display:none;'
-              li data-url="https://www.youtube.com/watch?v=DQpoOnI6wtM" data-thumbnail-path="#{image_path('product/img_4.jpg')}" 
+              / li data-url="https://www.youtube.com/watch?v=DQpoOnI6wtM" data-thumbnail-path="#{image_path('product/img_4.jpg')}"
+              li data-url=how_to_video_url("face") data-thumbnail-path=how_to_index_image_asset_path("face") 
                 p.gallery1DecHeader How to makeup your face
-              li data-url="https://www.youtube.com/watch?v=5bmA5Fxnalo"  data-thumbnail-path="#{image_path('product/img_5.jpg')}" 
+              li data-url=how_to_video_url("eyes") data-thumbnail-path=how_to_index_image_asset_path("eyes")
                 p.gallery1DecHeader  How to makeup your eyes
-              li data-url="https://www.youtube.com/watch?v=d8QjJetlQHQ" data-thumbnail-path="#{image_path('product/img_6.jpg')}" 
+              li data-url=how_to_video_url("lips") data-thumbnail-path=how_to_index_image_asset_path("lips") 
                 p.gallery1DecHeader  How to makeup your lips
-              li data-url="https://www.youtube.com/watch?v=REqphQgUNgA" data-thumbnail-path="#{image_path('product/img_7.jpg')}" 
+              li data-url=how_to_video_url("cheeks") data-thumbnail-path=how_to_index_image_asset_path("cheeks")
                 p.gallery1DecHeader  How to makeup your cheeks
+                / TODO Move this js out of template
             a.how_vid href="javascript:void(0)"  onclick="FWDRL.show('how_to', #{index});"  
               | See How
             

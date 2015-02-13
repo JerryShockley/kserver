@@ -8,7 +8,7 @@ class CreateProductReviews < ActiveRecord::Migration
       t.text :review
       t.references :product, index: true
       t.references :user, index: true
-      t.boolean :active, index: true
+      t.text :state, index: true
 
       t.timestamps
     end

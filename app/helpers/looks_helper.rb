@@ -1,4 +1,20 @@
 module LooksHelper
+  
+  def how_to_video_url(category)
+    @look.videos.find {|vid| vid.group == "how_to" && vid.name == category}.url
+  end
+
+  def how_to_index_image_asset_path(category)
+    image_url = @look.images.find {|img| img.role == category}.filepath
+    image_path(image_url)
+  end
+
+  
+  def look_summary_image(look)
+    look.images.find {|img| img.name == "look_summary"}
+  end
+
+  
   def full_name(product)
     fn = []
     fn << product.brand unless product.brand.blank?
@@ -7,10 +23,10 @@ module LooksHelper
     fn.join(" ")
   end
   
-  def full_shade(product)
+  def full_color_name(product_app)
     fn = []
-    fn << product.shade_name unless product.shade_name.blank?
-    fn << product.shade_code
+    fn << product_app.name unless product_app.name.blank?
+    fn << product_app.code unless product_app.code.blank?
     fn.join(" ")
   end
 

@@ -10,14 +10,12 @@
 #  review      :text
 #  product_id  :integer
 #  user_id     :integer
-#  active      :boolean
+#  state       :text
 #  created_at  :datetime
 #  updated_at  :datetime
 #
 
 class ProductReview < ActiveRecord::Base
-  belongs_to :product
-  belongs_to :user
-  
-  
+  belongs_to :product, counter_cache: true, inverse_of: :product_reviews
+  belongs_to :user  
 end

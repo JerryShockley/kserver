@@ -40,10 +40,12 @@ FactoryGirl.define do
                           eyes: [:basic_shadow, :highlight_shadow, :liner_bottom, :liner_top],
                           lips: [:gloss, :lipstick, :pencil],
                           cheeks: [:blush]}}
-        user_id {3}
+        # user_id {3}
       end
     
       after(:create) do |product_set, evaluator|
+        # cat_cnt = Random.rand(0..3)
+        # evaluator.category_roles.keys
         evaluator.category_roles.each do |category, roles|
           roles.each do |role|
             product_set.product_clusters << create(:product_cluster, category: category, 

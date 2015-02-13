@@ -127,6 +127,34 @@ p.look_name {
   max-height: 1.6rem;
 }
 
+.star-row {
+  background: black;
+  
+  .stars-col {
+    display: inline-block;
+    width: 100%;
+     margin: 0 0 2rem 0;
+    
+//    background: white;
+//    margin: 0 auto;
+
+    .stars {
+      display: inline-block;
+      margin: 0 auto;
+      padding: 0;
+      padding-right: 0rem;
+    }
+
+    p.product-review-count {
+      display: inline-block;
+      margin: 0;
+      font: 200 .8rem/1.1rem Raleway;
+      color: white;
+    }
+  } // .stars-col  
+} // .star-row
+
+
 
 // ********************   Directions and Usage
 
@@ -149,7 +177,7 @@ p.desc {
   padding: 2rem;
   color: white;
   font: 200 .8rem/1.3rem Raleway;
-  margin-bottom: 1.5%;
+  margin-bottom: .5%;
   
 }
 
@@ -460,9 +488,15 @@ dl.accordion {
             display: inline;
             background-color: $bg-color;
             color: $lt_blue;
-            padding: 2.5%;
-            font: 200 .8rem/1.7rem Raleway;
+//            padding: 2.5%;
             left: 20%;
+            
+            a.add_cart_link {
+              color: $lt_blue;
+              padding: 3% 4.5%;
+              font: 200 .8rem/1.7rem Raleway;
+              
+            }
           }
 
       }
@@ -539,7 +573,7 @@ dl.accordion {
         .all_reviews {
           background-color: $bg-color;
           color: $lt_blue;
-          padding: 2.5%;
+          padding: 2.5% 4.5%;
           font: 200 .8rem/1.7rem Raleway;
 
         }

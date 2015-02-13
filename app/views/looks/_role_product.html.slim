@@ -3,5 +3,7 @@ dd.accordion-navigation
     = render("looks/product_summary", product_app: product_app)
   .content id="panel_#{product_app.product.id}"
     = render("looks/product_detail", product: product_app.product)
-    = render("looks/product_review", review: product_app.product.product_reviews[0])
+    - review = product_app.product.product_reviews[0]
+    - unless review.nil?
+      = render("looks/product_review", review: review)
       

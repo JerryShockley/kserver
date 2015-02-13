@@ -6,6 +6,7 @@
 #  role       :integer          not null
 #  product_id :integer          not null
 #  user_id    :integer
+#  color_id   :integer
 #  category   :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
@@ -13,16 +14,18 @@
 
 class ProductApp < ActiveRecord::Base
   belongs_to :product
+  belongs_to :color
   belongs_to :user
   has_many :product_recommendations, inverse_of: :product_app
   has_many :product_clusters, through: :product_recommendations
   
-  has_many :custom_look_products, inverse_of: :product_app
-  has_many :custom_looks, through: :custom_look_products
+  has_many :custom_products, inverse_of: :product_apps
+  has_many :custom_product_sets, through: :custom_products
   
   
-  def self.by_category(category)
-    ProductApp.includes(:product).where("product_apps.category = ?", self.categories[category.to_s].to_s).order(:brand)
+  # TODO implement role parameter in by_category
+  def self.by_category(category, role)
+    ProductApp.includes(product: :reviews).where("product_apps.category = ?", self.categories[category.to_s].to_s).order(:brand)
   end 
 
   

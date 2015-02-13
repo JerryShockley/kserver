@@ -1,6 +1,6 @@
 .row.prod_detail
   .columns.small-4.img
-    = image_tag(random_product_img_filename, class: "product_img")
+    = image_tag(product.image.filepath, class: "product_img")
   .columns.small-8
     .row
       p.prod_short_desc
@@ -12,6 +12,6 @@
       p.price
         = humanized_money_with_symbol(product.price)
       p.add_cart_item
-        = link_to("Add to cart", "cart/add")
+        = link_to("Add to cart", "cart/add", class: "add_cart_link")
         
         

@@ -7,8 +7,8 @@ class LooksController < ApplicationController
 
   # /looks/:id
   def show
-    @look = Look.includes(product_sets: {product_clusters: {product_apps: :product}}).find(params[:id])
-    @set = @look.product_sets[0]
+    @look = Look.find(params[:id])
+    @set = @look.product_sets.includes(product_clusters: {product_apps: [{ product: :product_reviews}, :color]}).first
   end
 
 

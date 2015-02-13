@@ -2,18 +2,27 @@
 #
 # Table name: looks
 #
-#  id               :integer          not null, primary key
-#  title            :text
-#  short_desc       :text
-#  desc             :text
-#  usage_directions :text
-#  user_id          :integer
-#  active           :boolean
-#  created_at       :datetime
-#  updated_at       :datetime
+#  id                 :integer          not null, primary key
+#  title              :text
+#  code               :text
+#  short_desc         :text
+#  desc               :text
+#  usage_directions   :text
+#  avg_rating         :float            default(0.0), not null
+#  user_id            :integer
+#  state              :text
+#  look_reviews_count :integer
+#  created_at         :datetime
+#  updated_at         :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
+
+def random_look_code
+  %w(A B C D E F)[Random.rand(0..3)] + Random.rand(100..999).to_s
+end
+
+
 
 FactoryGirl.define do
   sequence :utitle do |n|
@@ -27,8 +36,10 @@ FactoryGirl.define do
     desc {Faker::Lorem.paragraphs(Random.rand(2..4)).join("\n\n")}
     usage_directions {Faker::Lorem.sentences(3).join(".  ")}
     user_id 3
-    active true
-    
+    state "active" 
+    code {random_look_code}
+    avg_rating {Random.rand(0.0..5.1).round(1)}
+    look_reviews_count {Random.rand(1..500)}
     factory :look_with_product_sets do
 
       count = Random.rand(1..8)

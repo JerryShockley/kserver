@@ -14,6 +14,7 @@ class ProductSet < ActiveRecord::Base
   belongs_to :look
   belongs_to :user
   has_many :product_clusters
+  has_many :custom_product_sets
   
   def clusters_by_category(category)
     return product_clusters if category.blank?

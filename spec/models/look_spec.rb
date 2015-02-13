@@ -2,15 +2,18 @@
 #
 # Table name: looks
 #
-#  id               :integer          not null, primary key
-#  title            :text
-#  short_desc       :text
-#  desc             :text
-#  usage_directions :text
-#  user_id          :integer
-#  active           :boolean
-#  created_at       :datetime
-#  updated_at       :datetime
+#  id                 :integer          not null, primary key
+#  title              :text
+#  code               :text
+#  short_desc         :text
+#  desc               :text
+#  usage_directions   :text
+#  avg_rating         :float            default(0.0), not null
+#  user_id            :integer
+#  state              :text
+#  look_reviews_count :integer
+#  created_at         :datetime
+#  updated_at         :datetime
 #
 
 require 'rails_helper'

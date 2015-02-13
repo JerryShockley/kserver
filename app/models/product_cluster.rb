@@ -29,6 +29,20 @@ class ProductCluster < ActiveRecord::Base
     product_apps.first
   end
 
+   def reorder_product_app(product_app, priority=1)
+    if priority < 1 || priority > product_apps.size
+      raise ArgumentError, "Argument 'priority' is out of valid range 1..#{product_apps.size}: #{priority}", caller
+    end
+    
+    product_recommendations.sort
+  end
+  
+  def sorted_products
+    product_recommendations.sort.map {|pr| pr.product_app.product}
+  end
+  
+
+
   #
   # def product_apps_by_role(role)
   #   return product_apps if role.blank?
@@ -44,6 +58,30 @@ class ProductCluster < ActiveRecord::Base
   #   #   [recs]
   #   # end
   # end
+  
+
+  #
+  # def product_apps_by_role(role)
+  #   return product_apps if role.blank?
+  #   product_apps.find_all { |pc| pc.role == role}
+  # end
+
+  
+  # def product_apps_as_array
+  #   recs = product_apps.all
+  #   # if recs.has_many?
+  #   #   recs
+  #   # else
+  #   #   [recs]
+  #   # end
+  # end
+  
+  
+  def sorted_products
+    product_recommendations.sort.map {|pr| pr.product_app.product}
+  end
+  
+
   
   
 end

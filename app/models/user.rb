@@ -28,6 +28,12 @@ class User < ActiveRecord::Base
   has_many :product_apps, dependent: :nullify
   has_many :looks, dependent: :nullify
   has_many :product_clusters, dependent: :nullify
+  has_many :product_sets
+  has_many :custom_product_sets
+  has_many :look_reviews
+  has_many :product_reviews
+  
+  
     
   enum role: { 
                customer: 0, 

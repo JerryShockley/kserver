@@ -10,195 +10,235 @@
 
 require 'factory_girl_rails'
 
+class Seeds
+  ROLES_HASH ||= {
+            face: ProductApp::FACE_ROLES.map { |e| e.snakecase.to_sym},
+            eyes: ProductApp::EYE_ROLES.map { |e| e.snakecase.to_sym},
+            lips: ProductApp::LIP_ROLES.map { |e| e.snakecase.to_sym},
+            cheek: ProductApp::CHEEK_ROLES.map { |e| e.snakecase.to_sym}
+          }
 
+  SIZE ||= {
+            face: ProductApp::FACE_ROLES.size - 1,
+            eyes: ProductApp::EYE_ROLES.size - 1,
+            lips: ProductApp::LIP_ROLES.size - 1,
+            cheek: ProductApp::CHEEK_ROLES.size - 1
+          }
 
-def build_products 
-  usr_f = User.first.id
-  usr_l = User.last.id
-  puts "\nfirst user = #{usr_f}     last_usr = #{usr_l}"
-  
-  10.times do
-    FactoryGirl.create :look_with_product_sets, user_id: Random.rand(usr_f..usr_l)
-  end
-    
-end
+  CUSTOMER_COUNT = 100
+  PRODUCT_COUNT = 100
+  LOOK_COUNT = 10
 
-def remove_products
-  Product.destroy_all
-  ProductApp.destroy_all
-  ProductCluster.destroy_all
-  
-  ProductRecommendation.destroy_all
-  ImageUsage.destroy_all
-  Image.destroy_all
-  VideoUsage.destroy_all
-  Video.destroy_all
-  CustomLook.destroy_all
-  CustomLookProduct.destroy_all
-  ProductReview.destroy_all
-  ProductSet.destroy_all
-  Look.destroy_all
-end
+  KLASSES = [User, Profile, Color, Product, ProductApp, ProductCluster, ProductRecommendation, Image, Video, 
+             CustomProductSet, CustomProduct, ProductReview, LookReview, Look]
 
-
-def display_records_to_be_removed
-  puts "\n--  Removing #{User.count} User record#{"s" if User.count > 1} before reseeding"
-  puts "--  Removing #{Profile.count} Profile record#{"s" if Profile.count > 1}  before reseeding"
-  puts "--  Removing #{Look.count} Look record#{"s" if Look.count > 1} before reseeding"
-  puts "--  Removing #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} before reseeding"
-  puts "--  Removing #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} before reseeding"
-  puts "--  Removing #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} before reseeding"
-  puts "--  Removing #{Product.count} Product record#{"s" if Product.count > 1} before reseeding"
-  puts "--  Removing #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} before reseeding"
-  puts "--  Removing #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} before reseeding"
-  puts "--  Removing #{CustomLook.count} CustomLook record#{"s" if CustomLook.count > 1} before reseeding"
-  puts "--  Removing #{CustomLookProduct.count} CustomLookProduct record#{"s" if CustomLookProduct.count > 1} before reseeding"
-end
-
-def display_product_records_added
-  puts "--  Created #{Look.count} Look record#{"s" if Look.count > 1} during reseeding"
-  puts "--  Created #{ProductSet.count} ProductSet record#{"s" if ProductSet.count > 1} during reseeding"
-  puts "--  Created #{ProductCluster.count} ProductCluster record#{"s" if ProductCluster.count > 1} during reseeding"
-  puts "--  Created #{ProductRecommendation.count} ProductRecommendation record#{"s" if ProductRecommendation.count > 1} during reseeding"
-  puts "--  Created #{Product.count} Product record#{"s" if Product.count > 1} during reseeding"
-  puts "--  Created #{ProductApp.count} ProductApp record#{"s" if ProductApp.count > 1} during reseeding"
-  puts "--  Created #{ProductReview.count} ProductReview record#{"s" if ProductReview.count > 1} during reseeding"
-  
-end
-
-
-
-
-if Rails.env.production?
-  # unless User.where email: "jerry@kokkoinc.com"
-  #   User.create!(first_name: "Jerry", last_name: "Shockley", password: Rails.application.secrets.password_root,
-  #               email: "jerry@kokkoinc.com", role: :sysadmin)
-  #   puts "\nSeeded database with Jerry Shockley User records\n\n"
-  # end
-  # unless User.where email: "scott@kokkoinc.com"
-  #   User.create!(first_name: "Scott", last_name: "Trappe", password: Rails.application.secrets.password_root,
-  #               email: "scott@kokkoinc.com", role: :administrator)
-  #   puts "\nSeeded database with Scott Trappe User records\n\n"
-  #
-  # end
-
-  display_records_to_be_removed
-  remove_products
-  build_products
-
-  display_product_records_added
-  
-else
-
-  def logger
-      Rails::logger
-  end
-
-  display_records_to_be_removed
-
-  User.destroy_all
-  Profile.destroy_all
-  remove_products
-  puts "\n"
-  usr = User.new
-    usr.first_name = "Nina"
-    usr.last_name = "Bhatti"
-    usr.email = "nina@kokkoinc.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.sysadmin!
-    usr.save!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created #{usr.name}'s account")
-
-  usr = User.new
-    usr.first_name = "Scott"
-    usr.last_name = "Trappe"
-    usr.email = "scott@kokkoinc.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.sysadmin!
-    usr.save!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created #{usr.name}'s account")
-
-  usr = User.new
-  usr.first_name = "Jerry"
-    usr.last_name = "Shockley"
-    usr.email = "jerry@shockley.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.sysadmin!
-    usr.save!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created #{usr.name}'s account")
-
-
-  usr = User.new
-    usr.first_name = "Sysadmin"
-    usr.last_name = "User"
-    usr.email = "sysadmin@foo.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.sysadmin!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created sysadmin user")
-  
-  usr = User.new
-    usr.first_name = "Administrator"
-    usr.last_name = "User"
-    usr.email = "administrator@foo.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.administrator!
-    usr.save!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created administrator user")
-  
-  usr = User.new
-    usr.first_name = "editor"
-    usr.last_name = "User"
-    usr.email = "editor@foo.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.editor!
-    usr.save!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created editor user")
-
-  usr = User.new
-    usr.first_name = "writer"
-    usr.last_name = "User"
-    usr.email = "writer@foo.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.writer!
-    usr.save!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created writer user")
-
-
-  usr = User.new
-    usr.first_name = "cust"
-    usr.last_name = "User"
-    usr.email = "cust@foo.com"
-    usr.password = "foobar"
-    usr.password_confirmation = "foobar"
-    usr.save!
-    usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
-    puts("Created cust user")
-  
-  
-  
-    # Create linked users and profiles
-    100.times do
-     FactoryGirl.create(:create_customer_profile)
-    end
-
-    puts "\n--  Created #{User.count} User record#{"s" if User.count > 1}"
-    puts "--  Created #{Profile.count} Profile record#{"s" if Profile.count > 1} during reseeding"
-
+  def seed_db
+    build_users_and_profiles
     build_products
-    display_product_records_added  
-end
+    build_looks
+    KLASSES.each do |klass| 
+     puts "--  Created #{klass.count} #{klass.name} record#{"s" if klass.count > 1} during reseeding"
+    end
+  end
+  
 
+  def remove_records
+    KLASSES.each do |klass| 
+      puts "--  Removing #{klass.count} #{klass.name} record#{"s" if klass.count > 1} before reseeding"
+      klass.destroy_all
+    end 
+  end
+
+  
+  
+  
+  private 
+
+
+  def look_videos(look, user_id)
+    video_hash = {  
+                  face: "https://www.youtube.com/watch?v=DQpoOnI6wtM",
+                  eyes: "https://www.youtube.com/watch?v=5bmA5Fxnalo",
+                  lips: "https://www.youtube.com/watch?v=d8QjJetlQHQ", 
+                  cheeks: "https://www.youtube.com/watch?v=REqphQgUNgA"
+                 }
+
+    video_hash.each do |category, link| 
+      look.videos.create!(name: "#{category}", page: "look/show", group: "how_to", url: link, user_id: user_id)
+    end
+  end
+  
+  
+  def look_images(look, user_id)
+    categories = ["face", "eyes", "lips", "cheeks"]
+ 
+    categories.each_with_index do |category, i| 
+      look.images.create!(filename:  random_product_image_filename, dir: "product", user_id: user_id, name: "index_#{i}",
+                          page: "look", template: "show", group: "how_to", role: category)
+    end
+    
+    look.images.create!(filename: "look.jpg", dir: "look", user_id: user_id, name: "look_summary")
+  end
+
+
+
+  def random_product_image_filename
+    ["img_1.png","img_2.png", "img_3.png", "img_4.jpg",  "img_5.jpg",  
+          "img_6.jpg",  "img_7.jpg",  "img_8.jpg",  "img_9.jpg",  "img_10.jpg" ].shuffle.first
+  end
+
+
+  
+  def logger
+    Rails::logger
+  end
+
+
+  def build_looks 
+    usr_f = User.first.id
+    usr_l = User.last.id
+    10.times do
+      user_id = Random.rand(usr_f..usr_l)
+      look = FactoryGirl.create :look_with_product_sets, user_id: user_id
+      look_videos(look, user_id)
+      look_images(look, user_id)
+    end
+    
+  end
+
+  def build_products
+    PRODUCT_COUNT.times { FactoryGirl.create :product_with_reviews}
+    puts "exiting build products"
+  end
+
+
+  def build_product_apps(cnt, usr_f, usr_l)
+    products = build_products
+    ROLES_HASH.keys.each do |category|
+      ROLES_HASH[:category].each do |role|
+        cnt.times do 
+          create(:product_app, role: role, category: category, user_id: Random.rand(usr_f..usr_l))
+        end
+      end
+    end
+  
+  end
+
+
+  def display_records_to_be_removed
+
+    KLASSES.each do |klass| 
+      puts "--  Removing #{klass.count} #{klass.name} record#{"s" if klass.count > 1} before reseeding"
+    end
+  end
+
+  def display_records_added
+    KLASSES.each do |klass| 
+      puts "--  Created #{Klass.count} #{klass.name} record#{"s" if klass.count > 1} during reseeding"
+    end
+  end
+
+  def build_users_and_profiles
+    puts "\n"
+    usr = User.new
+      usr.first_name = "Nina"
+      usr.last_name = "Bhatti"
+      usr.email = "nina@kokkoinc.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.sysadmin!
+      usr.save!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created #{usr.name}'s account")
+
+    usr = User.new
+      usr.first_name = "Scott"
+      usr.last_name = "Trappe"
+      usr.email = "scott@kokkoinc.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.sysadmin!
+      usr.save!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created #{usr.name}'s account")
+
+    usr = User.new
+    usr.first_name = "Jerry"
+      usr.last_name = "Shockley"
+      usr.email = "jerry@shockley.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.sysadmin!
+      usr.save!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created #{usr.name}'s account")
+
+
+    usr = User.new
+      usr.first_name = "Sysadmin"
+      usr.last_name = "User"
+      usr.email = "sysadmin@foo.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.sysadmin!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created sysadmin user")
+  
+    usr = User.new
+      usr.first_name = "Administrator"
+      usr.last_name = "User"
+      usr.email = "administrator@foo.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.administrator!
+      usr.save!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created administrator user")
+  
+    usr = User.new
+      usr.first_name = "editor"
+      usr.last_name = "User"
+      usr.email = "editor@foo.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.editor!
+      usr.save!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created editor user")
+
+    usr = User.new
+      usr.first_name = "writer"
+      usr.last_name = "User"
+      usr.email = "writer@foo.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.writer!
+      usr.save!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created writer user")
+
+
+    usr = User.new
+      usr.first_name = "cust"
+      usr.last_name = "User"
+      usr.email = "cust@foo.com"
+      usr.password = "foobar"
+      usr.password_confirmation = "foobar"
+      usr.save!
+      usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
+      puts("Created cust user")
+  
+  
+  
+      # Create linked users and profiles
+      CUSTOMER_COUNT.times do
+        FactoryGirl.create(:create_customer_profile)
+      end
+  
+  end
+  
+end   
+
+app = Seeds.new
+app.remove_records
+app.seed_db

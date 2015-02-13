@@ -11,61 +11,96 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122230151) do
+ActiveRecord::Schema.define(version: 20150205221637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "custom_look_products", force: true do |t|
-    t.integer  "custom_look_id"
-    t.integer  "product_app_id"
+  create_table "colors", force: true do |t|
+    t.integer  "product_id"
+    t.text     "name"
+    t.text     "code"
+    t.text     "hex_color_val"
+    t.text     "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "custom_look_products", ["custom_look_id"], name: "index_custom_look_products_on_custom_look_id", using: :btree
-  add_index "custom_look_products", ["product_app_id"], name: "index_custom_look_products_on_product_app_id", using: :btree
+  add_index "colors", ["product_id"], name: "index_colors_on_product_id", using: :btree
 
-  create_table "custom_looks", force: true do |t|
+  create_table "custom_product_sets", force: true do |t|
     t.integer  "product_set_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "custom_looks", ["product_set_id"], name: "index_custom_looks_on_product_set_id", using: :btree
-  add_index "custom_looks", ["user_id"], name: "index_custom_looks_on_user_id", using: :btree
+  add_index "custom_product_sets", ["product_set_id"], name: "index_custom_product_sets_on_product_set_id", using: :btree
+  add_index "custom_product_sets", ["user_id"], name: "index_custom_product_sets_on_user_id", using: :btree
 
-  create_table "image_usages", force: true do |t|
-    t.text     "page"
-    t.text     "role"
-    t.integer  "image_id"
+  create_table "custom_products", force: true do |t|
+    t.integer  "custom_product_set_id"
+    t.integer  "product_app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "image_usages", ["image_id"], name: "index_image_usages_on_image_id", using: :btree
+  add_index "custom_products", ["custom_product_set_id"], name: "index_custom_products_on_custom_product_set_id", using: :btree
+  add_index "custom_products", ["product_app_id"], name: "index_custom_products_on_product_app_id", using: :btree
 
   create_table "images", force: true do |t|
+    t.text     "name"
     t.text     "filename"
+    t.text     "dir"
+    t.text     "page"
+    t.text     "template"
+    t.text     "group"
+    t.text     "model"
+    t.text     "role"
+    t.text     "description"
+    t.text     "file_type"
+    t.text     "code"
     t.integer  "user_id"
-    t.boolean  "active"
+    t.text     "state"
+    t.text     "active"
     t.integer  "file_size"
     t.integer  "width"
     t.integer  "height"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "images", ["imageable_id", "imageable_type"], name: "index_images_on_imageable_id_and_imageable_type", using: :btree
   add_index "images", ["user_id"], name: "index_images_on_user_id", using: :btree
+
+  create_table "look_reviews", force: true do |t|
+    t.text     "title"
+    t.integer  "rating"
+    t.boolean  "recommended"
+    t.boolean  "use_again"
+    t.text     "review"
+    t.integer  "look_id"
+    t.integer  "user_id"
+    t.text     "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "look_reviews", ["look_id"], name: "index_look_reviews_on_look_id", using: :btree
+  add_index "look_reviews", ["user_id"], name: "index_look_reviews_on_user_id", using: :btree
 
   create_table "looks", force: true do |t|
     t.text     "title"
+    t.text     "code"
     t.text     "short_desc"
     t.text     "desc"
     t.text     "usage_directions"
+    t.float    "avg_rating",         default: 0.0, null: false
     t.integer  "user_id"
-    t.boolean  "active"
+    t.text     "state"
+    t.integer  "look_reviews_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,11 +111,13 @@ ActiveRecord::Schema.define(version: 20150122230151) do
     t.integer  "role",       null: false
     t.integer  "product_id", null: false
     t.integer  "user_id"
+    t.integer  "color_id"
     t.integer  "category",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "product_apps", ["color_id"], name: "index_product_apps_on_color_id", using: :btree
   add_index "product_apps", ["product_id"], name: "index_product_apps_on_product_id", using: :btree
   add_index "product_apps", ["user_id"], name: "index_product_apps_on_user_id", using: :btree
 
@@ -93,7 +130,6 @@ ActiveRecord::Schema.define(version: 20150122230151) do
     t.datetime "updated_at"
   end
 
-  add_index "product_clusters", ["product_set_id", "category", "role"], name: "index_product_clusters_on_product_set_id_and_category_and_role", unique: true, using: :btree
   add_index "product_clusters", ["product_set_id"], name: "index_product_clusters_on_product_set_id", using: :btree
   add_index "product_clusters", ["user_id"], name: "index_product_clusters_on_user_id", using: :btree
 
@@ -116,7 +152,7 @@ ActiveRecord::Schema.define(version: 20150122230151) do
     t.text     "review"
     t.integer  "product_id"
     t.integer  "user_id"
-    t.boolean  "active"
+    t.text     "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -136,19 +172,20 @@ ActiveRecord::Schema.define(version: 20150122230151) do
   add_index "product_sets", ["user_id"], name: "index_product_sets_on_user_id", using: :btree
 
   create_table "products", force: true do |t|
-    t.text     "sku",                        null: false
+    t.text     "sku",                                 null: false
     t.text     "brand"
     t.text     "line"
     t.text     "name"
-    t.text     "shade_name"
-    t.text     "shade_code"
+    t.text     "code"
     t.text     "short_desc"
     t.text     "desc"
-    t.integer  "image_usage_id"
-    t.text     "hex_color_val"
-    t.boolean  "active"
-    t.integer  "price_cents",    default: 0, null: false
+    t.text     "size"
+    t.text     "manufacturer_sku"
+    t.text     "state"
+    t.float    "avg_rating",            default: 0.0, null: false
+    t.integer  "price_cents",           default: 0,   null: false
     t.integer  "cost_cents"
+    t.integer  "product_reviews_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -172,7 +209,6 @@ ActiveRecord::Schema.define(version: 20150122230151) do
     t.string   "hair_color"
     t.string   "age"
     t.string   "skin_type"
-    t.text     "img_filename"
   end
 
   add_index "profiles", ["email"], name: "index_profiles_on_email", unique: true, using: :btree
@@ -199,27 +235,31 @@ ActiveRecord::Schema.define(version: 20150122230151) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "video_usages", force: true do |t|
-    t.text     "page"
-    t.text     "role"
-    t.integer  "video_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "video_usages", ["video_id"], name: "index_video_usages_on_video_id", using: :btree
-
   create_table "videos", force: true do |t|
     t.text     "name"
-    t.integer  "size"
-    t.string   "duration",   limit: nil
     t.text     "filename"
-    t.text     "dimensions"
+    t.text     "dir"
+    t.text     "page"
+    t.text     "template"
+    t.text     "group"
+    t.text     "model"
+    t.text     "role"
+    t.text     "description"
+    t.text     "storage_site"
+    t.text     "code"
+    t.integer  "size"
+    t.time     "duration"
+    t.text     "url"
+    t.text     "file_type"
     t.integer  "user_id"
+    t.text     "status"
+    t.integer  "videoable_id"
+    t.string   "videoable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "videos", ["user_id"], name: "index_videos_on_user_id", using: :btree
+  add_index "videos", ["videoable_id", "videoable_type"], name: "index_videos_on_videoable_id_and_videoable_type", using: :btree
 
 end

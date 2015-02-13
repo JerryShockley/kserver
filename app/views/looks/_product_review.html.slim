@@ -10,10 +10,10 @@
         p.attrib = "Skin type: #{profile.skin_type}" unless profile.skin_type.blank?
   .row.review_right
     .columns.medium-3.small-3
-      = image_tag("profile/head_shot.jpg", class: "review-headshot")
+      = image_tag(profile.avatar.filepath, class: "review-headshot")
     .columns.medium-9.small-9
       .row
-        - ([1,2,3,4,5][Random.rand(4)]).times do
+        - review.rating.times do
           = image_tag("product/review_star.png")
       .row.use
         p.use_again
