@@ -157,7 +157,7 @@
                              [[UIBarButtonItem alloc] initWithCustomView:self.prevNextSeg],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                              [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                              style:UIBarButtonItemStyleBordered
+                                                              style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(dismissKeyboard)]
                              ]
