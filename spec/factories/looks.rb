@@ -38,7 +38,7 @@ FactoryGirl.define do
     user_id 3
     state "active" 
     code {random_look_code}
-    avg_rating {Random.rand(0.0..5.1).round(1)}
+    avg_rating {Random.rand(3.0..5.1).round(1)}
     look_reviews_count {Random.rand(1..500)}
     factory :look_with_product_sets do
 

@@ -25,7 +25,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 gem 'kaminari'
 gem 'virtus'
 gem 'reform'
-gem 'videojs_rails'
+# gem 'ratyrate'
 gem 'money-rails'
 gem 'mina'
 gem 'mina-unicorn', require: false

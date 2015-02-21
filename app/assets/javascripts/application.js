@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require video
 //= require foundation
 //= require foundation/foundation.accordion
 //= require FWDRL

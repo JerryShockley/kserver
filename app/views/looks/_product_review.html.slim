@@ -1,30 +1,44 @@
 .product_review
+  - user = User.last
+  - profile = user.profile
+  .row
+    .columns.small-12.stars-col.clearfix
+      .stars
+        - star_cnt = review.product.avg_rating.round
+        - nonstar_cnt = 5 - star_cnt
+        - star_cnt.times do
+          = image_tag("star-on.png", class: :star_on)
+        - nonstar_cnt.times do
+          = image_tag("star-off.png", class: :star_off)
+      p.date.right = "#{review.created_at.strftime("%B %e, %Y")}"
   .row
     .columns.small-12
-      - user = User.last
-      - profile = user.profile
-      .row.profile1
-        - physical_attributes(user).each do |label, value|
-              p.attrib = "#{label.to_s.humanize.titleize}: " + value
-      .row.profile1
-        p.attrib = "Skin type: #{profile.skin_type}" unless profile.skin_type.blank?
+      p.title = review.title
+      
   .row.review_right
-    .columns.medium-3.small-3
+    .columns.medium-4.small-4
       = image_tag(profile.avatar.filepath, class: "review-headshot")
-    .columns.medium-9.small-9
+    .columns.medium-8.small-8
       .row
-        - review.rating.times do
-          = image_tag("product/review_star.png")
+          p.screen_name = "by #{profile.screen_name}"
       .row.use
         p.use_again
           = "Use again: #{review.use_again ? 'Yes':'No'}"
         p.recommend
           = "Recommend: #{review.recommended  ? 'Yes':'No'} "
-      .row
-        p.review
-          = review.review
-      .row
-        = link_to("Read all reviews", "product_reviews", class: :all_reviews)
+  .row
+    .columns.small-12
+      p.review
+        = review.review
+  .row.profile1
+    .columns.small-12
+      - physical_attributes(user).each do |label, value|
+            p.attrib = "#{label.to_s.humanize.titleize}: " + value
+  .row.profile1
+    .columns.small-12
+      p.attrib.bottom = "Skin type: #{profile.skin_type}" unless profile.skin_type.blank?
+  .row.text-center
+    = link_to("Read all reviews", "product_reviews", class: :all_reviews)
       
         
       

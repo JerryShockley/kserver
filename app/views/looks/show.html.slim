@@ -3,14 +3,17 @@
 .row.show_container
   .row.title_row
     .columns.small-12.text-center
-      - @look_num = Random.rand(10..78).to_s
       p.look_number = "ColorSisters Look: #{@look.code}"
       p.look_name = @look.title
   .row.star-row
     columns.small-12.text-center.stars-col
       .stars
-        - @look.avg_rating.round.times do
-          = image_tag("product/review_star.png")
+        - star_cnt = @look.avg_rating.round
+        - nonstar_cnt = 5 - star_cnt
+        - star_cnt.times do
+          = image_tag("star-on.png", class: :star_on)
+        - nonstar_cnt.times do
+          = image_tag("star-off.png", class: :star_off)
       p.product-review-count = " (#{@look.look_reviews_count})"
   .row.desc_row
     .columns.medium-6.small-12.text-center
@@ -32,7 +35,7 @@
         .columns.small-12
           = image_tag(look_summary_image(@look).filepath , class: :look_img, alt: "ColorSisters look overview")
       .row.nav-links
-        .columns.small-12
+        .columns.small-12.text-center
           .btn-grp
             = link_to("LOOKS", looks_path)
             = link_to("CUSTOMIZE", "customize", class: :customize)

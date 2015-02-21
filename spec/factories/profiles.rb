@@ -21,6 +21,7 @@
 #  hair_color     :string(255)
 #  age            :string(255)
 #  skin_type      :string(255)
+#  screen_name    :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -29,6 +30,7 @@ FactoryGirl.define do
   factory :profile do
     first_name { Faker::Name.first_name}
     last_name {Faker::Name.last_name}
+    screen_name {"#{first_name} #{last_name}"}
     email {"#{first_name.downcase}.#{last_name.downcase}@foo.com"}
     street1 {Faker::Address.street_address}
     street2 ""

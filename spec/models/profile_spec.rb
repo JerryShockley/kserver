@@ -21,6 +21,7 @@
 #  hair_color     :string(255)
 #  age            :string(255)
 #  skin_type      :string(255)
+#  screen_name    :string(255)
 #
 
 require 'rails_helper'

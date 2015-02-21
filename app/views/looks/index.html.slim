@@ -15,8 +15,12 @@
               .row.look-index
                 .columns.small-12.stars-col
                   .stars
-                    - ([1,2,3,4,5][Random.rand(4)]).times do
-                      = image_tag("product/review_star.png")
+                    - star_cnt = look.avg_rating.round
+                    - nonstar_cnt = 5 - star_cnt
+                    - star_cnt.times do
+                      = image_tag("star-on.png", class: :star_on)
+                    - nonstar_cnt.times do
+                      = image_tag("star-off.png", class: :star_off)
                   p.product-review-count = " (#{Random.rand(0..500)})"
               = image_tag(look_summary_image(look).filepath, class: :look_image_item)
               p.looks_desc_tag Description

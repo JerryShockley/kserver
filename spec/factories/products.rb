@@ -12,7 +12,6 @@
 #  desc                  :text
 #  size                  :text
 #  manufacturer_sku      :text
-#  hex_color_val         :text
 #  state                 :text
 #  avg_rating            :float            default(0.0), not null
 #  price_cents           :integer          default(0), not null
@@ -62,9 +61,9 @@ FactoryGirl.define do
            "1.7 OZ.", "3.2 OZ.", "2 OZ.", "4 OZ.", "2.4 OZ.", "3.7 OZ."][Random.rand(0..11)]}
     price_cents {Random.new.rand(499..2399)}
     cost_cents {(price_cents * 0.8).to_i}
-    avg_rating {Random.rand(0.0..5.1).round(1)}
+    avg_rating {Random.rand(1.0..5.1).round(1)}
     code {random_code}
-    product_reviews_count {Random.rand(1..500)}
+    product_reviews_count {Random.rand(1..100)}
       
       
       after(:create) do |product, evaluator|
@@ -76,8 +75,7 @@ FactoryGirl.define do
                              name: "product image", model: "product")
         
              
-        create_list(:product_review, evaluator.app_cnt, product: product, 
-                    user_id: user_id)
+        create_list(:product_review, evaluator.review_cnt, product: product)
       end
       
     
@@ -85,7 +83,7 @@ FactoryGirl.define do
       factory :product_with_reviews do
         ignore do
           # app_cnt {[1,4,2,15,2,3,1,5,9,7,2,12,4,3,3,4,2][Random.rand(16)]}
-          app_cnt {Random.rand(0..10)}
+          review_cnt {Random.rand(0..50)}
         end
       
       

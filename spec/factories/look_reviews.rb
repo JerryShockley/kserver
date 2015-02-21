@@ -17,7 +17,7 @@
 
 FactoryGirl.define do
   factory :look_review do
-    title {Faker::Lorem.words(Random.rand(3..12)).join(" ")}
+    title {Faker::Lorem.words(Random.rand(3..8)).join(" ")}
     rating {Random.rand(0..5)}
     recommended {[false, true, nil][Random.rand(2)]}
     use_again {[false, true, nil][Random.rand(2)]}

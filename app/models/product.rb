@@ -12,7 +12,6 @@
 #  desc                  :text
 #  size                  :text
 #  manufacturer_sku      :text
-#  hex_color_val         :text
 #  state                 :text
 #  avg_rating            :float            default(0.0), not null
 #  price_cents           :integer          default(0), not null
@@ -32,5 +31,5 @@ class Product < ActiveRecord::Base
   monetize :price_cents # creates a price attr
   monetize :cost_cents  # creates a cost attr
   
-
+  ratyrate_rateable 
 end

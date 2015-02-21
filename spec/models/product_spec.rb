@@ -12,7 +12,6 @@
 #  desc                  :text
 #  size                  :text
 #  manufacturer_sku      :text
-#  hex_color_val         :text
 #  state                 :text
 #  avg_rating            :float            default(0.0), not null
 #  price_cents           :integer          default(0), not null

@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_many :look_reviews
   has_many :product_reviews
   
-  
+  ratyrate_rater
     
   enum role: { 
                customer: 0, 
