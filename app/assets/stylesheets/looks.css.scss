@@ -479,7 +479,6 @@ dl.accordion {
       .prod_detail {
           border-right: 2px solid gray;
           border-left: 2px solid gray;
-          margin: 0;
           padding-top: .8rem;
           padding-right: .5rem;
           width: 100%;
@@ -496,9 +495,16 @@ dl.accordion {
 
           }
 
-          p.price {
+          p.price  {
             display: inline-block;
             font: normal 1rem/2rem Raleway;
+            margin-right: 1rem;
+            margin-left: 7%;
+          }
+          
+          p.size {
+            display: inline-block;
+            font: normal 0.8rem/2rem Raleway;
 
           }
 
@@ -508,21 +514,18 @@ dl.accordion {
             vertical-align: middle;
           }
 
-          p.add_cart_item {
-            position: relative;
-            display: inline;
-            background-color: $bg-color;
-            color: $lt_blue;
-//            padding: 2.5%;
-            left: 20%;
-            
-            a.add_cart_link {
+
+          .row.cart-row {
+//            margin-bottom: 1.8rem;
+
+            a.add-cart-link {
               color: $lt_blue;
-              padding: 3% 4.5%;
+              padding: 1.5% 4.5%;
+              margin: 0;
               font: 200 .8rem/1.7rem Raleway;
-              
             }
-          }
+            
+          }  // .row.cart-row
 
       }
 
@@ -530,12 +533,12 @@ dl.accordion {
 
     // -------------------------------   Product Review
       .product_review {
-        position: relative;
         background-color: DimGray;
         color: white;
         margin: 0;
         padding: 3% 3%;
         padding-bottom: 1.2rem;
+        
 
         p {
           font: 200 .7rem/1rem Raleway;
@@ -598,17 +601,17 @@ dl.accordion {
 
         }
         
-        .row.profile1 {
-          margin: 0;
-          padding: 0;
-          border: none;
-        }
-
-        .row.review_right {
-          margin-bottom: 0;
-          padding-bottom: 0;
-
-        }
+//        .row.profile1 {
+//          margin: 0;
+//          padding: 0;
+//          border: none;
+//        }
+//
+//        .row.review_right {
+//          margin-bottom: 0;
+//          padding-bottom: 0;
+//
+//        }
         
         .review-headshot { 
           margin: .5rem;
@@ -622,14 +625,12 @@ dl.accordion {
         
         p.bottom {
           margin-bottom: 1rem;
-          border: red solid 1px;
         }
         
         
         .all_reviews {
           background-color: $bg-color;
-//          color: $lt_blue;
-          color: white;
+          color: $lt_blue;
           margin-top: 14rem;
           padding: 2.5% 4.5%;
           font: 200 .8rem/1.7rem Raleway;

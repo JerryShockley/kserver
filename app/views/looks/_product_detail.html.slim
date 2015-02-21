@@ -1,17 +1,21 @@
 .row.prod_detail
-  .columns.small-4.img
-    = image_tag(product.image.filepath, class: "product_img")
-  .columns.small-8
-    .row
-      p.prod_short_desc
-        = product.short_desc
-    .row
-      p.prod_desc
-        = product.desc
-    .row
-      p.price
-        = humanized_money_with_symbol(product.price)
-      p.add_cart_item
-        = link_to("Add to cart", "cart/add", class: "add_cart_link")
+  .row
+    .columns.small-4.img
+      = image_tag(product.image.filepath, class: "product_img")
+    .columns.small-8
+      .row
+        p.prod_short_desc
+          = product.short_desc
+  .row
+    .columns.small-12
+      p.prod_desc = product.desc
+  .row.cart-row
+    .columns.small-12
+      p.size   = product.size
+      p.price   = humanized_money_with_symbol(product.price)
+      = link_to("Add to cart", "cart/add", class: [:right, "add-cart-link"])
+      
+  / .row.cart-row
+  /   .columns.small-12.text-center
         
         
