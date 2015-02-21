@@ -491,6 +491,7 @@ dl.accordion {
           }
 
           p.prod_desc {
+            margin-top: 1.5rem;
             font: normal .8rem/1.2rem Raleway;
 
           }
@@ -516,7 +517,7 @@ dl.accordion {
 
 
           .row.cart-row {
-//            margin-bottom: 1.8rem;
+            margin-bottom: .6rem;
 
             a.add-cart-link {
               color: $lt_blue;
@@ -627,14 +628,14 @@ dl.accordion {
           margin-bottom: 1rem;
         }
         
-        
-        .all_reviews {
-          background-color: $bg-color;
-          color: $lt_blue;
-          margin-top: 14rem;
-          padding: 2.5% 4.5%;
-          font: 200 .8rem/1.7rem Raleway;
-
+        .row.link {
+          margin: .6rem 0 .6rem 0;
+          .all_reviews {
+            background-color: $bg-color;
+            color: $lt_blue;
+            margin-top: 14rem;
+            padding: 2.5% 4.5%;
+            font: 200 .8rem/1.7rem Raleway;}
         }
       }
     }    
