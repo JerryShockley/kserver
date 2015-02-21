@@ -19,7 +19,8 @@
 #include "exemplar.h"
 
 typedef	std::shared_ptr<void>   FilterCtxPtr;
-typedef	cv::Mat (*FilterFunc)(const cv::Mat& face, FilterCtxPtr context);
+typedef	cv::Mat (*FilterFunc)(const cv::Mat& face, FilterCtxPtr context,
+			      const std::string& imageName);
 
 class SharedImageResources {
 public:
@@ -42,6 +43,8 @@ public:
 		{
 		    return detector.get_chart().get_regions();
 		}
+    const std::string&	getIntermediateFilePath() { return debugFPath; }
+    
     // Setter functions to change attributes
     void	setIntermediateFilePath(const std::string& debugFilePath);
     void	setMaxFaces(unsigned n)	    { refImages.setMaxFaces(n); }
@@ -104,6 +107,8 @@ private:
     FaceRank	matches;		    // list of exemplars matched
     Recommendations brandsShades;	    // list of brands and matching shades
     
+    bool	lookedForChart;		    // have tried to find chart
+    bool	lookedForFace;		    // have tried to find face
     bool	foundChart;		    // set if chart has been located
     bool	foundFace;		    // set if face has been located
     bool	skinIsolated;		    // set if recolored skin extracted
@@ -123,6 +128,9 @@ private:
     void	extractSkinPixels();	    // recolor and extract skin pixels
     void	makeRecommendations();	    // produce recommendations for face
     cv::Rect	scaleRect(const cv::Rect& origRect) const;
+    cv::Rect	resizeRect(const cv::Rect& origRect,
+			   double scaleWidthBy,
+			   double scaleHeightBy) const;
 };
 
 #endif /* defined(__kokko_image__) */

@@ -41,8 +41,9 @@ public:
     typedef enum {cs_rgb, cs_lab} colorspace_t;
     typedef enum {l_none, l_noMin, l_noMax, l_noMinMax} limit_t;
     
-    SkinPixels() : imageID(""), shadeName(""), pixelCnt(0), format(f_any),
-		    colorSpace(cs_rgb), asFloat(false), sorted(true) {
+    SkinPixels() : imageID(""), shadeName(""), pixelCnt(0), colCnt(0),
+	           format(f_any), colorSpace(cs_rgb), asFloat(false),
+                   sorted(true) {
 	memset(valCnts, 0, sizeof(valCnts));
     }
     void	clear();
@@ -59,6 +60,7 @@ public:
     const std::string& getImageID() const   { return imageID; }
     const std::string& getShadeName() const { return shadeName; }
     dindex_t	getPixelCnt() const	    { return pixelCnt; }
+    dindex_t	getColCnt() const	    { return colCnt; }
     format_t    getFormat() const	    { return format; }
     colorspace_t getColorSpace() const	    { return colorSpace; }
     bool	getFloat() const	    { return asFloat; }
@@ -80,6 +82,7 @@ private:
     std::string	imageID;		    // name of the image (original file name)
     std::string	shadeName;		    // shade of makeup chosen for this face
     dindex_t	pixelCnt;		    // # of pixels in the image data
+    dindex_t	colCnt;			    // number of columns in original matrix
     format_t	format;
     colorspace_t colorSpace;
     bool	asFloat;		    // data was read/should be written in floating point

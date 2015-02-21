@@ -37,8 +37,9 @@
  * as elegant or safe.
  */
 
-extern cv::Mat filterChinCheek(const cv::Mat& image, FilterCtxPtr context);
-extern cv::Mat filterSkinTones(const cv::Mat& image, FilterCtxPtr context);
-extern FilterCtxPtr filterSkinTonesInit(SharedImageResources& rsrc);
+extern cv::Mat filterSkinTonesHull(const cv::Mat& image,
+				   FilterCtxPtr context,
+				   const std::string& imageName = "");
+extern FilterCtxPtr filterSkinTonesHullInit(SharedImageResources& rsrc, bool useLab = false);
 
 #endif /* defined(__image_pipeline__face_extractor__) */

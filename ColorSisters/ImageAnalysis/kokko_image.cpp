@@ -51,6 +51,23 @@ using namespace cv;
 
 #define MAX_IMAGE_SIZE	    960
 
+// MIN_FACE_AREA attempts to establish a lower bound on how many pixels must
+// be in a detected face. This is for the rectangle returned by the face
+// recognizer; subsequent filter steps will throw out 30-50% of the pixels, so
+// this value should be chosen with this taken into account.
+#define MIN_FACE_AREA	    (50 * 50)
+
+// FACE_BOX_SHRINK controls how much the face bounding box is "pulled in"
+// towards the center to reduce how many non-face pixels are sampled. This is
+// necessary because the HAAR cascade face detector: (1) returns a bounding box
+// returned that is often much larger than the face and (2) always returns a
+// square bounding box (not just rectangular, but square!) and strangely enough
+// human faces are not square, so non-face pixels are always included. By
+// shrinking the bounding box we can ensure only face pixels get sample, at the
+// cost of having many fewer pixels to compare in later steps.
+
+#define FACE_BOX_SHRINK	    (0.6)	    // fraction of original box size
+
 // Forward references
 static	int getEXIFOrientation(const string& image_name);
 static	Mat recolorImage(const Mat &input, const ColorMeasure &measures);
@@ -87,7 +104,7 @@ void SharedImageResources::setIntermediateFilePath(const string& inbetweenFilePa
 
 cv::Rect KokkoImage::getChartRect()
 {
-    if (!foundChart)
+    if (!lookedForChart)
 	findChart();
     return scaleRect(chartRect);
 }
@@ -95,7 +112,7 @@ cv::Rect KokkoImage::getChartRect()
 
 cv::Rect KokkoImage::getFaceRect()
 {
-    if (!foundFace)
+    if (!lookedForFace)
 	findFace();
     return scaleRect(faceRect);
 }
@@ -103,7 +120,7 @@ cv::Rect KokkoImage::getFaceRect()
 
 cv::Mat KokkoImage::getFaceImage()
 {
-    if (!foundFace)
+    if (!lookedForFace)
 	findFace();
     return filteredFace;
 }
@@ -185,6 +202,7 @@ void KokkoImage::initWithImage(SharedImageResources *rsrc,
     // of the image. Calls to any method are allowed; they will simply invoke
     // the necessary preceding stages if necessary to make sure the right
     // information is available.
+    lookedForChart = lookedForFace = false;
     foundChart = foundFace = skinIsolated = facesRanked = madeRecoms = false;
     chartRect = zeroRect;
     faceRect = zeroRect;
@@ -256,6 +274,7 @@ void KokkoImage::findChart()
 	// rest of the work to extract the chart colors should be deferred
 	// to a later step, that way the chart finder can run faster
 	// (possibly fast enough to run at video frame rates).  !!FIXME!!
+	lookedForChart = true;
 	chartRect = shared->detector.detect(sizedImage, debugImagePath);
 	
 	// detect will throw an exception if it doesn't find the chart, so
@@ -279,6 +298,7 @@ void KokkoImage::findFace()
 					   1.1, 5, 0 |CV_HAAR_FIND_BIGGEST_OBJECT,
 					   cv::Size(0, 0));
 	
+	lookedForFace = true;
 	if (face_coor.empty())
 	    throw KokkoException("could not find a face in the image file\n");
 	
@@ -288,8 +308,10 @@ void KokkoImage::findFace()
 	// one. Someday, add checks that either face_coor.size() == 1, or do
 	// something to handle multiple faces being returned.   !!FIXME!!
 	faceRect = face_coor[0];
-	filteredFace = sizedImage(faceRect).clone();
-	foundFace = true;
+	foundFace = faceRect.area() > MIN_FACE_AREA;
+	
+	filteredFace = sizedImage(resizeRect(faceRect, FACE_BOX_SHRINK,
+					     FACE_BOX_SHRINK)).clone();
 	
 	if (debugImagePath != "") {
 	    // Grab the subset of the image that is the detected face bounding
@@ -309,15 +331,17 @@ void KokkoImage::findFace()
 
 void KokkoImage::extractSkinPixels()
 {
-    if (!foundChart)			// Need chart location
+    if (!lookedForChart)		// Need chart location
 	findChart();
-    if (!foundFace)			// Need face location
+    if (!lookedForFace)			// Need face location
 	findFace();
     
+    if (!foundChart || !foundFace)
+	return;				// never found either, can't do anything
+    
     if (shared->faceFilterFunc != NULL) {
-	Mat adjFace = shared->faceFilterFunc(filteredFace, shared->faceFilterContext);
+	Mat adjFace = shared->faceFilterFunc(filteredFace, shared->faceFilterContext, imageName);
 	filteredFace = adjFace;
-	// OPTIONAL DEBUG STEP: Save new face image here as unique file
     }
     
     // create color transform
@@ -328,15 +352,25 @@ void KokkoImage::extractSkinPixels()
     Mat recoloredFace = recolorImage(filteredFace, measure);
     
     if (shared->colorFilterFunc != NULL) {
-	Mat adjColors = shared->colorFilterFunc(recoloredFace, shared->colorFilterContext);
+	Mat adjColors = shared->colorFilterFunc(recoloredFace, shared->colorFilterContext, imageName);
 	recoloredFace = adjColors;
-	// OPTIONAL DEBUG STEP: Save new recolored image here as unique file
 	if (debugImagePath != "")
 	    imwrite(debugImagePath + ".xclr.png", recoloredFace);
     }
 
     extractedSkin.load(recoloredFace, SkinPixels::l_noMinMax);
+    // Scott Clearwater sometimes wants the pixel data such that we can
+    // recover the row & column structure. If you call load() with l_none,
+    // no pixels are omitted from the output and the row/col structure is
+    // recorded so that the shape can be reconstructed. Do:
+    //
+    //	extractedSkin.load(recoloredFace, SkinPixels::l_none);
+    
     extractedSkin.setImageID(imageName);
+    
+    // Possibly here we should check to see if there are "enough" pixels
+    // remaining from the filtering steps to do a meaningful comparison, and
+    // if not, ask the user to retake the photo. !!!FIXME!!!
     skinIsolated = true;
     
     if (debugImagePath != "") {
@@ -365,6 +399,9 @@ void KokkoImage::rankFaces()
     if (!skinIsolated)
 	extractSkinPixels();
     
+    if (!foundChart || !foundFace)
+	return;
+    
     // This feels like a hack that I have to manually force the format to
     // to f_counts because I know the match function will eventually call
     // KuiperCounts and need the data in this format. I have to do it here
@@ -383,6 +420,9 @@ void KokkoImage::makeRecommendations()
 {
     if (!facesRanked)
 	rankFaces();
+    
+    if (!foundChart || !foundFace)
+	return;
 
     brandsShades = shared->refImages.recommend(matches, brands);
     madeRecoms = true;
@@ -423,6 +463,7 @@ static int getEXIFOrientation(const std::string &image_name)
 #endif	// TARGET_OS_IPHONE
 }
 
+
 // scaleRect -- scale a rectangle to the original coordinates
 cv::Rect KokkoImage::scaleRect(const cv::Rect& origRect) const
 {
@@ -436,20 +477,45 @@ cv::Rect KokkoImage::scaleRect(const cv::Rect& origRect) const
     return sRect;
 }
 
+
+// resizeRect -- change size of rectangle but keep centered on same point
+cv::Rect KokkoImage::resizeRect(const cv::Rect& origRect,
+				double scaleWidthBy,
+				double scaleHeightBy) const
+{
+    double newWidth = origRect.width * scaleWidthBy;
+    double newHeight = origRect.height * scaleHeightBy;
+    
+    cv::Rect sRect;
+    sRect.x = origRect.x + (int(origRect.width - newWidth) + 1) / 2;
+    sRect.y = origRect.y + (int(origRect.height - newHeight) + 1) / 2;
+    sRect.height = newHeight + 0.5;	// round to nearest int
+    sRect.width = newWidth + 0.5;
+    if (sRect.x < 0)
+	sRect.x = 0;
+    if (sRect.y < 0)
+	sRect.y = 0;
+    if (sRect.height < 0)
+	sRect.height = 0;
+    if (sRect.width < 0)
+	sRect.width = 0;
+    return sRect;
+}
+
+
 // recolorImage -- using the color data from the chart, use a least-squares
 // algorithm to readjust every pixel. Note that this only works on sRGB data.
 static Mat recolorImage(const Mat &input, const ColorMeasure &measures)
 {
-    static const Vec3b fullBlack(0, 0, 0);
-    static const Vec3b fullWhite(255, 255, 255);
-    Mat output = Mat::zeros(input.rows, input.cols, CV_8UC3);
+    Mat output = Mat(input.rows, input.cols, CV_8UC3);
     
     for (int i=0; i<input.cols; i++) {
 	for (int j=0; j<input.rows; j++) {
 	    Vec3b pixel = input.at<Vec3b>(j, i);
+	    int chanSum = (int)pixel[0] + pixel[1] + pixel[2];
 	    // Pixel values at either extreme are mask values and should
 	    // not be changed by the recoloring
-	    if (pixel != fullBlack && pixel != fullWhite) {
+	    if (chanSum != 0 && chanSum != (255 * 3)) {
 		double blue = pixel(0);
 		double green = pixel(1);
 		double red = pixel(2);
@@ -461,7 +527,8 @@ static Mat recolorImage(const Mat &input, const ColorMeasure &measures)
 		if (green < 0) green = 0;
 		if (blue < 0) blue = 0;
 		output.at<Vec3b>(j, i) = Vec3b(blue, green, red);
-	    }
+	    } else
+		output.at<Vec3b>(j, i) = pixel;
 	}
     }
     return output;

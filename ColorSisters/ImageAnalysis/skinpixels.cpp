@@ -200,6 +200,7 @@ void SkinPixels::clear()
     imageID = "";
     shadeName = "";
     pixelCnt = 0;
+    colCnt = 0;
     format = f_any;
     colorSpace = cs_rgb;
     asFloat = false;
@@ -245,6 +246,12 @@ void SkinPixels::load(const cv::Mat& image, limit_t filter)
 	    // end of the row.
 	    chans[chan].assign(p, p + vectorized[chan].cols);
 	}
+	
+	// With no filtering, we record the number of columns in the original
+	// matrix. If the skin pixels are saved to a file, the header line
+	// will indicate the number of columns; this allows the reader to
+	// reconstruct the shape of the original matrix.
+	colCnt = image.cols;
     } else {
 	// filter out pixels that are either all zeros or all ones from the
 	// matrix (these represent masked-off portions of the image, don't
@@ -296,6 +303,7 @@ bool SkinPixels::loadOneFace(TextInput& pixelFile, ChanValInt minVal, ChanValInt
     dindex_t dataLinesToRead = NUM_CHANS;	// Must always read at least one data line
     linetype_t lineType = UnknownLine;
     dindex_t pixelsStored;
+    dindex_t columns = 0;			// # of columns in pixel data
     int pixelsInFile;
    
     clear();					// inits all fields
@@ -307,8 +315,14 @@ bool SkinPixels::loadOneFace(TextInput& pixelFile, ChanValInt minVal, ChanValInt
     if (headerLine.find(' ') != string::npos) {
 	// "new" style header line with 3 fields: imagename, shadename, sample count
 	header >> imageID >> shadeName >> pixelsInFile;
-	if (header >> csName && csName == "Lab")
-	    colorSpace = cs_lab;
+	if (header >> csName) {
+	    if (csName == "Lab")
+		colorSpace = cs_lab;
+	    else if (csName != "RGB")
+		throw KokkoException(pixelFile.fileMsg("unrecognized color space name '" + csName + "'"));
+	    // colunns field is optional; indicates shape of original matrix
+	    header >> columns;
+	}
     } else	// "old" style header line -- just sample count
 	header >> pixelsInFile;
     if (pixelsInFile == 0 || abs(pixelsInFile) > 200000)
@@ -409,7 +423,8 @@ bool SkinPixels::loadOneFace(TextInput& pixelFile, ChanValInt minVal, ChanValInt
 	}
 	// No need to do anything special for PixelLine, chans are always coherent
 	pixelCnt = pixelsStored;
-    }
+    } else if (columns > 0 && format == f_pixels)
+	colCnt = columns;
     return true;
 }
 
@@ -443,7 +458,10 @@ void SkinPixels::save(const string& outfile)
     // Write the header line
     cout << imageID << ' ' << ((shadeName != "")? shadeName : "??");
     cout << ' ' << ((format == f_counts)? -outPixels : outPixels);
-    cout << ' ' << ((colorSpace == cs_lab)? "Lab" : "RGB") << endl;
+    cout << ' ' << ((colorSpace == cs_lab)? "Lab" : "RGB");
+    if (format == f_pixels && colCnt > 0)
+	cout << ' ' << colCnt;
+    cout << endl;
     
     // Datalines are written in the specified format
     switch (format) {
