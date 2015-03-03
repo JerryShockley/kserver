@@ -4,7 +4,7 @@
       circle cx="21" cy="21" r="20" stroke-width=".5" stroke="grey" fill="#{product_app.color.hex_color_val}"
   .summary_text.columns.small-9.medium-9.large-10
     p.role
-      = product_app.role.humanize.upcase
+      = full_role(product_app)
     p.full_name
       = full_name(product_app.product)
     p.color-name

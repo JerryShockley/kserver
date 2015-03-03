@@ -4,7 +4,6 @@ class CreateProductSets < ActiveRecord::Migration
       t.references :look, index: true, null: false
       t.text :skin_color, index: true, null:false
       t.references :user, index: true
-
       t.timestamps
     end
   end

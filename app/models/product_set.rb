@@ -16,7 +16,7 @@ class ProductSet < ActiveRecord::Base
   has_many :product_clusters
   has_many :custom_product_sets
   
-  def clusters_by_category(category)
+  def clusters_by_category(category=nil)
     return product_clusters if category.blank?
     product_clusters.find_all { |pc| pc.category == category.to_s}
   end

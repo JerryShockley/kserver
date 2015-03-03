@@ -1,4 +1,5 @@
-# == Schema Information
+# == Schema Informationrequire "product_app"
+
 #
 # Table name: product_apps
 #

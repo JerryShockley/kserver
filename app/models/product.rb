@@ -31,5 +31,4 @@ class Product < ActiveRecord::Base
   monetize :price_cents # creates a price attr
   monetize :cost_cents  # creates a cost attr
   
-  ratyrate_rateable 
 end

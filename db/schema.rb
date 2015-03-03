@@ -38,13 +38,16 @@ ActiveRecord::Schema.define(version: 20150216215437) do
   add_index "colors", ["product_id"], name: "index_colors_on_product_id", using: :btree
 
   create_table "custom_product_sets", force: true do |t|
-    t.integer  "product_set_id"
+    t.integer  "look_id",                null: false
+    t.text     "skin_color",             null: false
     t.integer  "user_id"
+    t.integer  "default_product_set_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "custom_product_sets", ["product_set_id"], name: "index_custom_product_sets_on_product_set_id", using: :btree
+  add_index "custom_product_sets", ["default_product_set_id"], name: "index_custom_product_sets_on_default_product_set_id", using: :btree
+  add_index "custom_product_sets", ["look_id"], name: "index_custom_product_sets_on_look_id", using: :btree
   add_index "custom_product_sets", ["user_id"], name: "index_custom_product_sets_on_user_id", using: :btree
 
   create_table "custom_products", force: true do |t|
@@ -126,6 +129,7 @@ ActiveRecord::Schema.define(version: 20150216215437) do
 
   create_table "product_apps", force: true do |t|
     t.integer  "role",       null: false
+    t.string   "subrole"
     t.integer  "product_id", null: false
     t.integer  "user_id"
     t.integer  "color_id"
@@ -141,6 +145,7 @@ ActiveRecord::Schema.define(version: 20150216215437) do
   create_table "product_clusters", force: true do |t|
     t.text     "category",       null: false
     t.text     "role",           null: false
+    t.string   "subrole"
     t.integer  "user_id"
     t.integer  "product_set_id", null: false
     t.datetime "created_at"

@@ -38,6 +38,7 @@ FactoryGirl.define do
     role  {ROLES_HASH[category][Random.rand(SIZE[category])]}
     user_id 3
     color_id 1
+    subrole nil
     product
     
     # trait :random_role do

@@ -13,6 +13,12 @@ module LooksHelper
   def look_summary_image(look)
     look.images.find {|img| img.name == "look_summary"}
   end
+  
+  def full_role(product_app)  
+    frole = product_app.role.humanize.upcase
+    frole << " - #{product_app.subrole.humanize}" unless product_app.subrole.blank?
+  end
+
 
   
   def full_name(product)
