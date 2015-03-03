@@ -128,12 +128,12 @@ ActiveRecord::Schema.define(version: 20150216215437) do
   end
 
   create_table "product_apps", force: true do |t|
-    t.integer  "role",       null: false
+    t.string   "role",       null: false
     t.string   "subrole"
     t.integer  "product_id", null: false
     t.integer  "user_id"
     t.integer  "color_id"
-    t.integer  "category",   null: false
+    t.string   "category",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

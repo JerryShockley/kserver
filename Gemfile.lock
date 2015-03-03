@@ -103,6 +103,8 @@ GEM
     disposable (0.0.9)
       representable (~> 2.0)
       uber
+    enumerize (0.10.0)
+      activesupport (>= 3.2)
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.2)
@@ -371,6 +373,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
+  enumerize
   factory_girl_rails
   faker
   foundation-rails (= 5.3.3.0)
