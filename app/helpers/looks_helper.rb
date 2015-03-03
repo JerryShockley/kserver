@@ -15,8 +15,9 @@ module LooksHelper
   end
   
   def full_role(product_app)  
-    frole = product_app.role.humanize.upcase
+    frole = product_app.role_text.humanize.upcase
     frole << " - #{product_app.subrole.humanize}" unless product_app.subrole.blank?
+    frole
   end
 
 
