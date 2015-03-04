@@ -40,6 +40,7 @@ module Colorsisters
 
     # For Foundation 5
     config.assets.precompile += %w( vendor/modernizr vender/content)
+    config.autoload_paths += %W( #{config.root}/app/modules)
 
   end
 end

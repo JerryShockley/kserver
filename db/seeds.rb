@@ -30,7 +30,7 @@ class Seeds
   LOOK_COUNT = 10
 
   KLASSES = [User, Profile, Color, Product, ProductApp, ProductCluster, ProductRecommendation, Image, Video, 
-             CustomProductSet, CustomProduct, ProductReview, LookReview, Look]
+             CustomProductSet, ProductReview, LookReview, Look]
 
   def seed_db
     build_users_and_profiles

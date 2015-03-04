@@ -5,6 +5,7 @@
 #  id             :integer          not null, primary key
 #  category       :text             not null
 #  role           :text             not null
+#  subrole        :string(255)
 #  user_id        :integer
 #  product_set_id :integer          not null
 #  created_at     :datetime
@@ -12,6 +13,8 @@
 #
 
 class ProductCluster < ActiveRecord::Base
+  include ProductEnumerations
+  
   belongs_to :user
   has_many :product_recommendations, dependent: :destroy, inverse_of: :product_cluster
   has_many :product_apps, :through => :product_recommendations

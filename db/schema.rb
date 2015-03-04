@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205221637) do
+ActiveRecord::Schema.define(version: 20150205221429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,16 +40,6 @@ ActiveRecord::Schema.define(version: 20150205221637) do
   add_index "custom_product_sets", ["default_product_set_id"], name: "index_custom_product_sets_on_default_product_set_id", using: :btree
   add_index "custom_product_sets", ["look_id"], name: "index_custom_product_sets_on_look_id", using: :btree
   add_index "custom_product_sets", ["user_id"], name: "index_custom_product_sets_on_user_id", using: :btree
-
-  create_table "custom_products", force: true do |t|
-    t.integer  "custom_product_set_id"
-    t.integer  "product_app_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "custom_products", ["custom_product_set_id"], name: "index_custom_products_on_custom_product_set_id", using: :btree
-  add_index "custom_products", ["product_app_id"], name: "index_custom_products_on_product_app_id", using: :btree
 
   create_table "images", force: true do |t|
     t.text     "name"

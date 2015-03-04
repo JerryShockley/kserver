@@ -5,6 +5,7 @@
 #  id             :integer          not null, primary key
 #  category       :text             not null
 #  role           :text             not null
+#  subrole        :string(255)
 #  user_id        :integer
 #  product_set_id :integer          not null
 #  created_at     :datetime

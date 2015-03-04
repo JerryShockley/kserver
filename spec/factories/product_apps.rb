@@ -3,11 +3,12 @@
 # Table name: product_apps
 #
 #  id         :integer          not null, primary key
-#  role       :integer          not null
+#  role       :string(255)      not null
+#  subrole    :string(255)
 #  product_id :integer          not null
 #  user_id    :integer
 #  color_id   :integer
-#  category   :integer          not null
+#  category   :string(255)      not null
 #  created_at :datetime
 #  updated_at :datetime
 #
