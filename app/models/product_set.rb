@@ -22,7 +22,7 @@ class ProductSet < ActiveRecord::Base
   end
   
   def default_product_apps
-    product_clusters.each_with_object([]) {|cluster, apps| apps << cluster.product_apps[0]}
+    product_clusters.each_with_object([]) {|cluster, apps| apps << cluster.default_product_app}
   end
   
   def roles_hash
@@ -36,7 +36,12 @@ class ProductSet < ActiveRecord::Base
     categories.uniq
   end
 
-
+  
+  def default_product_app(cat, role, subrole=nil)
+    default_product_apps.find do |pa|
+      pa.category == cat && pa.role == role && (subrole.nil? ? true : pa.subrole == subrole )
+    end
+  end
 
 
   

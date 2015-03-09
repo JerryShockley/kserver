@@ -1309,6 +1309,25 @@ $include-html-global-classes: $include-html-classes;
 // $tabs-content-margin-bottom: rem-calc(24);
 // $tabs-content-padding: $column-gutter/2;
 
+$lt-blue: #a6cfda;
+$lt-blue-h: #5a838e;
+$gold: #B6885A;
+$lt-black: #303030;
+$bg-color: black;
+$dark_gray: DIMGRAY;
+
+ $tabs-navigation-bg-color: $lt-black;
+ $tabs-navigation-active-bg-color: $tabs-navigation-bg-color;
+ $tabs-navigation-hover-bg-color: scale-color($tabs-navigation-bg-color, $lightness: -6%);
+ $tabs-navigation-font-color: WHITE;
+ $tabs-navigation-active-font-color: $tabs-navigation-font-color;
+// $tabs-navigation-font-size: rem-calc(16);
+// $tabs-navigation-font-family: $body-font-family;
+
+ $tabs-content-margin-bottom: rem-calc(12);
+// $tabs-content-padding: $column-gutter/2;
+
+
 // $tabs-vertical-navigation-margin-bottom: 1.25rem;
 
 // 32. Thumbnails

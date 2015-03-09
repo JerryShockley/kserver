@@ -45,8 +45,13 @@ FactoryGirl.define do
       count = Random.rand(1..8)
     
       after(:create) do |look, evaluator|
+        fmap = FactoryGirl.create(:face_map, user_id: evaluator.user_id, look: look)
         count.times do
             look.product_sets << create(:product_set_with_clusters, user_id: evaluator.user_id)
+        end
+        cnt = look.product_sets.first.product_clusters.size
+        cnt.times do |i|
+          create(:face_map_step, face_map: fmap, number: i + 1)
         end
       end
       

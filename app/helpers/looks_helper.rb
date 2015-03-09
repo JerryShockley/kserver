@@ -1,5 +1,10 @@
 module LooksHelper
   
+  def format_face_map_step(step)
+    val = "#{step.number}.  #{step.description}"
+  end
+
+  
   def how_to_video_url(category)
     @look.videos.find {|vid| vid.group == "how_to" && vid.name == category}.url
   end

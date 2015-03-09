@@ -18,6 +18,57 @@ $bg-color: black;
 //  max-width: 100%;
 //}
 
+//^^^^^^^^^^^^^^^^^^^^^^^^  Tabs   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.content {
+  margin-top: 2.7rem;
+}
+
+.tab-row {
+  background: black;
+}
+.content.active {
+  background-color: black;
+  
+}
+ul.tabs  {
+  margin-left: .3rem;
+}
+ul.tabs, .row.show_container.content#details{
+  background-color: black;
+}
+
+
+ul.tabs li.tab-title {
+  box-sizing: border-box;
+  margin-top: .5rem;
+//  border: DIMGRAY solid 2px;
+  a {
+    padding: .3rem .7rem .3rem .7rem;
+  }
+}
+
+
+ul.tabs li.tab-title.active {
+  border: $gold solid 2px;
+  color: $lt-blue;
+}
+
+
+//^^^^^^^^^^^^^^^^^^^^^^   Face Map Tab   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+p.step-desc {
+//  padding: 0.7rem;
+  color: white;
+  padding: .5rem 0 .5rem 0;
+  margin: 0.4rem 0rem 0.4rem 0rem;
+  font: 200 .9rem/1.3rem Raleway;
+  
+}
+
+
+//^^^^^^^^^^^^^^^^^^^^^^   General   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .row .row {
   margin: 0;
   padding: 0;
@@ -49,7 +100,7 @@ $bg-color: black;
 }
 
 
-.row.show_container, .row.looks-container  {
+.row.show_container, .row.looks-container, .face-map-container  {
   width: 100%;
   max-width: 100%;
 }

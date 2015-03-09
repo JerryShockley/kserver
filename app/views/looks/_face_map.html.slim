@@ -1,0 +1,23 @@
+.row.face-map-container
+  .row.title_row
+    .columns.small-12.text-center
+      p.look_number = "ColorSisters Look: #{@look.code}"
+      p.look_name = look.title
+  .row.star-row
+    columns.small-12.text-center.stars-col
+      .stars
+        - star_cnt = look.avg_rating.round
+        - nonstar_cnt = 5 - star_cnt
+        - star_cnt.times do
+          = image_tag("star-on.png", class: :star_on)
+        - nonstar_cnt.times do
+          = image_tag("star-off.png", class: :star_off)
+      p.product-review-count = " (#{look.look_reviews_count})"
+  .row
+    .columns.small-12.medium-4.large-4.steps
+      - @look.face_map.face_map_steps.sort.each do |step|
+        p.step-desc = format_face_map_step(step)
+    .columns.small-12.medium-4.large-4.facemap
+      = image_tag(@look.face_map.image.filepath , class: :look_img, alt: "ColorSisters look overview")
+    .columns.small-12.medium-4.large-4.photo
+      = image_tag(look_summary_image(@look).filepath , class: :look_img, alt: "ColorSisters look overview")

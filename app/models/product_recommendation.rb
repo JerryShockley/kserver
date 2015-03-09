@@ -16,6 +16,9 @@ class ProductRecommendation < ActiveRecord::Base
   belongs_to :product_cluster, inverse_of: :product_recommendations
   belongs_to :product_app, inverse_of: :product_recommendations
   
+  accepts_nested_attributes_for :product_app
+  
+
   def <=>(other)
   self.priority <=> other.priority
   end

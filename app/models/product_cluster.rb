@@ -18,31 +18,34 @@ class ProductCluster < ActiveRecord::Base
   belongs_to :user
   has_many :product_recommendations, dependent: :destroy, inverse_of: :product_cluster
   has_many :product_apps, :through => :product_recommendations
+
+  accepts_nested_attributes_for :product_recommendations
   
   
   def self.by_category(category)
-    # ProductCluster.includes(:product_apps).where("product_clusters.category = ?", ProductApp.categories[category.to_s].to_s).order(role: :asc)
     ProductCluster.includes(:product_apps).where("category = ?", 
                   category.to_s).order(role: :asc)
     
   end 
   
-  # TODO change algorithm to use product_recommendations instead of taking first
+  
   def default_product_app
-    product_apps.first
+    product_recommendations.min.product_app
   end
 
-   def reorder_product_app(product_app, priority=1)
+  
+
+  def reorder_product_app(product_app, priority=1)
     if priority < 1 || priority > product_apps.size
       raise ArgumentError, "Argument 'priority' is out of valid range 1..#{product_apps.size}: #{priority}", caller
     end
-    
+
     product_recommendations.sort
   end
   
-  def sorted_products
-    product_recommendations.sort.map {|pr| pr.product_app.product}
-  end
+  # def sorted_products
+  #   product_recommendations.sort.map {|pr| pr.product_app.product}
+  # end
   
 
 

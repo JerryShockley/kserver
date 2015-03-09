@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205221429) do
+ActiveRecord::Schema.define(version: 20150304200702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,28 @@ ActiveRecord::Schema.define(version: 20150205221429) do
   add_index "custom_product_sets", ["default_product_set_id"], name: "index_custom_product_sets_on_default_product_set_id", using: :btree
   add_index "custom_product_sets", ["look_id"], name: "index_custom_product_sets_on_look_id", using: :btree
   add_index "custom_product_sets", ["user_id"], name: "index_custom_product_sets_on_user_id", using: :btree
+
+  create_table "face_map_steps", force: true do |t|
+    t.integer  "number"
+    t.text     "description"
+    t.integer  "face_map_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "face_map_steps", ["face_map_id"], name: "index_face_map_steps_on_face_map_id", using: :btree
+
+  create_table "face_maps", force: true do |t|
+    t.integer  "look_id"
+    t.integer  "image_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "face_maps", ["image_id"], name: "index_face_maps_on_image_id", using: :btree
+  add_index "face_maps", ["look_id"], name: "index_face_maps_on_look_id", using: :btree
+  add_index "face_maps", ["user_id"], name: "index_face_maps_on_user_id", using: :btree
 
   create_table "images", force: true do |t|
     t.text     "name"

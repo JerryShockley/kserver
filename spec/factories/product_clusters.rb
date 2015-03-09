@@ -42,7 +42,7 @@ FactoryGirl.define do
 
     after(:create) do |product_cluster, evaluator|
       n = Random.rand(2..8)
-      app_hash={}
+      # app_hash={}
       # ROLES_HASH.keys.each do {|category| app_hash[category] = ProductApp.by_category(category)}
       i=1
       while i <= n do
@@ -53,7 +53,9 @@ FactoryGirl.define do
                                   user_id: evaluator.user_id, product: product, color_id: color.id, 
                                   subrole: evaluator.subrole )
         product_cluster.product_apps << pa
-        pa.product_recommendations.first.priority = i
+        pr= pa.product_recommendations.first
+        pr.priority = i
+        pr.save!
         pa.save!
         i += 1
       end

@@ -21,6 +21,7 @@ class Look < ActiveRecord::Base
   has_many :look_reviews, dependent: :destroy, inverse_of: :look
   has_many :videos, as: :videoable
   has_many :images, as: :imageable
+  has_one :face_map, dependent: :destroy, inverse_of: :look
 
   has_many :product_sets, dependent: :destroy
   

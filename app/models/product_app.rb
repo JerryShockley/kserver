@@ -39,7 +39,7 @@ class ProductApp < ActiveRecord::Base
   has_many :custom_products, inverse_of: :product_apps
   has_many :custom_product_sets, through: :custom_products
   
-  
+  accepts_nested_attributes_for :product_recommendations
   # TODO implement role parameter in by_category
   def self.by_category(category, role)
     ProductApp.includes(product: :reviews).where("product_apps.category = ?", self.categories[category.to_s].to_s).order(:brand)

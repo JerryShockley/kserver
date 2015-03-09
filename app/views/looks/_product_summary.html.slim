@@ -10,7 +10,7 @@
     p.color-name
       = full_color_name(product_app.color)
     .row.last
-      .columns.small-12.large-9.stars-col
+      .columns.small-12.medium-9.large-9.stars-col
         .stars
           - star_cnt = product_app.product.avg_rating.round
           - nonstar_cnt = 5 - star_cnt
@@ -19,7 +19,7 @@
           - nonstar_cnt.times do
             = image_tag("star-off.png", class: :star_off)
         p.product-review-count = " (#{Random.rand(0..500)})"
-      .columns.small-12.large-3
+      .columns.small-12.medium-3.large-3
         p.product-price.right  = number_to_aligned_currency(product_app.product.price, 2 )
         
         / .star data-readonly='true' data-enable-half='true' data-half-show='true' data-rating='4'

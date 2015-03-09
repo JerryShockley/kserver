@@ -30,7 +30,7 @@ class Seeds
   LOOK_COUNT = 10
 
   KLASSES = [User, Profile, Color, Product, ProductApp, ProductCluster, ProductRecommendation, Image, Video, 
-             CustomProductSet, ProductReview, LookReview, Look]
+             CustomProductSet, ProductReview, LookReview, Look, FaceMap, FaceMapStep]
 
   def seed_db
     build_users_and_profiles
@@ -108,7 +108,7 @@ class Seeds
 
   def build_products
     PRODUCT_COUNT.times { FactoryGirl.create :product_with_reviews}
-    puts "exiting build products"
+    puts "\nFinished building products"
   end
 
 
@@ -234,6 +234,7 @@ class Seeds
       CUSTOMER_COUNT.times do
         FactoryGirl.create(:create_customer_profile)
       end
+      puts "\nFinished building users"
   
   end
   
