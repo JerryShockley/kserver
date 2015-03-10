@@ -49,7 +49,6 @@ group :development do
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'annotate', github: 'ctran/annotate_models', require: false
-  gem 'factory_girl_rails'
 end
 group :development, :test do
   gem 'byebug'
