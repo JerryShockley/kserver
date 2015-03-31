@@ -599,7 +599,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "88ed61aa-6676-47ca-a245-1bd31ea06691";
+				PROVISIONING_PROFILE = "c2d16ca5-b97d-464c-8492-ad0f00050d86";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ColorSisters/ImageAnalysis $(PROJECT_DIR)/ColorSisters/Frameworks";
 			};
