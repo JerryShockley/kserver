@@ -1,0 +1,1317 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=UTF-8"></head>
+<body>
+<h5 style="color: gray; " align="right">Snapshot on 2015-04-01 18:27:28</h5>
+<h3>Schema: public</h3>
+<br>
+<h4>schema_migrations</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">version</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>images</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('images_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">name</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">filename</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">dir</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">page</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">template</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">group</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">model</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">role</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">description</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">file_type</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">code</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">state</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">active</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">file_size</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">width</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">height</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">imageable_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">imageable_type</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>users</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('users_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">email</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%">''::text</td>
+</tr>
+<tr>
+	<td width="35%">encrypted_password</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%">''::text</td>
+</tr>
+<tr>
+	<td width="35%">reset_password_token</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">reset_password_sent_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">remember_created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">sign_in_count</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">0</td>
+</tr>
+<tr>
+	<td width="35%">current_sign_in_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">last_sign_in_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">current_sign_in_ip</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">last_sign_in_ip</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">first_name</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">last_name</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">role</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>videos</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('videos_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">name</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">filename</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">dir</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">page</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">template</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">group</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">model</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">role</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">description</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">storage_site</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">code</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">size</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">duration</td>
+	<td width="30%">time(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">url</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">file_type</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">status</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">videoable_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">videoable_type</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>profiles</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('profiles_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">first_name</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">last_name</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">email</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">street1</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">street2</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">city</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">state</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">postal_code</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">receive_emails</td>
+	<td width="30%">bool</td>
+	<td width="15%">Yes</td>
+	<td width="20%">true</td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">source</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">skin_color</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">eye_color</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">hair_color</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">age</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">skin_type</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">screen_name</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>products</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('products_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">sku</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">brand</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">line</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">name</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">code</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">short_desc</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">desc</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">size</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">manufacturer_sku</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">state</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">is_multicolor</td>
+	<td width="30%">bool</td>
+	<td width="15%">Yes</td>
+	<td width="20%">false</td>
+</tr>
+<tr>
+	<td width="35%">avg_rating</td>
+	<td width="30%">float8</td>
+	<td width="15%">No</td>
+	<td width="20%">0.0</td>
+</tr>
+<tr>
+	<td width="35%">price_cents</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">0</td>
+</tr>
+<tr>
+	<td width="35%">cost_cents</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">product_reviews_count</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>product_apps</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('product_apps_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">role</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">subrole</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">product_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">color_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">category</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>product_sets</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('product_sets_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">look_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">skin_color</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>looks</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('looks_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">title</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">code</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">short_desc</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">desc</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">usage_directions</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">avg_rating</td>
+	<td width="30%">float8</td>
+	<td width="15%">No</td>
+	<td width="20%">0.0</td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">state</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">look_reviews_count</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>product_recommendations</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('product_recommendations_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">product_cluster_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">product_app_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">priority</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">50</td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>product_clusters</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('product_clusters_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">category</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">role</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">subrole</td>
+	<td width="30%">varchar(255)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">use_order</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">product_set_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>product_reviews</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('product_reviews_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">title</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">rating</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">recommended</td>
+	<td width="30%">bool</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">use_again</td>
+	<td width="30%">bool</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">review</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">product_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">state</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>colors</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('colors_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">product_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">name</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">code</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">hex_color_val</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">state</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>look_reviews</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('look_reviews_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">title</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">rating</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">recommended</td>
+	<td width="30%">bool</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">use_again</td>
+	<td width="30%">bool</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">review</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">look_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">state</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>custom_product_sets</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('custom_product_sets_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">look_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">skin_color</td>
+	<td width="30%">text</td>
+	<td width="15%">No</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">default_product_set_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>face_maps</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('face_maps_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">look_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">image_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">user_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+<br>
+<h4>face_map_steps</h4>
+<table border="1" width="75%">
+<tbody><tr>
+	<th width="35%">Field</th>
+	<th width="30%">Type</th>
+	<th width="15%">Allow Null</th>
+	<th width="20%">Default Value</th>
+</tr>
+<tr>
+	<td width="35%">id</td>
+	<td width="30%">int4</td>
+	<td width="15%">No</td>
+	<td width="20%">nextval('face_map_steps_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width="35%">number</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">description</td>
+	<td width="30%">text</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">face_map_id</td>
+	<td width="30%">int4</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">created_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+<tr>
+	<td width="35%">updated_at</td>
+	<td width="30%">timestamp(6)</td>
+	<td width="15%">Yes</td>
+	<td width="20%"></td>
+</tr>
+</tbody></table>
+
+
+</body></html>
