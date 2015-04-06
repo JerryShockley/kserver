@@ -15,6 +15,7 @@ Production site
 git push origin master
 mina deploy -f config/deploy_production.rb
 ssh -p 6287 deployer@signup.colorsisters.com
-ps aux | grep unicorn (locate the unicorn_rails master pid) 
+cd kserver/current
+ps aux | grep unicorn   # (locate the unicorn_rails master pid) 
 sudo kill unicorn_rails master pid      #kills unicorn server so we can restart
 bundle exec unicorn_rails -D -E development -c config/unicorn.rb
