@@ -1,0 +1,20 @@
+Staging site
+
+git push stage master
+mina deploy -f config/deploy_stage_dev.rb
+ssh -p 6287 deployer@23.239.17.60
+cd rails/dev/current
+ps aux | grep unicorn (locate the unicorn_rails master pid) 
+sudo kill unicorn_rails master pid      #kills unicorn server so we can restart
+bundle exec unicorn_rails -D -E development -c config/unicorn.rb
+
+
+
+Production site
+
+git push origin master
+mina deploy -f config/deploy_production.rb
+ssh -p 6287 deployer@signup.colorsisters.com
+ps aux | grep unicorn (locate the unicorn_rails master pid) 
+sudo kill unicorn_rails master pid      #kills unicorn server so we can restart
+bundle exec unicorn_rails -D -E development -c config/unicorn.rb
