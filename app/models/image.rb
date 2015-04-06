@@ -27,7 +27,8 @@
 #
 
 class Image < ActiveRecord::Base
-  belongs_to :iamgeable, polymorphic: true  
+  belongs_to :imageable, polymorphic: true
+  belongs_to :user  
   
   def filepath
     File.join(dir, filename)

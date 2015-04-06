@@ -37,7 +37,6 @@ feature 'User edit', :devise do
       expect(page).to have_content 'Access denied'
     end  
   end
-
-git s   
+  
 
 end

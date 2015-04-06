@@ -9,7 +9,7 @@
     
 .tabs-content
   .content#facemap
-    = render partial: "face_map", locals: {look: @look, set: @set}
+    / = render partial: "face_map", locals: {look: @look, set: @set}
     
   .content#reviews  Add Reviews
 
@@ -64,17 +64,17 @@
                 .columns.small-12.small-centered
                   p.item-category = "#{category.titleize}: "
                 .row
-                  - @set.clusters_by_category(category).each do |cluster|
+                  - @set.unique_billable_product_apps(category).each do |app|
                     .columns.small-1
                     .columns.small-6.small-offset-1
-                      p.item = cluster.role.humanize.titleize
+                      p.item = price_summary_role(app)
                     .columns.small-5.text-right 
                       p.item-price
-                        =  number_to_aligned_currency(cluster.default_product_app.product.price, 2)
+                        =  number_to_aligned_currency(app.product.price, 2)
           .row
             columns.small-12
               p.total_cost.text-center
-                = "#{product_role_count} items totaling #{number_to_aligned_currency(total_product_cost, 3)}"
+                = "#{@set.unique_billable_product_apps.count} unique items totaling #{number_to_aligned_currency(total_product_cost(@set), 3)}"
 
 
       .col-container.columns.medium-6.small-12.left
@@ -87,13 +87,13 @@
                 = category.to_s.titleize
               ul id="how_to" style='display:none;'
                 / li data-url="https://www.youtube.com/watch?v=DQpoOnI6wtM" data-thumbnail-path="#{image_path('product/img_4.jpg')}"
-                li data-url=how_to_video_url("face") data-thumbnail-path=how_to_index_image_asset_path("face") 
+                li data-url=how_to_video_url("face") 
                   p.gallery1DecHeader How to makeup your face
-                li data-url=how_to_video_url("eyes") data-thumbnail-path=how_to_index_image_asset_path("eyes")
+                li data-url=how_to_video_url("eyes") 
                   p.gallery1DecHeader  How to makeup your eyes
-                li data-url=how_to_video_url("lips") data-thumbnail-path=how_to_index_image_asset_path("lips") 
+                li data-url=how_to_video_url("lips") 
                   p.gallery1DecHeader  How to makeup your lips
-                li data-url=how_to_video_url("cheeks") data-thumbnail-path=how_to_index_image_asset_path("cheeks")
+                li data-url=how_to_video_url("cheeks") 
                   p.gallery1DecHeader  How to makeup your cheeks
                   / TODO Move this js out of template
               a.how_vid href="javascript:void(0)"  onclick="FWDRL.show('how_to', #{index});"  
@@ -102,7 +102,7 @@
             
           dl class="accordion"  data-accordion="look_products"
             - @set.clusters_by_category(category).each do |cluster|
-              = render("looks/role_product", product_app: cluster.default_product_app)
+              = render("looks/role_product", product_app: cluster.selected_product_app)
 
         
 

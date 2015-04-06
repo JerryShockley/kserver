@@ -14,7 +14,7 @@
 FactoryGirl.define do
   factory :custom_product_set do
     product_set nil
-user nil
+    user nil
   end
 
 end

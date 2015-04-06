@@ -16,7 +16,7 @@
   .row
     .columns.small-12.medium-4.large-4.steps
       - @look.face_map.face_map_steps.sort.each do |step|
-        p.step-desc = format_face_map_step(step)
+        p.step-desc = step.to_s(@set).html_safe
     .columns.small-12.medium-4.large-4.facemap
       = image_tag(@look.face_map.image.filepath , class: :look_img, alt: "ColorSisters look overview")
     .columns.small-12.medium-4.large-4.photo

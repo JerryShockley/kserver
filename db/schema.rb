@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20150304200702) do
     t.text     "category",       null: false
     t.text     "role",           null: false
     t.string   "subrole"
+    t.integer  "use_order"
     t.integer  "user_id"
     t.integer  "product_set_id", null: false
     t.datetime "created_at"
@@ -189,7 +190,7 @@ ActiveRecord::Schema.define(version: 20150304200702) do
   add_index "product_sets", ["user_id"], name: "index_product_sets_on_user_id", using: :btree
 
   create_table "products", force: true do |t|
-    t.text     "sku",                                 null: false
+    t.text     "sku",                                   null: false
     t.text     "brand"
     t.text     "line"
     t.text     "name"
@@ -199,8 +200,9 @@ ActiveRecord::Schema.define(version: 20150304200702) do
     t.text     "size"
     t.text     "manufacturer_sku"
     t.text     "state"
-    t.float    "avg_rating",            default: 0.0, null: false
-    t.integer  "price_cents",           default: 0,   null: false
+    t.boolean  "is_multicolor",         default: false
+    t.float    "avg_rating",            default: 0.0,   null: false
+    t.integer  "price_cents",           default: 0,     null: false
     t.integer  "cost_cents"
     t.integer  "product_reviews_count"
     t.datetime "created_at"

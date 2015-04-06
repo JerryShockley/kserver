@@ -11,6 +11,7 @@ class CreateProducts < ActiveRecord::Migration
       t.text :size
       t.text :manufacturer_sku
       t.text :state, index: true
+      t.boolean :is_multicolor, default: false
       t.float :avg_rating, precision: 2, scale: 1, null: false, default: 0.0
       t.integer :price_cents, null: false, default: 0 
       t.integer :cost_cents

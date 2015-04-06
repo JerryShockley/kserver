@@ -13,18 +13,6 @@
 #  updated_at :datetime
 #
 
-#
-# Table name: product_apps
-#
-#  id         :integer          not null, primary key
-#  role       :integer          not null
-#  product_id :integer          not null
-#  user_id    :integer
-#  color_id   :integer
-#  category   :integer          not null
-#  created_at :datetime
-#  updated_at :datetime
-#
 require 'product_enumerations'
 
 class ProductApp < ActiveRecord::Base
@@ -45,7 +33,27 @@ class ProductApp < ActiveRecord::Base
     ProductApp.includes(product: :reviews).where("product_apps.category = ?", self.categories[category.to_s].to_s).order(:brand)
   end 
 
+  def markup_product_name
+    fn = []
+    fn << product.brand unless product.brand.blank?
+    fn << product.line unless product.line.blank?
+    fn << product.name unless product.name.blank?
+    fn << color.name unless color.name.blank?
+    fn << color.code unless color.code.blank?
+    fn.join(" ")
+  end
   
+  
+  # # Used by ProductSet#unique_product_apps
+  # def eql?(other)
+  #   self.same_product?(other)
+  # end
+  
+
+  def ===(other)
+    self.product.id == other.product.id && (self.product.is_multicolor? ? true : self.color.id == other.color.id)
+  end
+
   # enumerize :category, in: [:cheeks, :eyes, :face, :lips]
   # enumerize :role, in: [:basic_shadow, :bb_cream, :blush, :bronzer, :concealer, :contour, :crease_shadow, :foundation,
   #                       :gloss, :highlight_shadow, :liner_bottom, :liner_top, :lipstick, :mascara, :pencil, :powder,

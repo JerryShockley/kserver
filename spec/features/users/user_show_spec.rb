@@ -18,7 +18,7 @@ feature 'User profile page', :devise do
   scenario 'user sees own profile' do
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
-    visit userx_registration_path(user)
+    visit userx_registration_path(user.profile.id)
     expect(page).to have_content 'User'
     expect(page).to have_content user.email
   end
@@ -32,7 +32,7 @@ feature 'User profile page', :devise do
     other = FactoryGirl.create(:cust, email: 'other@example.com')
     login_as(me, :scope => :user)
     Capybara.current_session.driver.header 'Referer', '/welcome/index'
-    visit userx_registration_path(other)
+    visit userx_registration_path(other.profile)
     expect(page).to have_content "Access denied.×"
   end
 

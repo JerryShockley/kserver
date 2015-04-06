@@ -1,10 +1,5 @@
 module LooksHelper
   
-  def format_face_map_step(step)
-    val = "#{step.number}.  #{step.description}"
-  end
-
-  
   def how_to_video_url(category)
     @look.videos.find {|vid| vid.group == "how_to" && vid.name == category}.url
   end
@@ -24,6 +19,16 @@ module LooksHelper
     frole << " - #{product_app.subrole.humanize}" unless product_app.subrole.blank?
     frole
   end
+  
+  
+  def price_summary_role(product_app)  
+    frole = product_app.role_text 
+    frole = frole + " #{product_app.subrole}" unless product_app.subrole.blank?
+    frole = frole.gsub("_", " ").scan(/\w+/)
+    result = frole.map { |s| s.strip.capitalize}
+    result.join(" ")
+  end
+  
 
 
   
@@ -68,12 +73,8 @@ module LooksHelper
     cnt
   end
   
-  def product_role_count
-    @set.default_product_apps.size
-  end
-  
-  def total_product_cost
-    cost = @set.default_product_apps.map {|app| app.product.price_cents}
+  def total_product_cost(set)
+    cost = set.unique_billable_product_apps.map {|app| app.product.price_cents}
     cost.inject(0, :+)/100.0
   end
   

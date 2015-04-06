@@ -47,18 +47,21 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
-  gem 'spring-commands-rspec'
   gem 'annotate', github: 'ctran/annotate_models', require: false
 end
+
 group :development, :test do
+  gem 'spring-commands-rspec'
+  # gem 'pry-byebug'
   gem 'byebug'
   gem 'jasmine-rails'
   gem 'jasmine-jquery-rails'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', "~> 4.0"
   gem 'faker'
   
 end
+
 group :test do
   # gem 'capybara-screenshot'
   gem 'fuubar'

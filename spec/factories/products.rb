@@ -13,6 +13,7 @@
 #  size                  :text
 #  manufacturer_sku      :text
 #  state                 :text
+#  is_multicolor         :boolean          default(FALSE)
 #  avg_rating            :float            default(0.0), not null
 #  price_cents           :integer          default(0), not null
 #  cost_cents            :integer
@@ -41,6 +42,11 @@ def random_code
   'P' + %w(F E L C)[Random.rand(0..3)] + %w(BS BB BL BR CC CT CS FO GL HS LB LT LI MA PE PO PR)[Random.rand(0..16)] + Random.rand(1000..9999).to_s
 end
 
+def fetch_user
+  User.count > 0 ? User.find(Random.rand(User.first.id..User.last.id)) : build_stubbed(:user)
+end
+
+
 
 FactoryGirl.define do
   sequence(:pname) do |n|
@@ -63,45 +69,27 @@ FactoryGirl.define do
     cost_cents {(price_cents * 0.8).to_i}
     avg_rating {Random.rand(1.0..5.1).round(1)}
     code {random_code}
-    product_reviews_count {Random.rand(1..100)}
-      
-      
-      after(:create) do |product, evaluator|
-        create_colors(product.id)
-        @usr_f ||= User.first.id
-        @usr_l ||= User.last.id   
-        user_id = Random.rand(@usr_f..@usr_l)
-        product.image = Image.create!(filename:  random_product_image_filename, dir: "product", user_id: user_id, 
-                             name: "product image", model: "product")
-        
-             
-        create_list(:product_review, evaluator.review_cnt, product: product)
-      end
-      
+    product_reviews_count {Random.rand(1..50)}
+    is_multicolor false 
     
-    
-      factory :product_with_reviews do
-        ignore do
-          # app_cnt {[1,4,2,15,2,3,1,5,9,7,2,12,4,3,3,4,2][Random.rand(16)]}
-          review_cnt {Random.rand(0..50)}
-        end
-      
-      
+    after(:create) do |product, evaluator| 
+      create_colors(product.id)
+      # @usr_f ||= User.first.id
+      # @usr_l ||= User.last.id
+      # user_id = Random.rand(@usr_f..@usr_l)
+      product.image = Image.create!(filename:  random_product_image_filename, dir: "product", user: fetch_user, 
+                           name: "product image", model: "product")
     end
     
-    
-    factory :product_with_apps do
-      
-      ignore do
-        category {:face}
-        role {:base_shadow}
-        user_id {3}
-        app_cnt {[1,1,1,2,2,3,1,1,1,2,2,1,1,1,3,1,2][Random.rand(16)]}
+  
+    factory :product_with_reviews do
+      transient do
+        # app_cnt {[1,4,2,15,2,3,1,5,9,7,2,12,4,3,3,4,2][Random.rand(16)]}
+        review_cnt {Random.rand(1..50)}
       end
       
       after(:create) do |product, evaluator|
-        create_list(:product_app, evaluator.app_cnt, product: product, category: evaluator.category, 
-                    role: evaluator.role, user_id: evaluator.user_id)
+        create_list(:product_review, evaluator.review_cnt, product: product)
       end
     end
   end

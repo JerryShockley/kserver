@@ -13,6 +13,7 @@
 #  size                  :text
 #  manufacturer_sku      :text
 #  state                 :text
+#  is_multicolor         :boolean          default(FALSE)
 #  avg_rating            :float            default(0.0), not null
 #  price_cents           :integer          default(0), not null
 #  cost_cents            :integer
@@ -20,6 +21,10 @@
 #  created_at            :datetime
 #  updated_at            :datetime
 #
+
+
+# This class represents a manufacturer's cosmetic product irrespective of color. Each product should be 
+# unique to the database.
 
 class Product < ActiveRecord::Base
   

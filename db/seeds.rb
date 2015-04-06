@@ -95,20 +95,24 @@ class Seeds
 
 
   def build_looks 
+    puts "\n***  Building Looks\n\n"
+    
     usr_f = User.first.id
     usr_l = User.last.id
     10.times do
-      user_id = Random.rand(usr_f..usr_l)
-      look = FactoryGirl.create :look_with_product_sets, user_id: user_id
-      look_videos(look, user_id)
-      look_images(look, user_id)
+      user = User.find(Random.rand(usr_f..usr_l))
+      look = FactoryGirl.create :look_with_product_sets, user: user
+      look.product_sets.each {|ps| ps.order_clusters}
+      look_videos(look, user)
+      look_images(look, user)
     end
     
   end
 
   def build_products
+    puts "\n***  Building Products"
+    
     PRODUCT_COUNT.times { FactoryGirl.create :product_with_reviews}
-    puts "\nFinished building products"
   end
 
 
@@ -229,12 +233,12 @@ class Seeds
       puts("Created cust user")
   
   
+      puts "\n***  Building Users"
   
       # Create linked users and profiles
       CUSTOMER_COUNT.times do
         FactoryGirl.create(:create_customer_profile)
       end
-      puts "\nFinished building users"
   
   end
   

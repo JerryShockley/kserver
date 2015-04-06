@@ -14,61 +14,102 @@
 require 'core_ext/string'
 
 def create_cluster(product_set, evaluator, category, role, subrole=nil)
-  product_set.product_clusters << create(:product_cluster, category: category, 
-                                         role: role, user_id: evaluator.user_id,
+  product_set.product_clusters << create(:cluster_create_apps, category: category, role: role, user: evaluator.user,
+                                         subrole: subrole, app_cnt: evaluator.app_cnt)  
+end
+
+# this one looks up existing products vs creating new
+def create_seed_cluster(product_set, evaluator, category, role, subrole=nil)
+  product_set.product_clusters << create(:product_cluster_with_product_apps, category: category, role: role, user: evaluator.user,
                                          subrole: subrole)  
 end
 
 
-ROLES_HASH ||= {
-          face: ProductApp::FACE_ROLES.map { |e| e.snakecase.to_sym},
-          eyes: ProductApp::EYE_ROLES.map { |e| e.snakecase.to_sym},
-          lips: ProductApp::LIP_ROLES.map { |e| e.snakecase.to_sym},
-          cheeks: ProductApp::CHEEK_ROLES.map { |e| e.snakecase.to_sym}
-        }
-      
-SIZE ||= {
-          face: ProductApp::FACE_ROLES.size - 1,
-          eyes: ProductApp::EYE_ROLES.size - 1,
-          lips: ProductApp::LIP_ROLES.size - 1,
-          cheeks: ProductApp::CHEEK_ROLES.size - 1 
-        }
+
+def build_cluster(product_set, evaluator, category, role, subrole=nil)
+  product_set.product_clusters << build_stubbed(:cluster_build_apps, category: category, role: role, user: evaluator.user, 
+                                        subrole: subrole, app_cnt: evaluator.app_cnt)  
+
+end
+
 
 FactoryGirl.define do
   factory :product_set do
     look_id 1
     skin_color {Faker::Number.number(6)}
-    user_id 3
+    user nil
+    
+    
+    
+    
+    factory :product_set_create_clusters do
+
+      transient do
+        category_roles nil
+        app_cnt 1
+      end
+    
+      after(:create) do |product_set, evaluator|
+        unless evaluator.category_roles.nil?
+          evaluator.category_roles.each_key do |category|
+            evaluator.category_roles[category].each do |role|
+              if role.class == Array
+                raise ArgumentError, "Invalid array size for role: #{role.to_s}" if role.size != 2
+                create_cluster(product_set, evaluator, category, role[0], role[1])
+              else
+                create_cluster(product_set, evaluator, category, role)
+              end
+            end
+          end
+        end
+      end
+    end      
+    
+    
+    factory :product_set_build_clusters do
+
+      transient do
+        category_roles nil
+        app_cnt 1
+      end
+    
+      after(:stub) do |product_set, evaluator|
+        unless evaluator.category_roles.nil?
+          evaluator.category_roles.each_key do |category|
+            evaluator.category_roles[category].each do |role|
+              if role.class == Array
+                raise ArgumentError, "Invalid array size for role: #{role.to_s}" if role.size != 2
+                build_cluster(product_set, evaluator, category, role[0], role[1])
+              else
+                build_cluster(product_set, evaluator, category, role)
+              end
+            end
+          end
+        end
+      end
+    end      
+
     
     factory :product_set_with_clusters do
 
-      ignore do
-        category_roles {{face: [:foundation, :primer, :powder],
-                          eyes: [:basic_shadow, :highlight_shadow, :liner_bottom, :liner_top],
-                          lips: [:gloss, :lipstick, :pencil],
-                          cheeks: [:blush]}}
-        # user_id {3}
+      transient do
+        category_roles nil
+        app_cnt 2
       end
     
       after(:create) do |product_set, evaluator|
         # cat_cnt = Random.rand(0..3)
         # evaluator.category_roles.keys
-        evaluator.category_roles.each do |category, roles|
-          roles.each do |role|
-            if [:basic_shadow, :crease_shadow, :highlight_shadow, :liner_bottom, :liner_top].include?(role)
-              cnt = Random.rand(1..2)
-              subroles = ["Special use #1", "Special use #2"]
-              i = 0
-              cnt.times  do
-                subrole = cnt > 1 ? subroles[i] : nil
-                create_cluster(product_set, evaluator, category, role, subrole)
-                i += 1
-              end
+        evaluator.category_roles.each_key do |category|
+          evaluator.category_roles[category].each do |role|
+            if role.class == Array
+              raise ArgumentError, "Invalid array size for role: #{role.to_s}" if role.size != 2
+              create_seed_cluster(product_set, evaluator, category, role[0], role[1])
             else
-              create_cluster(product_set, evaluator, category, role)
+              create_seed_cluster(product_set, evaluator, category, role)
             end
             
-          
+            
           end
         end
       end

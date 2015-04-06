@@ -48,14 +48,8 @@ FactoryGirl.define do
                 "Oily/Combination/Sensitive/Consistent Breakouts", "Oily/Combination/Sensitive/Occasional Breakouts", 
                 "Normal/Sensitive/Red/Anti-Aging", "Normal/Anti-Aging", "Dry/Tired/Aging", 
                 "Dry/SunDamaged/Aging", "Dry/Sensitive/Red/Aging", nil][Random.new.rand(9)]}
-                
-    after(:create) do |profile|
-      profile.avatar = create(:image, filename: "head_shot.jpg", dir: "profile", user_id: User.first.id, name: "profile")
-    end
     
-    
-    trait :with_stubbed_user do
-      association :user, factory: :user, strategy: :build_stubbed
-    end
+    avatar { create(:image, filename: "head_shot.jpg", dir: "profile", user_id: User.first.id, name: "profile")}
+    user nil
   end
 end

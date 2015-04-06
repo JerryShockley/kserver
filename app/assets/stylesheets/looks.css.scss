@@ -9,7 +9,9 @@ $gold: #B6885A;
 $lt-black: #303030;
 $bg-color: black;
 
-
+.mu-product-name {
+  color: $gold;
+}
 
 //.row.sticky-nav {
 //  margin: 0px;
@@ -51,6 +53,7 @@ ul.tabs li.tab-title {
 
 ul.tabs li.tab-title.active {
   border: $gold solid 2px;
+  border-bottom: 2px solid transparent;
   color: $lt-blue;
 }
 
@@ -60,7 +63,7 @@ ul.tabs li.tab-title.active {
 p.step-desc {
 //  padding: 0.7rem;
   color: white;
-  padding: .5rem 0 .5rem 0;
+  padding: .5rem 0 .5rem 1.5rem;
   margin: 0.4rem 0rem 0.4rem 0rem;
   font: 200 .9rem/1.3rem Raleway;
   

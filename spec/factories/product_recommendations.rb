@@ -18,6 +18,21 @@ FactoryGirl.define do
   factory :product_recommendation do
     product_cluster nil
     product_app nil
+    priority 1
+    
+    # factory :product_recommendation_with_product_app do
+    #   transient do
+    #     role  {product_cluster.nil? ? nil : product_cluster.role}
+    #     category  {product_cluster.nil? ? nil : product_cluster.category}
+    #     subrole {product_cluster.nil? ? nil : product_cluster.subrole}
+    #   end
+    #
+    #   after(:create) do |product_rec, evaluator|
+    #     product_rec.product_app = create(:product_app, role: evaluator.role, category: evaluator.category,
+    #                                       subrole: evaluator.subrole)
+    #     product_rec.save!
+    #   end
+    # end
     
   end
 end

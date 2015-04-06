@@ -16,58 +16,90 @@ class ProductSet < ActiveRecord::Base
   has_many :product_clusters
   has_many :custom_product_sets
   
-  def clusters_by_category(category=nil)
-    return product_clusters if category.blank?
-    product_clusters.find_all { |pc| pc.category == category.to_s}
+
+  def clusters_by_category(category)
+    # self.order_clusters
+    val = product_clusters.sort.find_all { |pc| pc.category == category.to_s}
+    val.sort
   end
   
-  def default_product_apps
-    product_clusters.each_with_object([]) {|cluster, apps| apps << cluster.default_product_app}
-  end
-  
-  def roles_hash
-    product_clusters.each_with_object({}) do |cluster, hash|
-      hash[cluster.category] = cluster.map {|app| app.role}
+  def product_cluster(category, role, subrole=nil)
+    product_clusters.find do |cluster| 
+      cluster.has_role?(category, role, subrole)
     end
   end
+  
+  
+  def selected_product_apps
+    product_clusters.sort.map {|pc| pc.selected_product_app}
+  end
+  
+
+  def unique_billable_product_apps(category=nil)
+    apps = selected_product_apps.dup
+    result = []
+    count = apps.count
+    # byebug
+    1.upto(count) do
+      a = apps.shift
+      result << a unless result.find {|pa| pa.product === a.product }
+    end
+    category.nil? ? result : result.find_all {|app| app.category == category.to_s.to_sc}
+  end
+
+  
+  def selected_product_app(category, role, subrole=nil)
+    pc = product_cluster(category, role, subrole)
+    pc.selected_product_app
+  end
+
+  
+  def selected_product_app_markup_name(category, role, subrole=nil)
+    selected_product_app(category, role, subrole).markup_product_name
+  end
+
+  
+  # def roles_hash
+  #   product_clusters.each_with_object({}) do |cluster, hash|
+  #     hash[cluster.category] = cluster.map {|app| app.role}
+  #   end
+  # end
+  
   
   def categories
-    categories = product_clusters.map {|cluster| cluster.category}
+    # self.order_clusters
+    categories = product_clusters.sort.map {|cluster| cluster.category}
     categories.uniq
   end
+  
 
   
-  def default_product_app(cat, role, subrole=nil)
-    default_product_apps.find do |pa|
-      pa.category == cat && pa.role == role && (subrole.nil? ? true : pa.subrole == subrole )
+  def has_cluster_by_role?(*role_ary)
+    product_clusters.any? {|pc| pc.has_role?(*role_ary)}
+  end
+
+  # Orders clusters based on face map steps and groups by category
+  
+  def order_clusters
+    use_ary = self.look.face_map.ordered_product_role_array 
+    use_ary.each_with_index do |params, idx|  
+      set_cluster_use_order(idx + 1, *params)
+    end
+  end
+  
+  
+  private
+
+  
+  
+  def set_cluster_use_order(idx, category, role, subrole=nil)
+    pc = product_cluster(category, role, subrole)
+    raise ArgumentError, "Cluster not found ('#{category}', '#{role}', '#{subrole}') while ordering clusters" if pc.nil?
+    unless pc.use_order == idx
+      pc.use_order = idx 
+      pc.save!
     end
   end
 
-
-  
-  # def cluster_count(category=nil)
-  #   if category.nil?
-  #     product_clusters.count
-  #   else
-  #     product_clusters.by_category(category).count
-  #   end
-  # end
-  
-  #
-  # def product_clusters_as_array(category=nil)
-  #   recs=nil
-  #   if category.nil?
-  #     recs = product_clusters.all
-  #   else
-  #     recs = product_clusters.by_category(category)
-  #   end
-  #
-  #   if recs.size > 1
-  #     recs
-  #   else
-  #     [recs]
-  #   end
-  # end
-  
 
 end

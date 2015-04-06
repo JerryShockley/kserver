@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 require './app/models/profile'
 
-include FactoryGirl::Syntax::Methods
+# include FactoryGirl::Syntax::Methods
 
 describe ProfileForm do
   
@@ -10,7 +10,7 @@ describe ProfileForm do
     context 'called with no parameters' do
       pform = ProfileForm.new
       it 'initializes an empty ProfileForm' do
-        expect(pform.email).to be_nil
+        expect(pform.email.blank?).to eq true
       end
     end
     # context 'called with a User instance' do

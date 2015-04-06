@@ -18,6 +18,9 @@ class ProductRecommendation < ActiveRecord::Base
   
   accepts_nested_attributes_for :product_app
   
+  def self.selected_product_app
+    where(priority: 1).product_app
+  end
 
   def <=>(other)
   self.priority <=> other.priority

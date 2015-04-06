@@ -13,6 +13,7 @@
 #  size                  :text
 #  manufacturer_sku      :text
 #  state                 :text
+#  is_multicolor         :boolean          default(FALSE)
 #  avg_rating            :float            default(0.0), not null
 #  price_cents           :integer          default(0), not null
 #  cost_cents            :integer
@@ -24,5 +25,11 @@
 require 'rails_helper'
 
 RSpec.describe Product, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#is_multicolor' do
+    it 'returns true when true' do
+      p = FactoryGirl.build :product, is_multicolor: true
+      expect(p.is_multicolor?).to be true
+    end 
+    
+  end
 end
