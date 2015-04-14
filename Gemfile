@@ -1,19 +1,19 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
-gem 'rails', '~>4.1.4'
-gem 'sass-rails', '4.0.3'
+ruby '2.2.1'
+
+gem 'rails', '4.2.1'
+gem 'sass-rails', '~> 5.0'
 # gem 'sass-rails', github: 'rails/sass-rails', branch: 'master'
-# gem 'sass-rails', '~> 5.01'
-# gem 'sass', '~> 3.3.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+# gem 'sass'
+gem 'uglifier', '>= 1.3.0' 
+gem 'coffee-rails', '~> 4.1.0' 
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'spring',        group: :development
+gem 'sdoc', ' 0.4.0',  group: :doc
+gem 'spring', group: :development
 gem 'devise'
-gem 'foundation-rails', '5.3.3.0'
+gem 'foundation-rails', '~> 5.5.1.2'
 gem 'pg'
 gem 'pundit'
 gem 'simple_form'

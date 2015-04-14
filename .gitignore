@@ -10,6 +10,11 @@
 # http://github.com/RailsApps/rails-composer/issues
 #----------------------------------------------------------------------------
 
+/dev_notes.txt
+/provisioning_instructions.txt
+/config/deploy*.rb
+
+
 # bundler state
 /.bundle
 /vendor/bundle/
@@ -78,8 +83,5 @@ pickle-email-*.html
 .env
 .powenv
 
-/dev_notes.txt
-/provisioning_instructions.txt
-/config/deploy*.rb
 
 

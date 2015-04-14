@@ -18,6 +18,7 @@ class ProductCluster < ActiveRecord::Base
   include Comparable
   
   belongs_to :user
+  belongs_to :product_set #, inverse_of: :product_cluster
   has_many :product_recommendations, dependent: :destroy, inverse_of: :product_cluster
   has_many :product_apps, :through => :product_recommendations
 

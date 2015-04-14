@@ -1,0 +1,269 @@
+$ brew upgrade
+==> Upgrading 18 outdated packages, with result:
+bison 3.0.4, git 2.3.5, libevent 2.0.22, libxml2 2.9.2, libxslt 1.1.28_1, macvim 7.4-74, mongodb 3.0.1, node 0.12.2_1, openssl 1.0.2a-1, pcre 8.36, phantomjs 2.0.0, postgresql 9.4.1, the_silver_searcher 0.29.1, wget 1.16.3, xz 5.2.1, zsh 5.0.7, zsh-completions 0.12.0, zsh-syntax-highlighting 0.2.1
+==> Upgrading bison
+==> Downloading https://homebrew.bintray.com/bottles/bison-3.0.4.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring bison-3.0.4.yosemite.bottle.tar.gz
+==> Caveats
+This formula is keg-only, which means it was not symlinked into /usr/local.
+
+Mac OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Some formulae require a newer version of bison.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you'll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/bison/lib
+
+==> Summary
+🍺  /usr/local/Cellar/bison/3.0.4: 51 files, 2.2M
+==> Upgrading git
+==> Downloading https://homebrew.bintray.com/bottles/git-2.3.5.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring git-2.3.5.yosemite.bottle.tar.gz
+==> Caveats
+The OS X keychain credential helper has been installed to:
+  /usr/local/bin/git-credential-osxkeychain
+
+The "contrib" directory has been installed to:
+  /usr/local/share/git-core/contrib
+
+Bash completion has been installed to:
+  /usr/local/etc/bash_completion.d
+
+zsh completion has been installed to:
+  /usr/local/share/zsh/site-functions
+==> Summary
+🍺  /usr/local/Cellar/git/2.3.5: 1363 files, 31M
+==> Upgrading libevent
+==> Installing libevent dependency: openssl
+==> Downloading https://homebrew.bintray.com/bottles/openssl-1.0.2a-1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring openssl-1.0.2a-1.yosemite.bottle.tar.gz
+==> Caveats
+A CA file has been bootstrapped using certificates from the system
+keychain. To add additional certificates, place .pem files in
+  /usr/local/etc/openssl/certs
+
+and run
+  /usr/local/opt/openssl/bin/c_rehash
+
+This formula is keg-only, which means it was not symlinked into /usr/local.
+
+Mac OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you'll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/openssl/lib
+    CPPFLAGS: -I/usr/local/opt/openssl/include
+
+==> Summary
+🍺  /usr/local/Cellar/openssl/1.0.2a-1: 463 files, 18M
+==> Installing libevent
+==> Downloading https://homebrew.bintray.com/bottles/libevent-2.0.22.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring libevent-2.0.22.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/libevent/2.0.22: 48 files, 1.8M
+==> Upgrading libxml2
+==> Downloading https://homebrew.bintray.com/bottles/libxml2-2.9.2.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring libxml2-2.9.2.yosemite.bottle.tar.gz
+==> Caveats
+This formula is keg-only, which means it was not symlinked into /usr/local.
+
+Mac OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you'll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/libxml2/lib
+    CPPFLAGS: -I/usr/local/opt/libxml2/include
+
+==> Summary
+🍺  /usr/local/Cellar/libxml2/2.9.2: 275 files, 11M
+==> Upgrading libxslt
+==> Downloading https://homebrew.bintray.com/bottles/libxslt-1.1.28_1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring libxslt-1.1.28_1.yosemite.bottle.tar.gz
+==> Caveats
+To allow the nokogiri gem to link against this libxslt run:
+  gem install nokogiri -- --with-xslt-dir=/usr/local/opt/libxslt
+
+This formula is keg-only, which means it was not symlinked into /usr/local.
+
+Mac OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you'll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/libxslt/lib
+    CPPFLAGS: -I/usr/local/opt/libxslt/include
+
+
+If you need Python to find bindings for this keg-only formula, run:
+  echo /usr/local/opt/libxslt/lib/python2.7/site-packages >> /usr/local/lib/python2.7/site-packages/libxslt.pth
+  mkdir -p /Users/jerry/Library/Python/2.7/lib/python/site-packages
+  echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> /Users/jerry/Library/Python/2.7/lib/python/site-packages/homebrew.pth
+==> Summary
+🍺  /usr/local/Cellar/libxslt/1.1.28_1: 145 files, 3.3M
+==> Upgrading macvim
+==> Downloading https://github.com/macvim-dev/macvim/archive/snapshot-74.tar.gz
+######################################################################## 100.0%
+==> ./configure --with-features=huge --enable-multibyte --with-macarchs=x86_64 --enable-perlinterp --enable-rubyinterp --enable-tclin
+==> make
+==> Caveats
+.app bundles were installed.
+Run `brew linkapps macvim` to symlink these to /Applications.
+==> Summary
+🍺  /usr/local/Cellar/macvim/7.4-74: 1842 files, 29M, built in 47 seconds
+==> Upgrading mongodb
+==> Downloading https://homebrew.bintray.com/bottles/mongodb-3.0.1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring mongodb-3.0.1.yosemite.bottle.tar.gz
+==> Caveats
+To reload mongodb after an upgrade:
+    launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+Or, if you don't want/need launchctl, you can just run:
+    mongod --config /usr/local/etc/mongod.conf
+==> Summary
+🍺  /usr/local/Cellar/mongodb/3.0.1: 17 files, 153M
+==> Upgrading node
+==> Downloading https://homebrew.bintray.com/bottles/node-0.12.2_1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring node-0.12.2_1.yosemite.bottle.tar.gz
+==> Caveats
+If you update npm itself, do NOT use the npm update command.
+The upstream-recommended way to update npm is:
+  npm install -g npm@latest
+
+Bash completion has been installed to:
+  /usr/local/etc/bash_completion.d
+Error: The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+Could not symlink bin/node
+Target /usr/local/bin/node
+already exists. You may want to remove it:
+  rm '/usr/local/bin/node'
+
+To force the link and overwrite all conflicting files:
+  brew link --overwrite node
+
+To list all files that would be deleted:
+  brew link --overwrite --dry-run node
+
+Possible conflicting files are:
+/usr/local/bin/node
+/usr/local/share/man/man1/node.1
+/usr/local/lib/dtrace/node.d
+==> Summary
+🍺  /usr/local/Cellar/node/0.12.2_1: 2603 files, 28M
+==> Upgrading pcre
+==> Downloading https://homebrew.bintray.com/bottles/pcre-8.36.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring pcre-8.36.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/pcre/8.36: 146 files, 5.9M
+==> Upgrading phantomjs
+==> Downloading https://homebrew.bintray.com/bottles/phantomjs-2.0.0.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring phantomjs-2.0.0.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/phantomjs/2.0.0: 58 files, 50M
+==> Upgrading postgresql
+==> Downloading https://homebrew.bintray.com/bottles/postgresql-9.4.1.yosemite.bottle.1.tar.gz
+######################################################################## 100.0%
+==> Pouring postgresql-9.4.1.yosemite.bottle.1.tar.gz
+==> Caveats
+If builds of PostgreSQL 9 are failing and you have version 8.x installed,
+you may need to remove the previous version first. See:
+  https://github.com/Homebrew/homebrew/issues/2510
+
+To migrate existing data from a previous major version (pre-9.4) of PostgreSQL, see:
+  http://www.postgresql.org/docs/9.4/static/upgrading.html
+
+To reload postgresql after an upgrade:
+    launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+Or, if you don't want/need launchctl, you can just run:
+    postgres -D /usr/local/var/postgres
+==> Summary
+🍺  /usr/local/Cellar/postgresql/9.4.1: 2996 files, 40M
+==> Upgrading the_silver_searcher
+==> Installing the_silver_searcher dependency: xz
+==> Downloading https://homebrew.bintray.com/bottles/xz-5.2.1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring xz-5.2.1.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/xz/5.2.1: 59 files, 1.7M
+==> Installing the_silver_searcher
+==> Downloading https://homebrew.bintray.com/bottles/the_silver_searcher-0.29.1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring the_silver_searcher-0.29.1.yosemite.bottle.tar.gz
+==> Caveats
+Bash completion has been installed to:
+  /usr/local/etc/bash_completion.d
+==> Summary
+🍺  /usr/local/Cellar/the_silver_searcher/0.29.1: 8 files, 112K
+==> Upgrading wget
+==> Downloading https://homebrew.bintray.com/bottles/wget-1.16.3.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring wget-1.16.3.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/wget/1.16.3: 9 files, 1.5M
+==> Upgrading zsh
+==> Downloading https://homebrew.bintray.com/bottles/zsh-5.0.7.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring zsh-5.0.7.yosemite.bottle.tar.gz
+==> Caveats
+Add the following to your zshrc to access the online help:
+  unalias run-help
+  autoload run-help
+  HELPDIR=/usr/local/share/zsh/help
+==> Summary
+🍺  /usr/local/Cellar/zsh/5.0.7: 1084 files, 11M
+==> Upgrading zsh-completions
+==> Downloading https://github.com/zsh-users/zsh-completions/archive/0.12.0.tar.gz
+######################################################################## 100.0%
+==> Caveats
+To activate these completions, add the following to your .zshrc:
+
+  fpath=(/usr/local/share/zsh-completions $fpath)
+
+You may also need to force rebuild `zcompdump`:
+
+  rm -f ~/.zcompdump; compinit
+
+Additionally, if you receive "zsh compinit: insecure directories" warnings when attempting
+to load these completions, you may need to run this:
+
+  chmod go-w /usr/local/share
+==> Summary
+🍺  /usr/local/Cellar/zsh-completions/0.12.0: 121 files, 980K, built in 3 seconds
+==> Upgrading zsh-syntax-highlighting
+==> Downloading https://github.com/zsh-users/zsh-syntax-highlighting/archive/0.2.1.tar.gz
+######################################################################## 100.0%
+==> Caveats
+To activate the syntax highlighting, add the following at the end of your .zshrc:
+
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+You will also need to force reload of your .zshrc:
+
+  source ~/.zshrc
+
+Additionally, if your receive "highlighters directory not found" error message,
+you may need to add the following to your .zshenv:
+
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+==> Summary
+🍺  /usr/local/Cellar/zsh-syntax-highlighting/0.2.1: 36 files, 172K, built in 2 seconds

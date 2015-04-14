@@ -13,7 +13,7 @@
 class ProductSet < ActiveRecord::Base
   belongs_to :look
   belongs_to :user
-  has_many :product_clusters
+  has_many :product_clusters #, inverse_of: :product_set
   has_many :custom_product_sets
   
 
@@ -96,8 +96,8 @@ class ProductSet < ActiveRecord::Base
     pc = product_cluster(category, role, subrole)
     raise ArgumentError, "Cluster not found ('#{category}', '#{role}', '#{subrole}') while ordering clusters" if pc.nil?
     unless pc.use_order == idx
-      pc.use_order = idx 
-      pc.save!
+      pc = ProductCluster.find(pc.id)
+      pc.update!(use_order: idx)
     end
   end
 

@@ -26,7 +26,7 @@ require 'factory_girl'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller  
-  config.include Rails.application.routes.url_helpers
+  # config.include Rails.application.routes.url_helpers
   config.include Warden::Test::Helpers
   # config.include FactoryGirl::Syntax::Methods
   # config.include Features::SessionHelpers, type: :feature
