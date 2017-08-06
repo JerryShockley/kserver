@@ -102,7 +102,7 @@ class Seeds
     10.times do
       user = User.find(Random.rand(usr_f..usr_l))
       look = FactoryGirl.create :look_with_product_sets, user: user
-      # look.product_sets.each {|ps| ps.order_clusters}
+      look.product_sets.each {|ps| ps.order_clusters}
       look_videos(look, user)
       look_images(look, user)
     end

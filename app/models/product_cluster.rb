@@ -42,7 +42,7 @@ class ProductCluster < ActiveRecord::Base
   # end
   
   def has_role?(category, role, subrole=nil)
-    ret = self.category == format_param(category) && self.role == format_param(role) && 
+    self.category == format_param(category) && self.role == format_param(role) && 
           ((subrole.blank? && self.subrole.blank?) ? true : self.subrole == format_param(subrole) )
   end
 

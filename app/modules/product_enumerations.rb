@@ -28,5 +28,11 @@ module ProductEnumerations
             lips: LIP_ROLES.size - 1,
             cheeks: CHEEK_ROLES.size - 1 
           }
+          
+  def self.db_query_name(name)
+    return name if name.nil?
+    name.to_s.gsub(" ", "_")
+  end
+
   
 end

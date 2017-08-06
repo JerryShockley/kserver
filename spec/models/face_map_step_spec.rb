@@ -14,7 +14,7 @@ require 'rails_helper'
 
 describe FaceMapStep, :type => :model do
   
-  describe "Ordered markup parameter list" do
+  describe "#ordered_markup_parameter_list" do
     let(:multi_markup_str) {"Apply <eyes:highlight shadow:1> just under the eyebrow and the <eyes:basic shadow> to the rest of the eye"}
     let(:markup_str) {"Apply <eyes:highlight shadow: 1> just under the eyebrow."}
     let(:no_markup_str) {"A great string without markup"}

@@ -10,25 +10,41 @@
 #  updated_at :datetime
 #
 
+require 'product_enumerations'
+
 class ProductSet < ActiveRecord::Base
+  
   belongs_to :look
   belongs_to :user
   has_many :product_clusters #, inverse_of: :product_set
   has_many :custom_product_sets
-  
+
 
   def clusters_by_category(category)
     # self.order_clusters
-    val = product_clusters.sort.find_all { |pc| pc.category == category.to_s}
-    val.sort
+    self.product_clusters.where(category: db_query_name(category)).order(use_order: :asc)
+    # val = product_clusters.sort.find_all { |pc| pc.category == category.to_s}
+    # val.sort
   end
   
   def product_cluster(category, role, subrole=nil)
-    product_clusters.find do |cluster| 
-      cluster.has_role?(category, role, subrole)
-    end
+    self.product_clusters.where(category: db_query_name(category), role: db_query_name(role), subrole: db_query_name(subrole)).first
+    
+    # product_clusters.find do |cluster|
+    #   cluster.has_role?(category, role, subrole)
+    # end
   end
   
+  def product_cluster!(category, role, subrole=nil)
+    x = self.product_cluster(category, role, subrole)
+    raise ArgumentError, "Cluster not found ('#{category}', '#{role}', '#{subrole}') while ordering clusters" if x.nil?
+    x
+    
+    # product_clusters.find do |cluster|
+    #   cluster.has_role?(category, role, subrole)
+    # end
+  end
+
   
   def selected_product_apps
     product_clusters.sort.map {|pc| pc.selected_product_app}
@@ -92,12 +108,20 @@ class ProductSet < ActiveRecord::Base
 
   
   
+  def db_query_name(name)
+    return name if name.nil?
+    name.to_s.gsub(" ", "_")
+  end
+  
+  
   def set_cluster_use_order(idx, category, role, subrole=nil)
-    pc = product_cluster(category, role, subrole)
-    raise ArgumentError, "Cluster not found ('#{category}', '#{role}', '#{subrole}') while ordering clusters" if pc.nil?
+    pc = product_cluster!(category, role, subrole)
     unless pc.use_order == idx
       pc = ProductCluster.find(pc.id)
       pc.update!(use_order: idx)
+      # pc.use_order = idx
+      # # byebug
+      # pc.save!
     end
   end
 

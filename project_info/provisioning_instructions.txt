@@ -58,6 +58,7 @@ ssh cloudforge.com
 Follow security instructions to configure firewall and remote access methods.
 https://www.linode.com/docs/security/securing-your-server
 
+
 After creating cloudforge repository
 git remote add stage ssh://git_kokko@kokko.git.cloudforge.com/kokko_stage.git
 git push stage master

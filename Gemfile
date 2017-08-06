@@ -33,6 +33,8 @@ gem 'mina-sidekiq', require: false
 gem 'foundicons-rails'
 gem 'js_assets'
 gem 'enumerize'
+# gem 'axlxs', github: 'randym/axlsx'
+# gem 'acts_as_xlxs'
 
 group :development do
   gem 'better_errors'

@@ -61,6 +61,10 @@ FactoryGirl.define do
               end
             end
           end
+          byebug
+          product_set.order_clusters unless product_set.look.nil? || product_set.look.face_map.nil?
+          puts "hello"
+          
         end
       end
     end      
