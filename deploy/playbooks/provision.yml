@@ -10,12 +10,13 @@
     - geerlingguy.nodejs
     - geerlingguy.ruby
     - geerlingguy.passenger
+    - geerlingguy.postgresql
+      become: yes
 
   tasks:
     - name: Install app dependencies.
       apt: "name={{ item }} state=present"
       with_items:
-        - libsqlite3-dev
         - libreadline-dev
 
     - name: Ensure app directory exists and is writeable.
@@ -25,3 +26,4 @@
         owner: "{{ app_user }}"
         group: "{{ app_user }}"
         mode: 0755
+

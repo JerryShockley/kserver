@@ -1,19 +1,24 @@
 ---
 # Variables for our app.
-app_version: 1.1.4
+app_version: 0.2.2
 app_directory: /opt/kserver
+# OS user created by NGINX or APACHE
 app_user: www-data
 app_secrets:
-  dev: fe562ec1e21eecc5af4d83f6a157a7
+  dev:  fe562ec1e21eecc5af4d83f6a157a7
   test: 4408f36dd290766d2f368fdfcedf4d
   prod: 9bf801da1a24c9a103ea86a1438caa
-app_environment:
-  RAILS_ENV: production
+app_mode: production
+db_name: kokko_{{app_mode}}
+app_env:
+  RAILS_ENV: {{app_mode}}
+db_user: kokko_db_user
+db_user_password: dbpass32
 
 # Variables for Passenger and Nginx.
 passenger_server_name: 0.0.0.0
 passenger_app_root: /opt/kserver/public
-passenger_app_env: production
+passenger_app_env: {{app_mode}}
 passenger_ruby: /usr/local/bin/ruby
 
 # Variables for Ruby installation.
@@ -23,3 +28,15 @@ ruby_version: 2.2.10
 
 # Variables for Node.js installation.
 nodejs_install_npm_user: root
+
+# Create db_user used by ruby to access db
+postgresql_users:
+  - name: {{db_user}}
+    password: {{db_user_password}}
+    role_attr_flags: CREATE_DB LOGIN
+
+# Create database used by rails app
+postgresql_databases: 
+  - name: {{db_name}}
+    owner: {{db_user}}
+
