@@ -33,11 +33,16 @@ class Seeds
              CustomProductSet, ProductReview, LookReview, Look, FaceMap, FaceMapStep]
 
   def seed_db
-    build_users_and_profiles
-    build_products
-    build_looks
-    KLASSES.each do |klass| 
-     puts "--  Created #{klass.count} #{klass.name} record#{"s" if klass.count > 1} during reseeding"
+    build_production_accounts
+      
+    unless ENV[RAILS_ENV].trim.casecmp "production" 
+      build_dev_accounts
+      build_products
+      build_looks
+
+      KLASSES.each do |klass| 
+       puts "--  Created #{klass.count} #{klass.name} record#{"s" if klass.count > 1} during reseeding"
+      end
     end
   end
   
@@ -142,7 +147,7 @@ class Seeds
     end
   end
 
-  def build_users_and_profiles
+  def build_production_accounts
     puts "\n"
     usr = User.new
       usr.first_name = "Nina"
@@ -176,7 +181,9 @@ class Seeds
       usr.save!
       usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
       puts("Created #{usr.name}'s account")
+  end
 
+  def build_dev_accounts
 
     usr = User.new
       usr.first_name = "Sysadmin"
@@ -231,15 +238,13 @@ class Seeds
       usr.save!
       usr.create_profile!(first_name: usr.first_name, last_name: usr.last_name, email: usr.email)
       puts("Created cust user")
-  
-  
       puts "\n***  Building Users"
   
       # Create linked users and profiles
       CUSTOMER_COUNT.times do
         FactoryGirl.create(:create_customer_profile)
       end
-  
+    
   end
   
 end   
