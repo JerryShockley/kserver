@@ -9,9 +9,10 @@
     - geerlingguy.passenger
 
   environment:
-    {{app_env}}
-  
-      git:
+    "{{app_env}}"
+
+  tasks: 
+    - git:
         repo: https://github.com/jshock1/kserver.git 
         version: "{{ app_version }}"
         dest: "{{ app_directory }}"
@@ -35,16 +36,15 @@
       notify: restart nginx
 
     - name: Check if database exists.
-      shell: "psql -lqt | cut -d \| -f 1 | grep -qw {{db_name}}"
+      shell: "psql -lqt | cut -d | -f 1 | grep -qw {{db_name}}"
       register: app_db_exists
 
     - name: Create database.
-      shell: "bundle exec rake db:create chdir={{ app_directory }}"
       shell: "{{ item }} chdir={{ app_directory }}"
       with_items:
-        - bundle exec rake db:create
-        - bundle exec rake db:schema:load
-        - bundle exec rake assets:precompile
+        - "{{bundle exec rake db:create}}"
+        - "{{bundle exec rake db:schema:load}}"
+        - "{{bundle exec rake assets:precompile}}"
       when: app_db_exists == false
       notify: restart nginx
 
@@ -52,8 +52,8 @@
 
       shell: "{{ item }} chdir={{ app_directory }}"
       with_items:
-        - bundle exec rake db:migrate
-        - bundle exec rake assets:precompile
+        - "{{bundle exec rake db:migrate}}"
+        - "{{bundle exec rake assets:precompile}}"
       when: 
         - app_updated.changed == true
         - app_mode == "production"
@@ -62,8 +62,8 @@
     - name: Perform deployment-related rake tasks for Test.
       shell: "{{ item }} chdir={{ app_directory }}"
       with_items:
-        - bundle exec rake db:drop
-        - bundle exec rake db:setup
+        - "{{bundle exec rake db:drop}}"
+        - "{{bundle exec rake db:setup}}"
       when: 
         - app_updated.changed == true
         - app_mode == "test"
@@ -72,8 +72,8 @@
     - name: Perform deployment-related rake tasks for Development.
       shell: "{{ item }} chdir={{ app_directory }}"
       with_items:
-        - bundle exec rake db:migrate
-        - bundle exec rake db:seed
+        - "{{bundle exec rake db:migrate}}"
+        - "{{bundle exec rake db:seed}}"
       when: 
         - app_updated.changed == true
         - app_mode == "development"
