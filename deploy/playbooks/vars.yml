@@ -1,6 +1,6 @@
 ---
 # Variables for our app.
-app_version: 0.2.7
+app_version: 0.2.8
 app_directory: /opt/kserver
 # OS user created by NGINX or APACHE
 app_user: www-data
@@ -8,12 +8,34 @@ app_secrets:
   dev:  fe562ec1e21eecc5af4d83f6a157a7
   test: 4408f36dd290766d2f368fdfcedf4d
   prod: 9bf801da1a24c9a103ea86a1438caa
-app_mode: production
+
+# An arbitrary name used to easily identify
+# associated users, db names, etc. A short
+# name is preferable.
+app_name: kokko
+
+# Set in inventory file. Required for all inventories.
+# Can be one of: development, test, or production.
+app_mode: "{{ hostvars['rails'].app_mode }}"
+
 db_name: kokko_{{app_mode}}
 app_env:
   RAILS_ENV: "{{app_mode}}"
-db_user: kokko_db_user
-db_user_password: dbpass32
+
+db_names:
+  development: "{{ app_name }}_development"
+  test: "{{ app_name }}_test"
+  production: "{{ app_name }}_production"
+
+db_users:
+  development: "{{ app_name }}_db_user_development"
+  test: "{{ app_name }}_db_user_test"
+  production: "{{ app_name }}_db_user_production"
+
+db_user_passwords:
+  development: 
+  test: hello123
+  production: 34dbpass4599
 
 # Variables for Passenger and Nginx.
 passenger_server_name: 0.0.0.0
@@ -33,13 +55,12 @@ nodejs_install_npm_user: root
 
 # Create db_user used by ruby to access db
 postgresql_users:
-  - name: "{{db_user}}"
-    password: "{{db_user_password}}"
+  - name: "{{db_users[app_mode]}}"
+    password: "{{db_user_passwords[app_mode]}}"
     role_attr_flags: CREATEDB,LOGIN
 
 # Create database used by rails app
 postgresql_databases: 
-  - name: "{{db_name}}"
+  - name: "{{db_names[app_mode]}}"
 
 
-no_log: false
