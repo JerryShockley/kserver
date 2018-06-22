@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: rails
   become: yes
 
   vars_files:
@@ -11,6 +11,10 @@
     - geerlingguy.ruby
     - geerlingguy.passenger
     - geerlingguy.postgresql
+
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=3600
 
   tasks:
     - name: Install app dependencies.
@@ -25,4 +29,11 @@
         owner: "{{ app_user }}"
         group: "{{ app_user }}"
         mode: 0755
-      
+
+    - name: Install Rails {{rails_version}}
+      gem: 
+        name: rails
+        version: "{{rails_version}}"
+        state: present
+        become: yes
+        become_user: "{{ app_user }}"
