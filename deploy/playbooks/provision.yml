@@ -35,5 +35,3 @@
         name: rails
         version: "{{rails_version}}"
         state: present
-        become: yes
-        become_user: "{{ app_user }}"
