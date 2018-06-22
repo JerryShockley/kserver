@@ -1,6 +1,7 @@
 ---
 - hosts: all
   become: yes
+  become_user: "{{ app_user }}"
 
   vars_files:
     - vars.yml
@@ -36,7 +37,7 @@
       notify: restart nginx
 
     - name: Check if database exists.
-      shell: "psql -lqt | cut -d | -f 1 | grep -qw {{db_name}}"
+      shell: "psql -lqt | cut -d | -f 1 | grep -qw {{db_names[ app_mode ]}}"
       register: app_db_exists
 
     - name: Create database.
