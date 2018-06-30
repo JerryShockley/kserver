@@ -1,7 +1,8 @@
 ---
 - hosts: all
   become: yes
-  become_user: "{{ app_user }}"
+  # become_user: "{{ app_user }}"
+  become_user: root
 
   vars_files:
     - vars.yml
@@ -39,6 +40,9 @@
     - name: Check if database exists.
       shell: "psql -lqt | cut -d | -f 1 | grep -qw {{db_names[ app_mode ]}}"
       register: app_db_exists
+      become: yes
+      become_user: postgres
+      failed_when: app_db_exists.rc < 0 or app_db_exists.rc > 1
 
     - name: Create database.
       shell: "{{ item }} chdir={{ app_directory }}"
@@ -46,7 +50,7 @@
         - "{{bundle exec rake db:create}}"
         - "{{bundle exec rake db:schema:load}}"
         - "{{bundle exec rake assets:precompile}}"
-      when: app_db_exists == false
+      when: app_db_exists.rc == 0
       notify: restart nginx
 
     - name: Perform deployment-related rake tasks for Production.
