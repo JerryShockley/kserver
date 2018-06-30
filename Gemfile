@@ -21,7 +21,7 @@ gem 'slim-rails', '~> 3.1.3'
 gem 'unicorn', '~> 5.4.0'
 gem 'unicorn-rails', '~> 2.2.1'
 gem 'jquery-turbolinks', '~> 2.1.0'
-gem 'ransack', '~> 1.8.8', github: 'https://activerecord-hackery/ransack'
+gem 'ransack', '~> 1.8.8' 
 gem 'kaminari', '~> 1.1.1'
 gem 'virtus', '~> 1.0.5'
 gem 'reform', '~> 2.2.4'
@@ -48,7 +48,7 @@ group :development do
   gem 'rb-fchange', '~> 0.0.6',  :require=>false
   gem 'rb-fsevent', '~> 0.10.3',  :require=>false
   gem 'rb-inotify', '~> 0.9.10',  :require=>false
-  gem 'annotate', '~> 2.7.2',  github: 'https://ctran/annotate_models',  require: false
+  gem 'annotate', '~> 2.7.2' 
 end
 
 group :development, :test do
