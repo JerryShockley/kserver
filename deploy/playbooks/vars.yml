@@ -1,6 +1,6 @@
 ---
 # Variables for our app.
-app_version: v0.2.8
+app_version: v0.2.9
 app_directory: /opt/kserver
 # OS user created by NGINX or APACHE
 app_user: www-data
