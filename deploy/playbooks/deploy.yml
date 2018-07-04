@@ -1,7 +1,6 @@
 ---
 - hosts: all
   become: yes
-  # become_user: "{{ app_user }}"
   become_user: root
 
   vars_files:
@@ -15,7 +14,8 @@
 
   tasks: 
     - git:
-      repo: "git@github.com:JerryShockley/kserver.git"
+        repo: https://github.com/JerryShockley/kserver.git
+        # version: "{{ app_version }}"
         dest: "{{ app_directory }}"
         accept_hostkey: true
         force: yes
