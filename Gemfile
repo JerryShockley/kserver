@@ -14,7 +14,7 @@ gem 'sdoc', ' 0.4.0',  :group => :doc
 gem 'spring', '~> 2.0.2', :group => :development
 gem 'devise', '~> 4.4.3'
 gem 'foundation-rails', '~> 5.5.1.2'
-gem 'pg', '~> 1.0.0'
+gem 'pg', '1.0.0'
 gem 'pundit', '~> 1.1.0'
 gem 'simple_form', '~> 3.5.1'
 gem 'slim-rails', '~> 3.1.3'
