@@ -15,7 +15,7 @@ def build_markup_str(markup_ary)
 end
 
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :face_map_step do
     number 1
     description nil 

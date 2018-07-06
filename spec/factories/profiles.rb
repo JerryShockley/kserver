@@ -24,9 +24,9 @@
 #  screen_name    :string(255)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :profile do
     first_name { Faker::Name.first_name}
     last_name {Faker::Name.last_name}

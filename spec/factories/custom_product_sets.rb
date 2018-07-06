@@ -11,7 +11,7 @@
 #  updated_at             :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :custom_product_set do
     product_set nil
     user nil

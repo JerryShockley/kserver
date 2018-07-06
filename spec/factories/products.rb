@@ -22,7 +22,7 @@
 #  updated_at            :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
 
 def random_product_image_filename
@@ -48,13 +48,13 @@ end
 
 
 
-FactoryGirl.define do
+FactoryBot.define do
   sequence(:pname) do |n|
     "Very Cool Product #{n}"
   end
 end
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :product do
     sku  {Faker::Number.number(10)}
     brand  {["Maybelline", "Loreal", "Mac", "Covergirl", "Clinique", "Diorskin", "Maxfactor", "Estee Lauder", "Lancome"][Random.new.rand(8)]}

@@ -10,7 +10,7 @@
 #  updated_at :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 require 'core_ext/string'
 
 def create_cluster(product_set, evaluator, category, role, subrole=nil)
@@ -33,7 +33,7 @@ def build_cluster(product_set, evaluator, category, role, subrole=nil)
 end
 
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :product_set do
     look_id 1
     skin_color {Faker::Number.number(6)}

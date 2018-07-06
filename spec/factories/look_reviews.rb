@@ -15,7 +15,7 @@
 #  updated_at  :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :look_review do
     title {Faker::Lorem.words(Random.rand(3..8)).join(" ")}
     rating {Random.rand(0..5)}

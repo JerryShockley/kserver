@@ -154,7 +154,7 @@ describe ProductSet, :type => :model do
   #
   # describe '#clusters_by_category' do
   #   let(:role_hsh_simple) { {face: [:foundation, :concealer], eyes: [:highlight_shadow], lips: [:gloss]} }
-  #   let(:ps)  {FactoryGirl.create(:product_set_create_clusters, category_roles: role_hsh_simple )}
+  #   let(:ps)  {FactoryBot.create(:product_set_create_clusters, category_roles: role_hsh_simple )}
   #
   #
   #   it 'returns multiple clusters for a valid category when there are multiple' do

@@ -16,7 +16,7 @@
 #  updated_at         :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
 def random_look_code
   %w(A B C D E F)[Random.rand(0..3)] + Random.rand(100..999).to_s
@@ -43,13 +43,13 @@ def role_hash_to_array(role_hash)
 end
 
 
-FactoryGirl.define do
+FactoryBot.define do
   sequence :utitle do |n|
     "Really Awesome Look ##{n}"
   end
 end
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :look do
     title {generate :utitle}
     short_desc {Faker::Lorem.words(Random.rand(5..13)).join(" ")}
@@ -77,7 +77,7 @@ FactoryGirl.define do
         count.times do
             look.product_sets << create(:product_set_with_clusters, user_id: evaluator.user_id, category_roles: evaluator.category_roles)
         end
-        look.face_map = FactoryGirl.create(:face_map, user_id: evaluator.user_id, look: look, roles_ary: role_hash_to_array(evaluator.category_roles))
+        look.face_map = FactoryBot.create(:face_map, user_id: evaluator.user_id, look: look, roles_ary: role_hash_to_array(evaluator.category_roles))
         look.save!
       end
     end

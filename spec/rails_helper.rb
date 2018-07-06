@@ -21,7 +21,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # ActiveRecord::Migration.maintain_test_schema!
 
 # Cucumber
-# World(FactoryGirl::Syntax::Methods)
+# World(FactoryBot::Syntax::Methods)
 def logger
     Rails::logger
 end

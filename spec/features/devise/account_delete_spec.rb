@@ -17,7 +17,7 @@ feature 'User delete', :devise, :js do
   #   Then I should see an account deleted message
   scenario 'user can delete own account' do
     skip 'skip a slow test'
-    user = FactoryGirl.create(:cust)
+    user = FactoryBot.create(:cust)
     login_as(user, :scope => :user)
     # page.driver.submit :delete, send(userx_registration_path(user), User)
     visit edit_userx_registration_path(user.id)

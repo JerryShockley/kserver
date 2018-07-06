@@ -10,11 +10,11 @@
 #  updated_at         :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
 
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :product_recommendation do
     product_cluster nil
     product_app nil

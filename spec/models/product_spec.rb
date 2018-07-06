@@ -27,7 +27,7 @@ require 'rails_helper'
 RSpec.describe Product, :type => :model do
   describe '#is_multicolor' do
     it 'returns true when true' do
-      p = FactoryGirl.build :product, is_multicolor: true
+      p = FactoryBot.build :product, is_multicolor: true
       expect(p.is_multicolor?).to be true
     end 
     

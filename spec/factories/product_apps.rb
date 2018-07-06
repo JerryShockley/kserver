@@ -13,7 +13,7 @@
 #  updated_at :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
 
 
@@ -21,7 +21,7 @@
 
 
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :product_app do
     category [:face, :eyes, :lips, :cheeks][Random.rand(3)]
     # association product, factory: :product

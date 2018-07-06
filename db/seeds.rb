@@ -8,7 +8,7 @@
 
 # Populating 1 User for each role
 
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 class Seeds
   ROLES_HASH ||= {
@@ -106,7 +106,7 @@ class Seeds
     usr_l = User.last.id
     10.times do
       user = User.find(Random.rand(usr_f..usr_l))
-      look = FactoryGirl.create :look_with_product_sets, user: user
+      look = FactoryBot.create :look_with_product_sets, user: user
       look.product_sets.each {|ps| ps.order_clusters}
       look_videos(look, user)
       look_images(look, user)
@@ -117,7 +117,7 @@ class Seeds
   def build_products
     puts "\n***  Building Products"
     
-    PRODUCT_COUNT.times { FactoryGirl.create :product_with_reviews}
+    PRODUCT_COUNT.times { FactoryBot.create :product_with_reviews}
   end
 
 
@@ -242,7 +242,7 @@ class Seeds
   
       # Create linked users and profiles
       CUSTOMER_COUNT.times do
-        FactoryGirl.create(:create_customer_profile)
+        FactoryBot.create(:create_customer_profile)
       end
     
   end

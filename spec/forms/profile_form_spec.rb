@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 require './app/models/profile'
 
-# include FactoryGirl::Syntax::Methods
+# include FactoryBot::Syntax::Methods
 
 describe ProfileForm do
   

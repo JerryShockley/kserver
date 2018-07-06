@@ -12,7 +12,7 @@
 #  updated_at    :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :color do
     product_id 0
     

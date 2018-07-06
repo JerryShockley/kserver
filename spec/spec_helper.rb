@@ -2,7 +2,7 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'pundit/rspec'
 require 'devise'
-require 'factory_girl'
+require 'factory_bot'
 # require 'capybara-screenshot'
 # require 'capybara-screenshot/rspec'
 
@@ -28,7 +28,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller  
   # config.include Rails.application.routes.url_helpers
   config.include Warden::Test::Helpers
-  # config.include FactoryGirl::Syntax::Methods
+  # config.include FactoryBot::Syntax::Methods
   # config.include Features::SessionHelpers, type: :feature
   
 # The settings below are suggested to provide a good initial experience

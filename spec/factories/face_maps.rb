@@ -10,10 +10,10 @@
 #  updated_at :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :face_map do
     look nil
-    image {FactoryGirl.create(:image, filename: "facemap.jpg", dir: "look", user_id: user_id, name: "facemap")}
+    image {FactoryBot.create(:image, filename: "facemap.jpg", dir: "look", user_id: user_id, name: "facemap")}
     user_id nil
     face_map_steps []
     

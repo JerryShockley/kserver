@@ -14,7 +14,7 @@ gem 'sdoc', ' 0.4.0',  :group => :doc
 gem 'spring', '~> 2.0.2', :group => :development
 gem 'devise', '~> 4.4.3'
 gem 'foundation-rails', '~> 5.5.1.2'
-gem 'pg', '1.0.0'
+gem 'pg', '~> 1.0.0'
 gem 'pundit', '~> 1.1.0'
 gem 'simple_form', '~> 3.5.1'
 gem 'slim-rails', '~> 3.1.3'
@@ -58,7 +58,8 @@ group :development, :test do
   gem 'jasmine-rails', '~> 0.14.7'
   gem 'jasmine-jquery-rails', '~> 2.0.3'
   gem 'rspec-rails', '~> 3.7.2'
-  gem 'factory_girl_rails', "~> 4.0"
+  gem 'factory_bot', '4.10.0'
+  gem 'factory_bot_rails', '4.10.0'
   gem 'faker', '~> 1.8.7'
   
 end

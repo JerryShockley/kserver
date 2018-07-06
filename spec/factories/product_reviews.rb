@@ -15,7 +15,7 @@
 #  updated_at  :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
 STAR_IMG ||= Image.where("filename = ?", 'review_star.png')
 
@@ -27,7 +27,7 @@ def random_user
 end
 
  
-FactoryGirl.define do
+FactoryBot.define do
   factory :product_review do
     title {Faker::Lorem.words(Random.rand(3..8)).join(" ")}
     rating {Random.rand(1..5)}

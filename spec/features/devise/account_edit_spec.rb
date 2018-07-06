@@ -17,7 +17,7 @@ feature 'User edit', :devise do
     #   When I change my email address
     #   Then I see an account updated message
     scenario 'change email address' do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       login_as(user, :scope => :user)
       visit edit_userx_registration_path(user)
       fill_in 'Email', with: 'newemail@foo.com'
@@ -30,8 +30,8 @@ feature 'User edit', :devise do
     #   When I try to edit another user's profile
     #   Then I see my own 'edit profile' page
     scenario "cannot edit another user's profile", :me do
-      me = FactoryGirl.create(:cust)
-      other = FactoryGirl.create(:cust, email: 'other@example.com')
+      me = FactoryBot.create(:cust)
+      other = FactoryBot.create(:cust, email: 'other@example.com')
       login_as(me, :scope => :user)
       visit edit_userx_registration_path(other)
       expect(page).to have_content 'Access denied'

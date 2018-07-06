@@ -13,7 +13,7 @@
 #  updated_at     :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 require 'core_ext/string'
 
 ROLES_HASH ||= {
@@ -32,7 +32,7 @@ SIZE ||= {
         
       
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :product_cluster do
     category {[:face, :eyes, :lips, :cheeks][Random.rand(3)]}
     role  {ROLES_HASH[category][Random.rand(SIZE[category])]}
