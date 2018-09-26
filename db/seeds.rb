@@ -35,7 +35,7 @@ class Seeds
   def seed_db
     build_production_accounts
       
-    unless ENV["RAILS_ENV"].trim.casecmp "production" 
+    unless ENV["RAILS_ENV"].strip.downcase == "production" 
       build_dev_accounts
       build_products
       build_looks
