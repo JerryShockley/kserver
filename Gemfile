@@ -18,7 +18,7 @@ gem 'pg', '~> 0.21.0'
 gem 'pundit', '~> 1.1.0'
 gem 'simple_form', '~> 3.5.1'
 gem 'slim-rails', '~> 3.1.3'
-gem 'passenger', '~> 5.0.30'
+gem 'passenger', '~> 5.0.30', require: "phusion_passenger/rack_handler"
 # gem 'unicorn', '~> 5.4.0'
 # gem 'unicorn-rails', '~> 2.2.1'
 gem 'jquery-turbolinks', '~> 2.1.0'
